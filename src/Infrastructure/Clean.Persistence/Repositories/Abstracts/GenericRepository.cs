@@ -3,20 +3,20 @@ using Clean.Domain.Entities.Abstracts;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Clean.Persistence.Repositories;
+namespace Clean.Persistence.Repositories.Abstracts;
 
-public class GenericRepository<TEntity, TContext, TKey> : IGenericRepository<TEntity, TKey>
+public abstract class GenericRepository<TEntity, TContext, TKey> : IGenericRepository<TEntity, TKey>
 where TEntity : Entity<TKey>, new()
 where TContext : DbContext
 {
-    protected DbContext _dbContext { get; }
+    protected readonly TContext _dbContext;
     public IMapper _mapper { get; }
 
     private DbSet<TEntity> _table;
 
     private IQueryable<TEntity> _query;
 
-    public GenericRepository(DbContext dbContext, IMapper mapper)
+    public GenericRepository(TContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
         _mapper = mapper;
@@ -24,19 +24,19 @@ where TContext : DbContext
         _query = _query!.AsNoTracking();
     }
 
-    public void Delete(TEntity entity)
+    public virtual void Delete(TEntity entity)
     {
         _table.Remove(entity);
         Save();
     }
 
-    public void Insert(TEntity entity)
+    public virtual void Insert(TEntity entity)
     {
         _table.Add(entity);
         Save();
     }
 
-    public void Update(TEntity entity)
+    public virtual void Update(TEntity entity)
     {
         _table.Update(entity);
         Save();
@@ -44,7 +44,7 @@ where TContext : DbContext
 
 
 
-    public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate, params Expression<Func<TEntity, object>>[] includeProperties)
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate, params Expression<Func<TEntity, object>>[] includeProperties)
     {
         _query = predicate != null ? _query.Where(predicate) : _query;
 
@@ -59,7 +59,7 @@ where TContext : DbContext
         return await _query.ToListAsync();
     }
 
-    public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
+    public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
     {
         _query.Where(predicate);
 
@@ -73,15 +73,15 @@ where TContext : DbContext
         return await _query.SingleOrDefaultAsync();
     }
 
-    public IQueryable<TEntity> GetQueryable() => _query;
-  
+    public virtual IQueryable<TEntity> GetQueryable() => _query;
 
 
 
-    public void Save() => _dbContext.SaveChanges();
 
-    public Task SaveAsync() => _dbContext.SaveChangesAsync();
+    public virtual void Save() => _dbContext.SaveChanges();
 
-    public async ValueTask DisposeAsync() => await _dbContext.DisposeAsync();
+    public virtual async Task SaveAsync() => await _dbContext.SaveChangesAsync();
+
+    public virtual async ValueTask DisposeAsync() => await _dbContext.DisposeAsync();
 
 }

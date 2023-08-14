@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddApplicationService(ContextType.SQLiteContext, builder.Configuration["ConnectionStrings:SQLite"]);
+builder.Services.AddContextService(ContextType.SQLiteContext, builder.Configuration["ConnectionStrings:SQLite"]);
 builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection("JwtSetting"));
 builder.Services.AddAuthentication(scheme => scheme.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>
@@ -33,6 +33,7 @@ builder.Services.AddAuthentication(scheme => scheme.DefaultAuthenticateScheme = 
     });
 
 builder.Services.AddAutoMapperService();
+builder.Services.AddApplicationService();
 
 var app = builder.Build();
 

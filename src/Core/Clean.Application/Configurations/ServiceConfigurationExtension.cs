@@ -1,5 +1,7 @@
 ﻿using Clean.Persistence.Contexts;
 using Clean.Persistence.Contexts.Enums;
+using Clean.Persistence.Repositories;
+using Clean.Persistence.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -8,7 +10,7 @@ namespace Clean.Application.Configurations;
 
 public static class ServiceConfigurationExtension
 {
-    public static IServiceCollection AddApplicationService(this IServiceCollection services, ContextType contextType, string connectionString)
+    public static IServiceCollection AddContextService(this IServiceCollection services, ContextType contextType, string connectionString)
     {
 
         switch (contextType)
@@ -33,6 +35,12 @@ public static class ServiceConfigurationExtension
     public static IServiceCollection AddAutoMapperService(this IServiceCollection services)
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        return services;
+    }
+
+    public static IServiceCollection AddApplicationService(this IServiceCollection services)
+    {
+        services.AddScoped<IProductRepository, ProductRepository>();
         return services;
     }
 
