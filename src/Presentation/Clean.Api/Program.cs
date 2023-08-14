@@ -1,0 +1,48 @@
+using Clean.Application.Configurations;
+using Clean.Identity.Jwt;
+using Clean.Persistence.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+var builder = WebApplication.CreateBuilder(args);
+
+
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationService(ProviderType.SQLite, builder.Configuration["ConnectionStrings:SQLite"]);
+builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection("JwtSetting"));
+builder.Services.AddAuthentication(scheme => scheme.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(option =>
+    {
+        option.SaveToken = true;
+        option.TokenValidationParameters = new()
+        {
+            ValidateIssuer = builder.Configuration.GetValue<bool>("JwtSetting:ValidateIssuer"),
+            ValidateAudience = builder.Configuration.GetValue<bool>("JwtSetting:ValidateAudience"),
+            ValidateIssuerSigningKey = builder.Configuration.GetValue<bool>("JwtSetting:ValidateIssuerSigningKey"),
+            ValidateLifetime = builder.Configuration.GetValue<bool>("JwtSetting:ValidateLifetime"),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("JwtSetting:SecurityKey"))),
+            ValidIssuer = builder.Configuration.GetValue<string>("JwtSetting:Issuer"),
+            ValidAudience = builder.Configuration.GetValue<string>("JwtSetting:Audience"),
+            ClockSkew = TimeSpan.Zero
+        };
+
+    });
+
+var app = builder.Build();
+
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
