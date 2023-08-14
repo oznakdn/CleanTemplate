@@ -2,7 +2,7 @@
 
 namespace Clean.Domain.Entities;
 
-public class Product : Entity<int>
+public class Product : Entity<Guid>
 {
     public string ProductName { get; set; }
     public decimal Price { get; set; }

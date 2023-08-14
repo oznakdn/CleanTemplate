@@ -1,7 +1,0 @@
-﻿PowerShell Directory ==> C:\CleanTemplate\src\Infrastructure\Clean.Persistence
-
-Migration Commands
--------------------
-dotnet ef migrations add InitDatabase --startup-project C:\Users\HP\Desktop\Ozan\CleanTemplate\src\Presentation\Clean.Api
-dotnet ef database update --startup-project C:\Users\HP\Desktop\Ozan\CleanTemplate\src\Presentation\Clean.Api
-

@@ -1,6 +1,6 @@
 using Clean.Application.Configurations;
 using Clean.Identity.Jwt;
-using Clean.Persistence.Context;
+using Clean.Persistence.Contexts.Enums;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddApplicationService(ProviderType.SQLite, builder.Configuration["ConnectionStrings:SQLite"]);
+builder.Services.AddApplicationService(ContextType.SQLiteContext, builder.Configuration["ConnectionStrings:SQLite"]);
 builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection("JwtSetting"));
 builder.Services.AddAuthentication(scheme => scheme.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>
@@ -31,6 +31,8 @@ builder.Services.AddAuthentication(scheme => scheme.DefaultAuthenticateScheme = 
         };
 
     });
+
+builder.Services.AddAutoMapperService();
 
 var app = builder.Build();
 

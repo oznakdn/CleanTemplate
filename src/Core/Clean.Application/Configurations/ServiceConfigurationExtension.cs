@@ -1,21 +1,39 @@
-﻿using Clean.Persistence.Context;
+﻿using Clean.Persistence.Contexts;
+using Clean.Persistence.Contexts.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Clean.Application.Configurations;
 
 public static class ServiceConfigurationExtension
 {
-    public static IServiceCollection AddApplicationService(this IServiceCollection services, ProviderType providerType, string connectionString)
+    public static IServiceCollection AddApplicationService(this IServiceCollection services, ContextType contextType, string connectionString)
     {
-        services.AddDbContext<AppDbContext>(option => _ = providerType switch 
-        { 
-            ProviderType.MSSQLServer  => option.UseSqlServer(connectionString),
-            ProviderType.MySQL => option.UseMySql(ServerVersion.AutoDetect(connectionString)),
-            ProviderType.PostgreSQL => option.UseNpgsql(connectionString),
-            ProviderType.SQLite => option.UseSqlite(connectionString)
-        });
+
+        switch (contextType)
+        {
+            case ContextType.MsSQLContext:
+                services.AddDbContext<MsSQLContext>(option => option.UseSqlServer(connectionString));
+                break;
+            case ContextType.MySQLContext:
+                services.AddDbContext<MySQLContext>(option => option.UseMySql(ServerVersion.AutoDetect(connectionString)));
+                break;
+            case ContextType.PostgreSQLContext:
+                services.AddDbContext<PostgreSQLContext>(option => option.UseNpgsql(connectionString));
+                break;
+            case ContextType.SQLiteContext:
+                services.AddDbContext<SQLiteContext>(option => option.UseSqlite(connectionString));
+                break;
+        }
 
         return services;
     }
+
+    public static IServiceCollection AddAutoMapperService(this IServiceCollection services)
+    {
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        return services;
+    }
+
 }
