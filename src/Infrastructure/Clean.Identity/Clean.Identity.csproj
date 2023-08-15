@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Clean.Domain\Clean.Domain.csproj" />
+    <ProjectReference Include="..\Clean.Persistence\Clean.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

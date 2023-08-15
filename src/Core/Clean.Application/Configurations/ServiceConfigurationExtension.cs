@@ -1,4 +1,8 @@
-﻿using Clean.Persistence.Contexts;
+﻿using Clean.Domain.Identities;
+using Clean.Identity.Identity.Abstracts;
+using Clean.Identity.Identity.Interfaces;
+using Clean.Identity.Jwt.Handler;
+using Clean.Persistence.Contexts;
 using Clean.Persistence.Contexts.Enums;
 using Clean.Persistence.Repositories;
 using Clean.Persistence.Repositories.Interfaces;
@@ -49,6 +53,8 @@ public static class ServiceConfigurationExtension
     public static IServiceCollection AddApplicationService(this IServiceCollection services)
     {
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped(typeof(IGenericUserIdentity<AppUser,Guid>),typeof(GenericUserIdentity<AppUser,SQLiteContext,Guid>));
+        services.AddScoped<IJwtHandler,JwtHandler>();
         return services;
     }
 

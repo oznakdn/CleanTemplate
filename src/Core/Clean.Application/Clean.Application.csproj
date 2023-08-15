@@ -19,10 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Commands\Accounts\Handler\" />
-    <Folder Include="Features\Commands\Accounts\Dtos\" />
-    <Folder Include="Features\Commands\Accounts\Mapping\" />
-    <Folder Include="Features\Commands\Accounts\Validation\" />
+    <Folder Include="Features\Commands\Accounts\Login\Mapping\" />
+    <Folder Include="Features\Commands\Accounts\Login\Validation\" />
   </ItemGroup>
 
 </Project>
