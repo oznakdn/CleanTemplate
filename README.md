@@ -1,4 +1,4 @@
-# CleanTemplate
+# Clean Template
 ## Everything a dotnet project should have...
 
 - [x] Generic repository pattern implementation
