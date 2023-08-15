@@ -33,6 +33,7 @@ builder.Services.AddAuthentication(scheme => scheme.DefaultAuthenticateScheme = 
     });
 
 builder.Services.AddAutoMapperService();
+builder.Services.AddMediatRService();
 builder.Services.AddApplicationService();
 
 var app = builder.Build();

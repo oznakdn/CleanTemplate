@@ -2,6 +2,7 @@
 using Clean.Persistence.Contexts.Enums;
 using Clean.Persistence.Repositories;
 using Clean.Persistence.Repositories.Interfaces;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -35,6 +36,12 @@ public static class ServiceConfigurationExtension
     public static IServiceCollection AddAutoMapperService(this IServiceCollection services)
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        return services;
+    }
+
+    public static IServiceCollection AddMediatRService(this IServiceCollection services)
+    {
+        services.AddMediatR(Assembly.GetExecutingAssembly());
         return services;
     }
 
