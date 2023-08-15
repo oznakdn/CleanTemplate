@@ -1,10 +1,10 @@
 ﻿using Clean.Application.Features.Abstracts.Handler;
-using Clean.Application.Features.Product.Dtos;
+using Clean.Application.Features.Queries.Products.GetProducts.Dtos;
 using Clean.Persistence.Repositories.Interfaces;
 
-namespace Clean.Application.Features.Product.Handler;
+namespace Clean.Application.Features.Queries.Products.GetProducts.Handler;
 
-public class ProductHandler : GenericHandler<ProductRequest,ProductResponse>
+public class ProductHandler : GenericHandler<ProductRequest, ProductResponse>
 {
     private readonly IProductRepository _product;
     public ProductHandler(IProductRepository product)

@@ -1,4 +1,4 @@
-﻿namespace Clean.Application.Features.Product.Dtos;
+﻿namespace Clean.Application.Features.Queries.Products.GetProducts.Dtos;
 
 public class ProductResponse
 {
