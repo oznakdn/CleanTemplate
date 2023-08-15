@@ -2,7 +2,7 @@
 
 namespace Clean.Application.Features.Abstracts.Handler;
 
-public class GenericHandler<Request, Response> : IGenericHandler<Request, Response>
+public abstract class GenericHandler<Request, Response> : IRequestHandler<Request, Response>
 where Request : IRequest<Response>
 where Response : class, new()
 {
