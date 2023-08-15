@@ -3,13 +3,12 @@ using Clean.Domain.Entities;
 using Clean.Persistence.Contexts;
 using Clean.Persistence.Repositories.Abstracts;
 using Clean.Persistence.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace Clean.Persistence.Repositories;
 
-public class ProductRepository : GenericRepository<Product, SQLiteContext, Guid>, IProductRepository
+public class ProductRepository : GenericRepository<Product, ApplicationDbContext, Guid>, IProductRepository
 {
-    public ProductRepository(SQLiteContext dbContext, IMapper mapper) : base(dbContext, mapper)
+    public ProductRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
     {
     }
 }

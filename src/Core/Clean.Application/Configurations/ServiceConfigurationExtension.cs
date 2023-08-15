@@ -1,7 +1,4 @@
-﻿using Clean.Domain.Identities;
-using Clean.Identity.Identity.Abstracts;
-using Clean.Identity.Identity.Interfaces;
-using Clean.Identity.Jwt.Handler;
+﻿using Clean.Identity.Jwt.Handler;
 using Clean.Persistence.Contexts;
 using Clean.Persistence.Contexts.Enums;
 using Clean.Persistence.Repositories;
@@ -22,16 +19,16 @@ public static class ServiceConfigurationExtension
         switch (contextType)
         {
             case ContextType.MsSQLContext:
-                services.AddDbContext<MsSQLContext>(option => option.UseSqlServer(connectionString));
+                services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(connectionString));
                 break;
             case ContextType.MySQLContext:
-                services.AddDbContext<MySQLContext>(option => option.UseMySql(ServerVersion.AutoDetect(connectionString)));
+                services.AddDbContext<ApplicationDbContext>(option => option.UseMySql(ServerVersion.AutoDetect(connectionString)));
                 break;
             case ContextType.PostgreSQLContext:
-                services.AddDbContext<PostgreSQLContext>(option => option.UseNpgsql(connectionString));
+                services.AddDbContext<ApplicationDbContext>(option => option.UseNpgsql(connectionString));
                 break;
             case ContextType.SQLiteContext:
-                services.AddDbContext<SQLiteContext>(option => option.UseSqlite(connectionString));
+                services.AddDbContext<ApplicationDbContext>(option => option.UseSqlite(connectionString));
                 break;
         }
 
@@ -53,7 +50,7 @@ public static class ServiceConfigurationExtension
     public static IServiceCollection AddApplicationService(this IServiceCollection services)
     {
         services.AddScoped<IProductRepository, ProductRepository>();
-        services.AddScoped(typeof(IGenericUserIdentity<AppUser,Guid>),typeof(GenericUserIdentity<AppUser,SQLiteContext,Guid>));
+        services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IJwtHandler,JwtHandler>();
         return services;
     }

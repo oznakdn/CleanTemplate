@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Commands\Accounts\Login\Mapping\" />
-    <Folder Include="Features\Commands\Accounts\Login\Validation\" />
   </ItemGroup>
 
 </Project>
