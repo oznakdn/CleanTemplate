@@ -18,7 +18,8 @@
     <tr><td>FluentValidation</td></tr>
   </tbody>
 </table>
-## Current Packages
+
+Current Packages
 
 [![Nuget version](https://img.shields.io/nuget/v/blazored.localstorage.svg?logo=nuget)](https://www.nuget.org/packages/Blazored.LocalStorage/)
 [![Nuget downloads](https://img.shields.io/nuget/dt/Blazored.LocalStorage?logo=nuget)](https://www.nuget.org/packages/Blazored.LocalStorage/)
