@@ -1,23 +1,20 @@
 # CleanTemplate
 ## Everything a dotnet project should have...
 
-<table>
-  <thead>
-    <tr>
-      <th>Features</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Generic repository pattern implementation</td></tr>
-    <tr><td>CQRS - MediatR pattern implementation</td></tr>
-    <tr><td>Role based authentication with Json Web Token</td></tr>
-    <tr><td>SQL or NoSQL databases</td></tr>
-    <tr><td>Logging with NLog</td></tr>
-    <tr><td>Caching with Redis</td></tr>
-    <tr><td>AutoMapper</td></tr>
-    <tr><td>FluentValidation</td></tr>
-  </tbody>
-</table>
+- [x] Generic repository pattern implementation
+- [x] CQRS - MediatR pattern implementation
+- [x] Role based authentication with Json Web Token
+- [x] SQL or NoSQL databases
+- [x] Logging with NLog
+- [x] Caching with Redis
+- [x] AutoMapper
+- [x] FluentValidation
+- [ ] Mail Service
+- [ ] Message queue with RabbitMQ
+
+
+
+
 
 Current Packages
 
