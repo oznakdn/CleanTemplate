@@ -1,13 +1,4 @@
-﻿using Clean.Application.Features.Abstracts.Handler;
-using Clean.Application.Features.Commands.Accounts.Login.Dtos;
-using Clean.Application.Features.Commands.Accounts.Login.Validation;
-using Clean.Domain.Identities;
-using Clean.Identity.Helpers;
-using Clean.Identity.Jwt;
-using Clean.Identity.Jwt.Handler;
-using Clean.Persistence.Repositories.Interfaces;
-
-namespace Clean.Application.Features.Commands.Accounts.Login.Handler;
+﻿namespace Clean.Application.Features.Commands.Accounts.Login.Handler;
 
 public class LoginHandler : GenericHandler<LoginRequest, LoginResponse>
 {

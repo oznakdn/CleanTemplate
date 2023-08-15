@@ -1,10 +1,3 @@
-using Clean.Application.Configurations;
-using Clean.Identity.Jwt;
-using Clean.Persistence.Contexts.Enums;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-
 var builder = WebApplication.CreateBuilder(args);
 
 

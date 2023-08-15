@@ -1,0 +1,16 @@
+﻿global using Clean.Identity.Jwt.Handler;
+global using Clean.Persistence.Contexts;
+global using Clean.Persistence.Contexts.Enums;
+global using Clean.Persistence.Repositories;
+global using Clean.Persistence.Repositories.Interfaces;
+global using FluentValidation;
+global using MediatR;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Reflection;
+global using Clean.Application.Features.Abstracts.Handler;
+global using Clean.Application.Features.Commands.Accounts.Login.Dtos;
+global using Clean.Application.Features.Commands.Accounts.Login.Validation;
+global using Clean.Domain.Identities;
+global using Clean.Identity.Helpers;
+global using Clean.Identity.Jwt;

@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using Clean.Domain.Entities.Abstracts;
-using System.Linq.Expressions;
-
-namespace Clean.Persistence.Repositories;
+﻿namespace Clean.Persistence.Repositories;
 
 public interface IGenericRepository<TEntity, TKey> : IAsyncDisposable
 where TEntity : Entity<TKey>, new()

@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace Clean.Application.Features.Abstracts.Handler;
+﻿namespace Clean.Application.Features.Abstracts.Handler;
 
 public abstract class GenericHandler<Request, Response> : IRequestHandler<Request, Response>
 where Request : IRequest<Response>

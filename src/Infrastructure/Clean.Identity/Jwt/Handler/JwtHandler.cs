@@ -1,12 +1,4 @@
-﻿using Clean.Domain.Identities.Abstracts;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace Clean.Identity.Jwt.Handler;
+﻿namespace Clean.Identity.Jwt.Handler;
 
 public class JwtHandler : IJwtHandler
 {

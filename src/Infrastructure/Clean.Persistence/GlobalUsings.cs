@@ -1,0 +1,9 @@
+﻿global using Clean.Domain.Entities;
+global using Clean.Domain.Identities;
+global using Microsoft.EntityFrameworkCore;
+global using AutoMapper;
+global using Clean.Domain.Entities.Abstracts;
+global using System.Linq.Expressions;
+global using Clean.Persistence.Contexts;
+global using Clean.Persistence.Repositories.Abstracts;
+global using Clean.Persistence.Repositories.Interfaces;

@@ -1,6 +1,4 @@
-﻿using Clean.Domain.Identities.Abstracts;
-
-namespace Clean.Identity.Jwt.Handler;
+﻿namespace Clean.Identity.Jwt.Handler;
 
 public interface IJwtHandler
 {

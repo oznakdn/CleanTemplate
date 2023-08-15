@@ -1,6 +1,4 @@
-﻿using Clean.Domain.Entities.Abstracts;
-
-namespace Clean.Domain.Identities.Abstracts;
+﻿namespace Clean.Domain.Identities.Abstracts;
 
 public abstract class UserIdentity<TKey> : Entity<TKey>
 {

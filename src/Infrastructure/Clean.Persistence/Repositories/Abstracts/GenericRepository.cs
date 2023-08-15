@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-using Clean.Domain.Entities.Abstracts;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-
-namespace Clean.Persistence.Repositories.Abstracts;
+﻿namespace Clean.Persistence.Repositories.Abstracts;
 
 public abstract class GenericRepository<TEntity, TContext, TKey> : IGenericRepository<TEntity, TKey>
 where TEntity : Entity<TKey>, new()

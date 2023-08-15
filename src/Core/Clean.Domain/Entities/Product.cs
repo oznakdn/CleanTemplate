@@ -1,6 +1,4 @@
-﻿using Clean.Domain.Entities.Abstracts;
-
-namespace Clean.Domain.Entities;
+﻿namespace Clean.Domain.Entities;
 
 public class Product : Entity<Guid>
 {

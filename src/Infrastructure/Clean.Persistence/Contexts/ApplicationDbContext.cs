@@ -1,8 +1,4 @@
-﻿using Clean.Domain.Entities;
-using Clean.Domain.Identities;
-using Microsoft.EntityFrameworkCore;
-
-namespace Clean.Persistence.Contexts;
+﻿namespace Clean.Persistence.Contexts;
 
 public class ApplicationDbContext:DbContext
 {

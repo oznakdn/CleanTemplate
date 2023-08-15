@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace Clean.Application.Features.Commands.Accounts.Login.Dtos;
+﻿namespace Clean.Application.Features.Commands.Accounts.Login.Dtos;
 
 public class LoginRequest:IRequest<LoginResponse>
 {

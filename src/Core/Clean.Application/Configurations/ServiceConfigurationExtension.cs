@@ -1,15 +1,4 @@
-﻿using Clean.Identity.Jwt.Handler;
-using Clean.Persistence.Contexts;
-using Clean.Persistence.Contexts.Enums;
-using Clean.Persistence.Repositories;
-using Clean.Persistence.Repositories.Interfaces;
-using FluentValidation;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-
-namespace Clean.Application.Configurations;
+﻿namespace Clean.Application.Configurations;
 
 public static class ServiceConfigurationExtension
 {
