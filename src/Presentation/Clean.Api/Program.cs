@@ -35,6 +35,7 @@ builder.Services.AddAuthentication(scheme => scheme.DefaultAuthenticateScheme = 
 builder.Services.AddAutoMapperService();
 builder.Services.AddMediatRService();
 builder.Services.AddApplicationService();
+builder.Services.AddFleuntValidationService();
 
 var app = builder.Build();
 
@@ -45,6 +46,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

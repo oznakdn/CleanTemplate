@@ -2,6 +2,7 @@
 using Clean.Persistence.Contexts.Enums;
 using Clean.Persistence.Repositories;
 using Clean.Persistence.Repositories.Interfaces;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +49,12 @@ public static class ServiceConfigurationExtension
     public static IServiceCollection AddApplicationService(this IServiceCollection services)
     {
         services.AddScoped<IProductRepository, ProductRepository>();
+        return services;
+    }
+
+    public static IServiceCollection AddFleuntValidationService(this IServiceCollection services)
+    {
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         return services;
     }
 

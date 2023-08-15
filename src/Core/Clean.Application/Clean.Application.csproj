@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
@@ -18,7 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Commands\" />
+    <Folder Include="Features\Commands\Accounts\Handler\" />
+    <Folder Include="Features\Commands\Accounts\Dtos\" />
+    <Folder Include="Features\Commands\Accounts\Mapping\" />
+    <Folder Include="Features\Commands\Accounts\Validation\" />
   </ItemGroup>
 
 </Project>
