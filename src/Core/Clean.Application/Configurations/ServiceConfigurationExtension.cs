@@ -1,4 +1,8 @@
-﻿namespace Clean.Application.Configurations;
+﻿using Clean.Persistence.Repositories.Mongo;
+using Clean.Persistence.Repositories.Mongo.Interfaces;
+using MongoDB.Driver;
+
+namespace Clean.Application.Configurations;
 
 public static class ServiceConfigurationExtension
 {
@@ -38,8 +42,9 @@ public static class ServiceConfigurationExtension
 
     public static IServiceCollection AddApplicationService(this IServiceCollection services)
     {
-        services.AddScoped<IProductRepository, ProductRepository>();
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IEFProductRepository, EFProductRepository>();
+        services.AddScoped<IEFUserRepository, EFUserRepository>();
+        services.AddScoped<IMongoCustomerRepository, MongoCustomerRepository>();
         services.AddScoped<IJwtHandler,JwtHandler>();
         return services;
     }

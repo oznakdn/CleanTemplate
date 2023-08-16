@@ -1,6 +1,6 @@
 ﻿namespace Clean.Persistence.Repositories.Abstracts;
 
-public abstract class GenericRepository<TEntity, TContext, TKey> : IGenericRepository<TEntity, TKey>
+public abstract class EFRepository<TEntity, TContext, TKey> : IEFRepository<TEntity, TKey>
 where TEntity : Entity<TKey>, new()
 where TContext : DbContext
 {
@@ -11,7 +11,7 @@ where TContext : DbContext
 
     private IQueryable<TEntity> _query;
 
-    public GenericRepository(TContext dbContext, IMapper mapper)
+    public EFRepository(TContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
         _mapper = mapper;

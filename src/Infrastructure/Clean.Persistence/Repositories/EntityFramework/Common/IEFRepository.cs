@@ -1,6 +1,6 @@
 ﻿namespace Clean.Persistence.Repositories;
 
-public interface IGenericRepository<TEntity, TKey> : IAsyncDisposable
+public interface IEFRepository<TEntity, TKey> : IAsyncDisposable
 where TEntity : Entity<TKey>, new()
 {
     IMapper _mapper { get; }

@@ -1,3 +1,5 @@
+using Clean.Persistence.Data.Mongo;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -7,6 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddContextService(ContextType.SQLiteContext, builder.Configuration["ConnectionStrings:SQLite"]);
 builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection("JwtSetting"));
+builder.Services.Configure<MongoSetting>(builder.Configuration.GetSection("MongoSetting"));
 builder.Services.AddAuthentication(scheme => scheme.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>
     {

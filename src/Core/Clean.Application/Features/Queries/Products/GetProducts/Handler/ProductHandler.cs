@@ -1,13 +1,11 @@
-﻿using Clean.Application.Features.Abstracts.Handler;
-using Clean.Application.Features.Queries.Products.GetProducts.Dtos;
-using Clean.Persistence.Repositories.Interfaces;
+﻿using Clean.Application.Features.Queries.Products.GetProducts.Dtos;
 
 namespace Clean.Application.Features.Queries.Products.GetProducts.Handler;
 
 public class ProductHandler : GenericHandler<ProductRequest, ProductResponse>
 {
-    private readonly IProductRepository _product;
-    public ProductHandler(IProductRepository product)
+    private readonly IEFProductRepository _product;
+    public ProductHandler(IEFProductRepository product)
     {
         _product = product;
     }

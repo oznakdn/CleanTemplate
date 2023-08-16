@@ -3,9 +3,9 @@
 public class LoginHandler : GenericHandler<LoginRequest, LoginResponse>
 {
     private readonly IJwtHandler _jwtHandler;
-    private readonly IUserRepository _user;
+    private readonly IEFUserRepository _user;
 
-    public LoginHandler(IJwtHandler jwtHandler, IUserRepository user)
+    public LoginHandler(IJwtHandler jwtHandler, IEFUserRepository user)
     {
         _jwtHandler = jwtHandler;
         _user = user;
