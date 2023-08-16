@@ -9,14 +9,11 @@ where TContext : DbContext
 
     private DbSet<TEntity> _table;
 
-    private IQueryable<TEntity> _query;
-
     public EFRepository(TContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
         _mapper = mapper;
         _table = _dbContext.Set<TEntity>();
-        _query = _query!.AsNoTracking();
     }
 
     public virtual void Delete(TEntity entity)
@@ -41,6 +38,7 @@ where TContext : DbContext
 
     public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate, params Expression<Func<TEntity, object>>[] includeProperties)
     {
+        IQueryable<TEntity> _query = _table;
         _query = predicate != null ? _query.Where(predicate) : _query;
 
         if (includeProperties.Length > 0)
@@ -56,6 +54,7 @@ where TContext : DbContext
 
     public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
     {
+        IQueryable<TEntity> _query = _table;
         _query.Where(predicate);
 
         if (includeProperties.Length > 0)
@@ -68,7 +67,7 @@ where TContext : DbContext
         return await _query.SingleOrDefaultAsync();
     }
 
-    public virtual IQueryable<TEntity> GetQueryable() => _query;
+    public virtual IQueryable<TEntity> GetQueryable() => _table.AsQueryable();
 
 
 

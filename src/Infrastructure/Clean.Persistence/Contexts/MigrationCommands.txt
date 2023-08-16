@@ -1,7 +1,0 @@
-﻿PowerShell Directory ==> C:\CleanTemplate\src\Infrastructure\Clean.Persistence
-
-Migration Commands
--------------------
-dotnet ef migrations add InitDb --startup-project C:\CleanTemplate\src\Presentation\Clean.Api --context SQLiteContext
-dotnet ef database update --startup-project C:\CleanTemplate\src\Presentation\Clean.Api --context SQLiteContext
-

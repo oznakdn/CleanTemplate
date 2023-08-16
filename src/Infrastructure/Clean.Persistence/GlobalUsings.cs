@@ -13,6 +13,8 @@ global using MongoDB.Driver;
 global using Clean.Domain.Entities.NoSQL;
 global using Clean.Persistence.Repositories.Mongo.Common;
 global using Clean.Persistence.Repositories.Mongo.Interfaces;
-
+global using Clean.Persistence.Repositories.Mongo;
+global using Clean.Persistence.Repositories;
+global using Microsoft.Extensions.DependencyInjection;
 
 
