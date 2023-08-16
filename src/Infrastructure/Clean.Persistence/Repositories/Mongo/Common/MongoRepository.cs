@@ -1,4 +1,3 @@
-using Castle.Components.DictionaryAdapter;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -6,7 +5,7 @@ using MongoDB.Driver;
 namespace Clean.Persistence.Data.Mongo.Repositories.Abstracts;
 
 public abstract class MongoRepository<TEntity> : IMongoRepositroy<TEntity>
-where TEntity : Entity<ObjectId>, new()
+where TEntity : MongoEntity, new()
 {
 
     public IMapper Mapper { get; }
@@ -22,8 +21,8 @@ where TEntity : Entity<ObjectId>, new()
         _collection = database.GetCollection<TEntity>(collectionName);
     }
 
-    public virtual void Delete(ObjectId id, CancellationToken cancellationToken) => _collection.DeleteOne(x => x.Id == id, cancellationToken);
-    public virtual async Task DeleteAsync(ObjectId id, CancellationToken cancellationToken) => await _collection.DeleteOneAsync(x => x.Id == id, cancellationToken);
+    public virtual void Delete(string id, CancellationToken cancellationToken) => _collection.DeleteOne(x => x.Id == id, cancellationToken);
+    public virtual async Task DeleteAsync(string id, CancellationToken cancellationToken) => await _collection.DeleteOneAsync(x => x.Id == id, cancellationToken);
     public virtual void Insert(TEntity entity, CancellationToken cancellationToken) => _collection.InsertOne(entity, null, cancellationToken);
     public virtual async Task InsertAsync(TEntity entity, CancellationToken cancellationToken) => await _collection.InsertOneAsync(entity, null, cancellationToken);
     public virtual void Update(TEntity entity, CancellationToken cancellationToken) => _collection.ReplaceOne(x => x.Id == entity.Id, entity);
@@ -31,7 +30,7 @@ where TEntity : Entity<ObjectId>, new()
 
     public virtual async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken, Expression<Func<TEntity, bool>> filter = null) => await _collection.Find<TEntity>(filter == null ? x => true : filter).ToListAsync(cancellationToken);
     public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken) => await _collection.Find<TEntity>(filter).SingleOrDefaultAsync(cancellationToken);
-    public virtual async Task<TEntity> GetByIdAsync(ObjectId id, CancellationToken cancellationToken) => await _collection.Find<TEntity>(x => x.Id == id).SingleOrDefaultAsync(cancellationToken);
+    public virtual async Task<TEntity> GetByIdAsync(string id, CancellationToken cancellationToken) => await _collection.Find<TEntity>(x => x.Id == id).SingleOrDefaultAsync(cancellationToken);
 
 
 

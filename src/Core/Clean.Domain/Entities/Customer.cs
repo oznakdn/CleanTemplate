@@ -4,15 +4,9 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Clean.Domain.Entities;
 
-public class Customer:Entity<ObjectId>
+public class Customer: MongoEntity
 {
-    [IgnoreDataMember]
-    public override ObjectId Id { get;set; }
-
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    [BsonElement("_id")]
-    public string ID { get; set; }
+    
     [BsonElement("fullName")]
     public string FullName { get; set; }
 
