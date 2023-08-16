@@ -16,13 +16,34 @@
 
 
 
-# $\textcolor{blue}{\textsf{HOW TO USE}}$ 
+# $\textcolor{purple}{\textsf{HOW TO USE}}$ 
 
 
-#### $\textcolor{green}{\textsf{Creating new entities and identites for ef or mongo}}$ 
+### $\textcolor{green}{\textsf{Creating new entities and identites for ef or mongo}}$ 
+
+#### $\textcolor{blue}{\textsf{Base entities}}$ 
 
 ```
-/* EntityFramework models */
+/* Entity Framework */
+public class Entity<TKey> : IEntity<TKey>
+{
+    public virtual TKey Id { get; set; }
+}
+
+/* Mongo Driver */
+public abstract class MongoEntity : IMongoEntity
+{
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    [BsonElement]
+    public string Id { get; set; }
+}
+
+```
+#### $\textcolor{blue}{\textsf{Entities}}$ 
+```
+/* Entity Framework models */
+
 public class Product : Entity<Guid>
 {
    // you can write here your properties
@@ -46,7 +67,7 @@ public class Customer: MongoEntity
 }
 
 ```
-#### $\textcolor{green}{\textsf{Use to db context}}$
+### $\textcolor{green}{\textsf{Use to db context}}$
 
 ```
 public class ApplicationDbContext:DbContext
@@ -61,20 +82,20 @@ public class ApplicationDbContext:DbContext
 
 ```
 
-#### $\textcolor{green}{\textsf{Db context registration ioc container}}$
+### $\textcolor{green}{\textsf{Db context registration ioc container}}$
 
 ```
 builder.Services.AddContextService(ContextType.SQLiteContext, builder.Configuration["ConnectionStrings:SQLite"]);
 ```
 
-#### $\textcolor{green}{\textsf{Migration commands}}$
+### $\textcolor{green}{\textsf{Migration commands}}$
 
 <p>PowerShell cd C:\CleanTemplate\src\Infrastructure\Clean.Persistence</p>
 <p>dotnet ef migrations add InitDb --startup-project C:\CleanTemplate\src\Presentation\Clean.Api</p>
 <p></p>dotnet ef database update --startup-project C:\CleanTemplate\src\Presentation\Clean.Api<p>
 
   
-#### $\textcolor{green}{\textsf{appsetting.json}}$ 
+### $\textcolor{green}{\textsf{appsetting.json}}$ 
 ```
 "JwtSetting": {
   "ValidateIssuer": true, // true or false
