@@ -1,6 +1,6 @@
 ﻿namespace Clean.Application.Features.Commands.Accounts.Login.Handler;
 
-public class LoginHandler : GenericHandler<LoginRequest, LoginResponse>
+public class LoginHandler : AbstractHandler<LoginRequest, LoginResponse>
 {
     private readonly IJwtHandler _jwtHandler;
     private readonly IEFUserRepository _user;

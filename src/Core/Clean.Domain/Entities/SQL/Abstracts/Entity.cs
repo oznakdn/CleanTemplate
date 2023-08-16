@@ -1,4 +1,4 @@
-﻿namespace Clean.Domain.Entities.Abstracts;
+﻿namespace Clean.Domain.Entities.SQL.Abstracts;
 
 public class Entity<TKey> : IEntity<TKey>
 {

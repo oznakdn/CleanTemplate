@@ -1,4 +1,3 @@
-using Clean.Persistence.Data.Mongo;
 
 var builder = WebApplication.CreateBuilder(args);
 

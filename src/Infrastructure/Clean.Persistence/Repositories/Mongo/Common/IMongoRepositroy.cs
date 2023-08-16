@@ -1,4 +1,4 @@
-namespace Clean.Persistence.Data.Mongo.Repositories.Abstracts;
+namespace Clean.Persistence.Repositories.Mongo.Common;
 
 public interface IMongoRepositroy<TEntity>
 where TEntity : MongoEntity, new()

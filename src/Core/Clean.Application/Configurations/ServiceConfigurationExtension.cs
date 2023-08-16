@@ -1,8 +1,4 @@
-﻿using Clean.Persistence.Repositories.Mongo;
-using Clean.Persistence.Repositories.Mongo.Interfaces;
-using MongoDB.Driver;
-
-namespace Clean.Application.Configurations;
+﻿namespace Clean.Application.Configurations;
 
 public static class ServiceConfigurationExtension
 {

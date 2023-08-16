@@ -1,4 +1,4 @@
-﻿namespace Clean.Persistence.Repositories.Abstracts;
+﻿namespace Clean.Persistence.Repositories.EntityFramework.Common;
 
 public abstract class EFRepository<TEntity, TContext, TKey> : IEFRepository<TEntity, TKey>
 where TEntity : Entity<TKey>, new()

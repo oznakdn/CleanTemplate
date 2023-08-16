@@ -1,9 +1,6 @@
-using Clean.Application.Features.Queries.Customers.GetCustomers.Dtos;
-using Clean.Persistence.Repositories.Mongo.Interfaces;
-
 namespace Clean.Application.Features.Queries.Customers.GetCustomers.Handler;
 
-public class GetCustomersHandler:GenericHandler<GetCustomersRequest,List<GetCustomersResponse>>
+public class GetCustomersHandler:AbstractHandler<GetCustomersRequest,List<GetCustomersResponse>>
 {
     private readonly IMongoCustomerRepository _mongoCustomer;
 

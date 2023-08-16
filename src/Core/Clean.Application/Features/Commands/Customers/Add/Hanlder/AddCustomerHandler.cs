@@ -1,11 +1,6 @@
-﻿using Clean.Application.Features.Commands.Customers.Add.Dtos;
-using Clean.Application.Features.Commands.Customers.Add.Validation;
-using Clean.Domain.Entities;
-using Clean.Persistence.Repositories.Mongo.Interfaces;
+﻿namespace Clean.Application.Features.Commands.Customers.Add.Hanlder;
 
-namespace Clean.Application.Features.Commands.Customers.Add.Hanlder;
-
-public class AddCustomerHandler:GenericHandler<AddCustomerRequest, AddCustomerResponse>
+public class AddCustomerHandler:AbstractHandler<AddCustomerRequest, AddCustomerResponse>
 {
     private readonly IMongoCustomerRepository _mongoCustomer;
 

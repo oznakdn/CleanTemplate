@@ -1,8 +1,5 @@
-using Microsoft.Extensions.Options;
-using MongoDB.Bson;
-using MongoDB.Driver;
+namespace Clean.Persistence.Repositories.Mongo.Common;
 
-namespace Clean.Persistence.Data.Mongo.Repositories.Abstracts;
 
 public abstract class MongoRepository<TEntity> : IMongoRepositroy<TEntity>
 where TEntity : MongoEntity, new()

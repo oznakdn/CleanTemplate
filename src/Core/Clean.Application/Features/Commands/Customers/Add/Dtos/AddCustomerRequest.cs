@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-
-namespace Clean.Application.Features.Commands.Customers.Add.Dtos;
+﻿namespace Clean.Application.Features.Commands.Customers.Add.Dtos;
 
 public class AddCustomerRequest : IRequest<AddCustomerResponse>
 {

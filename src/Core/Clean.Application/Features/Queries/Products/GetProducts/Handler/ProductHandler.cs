@@ -1,8 +1,6 @@
-﻿using Clean.Application.Features.Queries.Products.GetProducts.Dtos;
+﻿namespace Clean.Application.Features.Queries.Products.GetProducts.Handler;
 
-namespace Clean.Application.Features.Queries.Products.GetProducts.Handler;
-
-public class ProductHandler : GenericHandler<ProductRequest, ProductResponse>
+public class ProductHandler : AbstractHandler<ProductRequest, List<ProductResponse>>
 {
     private readonly IEFProductRepository _product;
     public ProductHandler(IEFProductRepository product)
@@ -10,14 +8,12 @@ public class ProductHandler : GenericHandler<ProductRequest, ProductResponse>
         _product = product;
     }
 
-    public override async Task<ProductResponse> Handle(ProductRequest request, CancellationToken cancellationToken)
+    public async override Task<List<ProductResponse>> Handle(ProductRequest request, CancellationToken cancellationToken)
     {
         var products = await _product.GetAllAsync(null);
-        var productModel = _product._mapper.Map<ProductResponse>(products);
-        return new ProductResponse
-        {
-            Products = productModel.Products
-        };
-
+        var result = _product._mapper.Map<IEnumerable<ProductResponse>>(products);
+        return result.ToList();
     }
+
+   
 }

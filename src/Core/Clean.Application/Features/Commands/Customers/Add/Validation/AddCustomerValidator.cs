@@ -1,6 +1,4 @@
-﻿using Clean.Application.Features.Commands.Customers.Add.Dtos;
-
-namespace Clean.Application.Features.Commands.Customers.Add.Validation;
+﻿namespace Clean.Application.Features.Commands.Customers.Add.Validation;
 
 public class AddCustomerValidator: AbstractValidator<AddCustomerRequest>
 {

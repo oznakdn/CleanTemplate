@@ -1,4 +1,4 @@
-﻿namespace Clean.Domain.Entities;
+﻿namespace Clean.Domain.Entities.SQL;
 
 public class Product : Entity<Guid>
 {

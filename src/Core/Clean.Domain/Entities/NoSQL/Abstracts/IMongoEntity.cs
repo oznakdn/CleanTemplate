@@ -1,4 +1,4 @@
-﻿namespace Clean.Domain.Entities.Abstracts;
+﻿namespace Clean.Domain.Entities.NoSQL.Abstracts;
 
 public interface IMongoEntity
 {

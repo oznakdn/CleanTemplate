@@ -1,4 +1,4 @@
-namespace Clean.Persistence.Data.Mongo;
+namespace Clean.Persistence.Contexts;
 
 public class MongoSetting
 {

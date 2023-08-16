@@ -1,7 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-
-namespace Clean.Domain.Entities.Abstracts;
+﻿namespace Clean.Domain.Entities.NoSQL.Abstracts;
 
 public abstract class MongoEntity : IMongoEntity
 {

@@ -1,4 +1,4 @@
-﻿namespace Clean.Persistence.Repositories;
+﻿namespace Clean.Persistence.Repositories.EntityFramework.Common;
 
 public interface IEFRepository<TEntity, TKey> : IAsyncDisposable
 where TEntity : Entity<TKey>, new()
