@@ -1,3 +1,4 @@
+using Clean.Api.Controllers.Abstract;
 using Clean.Application.Features.Commands.Customers.Add.Dtos;
 using Clean.Application.Features.Queries.Customers.GetCustomers.Dtos;
 using MediatR;
@@ -5,17 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Clean.Api.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class CustomersController:ControllerBase
+
+public class CustomersController:AbstractController
 {
-    private readonly IMediator _mediator;
-
-    public CustomersController(IMediator mediator)
+    public CustomersController(IMediator mediator) : base(mediator)
     {
-        _mediator = mediator;
     }
-
 
     [HttpGet]
     public async Task<IActionResult>GetCustomers()

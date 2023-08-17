@@ -1,18 +1,14 @@
-﻿using Clean.Application.Features.Queries.Products.GetProducts.Dtos;
+﻿using Clean.Api.Controllers.Abstract;
+using Clean.Application.Features.Queries.Products.GetProducts.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clean.Api.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
-public class ProductsController : ControllerBase
+public class ProductsController : AbstractController
 {
-    private readonly IMediator _mediator;
-
-    public ProductsController(IMediator mediator)
+    public ProductsController(IMediator mediator) : base(mediator)
     {
-        _mediator = mediator;
     }
 
     [HttpGet]
