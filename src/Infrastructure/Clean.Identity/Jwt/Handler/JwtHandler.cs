@@ -9,27 +9,28 @@ public class JwtHandler : IJwtHandler
     }
    
 
-    public TokenResponse GenerateToken<TUser, TKey>(TUser user, int ExpiredCount, ExpireType expireType) where TUser : UserIdentity<TKey>
+    public TokenResponse GenerateToken<TUser, TKey>(TUser user, int ExpireTime, ExpireType expireType) where TUser : UserIdentity<TKey>
     {
         var securityKey = _settings.ValidateIssuerSigningKey == true ? new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.SecurityKey!)) : null;
         DateTime _expires = DateTime.Now;
 
+
         switch (expireType)
         {
             case ExpireType.Seconds:
-                _expires.AddSeconds(ExpiredCount);
+                _expires.AddSeconds(ExpireTime);
                 break;
             case ExpireType.Minutes:
-                _expires.AddMinutes(ExpiredCount);
+                _expires.AddMinutes(ExpireTime);
                 break;
             case ExpireType.Hours:
-                _expires.AddHours(ExpiredCount);
+                _expires.AddHours(ExpireTime);
                 break;
             case ExpireType.Days:
-                _expires.AddDays(ExpiredCount);
+                _expires.AddDays(ExpireTime);
                 break;
             case ExpireType.Months:
-                _expires.AddMonths(ExpiredCount);
+                _expires.AddMonths(ExpireTime);
                 break;
         }
 
@@ -57,7 +58,7 @@ public class JwtHandler : IJwtHandler
         return new TokenResponse(writedToken, _expires);
     }
 
-    public TokenResponse GenerateRefreshToken(int ExpiredCount, ExpireType expireType)
+    public TokenResponse GenerateRefreshToken(int ExpireTime, ExpireType expireType)
     {
 
         DateTime _expires = DateTime.Now;
@@ -65,19 +66,19 @@ public class JwtHandler : IJwtHandler
         switch (expireType)
         {
             case ExpireType.Seconds:
-                _expires.AddSeconds(ExpiredCount);
+                _expires.AddSeconds(ExpireTime);
                 break;
             case ExpireType.Minutes:
-                _expires.AddMinutes(ExpiredCount);
+                _expires.AddMinutes(ExpireTime);
                 break;
             case ExpireType.Hours:
-                _expires.AddHours(ExpiredCount);
+                _expires.AddHours(ExpireTime);
                 break;
             case ExpireType.Days:
-                _expires.AddDays(ExpiredCount);
+                _expires.AddDays(ExpireTime);
                 break;
             case ExpireType.Months:
-                _expires.AddMonths(ExpiredCount);
+                _expires.AddMonths(ExpireTime);
                 break;
         }
 
