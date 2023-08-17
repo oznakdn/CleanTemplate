@@ -1,4 +1,6 @@
-﻿namespace Clean.Api.Configurations;
+﻿using Clean.Application.GlobalException;
+
+namespace Clean.Api.Configurations;
 
 public static class ServiceConfiguration
 {
@@ -29,6 +31,8 @@ public static class ServiceConfiguration
         // Application configuration
         services.AddApplicationService(providerType: ProviderType.SQLite, configuration["ConnectionStrings:SQLite"]);
 
+        // Middleware configuration
+        services.AddTransient<GlobalExceptionHandler>();
 
         return services;
     }

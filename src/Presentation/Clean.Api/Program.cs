@@ -1,4 +1,6 @@
 
+using Clean.Application.GlobalException;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -22,7 +24,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseMiddleware<GlobalExceptionHandler>();
 app.MapControllers();
 
 app.Run();
