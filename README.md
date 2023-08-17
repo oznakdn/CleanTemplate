@@ -23,6 +23,11 @@
 
 #### $\textcolor{blue}{\textsf{Base entities}}$ 
 
+    ├── Clean.Domain                   
+    ├── Entities
+    ├── SQL-NoSQL
+    └── Abstracts
+
 ```
 /* Entity Framework */
 public class Entity<TKey> : IEntity<TKey>
@@ -41,6 +46,11 @@ public abstract class MongoEntity : IMongoEntity
 
 ```
 #### $\textcolor{blue}{\textsf{Entities}}$ 
+
+    ├── Clean.Domain                   
+    ├── Entities
+    └── SQL-NoSQL
+    
 ```
 /* Entity Framework models */
 
@@ -84,8 +94,12 @@ public class ApplicationDbContext:DbContext
 
 ### $\textcolor{green}{\textsf{Db context registration ioc container}}$
 
+    ├── Clean.Api                   
+    ├── Configurations                                
+    └── ServiceConfiguration 
+    
 ```
-builder.Services.AddContextService(ContextType.SQLiteContext, builder.Configuration["ConnectionStrings:SQLite"]);
+services.AddApplicationService(providerType: ProviderType.SQLite, configuration["ConnectionStrings:SQLite"]);
 ```
 
 ### $\textcolor{green}{\textsf{Migration commands}}$
