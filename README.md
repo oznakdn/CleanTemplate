@@ -2,19 +2,18 @@
 <h2>Everything a dotnet project should have...</h2><hr>
 <h3>Features</h3>
 
+- [x] Asp .Net Core 7
+- [x] Entity Framework Core 7
+- [x] Mongo Driver 
+- [x] SQL and NoSQL databases
 - [x] Generic repository pattern 
 - [x] CQRS - MediatR pattern
 - [x] Role based authentication with Json Web Token
-- [x] SQL and NoSQL databases
 - [x] Logging with NLog
 - [x] Caching with Redis
 - [x] AutoMapper
 - [x] FluentValidation
 - [ ] Mail Service
-- [ ] Message queue with RabbitMQ
-
-
-
 
 # $\textcolor{purple}{\textsf{HOW TO USE}}$ 
 
