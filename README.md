@@ -2,8 +2,8 @@
 <h2>Everything a dotnet project should have...</h2><hr>
 <h3>Features</h3>
 
-- [x] Generic repository pattern implementation
-- [x] CQRS - MediatR pattern implementation
+- [x] Generic repository pattern 
+- [x] CQRS - MediatR pattern
 - [x] Role based authentication with Json Web Token
 - [x] SQL and NoSQL databases
 - [x] Logging with NLog
