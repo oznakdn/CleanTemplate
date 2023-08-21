@@ -1,5 +1,5 @@
 <h1>Clean Template</h1> 
-<h2>Everything a dotnet project should have...</h2><hr>
+
 <h3>Features</h3>
 
 - [x] Asp .Net Core 7
