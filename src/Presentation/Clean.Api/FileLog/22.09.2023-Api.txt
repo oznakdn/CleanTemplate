@@ -1,0 +1,6 @@
+info: 22.09.2023 16:13:16 - GET - /api/Customers/GetCustomers
+info: 22.09.2023 16:13:17 - 200 - /api/Customers/GetCustomers
+info: 22.09.2023 16:15:27 - GET - /api/Products/GetProducts
+info: 22.09.2023 16:15:28 - 200 - /api/Products/GetProducts
+info: 22.09.2023 16:15:53 - GET - /api/Customers/GetCustomers
+info: 22.09.2023 16:15:54 - 200 - /api/Customers/GetCustomers

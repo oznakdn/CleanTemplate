@@ -1,19 +1,20 @@
 namespace Clean.Application.Features.Queries.Customers.GetCustomers.Handler;
 
-public class GetCustomersHandler:AbstractHandler<GetCustomersRequest,List<GetCustomersResponse>>
+public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, List<GetCustomersResponse>>
 {
-    private readonly IMongoCustomerRepository _mongoCustomer;
 
-    public GetCustomersHandler(IMongoCustomerRepository mongoCustomer)
+    private readonly IMongoUnitOfWork _mongoUnitOfWork;
+
+
+    public GetCustomersHandler(IMongoUnitOfWork mongoUnitOfWork)
     {
-        _mongoCustomer = mongoCustomer;
+        _mongoUnitOfWork = mongoUnitOfWork;
     }
 
-    public async override Task<List<GetCustomersResponse>> Handle(GetCustomersRequest request, CancellationToken cancellationToken)
+    public async Task<List<GetCustomersResponse>> Handle(GetCustomersRequest request, CancellationToken cancellationToken)
     {
-        var customers = await _mongoCustomer.GetAllAsync(cancellationToken);
-        var result = _mongoCustomer.Mapper.Map<List<GetCustomersResponse>>(customers);
-
-         return result;
+        var customers = await _mongoUnitOfWork.Customer.GetAllAsync(cancellationToken);
+        var result = _mongoUnitOfWork.Mapper.Map<List<GetCustomersResponse>>(customers);
+        return result;
     }
 }

@@ -1,23 +1,24 @@
 ﻿namespace Clean.Application.Features.Commands.Customers.Add.Hanlder;
 
-public class AddCustomerHandler:AbstractHandler<AddCustomerRequest, AddCustomerResponse>
+public class AddCustomerHandler : IRequestHandler<AddCustomerRequest, AddCustomerResponse>
 {
-    private readonly IMongoCustomerRepository _mongoCustomer;
+    private readonly IMongoUnitOfWork _mongoUnitOfWork;
 
-    public AddCustomerHandler(IMongoCustomerRepository mongoCustomer)
+    public AddCustomerHandler(IMongoUnitOfWork mongoUnitOfWork)
     {
-        _mongoCustomer = mongoCustomer;
+        _mongoUnitOfWork = mongoUnitOfWork;
     }
 
-    public async override Task<AddCustomerResponse> Handle(AddCustomerRequest request, CancellationToken cancellationToken)
+    public async Task<AddCustomerResponse> Handle(AddCustomerRequest request, CancellationToken cancellationToken)
     {
         var errorMessages = new List<string>();
         var validator = new AddCustomerValidator();
         var validation = validator.Validate(request);
-        if(validation.IsValid)
+        if (validation.IsValid)
         {
-            Customer customer = _mongoCustomer.Mapper.Map<Customer>(request);
-            await _mongoCustomer.InsertAsync(customer, cancellationToken);
+
+            Customer customer = _mongoUnitOfWork.Mapper.Map<Customer>(request);
+            await _mongoUnitOfWork.Customer.InsertAsync(customer, cancellationToken);
             return new AddCustomerResponse
             {
                 Messages = new List<string> { "Customer was added." }

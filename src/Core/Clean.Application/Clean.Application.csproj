@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Commands\Accounts\Login\Mapping\**" />
+    <EmbeddedResource Remove="Features\Commands\Accounts\Login\Mapping\**" />
+    <None Remove="Features\Commands\Accounts\Login\Mapping\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
@@ -14,12 +20,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Clean.Identity\Clean.Identity.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Clean.Logging\Clean.Logging.csproj" />
 	  <ProjectReference Include="..\..\Infrastructure\Clean.Persistence\Clean.Persistence.csproj" />
 
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Commands\Accounts\Login\Mapping\" />
   </ItemGroup>
 
 </Project>

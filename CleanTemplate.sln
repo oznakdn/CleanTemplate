@@ -21,7 +21,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clean.Api", "src\Presentation\Clean.Api\Clean.Api.csproj", "{6A4E250D-69F3-4825-9D73-7BBFDB0D121F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clean.WebUI", "src\Presentation\Clean.WebUI\Clean.WebUI.csproj", "{8407A232-720C-4F01-86D5-1AB3EE07D478}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clean.WebUI", "src\Presentation\Clean.WebUI\Clean.WebUI.csproj", "{8407A232-720C-4F01-86D5-1AB3EE07D478}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clean.Logging", "src\Infrastructure\Clean.Logging\Clean.Logging.csproj", "{52F9A7B0-71E9-435F-8E36-12E1CDEB89B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{8407A232-720C-4F01-86D5-1AB3EE07D478}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8407A232-720C-4F01-86D5-1AB3EE07D478}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8407A232-720C-4F01-86D5-1AB3EE07D478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52F9A7B0-71E9-435F-8E36-12E1CDEB89B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52F9A7B0-71E9-435F-8E36-12E1CDEB89B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52F9A7B0-71E9-435F-8E36-12E1CDEB89B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52F9A7B0-71E9-435F-8E36-12E1CDEB89B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{53B7991A-33CA-45DA-8298-7635A84B2BFD} = {DC615E92-42FF-4C33-97D9-8AFDCADA951A}
 		{6A4E250D-69F3-4825-9D73-7BBFDB0D121F} = {53B7991A-33CA-45DA-8298-7635A84B2BFD}
 		{8407A232-720C-4F01-86D5-1AB3EE07D478} = {53B7991A-33CA-45DA-8298-7635A84B2BFD}
+		{52F9A7B0-71E9-435F-8E36-12E1CDEB89B9} = {DD9B085E-85D4-4BEF-AC8F-6F72FCEA1E59}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4873EA1-4C77-426B-9FF2-830E3F51EAD8}

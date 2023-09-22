@@ -29,7 +29,7 @@ public static class ServiceConfiguration
        });
 
         // Application configuration
-        services.AddApplicationService(providerType: ProviderType.SQLite, configuration["ConnectionStrings:SQLite"]);
+        
 
         // Middleware configuration
         services.AddTransient<GlobalExceptionHandler>();

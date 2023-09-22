@@ -21,13 +21,6 @@ public static class ServiceConfiguration
                 break;
         }
 
-        // Repository configuration
-
-        services.AddScoped<IEFProductRepository, EFProductRepository>();
-        services.AddScoped<IEFUserRepository, EFUserRepository>();
-        services.AddScoped<IMongoCustomerRepository, MongoCustomerRepository>();
-
         return services;
-
     }
 }

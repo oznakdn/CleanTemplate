@@ -5,13 +5,11 @@ public abstract class MongoRepository<TEntity> : IMongoRepositroy<TEntity>
 where TEntity : MongoEntity, new()
 {
 
-    public IMapper Mapper { get; }
     private readonly IMongoCollection<TEntity> _collection;
     private readonly MongoSetting _setting;
     private readonly IMongoClient _mongoClient;
-    public MongoRepository(IOptions<MongoSetting> setting, IMapper mapper,string collectionName)
+    public MongoRepository(IOptions<MongoSetting> setting,string collectionName)
     {
-        Mapper = mapper;
         _setting = setting.Value;
         _mongoClient = new MongoClient(_setting.Connection);
         IMongoDatabase database = _mongoClient.GetDatabase(_setting.Database);

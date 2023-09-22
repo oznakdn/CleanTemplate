@@ -5,33 +5,26 @@ where TEntity : Entity<TKey>, new()
 where TContext : DbContext
 {
     protected readonly TContext _dbContext;
-    public IMapper _mapper { get; }
-
     private DbSet<TEntity> _table;
-
-    public EFRepository(TContext dbContext, IMapper mapper)
+    public EFRepository(TContext dbContext)
     {
         _dbContext = dbContext;
-        _mapper = mapper;
         _table = _dbContext.Set<TEntity>();
     }
 
     public virtual void Delete(TEntity entity)
     {
         _table.Remove(entity);
-        Save();
     }
 
     public virtual void Insert(TEntity entity)
     {
         _table.Add(entity);
-        Save();
     }
 
     public virtual void Update(TEntity entity)
     {
         _table.Update(entity);
-        Save();
     }
 
 
@@ -68,14 +61,5 @@ where TContext : DbContext
     }
 
     public virtual IQueryable<TEntity> GetQueryable() => _table.AsQueryable();
-
-
-
-
-    public virtual void Save() => _dbContext.SaveChanges();
-
-    public virtual async Task SaveAsync() => await _dbContext.SaveChangesAsync();
-
-    public virtual async ValueTask DisposeAsync() => await _dbContext.DisposeAsync();
 
 }

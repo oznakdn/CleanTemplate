@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\Core\Clean.Application\Clean.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataLog\" />
+  </ItemGroup>
+
 </Project>

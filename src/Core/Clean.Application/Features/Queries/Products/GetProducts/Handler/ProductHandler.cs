@@ -1,19 +1,17 @@
 ﻿namespace Clean.Application.Features.Queries.Products.GetProducts.Handler;
 
-public class ProductHandler : AbstractHandler<ProductRequest, List<ProductResponse>>
+public class ProductHandler : IRequestHandler<ProductRequest, List<ProductResponse>>
 {
-    private readonly IEFProductRepository _product;
-    public ProductHandler(IEFProductRepository product)
+    private readonly IEfUnitOfWork _efUnitOfWork;
+    public ProductHandler(IEfUnitOfWork efUnitOfWork)
     {
-        _product = product;
+        _efUnitOfWork = efUnitOfWork;
     }
 
-    public async override Task<List<ProductResponse>> Handle(ProductRequest request, CancellationToken cancellationToken)
+    public async Task<List<ProductResponse>> Handle(ProductRequest request, CancellationToken cancellationToken)
     {
-        var products = await _product.GetAllAsync(null);
-        var result = _product._mapper.Map<IEnumerable<ProductResponse>>(products);
+        var products = await _efUnitOfWork.Product.GetAllAsync(null);
+        var result = _efUnitOfWork.Mapper.Map<IEnumerable<ProductResponse>>(products);
         return result.ToList();
     }
-
-   
 }

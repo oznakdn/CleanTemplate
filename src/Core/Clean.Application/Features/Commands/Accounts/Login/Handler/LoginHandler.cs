@@ -1,24 +1,25 @@
 ﻿namespace Clean.Application.Features.Commands.Accounts.Login.Handler;
 
-public class LoginHandler : AbstractHandler<LoginRequest, LoginResponse>
+public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
 {
     private readonly IJwtHandler _jwtHandler;
-    private readonly IEFUserRepository _user;
-
-    public LoginHandler(IJwtHandler jwtHandler, IEFUserRepository user)
+    private readonly IEfUnitOfWork _efUnitOfWork;
+   
+    public LoginHandler(IJwtHandler jwtHandler, IEfUnitOfWork efUnitOfWork)
     {
         _jwtHandler = jwtHandler;
-        _user = user;
+        _efUnitOfWork = efUnitOfWork;
     }
 
-    public override async Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
+    public async Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
     {
         var loginValidator = new LoginValidator();
         var errors = new List<string>();
         var validation = loginValidator.Validate(request);
         if (validation.IsValid)
         {
-            var existUser = await _user.GetAsync(user => user.Email == request.Email && request.Password.VerifyHashPassword(user.PasswordHash));
+            var user = _efUnitOfWork.User;
+            var existUser = await user.GetAsync(user => user.Email == request.Email && request.Password.VerifyHashPassword(user.PasswordHash));
 
             if (existUser != null)
             {
@@ -26,8 +27,8 @@ public class LoginHandler : AbstractHandler<LoginRequest, LoginResponse>
                 var accessToken = _jwtHandler.GenerateToken<AppUser, Guid>(existUser, 5, ExpireType.Minutes);
                 existUser.RefreshToken = refreshToken.Token;
                 existUser.ExpiredDate = refreshToken.TokenExpiredDate;
-                _user.Update(existUser);
-                await _user.SaveAsync();
+                user.Update(existUser);
+                await _efUnitOfWork.SaveAsync();
 
                 return new LoginResponse
                 {
@@ -40,7 +41,7 @@ public class LoginHandler : AbstractHandler<LoginRequest, LoginResponse>
             {
                 Token = string.Empty,
                 TokenExpiredDate = null,
-                ErrorMessages = new List<string>() {"Email or Password is wrong!"}
+                ErrorMessages = new List<string>() { "Email or Password is wrong!" }
             };
         }
 
@@ -51,6 +52,5 @@ public class LoginHandler : AbstractHandler<LoginRequest, LoginResponse>
             TokenExpiredDate = null,
             ErrorMessages = errors
         };
-
     }
 }

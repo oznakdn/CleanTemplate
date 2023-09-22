@@ -3,7 +3,6 @@ namespace Clean.Persistence.Repositories.Mongo.Common;
 public interface IMongoRepositroy<TEntity>
 where TEntity : MongoEntity, new()
 {
-   IMapper Mapper {get;}
    void Delete(string id, CancellationToken cancellationToken);
    Task DeleteAsync(string id, CancellationToken cancellationToken);
    void Insert(TEntity entity, CancellationToken cancellationToken);
