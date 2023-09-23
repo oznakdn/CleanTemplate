@@ -9,7 +9,7 @@
 - [x] Generic repository pattern
 - [x] Unit Of Work pattern
 - [x] CQRS - Mediator pattern
-- [x] Role based authentication with Json Web Token
+- [x] Claim based authentication with Json Web Token
 - [x] Logging with NLog
 - [x] Caching with Redis
 - [x] AutoMapper
