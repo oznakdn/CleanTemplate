@@ -1,6 +1,6 @@
-<h1>Clean Template</h1> 
+# Clean Template 
 
-<h3>Features</h3>
+### Features
 
 - [x] Asp .Net Core 7
 - [x] Entity Framework Core 7
@@ -15,19 +15,19 @@
 - [x] FluentValidation
 - [ ] Mail Service
 
-# $\textcolor{purple}{\textsf{HOW TO USE}}$ 
+## HOW TO USE? 
 
 
-### $\textcolor{green}{\textsf{Creating new entities and identites for ef or mongo}}$ 
+### Creating new entities and identites for ef or mongo
 
-#### $\textcolor{blue}{\textsf{Base entities}}$ 
+#### Base entities
 
     ├── Clean.Domain                   
     ├── Entities
     ├── SQL-NoSQL
     └── Abstracts
 
-```
+```csharp
 /* Entity Framework */
 public class Entity<TKey> : IEntity<TKey>
 {
@@ -44,13 +44,13 @@ public abstract class MongoEntity : IMongoEntity
 }
 
 ```
-#### $\textcolor{blue}{\textsf{Entities}}$ 
+#### Entities
 
     ├── Clean.Domain                   
     ├── Entities
     └── SQL-NoSQL
     
-```
+```csharp
 /* Entity Framework models */
 
 public class Product : Entity<Guid>
@@ -76,9 +76,9 @@ public class Customer: MongoEntity
 }
 
 ```
-### $\textcolor{green}{\textsf{Use to db context}}$
+### Use to db context
 
-```
+```csharp
 public class ApplicationDbContext:DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext>options):base(options){}
@@ -91,43 +91,59 @@ public class ApplicationDbContext:DbContext
 
 ```
 
-### $\textcolor{green}{\textsf{Db context registration ioc container}}$
+### Db context registration ioc container
 
     ├── Clean.Api                   
     ├── Configurations                                
     └── ServiceConfiguration 
     
-```
+```csharp
 services.AddApplicationService(providerType: ProviderType.SQLite, configuration["ConnectionStrings:SQLite"]);
 ```
 
-### $\textcolor{green}{\textsf{Migration commands}}$
+### Migration commands
 
 <p>PowerShell cd C:\CleanTemplate\src\Infrastructure\Clean.Persistence</p>
 <p>dotnet ef migrations add InitDb --startup-project C:\CleanTemplate\src\Presentation\Clean.Api</p>
 <p></p>dotnet ef database update --startup-project C:\CleanTemplate\src\Presentation\Clean.Api<p>
 
   
-### $\textcolor{green}{\textsf{appsetting.json}}$ 
-```
-"JwtSetting": {
-  "ValidateIssuer": true, // true or false
-  "ValidateAudience": true, // true or false
-  "ValidateIssuerSigningKey": true, // true or false
-  "ValidateLifetime": true, // true or false
-  "Issuer": "", // write your issuer
-  "Audience": "", // write your audience
-  "SecurityKey": "" // write your key
-},
-"ConnectionStrings": {
-  "MSSQLServer": "", //Example ===> Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;
-  "MySQL": "", //Example ===> Host=myServerAddress;UserName=myUsername;Password=myPassword;Database=myDataBase;
-  "PostgreSQL": "", //Example ===> Server=127.0.0.1;Port=5432;Database=myDataBase;User Id=myUsername;Password=myPassword;
-  "SQLite": "" //Example ===> Data Source=c:\mydb.db;
-},
-"MongoSettings": {
-  "Connection": "", //Example ===> "mongodb://localhost:27017"
-  "Database": "" //Example ===> "MongoExampleDB"
+### appsetting.json
+
+```csharp
+{
+  "AllowedHosts": "*",
+  "TokenSetting": {
+    "SaveToken": true,
+    "ValidateIssuer": true,
+    "ValidateAudience": true,
+    "ValidateLifetime": true,
+    "Issuer": "http://localhost:5019",
+    "Audience": "http://localhost:27250",
+    "SigningKey": "729e13bb78b745e9bf82c4245fc4eaca"
+  },
+  "DatabaseOptions": {
+    "MSSQLServerConnection": "",
+    "MySQLConnection": "",
+    "PostgreSQLConnection": "",
+    "SQLiteConnection": "Data Source = C:/Users/HP/Desktop/Ozan/CleanTemplate/src/Infrastructure/Clean.Persistence/ExampleDB.db"
+  },
+  "MongoSettings": {
+    "Connection": "mongodb://localhost:27017",
+    "Database": "MongoExampleDB"
+  },
+  "LogOptions": {
+    "WriteToFile": true,
+    "WriteToDatabase": true,
+    "FilePath": "C:\\Users\\HP\\Desktop\\Ozan\\CleanTemplate\\src\\Presentation\\Clean.Api\\FileLog",
+    "FileName": "Api",
+    "DatabaseOptions": {
+      "SQLiteConnectionString": "Data Source = C:\\Users\\HP\\Desktop\\Ozan\\CleanTemplate\\src\\Presentation\\Clean.Api\\DataLog\\LogDb.db",
+      "MSSqlServerConectionString": "",
+      "PostgreSqlConnectionString": "",
+      "MySqlConnectionString": ""
+    }
+  }
 }
 ```
 
