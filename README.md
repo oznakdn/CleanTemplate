@@ -8,7 +8,7 @@
 - [x] SQL and NoSQL databases
 - [x] Generic repository pattern
 - [x] Unit Of Work pattern
-- [x] CQRS - MediatR pattern
+- [x] CQRS - Mediator pattern
 - [x] Role based authentication with Json Web Token
 - [x] Logging with NLog
 - [x] Caching with Redis
