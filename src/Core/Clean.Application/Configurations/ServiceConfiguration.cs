@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Clean.Logging.Configurations;
-namespace Clean.Application.Configurations;
+﻿namespace Clean.Application.Configurations;
 
 public static class ServiceConfiguration
 {

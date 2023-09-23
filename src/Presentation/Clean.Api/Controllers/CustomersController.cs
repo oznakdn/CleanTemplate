@@ -1,5 +1,5 @@
 using Clean.Api.Controllers.Abstract;
-using Clean.Application.Features.Commands.CustomerCommands.Add.Dtos;
+using Clean.Application.Features.Commands.CustomerCommands.Create.Dtos;
 using Clean.Application.Features.Queries.CustomerQueries.Get.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,9 +21,9 @@ public class CustomersController:AbstractController
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostCustomer([FromBody]AddCustomerRequest addCustomer)
+    public async Task<IActionResult> PostCustomer([FromBody]CreateCustomerRequest createCustomer)
     {
-        var result = await _mediator.Send(addCustomer);
+        var result = await _mediator.Send(createCustomer);
         if(result.Success)
             return Ok(result);
         return BadRequest(result.Messages);

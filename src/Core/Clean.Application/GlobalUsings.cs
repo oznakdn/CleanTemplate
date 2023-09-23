@@ -7,8 +7,6 @@ global using Microsoft.Extensions.DependencyInjection;
 global using System.Reflection;
 global using Clean.Identity.Helpers;
 global using Clean.Persistence.Repositories.Mongo.Interfaces;
-global using Clean.Application.Features.Commands.CustomerCommands.Add.Dtos;
-global using Clean.Application.Features.Commands.CustomerCommands.Add.Validation;
 global using Clean.Domain.Entities.NoSQL;
 global using Clean.Domain.Entities.SQL;
 global using Clean.Identity.Configurations;
@@ -19,7 +17,8 @@ global using Clean.Persistence.Repositories;
 global using Clean.Persistence.Repositories.Mongo;
 global using Microsoft.Extensions.Options;
 global using Gleeman.EffectiveLogger.Logger;
-
+global using Microsoft.Extensions.Configuration;
+global using Clean.Logging.Configurations;
 
 
 

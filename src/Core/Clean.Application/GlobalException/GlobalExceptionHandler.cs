@@ -22,12 +22,12 @@ public class GlobalExceptionHandler : IMiddleware
         }
         catch (Exception ex)
         {
-            _logger.Information($"{DateTime.Now} - {context.Response.StatusCode} - {ex.Message}");
             string message = ex.Message.ToString();
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             var response = new ExceptionResponse(statusCode: context.Response.StatusCode, message);
             await context.Response.WriteAsJsonAsync<ExceptionResponse>(response);
+            _logger.Fail($"{DateTime.Now} - {context.Response.StatusCode} - {ex.Message}");
         }
     }
 }
