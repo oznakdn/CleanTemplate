@@ -103,11 +103,16 @@ services.AddApplicationService(providerType: ProviderType.SQLite, configuration[
 
 ### Migration commands
 
-<p>PowerShell cd C:\CleanTemplate\src\Infrastructure\Clean.Persistence</p>
-<p>dotnet ef migrations add InitDb --startup-project C:\CleanTemplate\src\Presentation\Clean.Api</p>
-<p></p>dotnet ef database update --startup-project C:\CleanTemplate\src\Presentation\Clean.Api<p>
+```csharp
+> C:\CleanTemplate\src\Infrastructure\Clean.Persistence
+```
+```csharp
+> dotnet ef migrations add InitDb --context ApplicationDbContext --startup-project C:\Users\HP\Desktop\Ozan\CleanTemplate\src\Presentation\Clean.Api
+```
+```csharp
+> dotnet ef database update --context ApplicationDbContext --startup-project C:\Users\HP\Desktop\Ozan\CleanTemplate\src\Presentation\Clean.Api
+```
 
-  
 ### appsetting.json
 
 ```csharp
