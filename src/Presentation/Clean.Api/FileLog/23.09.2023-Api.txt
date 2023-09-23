@@ -38,3 +38,7 @@ info: 23.09.2023 15:54:04 - GET - /api/Products/GetProducts
 info: 23.09.2023 15:54:05 - 200 - /api/Products/GetProducts
 info: 23.09.2023 15:55:01 - GET - /api/Products/GetProducts
 info: 23.09.2023 15:55:01 - 200 - /api/Products/GetProducts
+info: 23.09.2023 16:49:59 - GET - /api/Customers/GetCustomers
+info: 23.09.2023 16:50:00 - 200 - /api/Customers/GetCustomers
+info: 23.09.2023 16:50:04 - GET - /api/Products/GetProducts
+info: 23.09.2023 16:50:05 - 200 - /api/Products/GetProducts

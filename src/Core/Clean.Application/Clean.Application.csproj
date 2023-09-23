@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Clean.Identity\Clean.Identity.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Clean.Logging\Clean.Logging.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Clean.Notification\Clean.Notification.csproj" />
 	  <ProjectReference Include="..\..\Infrastructure\Clean.Persistence\Clean.Persistence.csproj" />
 
   </ItemGroup>

@@ -12,6 +12,7 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
         _efUnitOfWork = efUnitOfWork;
     }
 
+    // TODO: Mail ile üyelik onayı kodu gönderilecek. Kod random olarak oluşturulacak.
     public async Task<RegisterResponse> Handle(RegisterRequest request, CancellationToken cancellationToken)
     {
         var validator = new RegisterValidator();

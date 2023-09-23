@@ -1,4 +1,6 @@
-﻿namespace Clean.Application.Configurations;
+﻿using Clean.Notification.Configurations;
+
+namespace Clean.Application.Configurations;
 
 public static class ServiceConfiguration
 {
@@ -12,6 +14,7 @@ public static class ServiceConfiguration
         services.AddPersistenceService(configuration, providerType);
         services.AddIdentityService(configuration);
         services.AddLoggerService(configuration);
+        services.AddNotificationService(configuration);
 
         return services;
     }
