@@ -10,7 +10,7 @@
 - [x] Unit Of Work pattern
 - [x] CQRS - Mediator pattern
 - [x] Claim based authentication with Json Web Token
-- [x] Logging with NLog
+- [x] Logging
 - [x] Caching with Redis
 - [x] AutoMapper
 - [x] FluentValidation
