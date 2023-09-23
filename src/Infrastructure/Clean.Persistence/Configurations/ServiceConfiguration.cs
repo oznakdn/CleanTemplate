@@ -7,10 +7,10 @@ public static class ServiceConfiguration
     public static IServiceCollection AddPersistenceService(this IServiceCollection services,IConfiguration configuration, ProviderType providerType)
     {
         services.Configure<DatabaseSettings>(configuration.GetSection(nameof(DatabaseSettings)));
-        string msSqlConnection = configuration.GetValue<string>("DatabaseOptions:MSSQLServerConnection");
-        string mySqlConnection = configuration.GetValue<string>("DatabaseOptions:MySQLConnection");
-        string postgreSqlConnection = configuration.GetValue<string>("DatabaseOptions:PostgreSQLConnection");
-        string sqLiteConnection = configuration.GetValue<string>("DatabaseOptions:SQLiteConnection");
+        string msSqlConnection = configuration.GetValue<string>("DatabaseSettings:MSSQLServerConnection");
+        string mySqlConnection = configuration.GetValue<string>("DatabaseSettings:MySQLConnection");
+        string postgreSqlConnection = configuration.GetValue<string>("DatabaseSettings:PostgreSQLConnection");
+        string sqLiteConnection = configuration.GetValue<string>("DatabaseSettings:SQLiteConnection");
 
         switch (providerType)
         {

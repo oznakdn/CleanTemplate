@@ -11,4 +11,5 @@ where TEntity : Entity<TKey>, new()
     Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate, params Expression<Func<TEntity, object>>[] includeProperties);
     Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
 
+    //TODO: Pagination ile ilgili metot eklenecek
 }

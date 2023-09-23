@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clean.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230923111423_InitDb")]
+    [Migration("20230923124038_InitDb")]
     partial class InitDb
     {
         /// <inheritdoc />
@@ -70,7 +70,7 @@ namespace Clean.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("ExpiredDate")
+                    b.Property<DateTime?>("ExpiredDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
@@ -84,10 +84,9 @@ namespace Clean.Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RefreshToken")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("RoleId")
+                    b.Property<Guid?>("RoleId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
@@ -104,9 +103,7 @@ namespace Clean.Persistence.Migrations
                 {
                     b.HasOne("Clean.Domain.Identities.SQL.AppRole", "Role")
                         .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoleId");
 
                     b.Navigation("Role");
                 });

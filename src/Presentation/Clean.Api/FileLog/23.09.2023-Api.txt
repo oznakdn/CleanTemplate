@@ -14,3 +14,21 @@ info: 23.09.2023 14:25:30 - GET - /api/Customers/GetCustomers
 info: 23.09.2023 14:26:16 - 200 - /api/Customers/GetCustomers
 info: 23.09.2023 14:29:26 - GET - /api/Customers/GetCustomers
 info: 23.09.2023 14:29:30 - 200 - /api/Customers/GetCustomers
+info: 23.09.2023 15:04:50 - POST - /api/Customers/PostCustomer
+info: 23.09.2023 15:04:51 - 200 - /api/Customers/PostCustomer
+info: 23.09.2023 15:25:34 - POST - /register
+info: 23.09.2023 15:25:35 - 200 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 23.09.2023 15:32:03 - POST - /register
+info: 23.09.2023 15:32:04 - 200 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 23.09.2023 15:33:03 - POST - /register
+info: 23.09.2023 15:33:41 - 200 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 23.09.2023 15:33:46 - POST - /register
+info: 23.09.2023 15:41:29 - POST - /register
+info: 23.09.2023 15:41:30 - 200 - /register
+info: 23.09.2023 15:43:08 - POST - /login
+info: 23.09.2023 15:43:33 - POST - /login
+info: 23.09.2023 15:43:33 - 200 - /login
+info: 23.09.2023 15:44:41 - POST - /login
+info: 23.09.2023 15:44:42 - 200 - /login
+info: 23.09.2023 15:45:52 - POST - /login
+info: 23.09.2023 15:45:53 - 200 - /login

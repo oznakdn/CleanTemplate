@@ -31,10 +31,10 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
                 {
                     Username = existUser.Username,
                     Email = existUser.Email,
-                    Role = existUser.Role.RoleTitle
+                    Role = existUser.Role != null ? existUser.Role.RoleTitle : null
                 };
-                var refreshToken = _tokenGenerator.GenerateAccessToken(tokenParameter, ExpireType.Hour, 1);
-                var accessToken = _tokenGenerator.GenerateRefreshToken(ExpireType.Hour, 2);
+                var accessToken = _tokenGenerator.GenerateAccessToken(tokenParameter, ExpireType.Hour, 1);
+                var refreshToken = _tokenGenerator.GenerateRefreshToken(ExpireType.Hour, 2);
                 existUser.RefreshToken = refreshToken.Token;
                 existUser.ExpiredDate = refreshToken.ExpireDate;
                 user.Update(existUser);

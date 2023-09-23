@@ -43,14 +43,14 @@ namespace Clean.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    RefreshToken = table.Column<string>(type: "TEXT", nullable: false),
-                    ExpiredDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    RefreshToken = table.Column<string>(type: "TEXT", nullable: true),
+                    ExpiredDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    RoleId = table.Column<Guid>(type: "TEXT", nullable: true),
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LastName = table.Column<string>(type: "TEXT", nullable: true),
                     Username = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: false),
-                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,8 +59,7 @@ namespace Clean.Persistence.Migrations
                         name: "FK_Users_Roles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "Roles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

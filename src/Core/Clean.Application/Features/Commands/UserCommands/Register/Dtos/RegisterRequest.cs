@@ -1,11 +1,7 @@
-﻿namespace Clean.Domain.Identities.SQL.Abstracts;
+﻿namespace Clean.Application.Features.Commands.UserCommands.Register.Dtos;
 
-public abstract class UserIdentity<TKey> : Entity<TKey>
+public class RegisterRequest : IRequest<RegisterResponse>
 {
-    public UserIdentity()
-    {
-
-    }
     public virtual string? FirstName { get; set; }
     public virtual string? LastName { get; set; }
     public virtual string? Username { get; set; }
