@@ -99,7 +99,7 @@ public class ApplicationDbContext:DbContext
     └── ServiceConfiguration 
     
 ```csharp
-services.AddApplicationService(providerType: ProviderType.SQLite, configuration["ConnectionStrings:SQLite"]);
+builder.Services.AddApplicationService(builder.Configuration, providerType: ProviderType.SQLite);
 ```
 
 ### Migration commands
