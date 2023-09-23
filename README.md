@@ -153,8 +153,20 @@ services.AddApplicationService(providerType: ProviderType.SQLite, configuration[
 ```
 
 
-Current Packages
-
-[![Nuget version](https://img.shields.io/nuget/v/blazored.localstorage.svg?logo=nuget)](https://www.nuget.org/packages/Blazored.LocalStorage/)
-[![Nuget downloads](https://img.shields.io/nuget/dt/Blazored.LocalStorage?logo=nuget)](https://www.nuget.org/packages/Blazored.LocalStorage/)
-![Build & Test Main](https://github.com/Blazored/LocalStorage/workflows/Build%20&%20Test%20Main/badge.svg)
+## Packages
+```csharp
+Gleeman.EffectiveLogger.SQLite
+Gleeman.JwtGenerator
+BCrypt.Net-Next
+MongoDB.Driver
+Microsoft.EntityFrameworkCore.Sqlite
+Microsoft.EntityFrameworkCore.SqlServer
+Npgsql.EntityFrameworkCore.PostgreSQL
+Pomelo.EntityFrameworkCore.MySql
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Proxies
+AutoMapper.Extensions.Microsoft.DependencyInjection
+FluentValidation.DependencyInjectionExtensions
+MediatR.Extensions.Microsoft.DependencyInjection
+```
