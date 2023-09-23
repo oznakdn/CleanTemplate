@@ -1,0 +1,16 @@
+info: 23.09.2023 13:26:41 - GET - /api/Customers/GetCustomers
+info: 23.09.2023 13:26:41 - 200 - /api/Customers/GetCustomers
+info: 23.09.2023 13:40:22 - GET - /api/Customers/GetCustomers
+info: 23.09.2023 13:40:22 - 200 - /api/Customers/GetCustomers
+info: 23.09.2023 13:57:04 - GET - /api/Products/GetProducts
+info: 23.09.2023 13:57:05 - 200 - /api/Products/GetProducts
+info: 23.09.2023 14:20:21 - GET - /api/Customers/GetCustomers
+info: 23.09.2023 14:20:21 - 200 - /api/Customers/GetCustomers
+info: 23.09.2023 14:20:25 - GET - /api/Products/GetProducts
+info: 23.09.2023 14:20:26 - 200 - /api/Products/GetProducts
+info: 23.09.2023 14:23:52 - GET - /api/Customers/GetCustomers
+info: 23.09.2023 14:24:48 - 200 - /api/Customers/GetCustomers
+info: 23.09.2023 14:25:30 - GET - /api/Customers/GetCustomers
+info: 23.09.2023 14:26:16 - 200 - /api/Customers/GetCustomers
+info: 23.09.2023 14:29:26 - GET - /api/Customers/GetCustomers
+info: 23.09.2023 14:29:30 - 200 - /api/Customers/GetCustomers

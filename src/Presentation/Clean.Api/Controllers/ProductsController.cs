@@ -1,5 +1,5 @@
 ﻿using Clean.Api.Controllers.Abstract;
-using Clean.Application.Features.Queries.Products.GetProducts.Dtos;
+using Clean.Application.Features.Queries.ProductQueries.Get.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

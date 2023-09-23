@@ -9,10 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Logging.ClearProviders();
 builder.Services.AddApiService(builder.Configuration);
-string connectionString = builder.Configuration.GetValue<string>("ConnectionStrings:SQLite");
-builder.Services.AddApplicationService(builder.Configuration, providerType: ProviderType.SQLite, connectionString);
-
-
+builder.Services.AddApplicationService(builder.Configuration, providerType: ProviderType.SQLite);
 
 var app = builder.Build();
 

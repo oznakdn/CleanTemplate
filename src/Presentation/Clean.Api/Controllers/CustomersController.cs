@@ -1,6 +1,6 @@
 using Clean.Api.Controllers.Abstract;
-using Clean.Application.Features.Commands.Customers.Add.Dtos;
-using Clean.Application.Features.Queries.Customers.GetCustomers.Dtos;
+using Clean.Application.Features.Commands.CustomerCommands.Add.Dtos;
+using Clean.Application.Features.Queries.CustomerQueries.Get.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

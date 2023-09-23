@@ -6,9 +6,9 @@ where TEntity : MongoEntity, new()
 {
 
     private readonly IMongoCollection<TEntity> _collection;
-    private readonly MongoSetting _setting;
+    private readonly MongoSettings _setting;
     private readonly IMongoClient _mongoClient;
-    public MongoRepository(IOptions<MongoSetting> setting,string collectionName)
+    public MongoRepository(IOptions<MongoSettings> setting,string collectionName)
     {
         _setting = setting.Value;
         _mongoClient = new MongoClient(_setting.Connection);

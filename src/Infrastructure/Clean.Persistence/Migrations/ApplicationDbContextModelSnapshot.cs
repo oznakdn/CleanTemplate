@@ -38,7 +38,7 @@ namespace Clean.Persistence.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Clean.Domain.Identities.Abstracts.RoleIdentity<System.Guid>", b =>
+            modelBuilder.Entity("Clean.Domain.Identities.SQL.AppRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,35 +48,26 @@ namespace Clean.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("RoleTitle")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoleIdentity<Guid>");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("RoleIdentity<Guid>");
-
-                    b.UseTphMappingStrategy();
+                    b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Clean.Domain.Identities.SQL.Abstracts.UserIdentity<System.Guid>", b =>
+            modelBuilder.Entity("Clean.Domain.Identities.SQL.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Discriminator")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
+                    b.Property<DateTime>("ExpiredDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
@@ -86,6 +77,10 @@ namespace Clean.Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RefreshToken")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -99,37 +94,12 @@ namespace Clean.Persistence.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserIdentity<Guid>");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("UserIdentity<Guid>");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("Clean.Domain.Identities.SQL.AppRole", b =>
-                {
-                    b.HasBaseType("Clean.Domain.Identities.Abstracts.RoleIdentity<System.Guid>");
-
-                    b.HasDiscriminator().HasValue("AppRole");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Clean.Domain.Identities.SQL.AppUser", b =>
                 {
-                    b.HasBaseType("Clean.Domain.Identities.SQL.Abstracts.UserIdentity<System.Guid>");
-
-                    b.Property<DateTime>("ExpiredDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("RefreshToken")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasDiscriminator().HasValue("AppUser");
-                });
-
-            modelBuilder.Entity("Clean.Domain.Identities.SQL.Abstracts.UserIdentity<System.Guid>", b =>
-                {
-                    b.HasOne("Clean.Domain.Identities.Abstracts.RoleIdentity<System.Guid>", "Role")
+                    b.HasOne("Clean.Domain.Identities.SQL.AppRole", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -138,7 +108,7 @@ namespace Clean.Persistence.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("Clean.Domain.Identities.Abstracts.RoleIdentity<System.Guid>", b =>
+            modelBuilder.Entity("Clean.Domain.Identities.SQL.AppRole", b =>
                 {
                     b.Navigation("Users");
                 });

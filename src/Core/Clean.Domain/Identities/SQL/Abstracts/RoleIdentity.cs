@@ -8,5 +8,4 @@ public abstract class RoleIdentity<TKey> : Entity<TKey>
     }
     public string RoleTitle { get; set; }
     public string Description { get; set; }
-    public ICollection<UserIdentity<TKey>> Users { get; set; }
 }
