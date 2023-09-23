@@ -12,8 +12,8 @@
 - [x] Claim based authentication with Json Web Token
 - [x] Logging
 - [x] Caching with Redis
-- [x] AutoMapper
-- [x] FluentValidation
+- [x] Object mapping
+- [x] Validation
 - [ ] Mail Service
 
 ## HOW TO USE? 
