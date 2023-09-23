@@ -14,7 +14,7 @@
 - [x] Caching with Redis
 - [x] Object mapping
 - [x] Validation
-- [ ] Mail Service
+- [ ] Notification Service
 
 ## HOW TO USE? 
 
