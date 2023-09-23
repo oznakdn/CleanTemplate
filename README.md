@@ -148,8 +148,17 @@ builder.Services.AddApplicationService(builder.Configuration, providerType: Prov
       "MSSqlServerConectionString": "",
       "PostgreSqlConnectionString": "",
       "MySqlConnectionString": ""
+    },
+    "NotificationSettings": {
+      "DisplayName": "",
+      "From": "",
+      "UserName": "",
+      "Password": "",
+      "Host": "",
+      "Port": "",
+      "UseSSL": false,
+      "UseStartTls": true
     }
-  }
 }
 ```
 
@@ -170,4 +179,5 @@ Microsoft.EntityFrameworkCore.Proxies
 AutoMapper.Extensions.Microsoft.DependencyInjection
 FluentValidation.DependencyInjectionExtensions
 MediatR.Extensions.Microsoft.DependencyInjection
+MailKit
 ```
