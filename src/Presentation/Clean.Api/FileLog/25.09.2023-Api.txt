@@ -60,3 +60,4 @@ info: 25.09.2023 16:00:17 - POST - /register - 200
 info: 25.09.2023 16:01:10 - POST - /register - 200
 info: 25.09.2023 16:01:36 - POST - /login - 200
 info: 25.09.2023 16:13:16 - POST - /register - 200
+info: 25.09.2023 17:20:13 - GET - /api/Products/GetProducts - 200

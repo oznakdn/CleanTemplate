@@ -25,7 +25,7 @@ namespace Clean.Api.Controllers
             {
                 return NotFound(result.Message);
             }
-            return BadRequest(result.ErrorMessages);
+            return BadRequest(result.Errors);
         }
 
 
