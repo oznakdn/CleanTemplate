@@ -63,7 +63,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
         var errors = new List<string>();
         validation.Errors.ForEach(error => errors.Add(error.ErrorMessage));
         response.Success = false;
-        response.ErrorMessages = errors;
+        response.Errors = errors;
         return response;
     }
 }

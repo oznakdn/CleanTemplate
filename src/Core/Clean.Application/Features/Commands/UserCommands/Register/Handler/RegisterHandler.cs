@@ -15,26 +15,32 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
     // TODO: Mail ile üyelik onayı kodu gönderilecek. Kod random olarak oluşturulacak.
     public async Task<RegisterResponse> Handle(RegisterRequest request, CancellationToken cancellationToken)
     {
+        var response = new RegisterResponse();
+
         var validator = new RegisterValidator();
         var validation = validator.Validate(request);
-        var errors = new List<string>();
+
         if(validation.IsValid)
         {
+            var existUser = await _efUnitOfWork.User.GetAsync(cancellationToken, user => user.Email == request.Email);
+            if (existUser != null)
+            {
+                response.Success = false;
+                response.Message = "You cannot use this email!";
+                return response;
+            }
+
             request.PasswordHash = request.PasswordHash.HashPassword();
             _efUnitOfWork.User.Insert(_efUnitOfWork.Mapper.Map<AppUser>(request));
             await _efUnitOfWork.SaveAsync();
-            return new RegisterResponse
-            {
-                Message = $"{request.Email} user was be register."
-            };
+            response.Message = $"{request.Email} user was be register.";
+            response.Success = true;
+            return response;
         }
-
+        var errors = new List<string>();
         validation.Errors.ForEach(e => errors.Add(e.ErrorMessage));
-        return new RegisterResponse
-        {
-            Message = string.Empty,
-            Errors = errors
-        };
-
+        response.Success = false;
+        response.Errors = errors;
+        return response;
     }
 }

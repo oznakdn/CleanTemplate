@@ -14,7 +14,7 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, Crea
 
     public async Task<CreateCustomerResponse> Handle(CreateCustomerRequest request, CancellationToken cancellationToken)
     {
-        var errorMessages = new List<string>();
+        var response = new CreateCustomerResponse();
         var validator = new CreateCustomerValidator();
         var validation = validator.Validate(request);
         if (validation.IsValid)
@@ -22,18 +22,16 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, Crea
 
             Customer customer = _mongoUnitOfWork.Mapper.Map<Customer>(request);
             await _mongoUnitOfWork.Customer.InsertAsync(customer, cancellationToken);
-            return new CreateCustomerResponse
-            {
-                Messages = new List<string> { "Customer was added." }
-            };
+
+            response.Success = true;
+            response.Message = "Customer was added.";
+            return response;
         }
 
-        validation.Errors.ForEach(error => errorMessages.Add(error.ErrorMessage));
-        return new CreateCustomerResponse
-        {
-            Messages = errorMessages,
-            Success = false
-        };
-
+        var erros = new List<string>();
+        validation.Errors.ForEach(error => erros.Add(error.ErrorMessage));
+        response.Success = false;
+        response.Errors = erros;
+        return response;
     }
 }

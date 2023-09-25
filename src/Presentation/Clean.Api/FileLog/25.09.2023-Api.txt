@@ -55,3 +55,8 @@ info: 25.09.2023 15:50:57 - POST - /login
 info: 25.09.2023 15:50:57 - 404 - /login
 info: 25.09.2023 15:55:04 - GET - /api/Customers/GetCustomers - 200
 info: 25.09.2023 15:55:12 - GET - /api/Products/GetProducts - 200
+info: 25.09.2023 15:59:44 - POST - /register - 200
+info: 25.09.2023 16:00:17 - POST - /register - 200
+info: 25.09.2023 16:01:10 - POST - /register - 200
+info: 25.09.2023 16:01:36 - POST - /login - 200
+info: 25.09.2023 16:13:16 - POST - /register - 200

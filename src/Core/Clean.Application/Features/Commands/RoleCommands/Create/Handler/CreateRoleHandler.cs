@@ -15,24 +15,22 @@ public class CreateRoleHandler : IRequestHandler<CreateRoleRequest, CreateRoleRe
 
     public async Task<CreateRoleResponse> Handle(CreateRoleRequest request, CancellationToken cancellationToken)
     {
+        var response = new CreateRoleResponse();
         var validator = new CreateRoleValidator();
         var validation = validator.Validate(request);
-        List<string> errors = new();
         if (validation.IsValid)
         {
             _efUnitOfWork.Role.Insert(_efUnitOfWork.Mapper.Map<AppRole>(request));
             await _efUnitOfWork.SaveAsync();
-            return new CreateRoleResponse
-            {
-                Message = $"{request.RoleTitle} was added."
-            };
+            response.Success = true;
+            response.Message = $"{request.RoleTitle} was added.";
+            return response;
         }
 
+        List<string> errors = new();
         validation.Errors.ForEach(e => errors.Add(e.ErrorMessage));
-        return new CreateRoleResponse
-        {
-            Errors = errors,
-            Message = string.Empty
-        };
+        response.Success = false;
+        response.Errors = errors;
+        return response;
     }
 }

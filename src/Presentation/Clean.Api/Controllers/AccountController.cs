@@ -33,12 +33,16 @@ namespace Clean.Api.Controllers
         public async Task<IActionResult> Register(RegisterRequest registerRequest)
         {
             var result = await _mediator.Send(registerRequest);
-            if (result.Errors != null)
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            if (result.Errors != null && !result.Success)
             {
                 return BadRequest(result.Errors);
             }
 
-            return Ok(result.Message);
+            return BadRequest(result.Message);
         }
     }
 }
