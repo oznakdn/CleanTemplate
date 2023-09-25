@@ -14,15 +14,18 @@ namespace Clean.Api.Controllers
 
 
         [HttpPost("/login")]
-        public async Task<IActionResult>Login(LoginRequest loginRequest)
+        public async Task<IActionResult> Login(LoginRequest loginRequest)
         {
             var result = await _mediator.Send(loginRequest);
-            if(result.ErrorMessages!=null)
+            if (result.Success)
             {
-                return BadRequest(result.ErrorMessages);
+                return Ok(new { Token = result.Token, Expire = result.TokenExpiredDate });
             }
-
-            return Ok(result);
+            else if (!result.Success && !string.IsNullOrEmpty(result.Message))
+            {
+                return NotFound(result.Message);
+            }
+            return BadRequest(result.ErrorMessages);
         }
 
 

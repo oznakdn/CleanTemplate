@@ -17,15 +17,16 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
 
     public async Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
     {
+        var response = new LoginResponse();
         var loginValidator = new LoginValidator();
         var errors = new List<string>();
         var validation = loginValidator.Validate(request);
         if (validation.IsValid)
         {
-            var user = _efUnitOfWork.User;
-            var existUser = await user.GetAsync(user => user.Email == request.Email && request.Password.VerifyHashPassword(user.PasswordHash), user => user.Role);
 
-            if (existUser != null)
+            var existUser = await _efUnitOfWork.User.GetAsync(user => user.Email == request.Email, user => user.Role);
+            bool passwordIsValid = request.Password.VerifyHashPassword(existUser.PasswordHash);
+            if (passwordIsValid && existUser != null)
             {
                 TokenParameter tokenParameter = new()
                 {
@@ -37,30 +38,23 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
                 var refreshToken = _tokenGenerator.GenerateRefreshToken(ExpireType.Hour, 2);
                 existUser.RefreshToken = refreshToken.Token;
                 existUser.ExpiredDate = refreshToken.ExpireDate;
-                user.Update(existUser);
+                _efUnitOfWork.User.Update(existUser);
                 await _efUnitOfWork.SaveAsync();
 
-                return new LoginResponse
-                {
-                    Token = accessToken.Token,
-                    TokenExpiredDate = accessToken.ExpireDate
-                };
+                response.Success = true;
+                response.Token = accessToken.Token;
+                response.TokenExpiredDate = accessToken.ExpireDate;
+                return response;
             }
 
-            return new LoginResponse
-            {
-                Token = string.Empty,
-                TokenExpiredDate = null,
-                ErrorMessages = new List<string>() { "Email or Password is wrong!" }
-            };
+            response.Success = false;
+            response.Message = "Email or Password is wrong!";
+            return response;
         }
 
         validation.Errors.ForEach(error => errors.Add(error.ErrorMessage));
-        return new LoginResponse
-        {
-            Token = string.Empty,
-            TokenExpiredDate = null,
-            ErrorMessages = errors
-        };
+        response.Success = false;
+        response.ErrorMessages = errors;
+        return response;
     }
 }
