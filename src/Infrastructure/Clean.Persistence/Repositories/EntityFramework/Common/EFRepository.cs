@@ -48,7 +48,7 @@ where TContext : DbContext
     public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
     {
         IQueryable<TEntity> _query = _table;
-        _query.Where(predicate);
+        _query = _query.Where(predicate);
 
         if (includeProperties.Length > 0)
         {

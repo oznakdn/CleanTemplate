@@ -19,13 +19,21 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
     {
         var response = new LoginResponse();
         var loginValidator = new LoginValidator();
-        var errors = new List<string>();
         var validation = loginValidator.Validate(request);
+
         if (validation.IsValid)
         {
 
             var existUser = await _efUnitOfWork.User.GetAsync(user => user.Email == request.Email, user => user.Role);
+            if (existUser == null)
+            {
+                response.Success = false;
+                response.Message = "Email is wrong!";
+                return response;
+            }
+
             bool passwordIsValid = request.Password.VerifyHashPassword(existUser.PasswordHash);
+
             if (passwordIsValid && existUser != null)
             {
                 TokenParameter tokenParameter = new()
@@ -52,6 +60,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
             return response;
         }
 
+        var errors = new List<string>();
         validation.Errors.ForEach(error => errors.Add(error.ErrorMessage));
         response.Success = false;
         response.ErrorMessages = errors;
