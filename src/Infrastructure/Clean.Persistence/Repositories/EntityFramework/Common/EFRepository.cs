@@ -29,7 +29,10 @@ where TContext : DbContext
 
 
 
-    public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate, params Expression<Func<TEntity, object>>[] includeProperties)
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync(
+        CancellationToken cancellationToken, 
+        Expression<Func<TEntity, bool>> predicate = null, 
+        params Expression<Func<TEntity, object>>[] includeProperties)
     {
         IQueryable<TEntity> _query = _table;
         _query = predicate != null ? _query.Where(predicate) : _query;
@@ -42,10 +45,13 @@ where TContext : DbContext
             }
         }
 
-        return await _query.ToListAsync();
+        return await _query.ToListAsync(cancellationToken);
     }
 
-    public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
+    public virtual async Task<TEntity> GetAsync(
+        CancellationToken cancellation, 
+        Expression<Func<TEntity, bool>> predicate, 
+        params Expression<Func<TEntity, object>>[] includeProperties)
     {
         IQueryable<TEntity> _query = _table;
         _query = _query.Where(predicate);
@@ -57,7 +63,7 @@ where TContext : DbContext
                 _query = _query.Include(property);
             }
         }
-        return await _query.SingleOrDefaultAsync();
+        return await _query.SingleOrDefaultAsync(cancellation);
     }
 
     public virtual IQueryable<TEntity> GetQueryable() => _table.AsQueryable();

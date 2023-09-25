@@ -24,7 +24,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
         if (validation.IsValid)
         {
 
-            var existUser = await _efUnitOfWork.User.GetAsync(user => user.Email == request.Email, user => user.Role);
+            var existUser = await _efUnitOfWork.User.GetAsync(cancellationToken,user => user.Email == request.Email, user => user.Role);
             if (existUser == null)
             {
                 response.Success = false;

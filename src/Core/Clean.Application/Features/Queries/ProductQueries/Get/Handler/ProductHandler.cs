@@ -12,7 +12,7 @@ public class ProductHandler : IRequestHandler<ProductRequest, List<ProductRespon
 
     public async Task<List<ProductResponse>> Handle(ProductRequest request, CancellationToken cancellationToken)
     {
-        var products = await _efUnitOfWork.Product.GetAllAsync(null);
+        var products = await _efUnitOfWork.Product.GetAllAsync(cancellationToken);
         var result = _efUnitOfWork.Mapper.Map<IEnumerable<ProductResponse>>(products);
         return result.ToList();
     }
