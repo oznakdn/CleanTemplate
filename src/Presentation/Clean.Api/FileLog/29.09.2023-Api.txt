@@ -1,5 +1,0 @@
-info: 29.09.2023 12:23:36 - POST - /login - 200
-info: 29.09.2023 12:24:24 - POST - /login - 200
-info: 29.09.2023 12:25:20 - POST - /login - 200
-info: 29.09.2023 13:13:42 - GET - /api/Products/GetProducts - 200
-info: 29.09.2023 13:20:46 - POST - /api/Account/Login - 200

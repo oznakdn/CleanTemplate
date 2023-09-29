@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="DataLog\" />
+    <Folder Include="FileLog\" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@ namespace Clean.Application.Configurations;
 public static class ServiceConfiguration
 {
 
-    public static IServiceCollection AddApplicationService(this IServiceCollection services, IConfiguration configuration, ProviderType providerType)
+    public static IServiceCollection AddApplicationService(this IServiceCollection services, IConfiguration configuration, ProviderType providerType,Assembly migrationAssembly)
     {
         services.AddAutoMapperService()
                 .AddFluentValidationService()
@@ -13,7 +13,7 @@ public static class ServiceConfiguration
                 .AddUnitOfWorkService();
         services.AddPersistenceService(configuration, providerType);
         services.AddIdentityService(configuration);
-        services.AddLoggerService(configuration);
+        services.AddLoggerService(configuration,migrationAssembly);
         services.AddNotificationService(configuration);
 
         return services;
