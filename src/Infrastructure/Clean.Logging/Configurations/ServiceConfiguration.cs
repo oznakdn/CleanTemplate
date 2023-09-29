@@ -9,6 +9,6 @@ namespace Clean.Logging.Configurations;
 public static class ServiceConfiguration
 {
     public static IServiceCollection AddLoggerService(this IServiceCollection services, IConfiguration configuration) => 
-        services.AddEffectiveLogger(configuration).AddSQLiteLog(configuration,Assembly.GetExecutingAssembly());
+        services.AddSQLiteLog(configuration,Assembly.GetExecutingAssembly());
 
 }

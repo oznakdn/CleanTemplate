@@ -36,13 +36,17 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
 
             if (passwordIsValid && existUser != null)
             {
-                TokenParameter tokenParameter = new()
-                {
-                    Username = existUser.Username,
-                    Email = existUser.Email,
-                    Role = existUser.Role != null ? existUser.Role.RoleTitle : null
-                };
-                var accessToken = _tokenGenerator.GenerateAccessToken(tokenParameter, ExpireType.Hour, 1);
+                UserParameters userParameters = new UserParameters(
+
+                    userId: existUser.Id.ToString(),
+                    email: existUser.Email,
+                    username: existUser.Username
+                 );
+
+                RoleParameters roleParameters = new();
+                roleParameters.Role = existUser.Role != null ? existUser.Role.RoleTitle: null;
+               
+                var accessToken = _tokenGenerator.GenerateAccessToken(userParameters, roleParameters, ExpireType.Hour, 1);
                 var refreshToken = _tokenGenerator.GenerateRefreshToken(ExpireType.Hour, 2);
                 existUser.RefreshToken = refreshToken.Token;
                 existUser.ExpiredDate = refreshToken.ExpireDate;

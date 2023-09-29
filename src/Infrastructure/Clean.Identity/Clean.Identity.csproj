@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageReference Include="Gleeman.JwtGenerator" Version="1.0.1" />
+    <PackageReference Include="Gleeman.JwtGenerator" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.10" />
   </ItemGroup>
 

@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Logging.ClearProviders();
 builder.Services.AddApiService(builder.Configuration);
 builder.Services.AddApplicationService(builder.Configuration, providerType: ProviderType.SQLite);
 

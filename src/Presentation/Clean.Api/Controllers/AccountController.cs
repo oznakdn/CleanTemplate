@@ -13,7 +13,7 @@ namespace Clean.Api.Controllers
         }
 
 
-        [HttpPost("/login")]
+        [HttpPost]
         public async Task<IActionResult> Login(LoginRequest loginRequest)
         {
             var result = await _mediator.Send(loginRequest);
@@ -29,7 +29,7 @@ namespace Clean.Api.Controllers
         }
 
 
-        [HttpPost("/register")]
+        [HttpPost]
         public async Task<IActionResult> Register(RegisterRequest registerRequest)
         {
             var result = await _mediator.Send(registerRequest);
