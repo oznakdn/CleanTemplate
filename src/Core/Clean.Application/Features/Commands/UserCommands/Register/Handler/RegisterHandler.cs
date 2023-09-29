@@ -32,7 +32,7 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
 
             request.PasswordHash = request.PasswordHash.HashPassword();
             _efUnitOfWork.User.Insert(_efUnitOfWork.Mapper.Map<AppUser>(request));
-            await _efUnitOfWork.SaveAsync();
+            await _efUnitOfWork.SaveAsync(cancellationToken);
             response.Message = $"{request.Email} user was be register.";
             response.Success = true;
             return response;

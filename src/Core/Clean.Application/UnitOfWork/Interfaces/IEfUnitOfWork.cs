@@ -8,6 +8,6 @@ public interface IEfUnitOfWork: IAsyncDisposable
     IEFProductRepository Product { get; }
     IEFUserRepository User { get; }
     IEFRoleRepository Role { get; }
-    void Save();
-    Task SaveAsync();
+    void Save(CancellationToken cancellationToken=default);
+    Task SaveAsync(CancellationToken cancellationToken = default);
 }

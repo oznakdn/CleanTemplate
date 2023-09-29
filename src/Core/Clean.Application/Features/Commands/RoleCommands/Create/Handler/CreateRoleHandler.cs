@@ -21,7 +21,7 @@ public class CreateRoleHandler : IRequestHandler<CreateRoleRequest, CreateRoleRe
         if (validation.IsValid)
         {
             _efUnitOfWork.Role.Insert(_efUnitOfWork.Mapper.Map<AppRole>(request));
-            await _efUnitOfWork.SaveAsync();
+            await _efUnitOfWork.SaveAsync(cancellationToken);
             response.Success = true;
             response.Message = $"{request.RoleTitle} was added.";
             return response;
