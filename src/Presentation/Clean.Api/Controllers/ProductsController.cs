@@ -2,6 +2,7 @@
 using Clean.Application.Features.Queries.ProductQueries.Get.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 
 namespace Clean.Api.Controllers;
 
@@ -12,9 +13,9 @@ public class ProductsController : AbstractController
     }
 
     [HttpGet]
-    public async Task<IActionResult>GetProducts()
+    public async Task<IActionResult>GetProducts(CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new ProductRequest());
+        var result = await _mediator.Send(new ProductRequest(), cancellationToken);
         return Ok(result);
     }
 }

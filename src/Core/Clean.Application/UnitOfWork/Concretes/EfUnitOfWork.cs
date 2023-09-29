@@ -22,7 +22,7 @@ public class EfUnitOfWork : IEfUnitOfWork
     }
 
     public void Save() => _dbContext.SaveChanges();
-    public async Task SaveAsync() => await _dbContext.SaveChangesAsync();
+    public async Task SaveAsync(CancellationToken cancellationToken) => await _dbContext.SaveChangesAsync(cancellationToken);
     public async ValueTask DisposeAsync() => await _dbContext.DisposeAsync();
 
 }

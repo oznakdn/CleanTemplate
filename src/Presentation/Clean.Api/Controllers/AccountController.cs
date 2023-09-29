@@ -14,9 +14,9 @@ namespace Clean.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginRequest loginRequest)
+        public async Task<IActionResult> Login(LoginRequest loginRequest,CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(loginRequest);
+            var result = await _mediator.Send(loginRequest, cancellationToken);
             if (result.Success)
             {
                 return Ok(new { Token = result.Token, Expire = result.TokenExpiredDate });
@@ -30,9 +30,9 @@ namespace Clean.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterRequest registerRequest)
+        public async Task<IActionResult> Register(RegisterRequest registerRequest, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(registerRequest);
+            var result = await _mediator.Send(registerRequest, cancellationToken);
             if (result.Success)
             {
                 return Ok(result.Message);
