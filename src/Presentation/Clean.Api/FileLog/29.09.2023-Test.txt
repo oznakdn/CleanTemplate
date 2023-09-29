@@ -4,3 +4,9 @@ info: 29.09.2023 16:01:19 - GET - /api/Customers/GetCustomers - 200
 info: 29.09.2023 16:01:38 - POST - /api/Account/Login - 200
 info: 29.09.2023 17:45:59 - GET - /api/Products/GetProducts - 200
 info: 29.09.2023 17:46:25 - POST - /api/Account/Login - 200
+info: 29.09.2023 17:50:15 - POST - /api/Account/Login - 200
+info: 29.09.2023 17:51:14 - GET - /api/Products/GetProducts - 200
+info: 29.09.2023 17:51:18 - GET - /api/Customers/GetCustomers - 200
+info: 29.09.2023 17:53:03 - POST - /api/Account/Login - 200
+info: 29.09.2023 17:53:25 - POST - /api/Account/Login - 200
+info: 29.09.2023 17:54:44 - GET - /api/Products/GetProducts - 200

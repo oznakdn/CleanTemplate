@@ -1,11 +1,12 @@
 ﻿using Clean.Api.Controllers.Abstract;
 using Clean.Application.Features.Queries.ProductQueries.Get.Dtos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading;
 
 namespace Clean.Api.Controllers;
 
+[Authorize]
 public class ProductsController : AbstractController
 {
     public ProductsController(IMediator mediator) : base(mediator)
