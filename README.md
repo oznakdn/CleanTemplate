@@ -23,6 +23,7 @@
 
 - [x] Asp .Net Core 7
 - [x] Entity Framework Core 7
+- [x] Sqlite, SqlServer, PostgreSQL, MySql
 - [x] Mongo Driver 
 - [x] SQL and NoSQL databases
 - [x] Generic repository pattern
