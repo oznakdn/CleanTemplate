@@ -47,7 +47,17 @@
 - [ ] Unit tests
 - [ ] Integration tests
 
-
+## Migration Commands
+#### Terminal
+```csharp
+$ cd CleanTemplate/src/Infrastructure/Clean.Persistence
+```
+```csharp
+$ dotnet ef migrations add [MigrationName] --context [ContextName] --startup-project [ProjectDirectoryPath]
+```
+```csharp
+$ dotnet ef database update --context [ContextName] --startup-project [ProjectDirectoryPath]
+```
 
 
 ## Packages
