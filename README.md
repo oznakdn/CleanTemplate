@@ -31,7 +31,7 @@
 
 ```csharp
 /* Entity Framework */
-public class Entity<TKey> : IEntity<TKey>
+public class Entity<TId> : IEntity<TId>
 {
     public virtual TKey Id { get; set; }
 }
