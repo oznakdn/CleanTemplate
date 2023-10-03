@@ -34,6 +34,7 @@
 - [x] Mongo Driver 
 - [x] SQL and NoSQL databases
 - [x] Generic repository pattern
+- [ ] Pagination and Filtering
 - [x] Unit Of Work pattern
 - [ ] Domain driven design (DDD)
 - [x] CQRS
@@ -42,7 +43,7 @@
 - [x] Logging
 - [ ] Caching with Redis,Memcache and InMemoryCache
 - [x] Object mapping
-- [x] Validation
+- [x] Validations
 - [X] Notification Service
 - [ ] Unit tests
 - [ ] Integration tests
