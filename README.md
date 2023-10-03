@@ -1,5 +1,24 @@
 # Clean Template 
 
+    CleanTemplate
+    |
+    ├── src
+    |   ├── Core
+    │   |    ├── Clean.Application
+    │   |    └── Clean.Domain
+    │   ├── Infrastructure
+    |   |    ├── Clean.Identity
+    |   |    ├── Clean.Logging
+    |   |    ├── Clean.Notification
+    |   |    └── Clean.Persistence
+    |   └── Presentation
+    |        ├── Clean.Api
+    |        └── Clean.WebUI
+    └── test
+        ├── UnitTests
+        └── IntegrationTests
+
+
 ### Features
 
 - [x] Asp .Net Core 7
@@ -17,25 +36,6 @@
 - [x] Validation
 - [ ] Notification Service
 
-## HOW TO USE? 
-
-    CleanTemplate
-    ├── src
-    |   ├── Core
-    │   |    ├── Clean.Application
-    │   |    └── Clean.Domain
-    │   ├── Infrastructure
-    |   |    ├── Clean.Identity
-    |   |    ├── Clean.Logging
-    |   |    ├── Clean.Notification
-    |   |    └── Clean.Persistence
-    |   └── Presentation
-    |        ├── Clean.Api
-    |        └── Clean.WebUI
-    └── test
-        ├── UnitTests
-        └── IntegrationTests
-        
 ### Creating new entities and identites for ef or mongo
 
 #### Base entities
