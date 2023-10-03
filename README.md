@@ -12,7 +12,7 @@
 - [x] Claim based authentication with Json Web Token
 - [x] Password hashing
 - [x] Logging
-- [x] Caching with Redis
+- [x] Caching with Redis,Memcache and InMemoryCache
 - [x] Object mapping
 - [x] Validation
 - [ ] Notification Service
