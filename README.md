@@ -1,5 +1,7 @@
 # Clean Template 
 
+```bash
+
     CleanTemplate
     |
     ├── src
@@ -17,7 +19,7 @@
     └── test
         ├── UnitTests
         └── IntegrationTests
-
+```
 
 ### Features
 
