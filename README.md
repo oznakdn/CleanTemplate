@@ -33,7 +33,7 @@
 /* Entity Framework */
 public class Entity<TId> : IEntity<TId>
 {
-    public virtual TKey Id { get; set; }
+    public virtual TId Id { get; set; }
 }
 
 /* Mongo Driver */
