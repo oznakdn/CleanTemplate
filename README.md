@@ -10,6 +10,7 @@
 - [x] Unit Of Work pattern
 - [x] CQRS - Mediator pattern
 - [x] Claim based authentication with Json Web Token
+- [x] Password hashing
 - [x] Logging
 - [x] Caching with Redis
 - [x] Object mapping
