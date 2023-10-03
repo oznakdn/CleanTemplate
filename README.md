@@ -21,7 +21,7 @@
         └── IntegrationTests
 ```
 
-### Features
+## Features
 
 - [x] Asp .Net Core 7
 - [x] Entity Framework Core 7
@@ -39,23 +39,29 @@
 - [x] Validation
 - [ ] Notification Service
 
-### Creating new entities and identites for ef or mongo
 
-#### Base entities
+## DOMAIN
 
-    ├── Clean.Domain                   
-    ├── Entities
-    ├── SQL-NoSQL
-    └── Abstracts
+### Base entities
 
 ```csharp
-/* Entity Framework */
+/* SQL */
+public interface IEntity<TId>:IEquatable<IEntity<TId>>
+{
+    TId Id { get; set; }
+}
 public abstract class Entity<TId> : IEntity<TId>
 {
     public virtual TId Id { get; set; }
 }
 
-/* Mongo Driver */
+/* NoSQL */
+
+public interface IMongoEntity
+{
+    string Id { get; set; }
+}
+
 public abstract class MongoEntity : IMongoEntity
 {
     [BsonId]
@@ -63,40 +69,60 @@ public abstract class MongoEntity : IMongoEntity
     [BsonElement]
     public string Id { get; set; }
 }
-
 ```
-#### Entities
+### Base identities
 
-    ├── Clean.Domain                   
-    ├── Entities
-    └── SQL-NoSQL
-    
 ```csharp
-/* Entity Framework models */
 
-public class Product : Entity<Guid>
+/* SQL */
+public class UserIdentity<TId> : Entity<TId>
 {
-   // you can write here your properties
+    public virtual string? FirstName { get; set; }
+    public virtual string? LastName { get; set; }
+    public virtual string? Username { get; set; }
+    public virtual string Email { get; set; }
+    public virtual string PasswordHash { get; set; }
 }
 
-public class AppUser:UserIdentity<Guid>
+public class RoleIdentity<TId> : Entity<TId>
 {
-   // you can write here your properties 
+    public string RoleTitle { get; set; }
+    public string Description { get; set; }
 }
 
-public class AppRole:RoleIdentity<Guid>
+/* NoSQL */
+
+public abstract class MongoUserIdentity:MongoEntity
 {
-   // you can write here your properties
+    [BsonElement]
+    public string? FirstName { get; set; }
+
+    [BsonElement]
+    public string? LastName { get; set; }
+
+    [BsonElement]
+    public string? Username { get; set; }
+
+    [BsonElement]
+    public string Email { get; set; }
+
+    [BsonElement]
+    public string PasswordHash { get; set; }
 }
 
-/* Mongo models */
-
-public class Customer: MongoEntity
+public abstract class MongoRoleIdentity:MongoEntity
 {
-   // you can write here your properties
+    [BsonElement]
+    public string RoleTitle { get; set; }
+
+    [BsonElement]
+    public string Description { get; set; }
 }
 
 ```
+## APPLICATION
+
+
 ### Use to db context
 
 ```csharp
