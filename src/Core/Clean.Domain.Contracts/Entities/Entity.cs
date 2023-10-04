@@ -3,6 +3,8 @@
 public abstract class Entity<TId> : IEntity<TId>
 {
     public virtual TId Id { get; set; }
+    public bool IsDeleted { get ; set ; } = false;
+
     public Entity(TId id)
     {
         if (!IsValid(id))
