@@ -1,165 +1,63 @@
 # Clean Template 
 
-### Features
+<p>
+    This repo was created to be an example of clean architecture and to be easily integrated into our future projects. 
+    If you want to contribute to the project, fork the project and submit a pull request.
+</p>
+
+```bash
+
+    CleanTemplate
+    |
+    ├── src
+    |   ├── Core
+    │   |    ├── Clean.Application
+    │   |    └── Clean.Domain
+    │   ├── Infrastructure
+    |   |    ├── Clean.Identity
+    |   |    ├── Clean.Logging
+    |   |    ├── Clean.Notification
+    |   |    └── Clean.Persistence
+    |   └── Presentation
+    |        ├── Clean.Api
+    |        └── Clean.WebUI
+    └── test
+        ├── UnitTests
+        └── IntegrationTests
+```
+
+## Features
 
 - [x] Asp .Net Core 7
 - [x] Entity Framework Core 7
+- [x] Sqlite, SqlServer, PostgreSQL, MySql
 - [x] Mongo Driver 
 - [x] SQL and NoSQL databases
 - [x] Generic repository pattern
+- [ ] Pagination and Filtering
 - [x] Unit Of Work pattern
-- [x] CQRS - Mediator pattern
+- [ ] Domain driven design (DDD)
+- [x] CQRS
 - [x] Claim based authentication with Json Web Token
+- [x] Password hashing
 - [x] Logging
-- [x] Caching with Redis
+- [ ] Caching with Redis,Memcache and InMemoryCache
 - [x] Object mapping
-- [x] Validation
-- [ ] Notification Service
+- [x] Validations
+- [X] Notification Service
+- [ ] Unit tests
+- [ ] Integration tests
 
-## HOW TO USE? 
-
-
-### Creating new entities and identites for ef or mongo
-
-#### Base entities
-
-    ├── Clean.Domain                   
-    ├── Entities
-    ├── SQL-NoSQL
-    └── Abstracts
-
+## Migration Commands
+#### Terminal
 ```csharp
-/* Entity Framework */
-public class Entity<TKey> : IEntity<TKey>
-{
-    public virtual TKey Id { get; set; }
-}
-
-/* Mongo Driver */
-public abstract class MongoEntity : IMongoEntity
-{
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    [BsonElement]
-    public string Id { get; set; }
-}
-
-```
-#### Entities
-
-    ├── Clean.Domain                   
-    ├── Entities
-    └── SQL-NoSQL
-    
-```csharp
-/* Entity Framework models */
-
-public class Product : Entity<Guid>
-{
-   // you can write here your properties
-}
-
-public class AppUser:UserIdentity<Guid>
-{
-   // you can write here your properties 
-}
-
-public class AppRole:RoleIdentity<Guid>
-{
-   // you can write here your properties
-}
-
-/* Mongo models */
-
-public class Customer: MongoEntity
-{
-   // you can write here your properties
-}
-
-```
-### Use to db context
-
-```csharp
-public class ApplicationDbContext:DbContext
-{
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext>options):base(options){}
-
-    public DbSet<Product> Products { get; set; }
-    public DbSet<AppUser> Users { get; set; }
-    public DbSet<AppRole> Roles { get; set; }
-    //  You can write own tables
-}
-
-```
-
-### Db context registration ioc container
-
-    ├── Clean.Api                   
-    ├── Configurations                                
-    └── ServiceConfiguration 
-    
-```csharp
-builder.Services.AddApplicationService(builder.Configuration, providerType: ProviderType.SQLite);
-```
-
-### Migration commands
-
-```csharp
-> C:\CleanTemplate\src\Infrastructure\Clean.Persistence
+$ cd CleanTemplate/src/Infrastructure/Clean.Persistence
 ```
 ```csharp
-> dotnet ef migrations add InitDb --context ApplicationDbContext --startup-project C:\Users\HP\Desktop\Ozan\CleanTemplate\src\Presentation\Clean.Api
+$ dotnet ef migrations add [MigrationName] --context [ContextName] --startup-project [ProjectDirectoryPath]
 ```
 ```csharp
-> dotnet ef database update --context ApplicationDbContext --startup-project C:\Users\HP\Desktop\Ozan\CleanTemplate\src\Presentation\Clean.Api
-```
-
-### appsetting.json
-
-```csharp
-{
-  "AllowedHosts": "*",
-  "TokenSetting": {
-    "SaveToken": true,
-    "ValidateIssuer": true,
-    "ValidateAudience": true,
-    "ValidateLifetime": true,
-    "Issuer": "http://localhost:5019",
-    "Audience": "http://localhost:27250",
-    "SigningKey": "729e13bb78b745e9bf82c4245fc4eaca"
-  },
-  "DatabaseOptions": {
-    "MSSQLServerConnection": "",
-    "MySQLConnection": "",
-    "PostgreSQLConnection": "",
-    "SQLiteConnection": "Data Source = C:/Users/HP/Desktop/Ozan/CleanTemplate/src/Infrastructure/Clean.Persistence/ExampleDB.db"
-  },
-  "MongoSettings": {
-    "Connection": "mongodb://localhost:27017",
-    "Database": "MongoExampleDB"
-  },
-  "LogOptions": {
-    "WriteToFile": true,
-    "WriteToDatabase": true,
-    "FilePath": "C:\\Users\\HP\\Desktop\\Ozan\\CleanTemplate\\src\\Presentation\\Clean.Api\\FileLog",
-    "FileName": "Api",
-    "DatabaseOptions": {
-      "SQLiteConnectionString": "Data Source = C:\\Users\\HP\\Desktop\\Ozan\\CleanTemplate\\src\\Presentation\\Clean.Api\\DataLog\\LogDb.db",
-      "MSSqlServerConectionString": "",
-      "PostgreSqlConnectionString": "",
-      "MySqlConnectionString": ""
-    },
-    "NotificationSettings": {
-      "DisplayName": "",
-      "From": "",
-      "UserName": "",
-      "Password": "",
-      "Host": "",
-      "Port": "",
-      "UseSSL": false,
-      "UseStartTls": true
-    }
-}
+$ dotnet ef database update --context [ContextName] --startup-project [ProjectDirectoryPath]
 ```
 
 
