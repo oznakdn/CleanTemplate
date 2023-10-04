@@ -1,25 +1,45 @@
-﻿using Clean.Domain.Contracts.ValueObjects;
+﻿using Clean.Domain.Contracts.Entities;
 
 namespace Clean.Domain.Entities.Category;
 
-public class Category : ValueObject
+public class Category : Entity<Guid>, IAgreegateRoot<Category, Guid>
 {
-    public string CategoryName { get; private set; }
-    public string CategoryDescription { get; private set; }
-
-    public Category ChangeCategoryName(string newName)
+    private static readonly List<Category> _categories = new();
+    public Category(string categoryName, string description) : base(Guid.NewGuid())
     {
-        return new Category
-        {
-            CategoryName = newName,
-            CategoryDescription = CategoryDescription
-        };
+        CategoryName = categoryName;
+        Description = description;
+        Products = new HashSet<Product.Product>();
     }
 
-    protected override IEnumerable<object> GetAtomicValues()
+    private Category() : base(Guid.NewGuid())
+    { }
+
+    public string CategoryName { get; private set; }
+    public string Description { get; private set; }
+    public ICollection<Product.Product> Products { get; private set; }
+
+    public static Category Create(string categoryName, string description)
     {
-        yield return CategoryName;
-        yield return CategoryDescription;
+        if (!string.IsNullOrEmpty(categoryName) && !string.IsNullOrEmpty(description))
+        {
+            var category = new Category(categoryName, description);
+            _categories.Add(category);
+            return category;
+        }
+
+        throw new ArgumentException("");
+    }
+
+    public Category AddProduct(string productName)
+    {
+        if (!string.IsNullOrEmpty(productName))
+        {
+            Products.Add(new Product.Product(this.Id.ToString(), productName));
+            return this;
+
+        }
+        throw new ArgumentException("");
     }
 
 }
