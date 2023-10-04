@@ -12,7 +12,8 @@
     ├── src
     |   ├── Core
     │   |    ├── Clean.Application
-    │   |    └── Clean.Domain
+    │   |    ├── Clean.Domain.Contracts
+    |   |    └── Clean.Domain
     │   ├── Infrastructure
     |   |    ├── Clean.Identity
     |   |    ├── Clean.Logging
@@ -79,3 +80,9 @@ FluentValidation.DependencyInjectionExtensions
 MediatR.Extensions.Microsoft.DependencyInjection
 MailKit
 ```
+
+## If you'd like to use this template in your projects!
+#### 1- In Microsoft Visual Studio, Solution Explorer, right-click the project you want to rename and click Rename.
+#### 2- In the In-place text editor, enter a new name
+![GUID-7E331960-6D23-43B4-B175-F7DD0DD312E0](https://github.com/oznakdn/CleanTemplate/assets/79724084/485e1ed0-0d0e-4b44-b29d-749a2ef730d1)
+
