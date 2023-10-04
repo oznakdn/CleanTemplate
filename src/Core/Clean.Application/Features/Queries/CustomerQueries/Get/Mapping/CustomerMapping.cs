@@ -1,4 +1,5 @@
 using Clean.Application.Features.Queries.CustomerQueries.Get.Dtos;
+using Clean.Domain.Entities.Customer;
 
 namespace Clean.Application.Features.Queries.CustomerQueries.Get.Mapping;
 

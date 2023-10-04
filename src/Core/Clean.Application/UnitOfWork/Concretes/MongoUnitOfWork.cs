@@ -1,4 +1,5 @@
-﻿using Clean.Persistence;
+﻿using Clean.Domain.Entities.Customer;
+using Clean.Persistence;
 
 namespace Clean.Application.UnitOfWork.Concretes;
 

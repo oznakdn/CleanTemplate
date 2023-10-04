@@ -1,4 +1,6 @@
-﻿namespace Clean.Application.UnitOfWork.Interfaces;
+﻿using Clean.Domain.Entities.Customer;
+
+namespace Clean.Application.UnitOfWork.Interfaces;
 
 public interface IMongoUnitOfWork
 {

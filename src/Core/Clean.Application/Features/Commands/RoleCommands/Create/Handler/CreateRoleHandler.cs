@@ -1,6 +1,6 @@
 ﻿using Clean.Application.Features.Commands.RoleCommands.Create.Dtos;
 using Clean.Application.Features.Commands.RoleCommands.Create.Validation;
-using Clean.Domain.Identities.SQL;
+using Clean.Domain.Identities.Role;
 
 namespace Clean.Application.Features.Commands.RoleCommands.Create.Handler;
 

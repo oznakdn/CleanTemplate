@@ -11,7 +11,7 @@ public static class ServiceConfiguration
                 .AddFluentValidationService()
                 .AddMediatRService()
                 .AddUnitOfWorkService();
-        services.AddPersistenceService(configuration, providerType);
+        services.AddPersistenceService(configuration, providerType,migrationAssembly);
         services.AddIdentityService(configuration);
         services.AddLoggerService(configuration,migrationAssembly);
         services.AddNotificationService(configuration);

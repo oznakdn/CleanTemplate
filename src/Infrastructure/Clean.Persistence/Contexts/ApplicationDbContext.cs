@@ -1,4 +1,8 @@
-﻿namespace Clean.Persistence.Contexts;
+﻿using Clean.Domain.Entities.Product;
+using Clean.Domain.Identities.Role;
+using Clean.Domain.Identities.User;
+
+namespace Clean.Persistence.Contexts;
 
 public class ApplicationDbContext:DbContext
 {

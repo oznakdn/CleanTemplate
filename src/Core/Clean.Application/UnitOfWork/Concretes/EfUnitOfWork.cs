@@ -1,5 +1,6 @@
-﻿using Clean.Persistence.Repositories.EntityFramework;
-using Clean.Persistence.Repositories.EntityFramework.Interfaces;
+﻿using Clean.Domain.Entities.Product;
+using Clean.Domain.Identities.Role;
+using Clean.Domain.Identities.User;
 
 namespace Clean.Application.UnitOfWork.Concretes;
 

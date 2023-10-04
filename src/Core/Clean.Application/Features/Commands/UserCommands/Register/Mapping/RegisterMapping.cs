@@ -1,5 +1,5 @@
 ﻿using Clean.Application.Features.Commands.UserCommands.Register.Dtos;
-using Clean.Domain.Identities.SQL;
+using Clean.Domain.Identities.User;
 
 namespace Clean.Application.Features.Commands.UserCommands.Register.Mapping;
 
