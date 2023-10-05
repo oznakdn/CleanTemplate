@@ -3,7 +3,7 @@ using Clean.Domain.ValueObjects;
 
 namespace Clean.Domain.Entities.Product;
 
-public class Product : Entity<Guid>, IAgreegateRoot<Product, Guid>
+public class Product : AgreegateRoot<Product,Guid>
 {
 
     private readonly List<Product> _products = new();

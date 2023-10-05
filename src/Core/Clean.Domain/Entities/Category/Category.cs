@@ -2,7 +2,7 @@
 
 namespace Clean.Domain.Entities.Category;
 
-public class Category : Entity<Guid>, IAgreegateRoot<Category, Guid>
+public class Category : AgreegateRoot<Category,Guid>
 {
     private static readonly List<Category> _categories = new();
     public Category(string categoryName, string description) : base(Guid.NewGuid())

@@ -25,7 +25,6 @@ public static class ServiceConfiguration
                 services.AddDbContext<ApplicationDbContext>(option => option.UseSqlite(connectionString, x => x.MigrationsAssembly(migrationAssembly.FullName)));
                 break;
         }
-
         return services;
     }
 }
