@@ -3,18 +3,18 @@ using Clean.Domain.ValueObjects;
 
 namespace Clean.Domain.Entities.Product;
 
-public class Product : AgreegateRoot<Product,Guid>
+public class Product : Entity<Guid>
 {
 
     private readonly List<Product> _products = new();
 
-    public Product(string categoryId,string productName) : base(Guid.NewGuid())
+    public Product(string categoryId, string productName) : base(Guid.NewGuid())
     {
         ProductName = productName;
         CategoryId = Guid.Parse(categoryId);
     }
 
-  
+
     public Product(string categoryId, string productName, Inventory inventory, Currency currency) : base(Guid.NewGuid())
     {
         ProductName = productName;
@@ -32,72 +32,58 @@ public class Product : AgreegateRoot<Product,Guid>
     public Guid CategoryId { get; private set; }
     public Category.Category Category { get; private set; }
 
-    public Product Create(string productName)
-    {
-        if (!string.IsNullOrEmpty(productName))
-        {
-            var product = new Product
-            {
-                ProductName = productName,
-            };
 
-            _products.Add(product);
-            return product;
+    public void ChangeProduct(string? categoryId, string? productName, Inventory? inventory, Currency? currency)
+    {
+        if (!string.IsNullOrWhiteSpace(categoryId) || 
+            !string.IsNullOrWhiteSpace(productName) || 
+            inventory != null || 
+            currency != null)
+        {
+            CategoryId = Guid.Parse(categoryId);
+            ProductName = productName;
+            Inventory = inventory;
+            Currency = currency;
         }
 
-        throw new ArgumentException("");
     }
 
-    public Product Update(string productId, string productName, Inventory? inventory, Currency? currency)
+    public void ChangeInventory(int amount)
     {
-        if (!string.IsNullOrEmpty(productName) && !string.IsNullOrEmpty(productId))
+        if(amount >= 0)
         {
-            var currentProduct = _products.Where(p => p.Id == Guid.Parse(productId)).SingleOrDefault();
-            if (currentProduct != null)
-            {
-                currentProduct.ProductName = productName;
-                currentProduct.Inventory = inventory;
-                currentProduct.Currency = currency;
-                return currentProduct;
-            }
+            Inventory.Amount = amount;
         }
-        throw new ArgumentException("");
     }
 
-    public Product Delete(string productId)
+    public void ChangeCurrency(CurrencyType currencyType, decimal price)
     {
-        if (!string.IsNullOrEmpty(productId))
+        if (price >= 0)
         {
-            var currentProduct = _products.Where(p => p.Id == Guid.Parse(productId)).SingleOrDefault();
-            if (currentProduct != null)
-            {
-                currentProduct.IsDeleted = true;
-                return currentProduct;
-            }
+            Currency.CurrencyType = currencyType;
+            Currency.Price = price;
         }
-        throw new ArgumentException("");
     }
 
-    public Product AddInventory(int amount)
+    public void DeleteProduct()
+    {
+        IsDeleted = true;
+    }
+
+    public void AddInventory(int amount)
     {
         if (amount > 0)
         {
             Inventory = new Inventory(amount);
-            return this;
         }
-
-        throw new ArgumentException("");
     }
 
-    public Product AddCurrency(CurrencyType currencyType, decimal price)
+    public void AddCurrency(CurrencyType currencyType, decimal price)
     {
         if (price > 0)
         {
             Currency = new Currency(currencyType, price);
-            return this;
         }
-
-        throw new ArgumentException("");
     }
 
 

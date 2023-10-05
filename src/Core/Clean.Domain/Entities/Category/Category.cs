@@ -2,14 +2,13 @@
 
 namespace Clean.Domain.Entities.Category;
 
-public class Category : AgreegateRoot<Category,Guid>
+public class Category : AgreegateRoot<Category, Guid>
 {
-    private static readonly List<Category> _categories = new();
+    private List<Product.Product> _products = new();
     public Category(string categoryName, string description) : base(Guid.NewGuid())
     {
         CategoryName = categoryName;
         Description = description;
-        Products = new HashSet<Product.Product>();
     }
 
     private Category() : base(Guid.NewGuid())
@@ -17,29 +16,51 @@ public class Category : AgreegateRoot<Category,Guid>
 
     public string CategoryName { get; private set; }
     public string Description { get; private set; }
-    public ICollection<Product.Product> Products { get; private set; }
+    public IEnumerable<Product.Product> Products => _products;
 
-    public static Category Create(string categoryName, string description)
+
+    public void ChangeCategory(string? categoryName, string? description)
     {
-        if (!string.IsNullOrEmpty(categoryName) && !string.IsNullOrEmpty(description))
+        if (!string.IsNullOrEmpty(categoryName) || !string.IsNullOrEmpty(description))
         {
-            var category = new Category(categoryName, description);
-            _categories.Add(category);
-            return category;
+            CategoryName = categoryName;
+            Description = description;
         }
+    }
 
+    public void ChangeDescription(string description)
+    {
+        if (!string.IsNullOrEmpty(description))
+        {
+            Description = description;
+        }
+        throw new ArgumentNullException("");
+    }
+
+    public void AddProduct(Product.Product product)
+    {
+        if (!string.IsNullOrEmpty(product.ProductName))
+        {
+            _products.Add(product);
+
+        }
         throw new ArgumentException("");
     }
 
-    public Category AddProduct(string productName)
+    public void UpdateProduct(Product.Product product)
     {
-        if (!string.IsNullOrEmpty(productName))
+        var existProduct = _products.SingleOrDefault(x => x.Id == product.Id);
+        if (existProduct != null)
         {
-            Products.Add(new Product.Product(this.Id.ToString(), productName));
-            return this;
-
+            existProduct = product;
         }
-        throw new ArgumentException("");
+
+        throw new Exception("");
+    }
+
+    public void ClearProducts()
+    {
+        _products.Clear();
     }
 
 }

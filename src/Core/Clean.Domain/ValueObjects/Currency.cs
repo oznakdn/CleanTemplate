@@ -12,8 +12,8 @@ public enum CurrencyType
 }
 public class Currency : ValueObject
 {
-    public CurrencyType CurrencyType { get; private set; }
-    public decimal Price { get; private set; }
+    public CurrencyType CurrencyType { get; internal set; }
+    public decimal Price { get; internal set; }
 
     public Currency(CurrencyType currencyType, decimal price)
     {

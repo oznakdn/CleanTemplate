@@ -11,7 +11,7 @@ public class Inventory : ValueObject
     }
     private Inventory() { }
 
-    public int Amount { get; private set; }
+    public int Amount { get; internal set; }
     public bool HasStock { get; }
     protected override IEnumerable<object> GetAtomicValues()
     {
