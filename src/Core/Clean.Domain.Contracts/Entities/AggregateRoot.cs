@@ -1,12 +1,12 @@
 ﻿namespace Clean.Domain.Contracts.Entities;
 
-public abstract class AgreegateRoot<T,TId> : IEntity<TId>
+public abstract class AggregateRoot<T,TId> : IEntity<TId>
 where T : IEntity<TId>
 {
     public virtual TId Id { get; set; }
     public bool IsDeleted { get; set; } = false;
 
-    public AgreegateRoot(TId id)
+    public AggregateRoot(TId id)
     {
         if (!IsValid(id))
             throw new ArgumentException("Identifier format is wrong!");
@@ -28,12 +28,12 @@ where T : IEntity<TId>
         return Id.GetHashCode() == other.GetHashCode();
     }
 
-    public static bool operator ==(AgreegateRoot<T,TId> lhs, AgreegateRoot<T,TId> rhs)
+    public static bool operator ==(AggregateRoot<T,TId> lhs, AggregateRoot<T,TId> rhs)
     {
         return lhs.Equals(rhs);
     }
 
-    public static bool operator !=(AgreegateRoot<T,TId> lhs, AgreegateRoot<T,TId> rhs)
+    public static bool operator !=(AggregateRoot<T,TId> lhs, AggregateRoot<T,TId> rhs)
     {
         return !(lhs == rhs);
     }

@@ -2,7 +2,7 @@
 
 namespace Clean.Domain.Entities.Category;
 
-public class Category : AgreegateRoot<Category, Guid>
+public class Category : AggregateRoot<Category, Guid>
 {
     private List<Product.Product> _products = new();
     public Category(string categoryName, string description) : base(Guid.NewGuid())
