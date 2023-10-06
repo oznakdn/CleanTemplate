@@ -1,0 +1,6 @@
+info: 6.10.2023 14:46:36 - GET - /api/Customers/GetCustomers - 200
+info: 6.10.2023 14:47:04 - GET - /api/Products/GetProducts - 200
+info: 6.10.2023 14:54:08 - GET - /api/Products/GetProducts - 200
+info: 6.10.2023 14:58:25 - GET - /api/Products/GetProducts - 200
+fail: 6.10.2023 14:58:26 - GET - /api/Products/GetProducts - 500 - SQLite Error 1: 'no such table: Products'.
+info: 6.10.2023 14:58:46 - GET - /api/Products/GetProducts - 200

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Clean.Api.Controllers;
 
-[Authorize]
+//[Authorize]
 public class ProductsController : AbstractController
 {
     public ProductsController(IMediator mediator) : base(mediator)
