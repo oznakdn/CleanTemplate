@@ -45,7 +45,7 @@
 - [ ] Caching with Redis,Memcache and InMemoryCache
 - [x] Object mapping
 - [x] Validations
-- [X] Notification Service
+- [X] Email and Notification Service
 - [ ] Unit tests
 - [ ] Integration tests
 
