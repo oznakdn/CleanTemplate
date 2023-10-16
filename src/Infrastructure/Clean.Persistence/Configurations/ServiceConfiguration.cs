@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Clean.Domain.Repositories;
+using Clean.Persistence.Repositories;
+using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
 namespace Clean.Persistence.Configurations;
@@ -28,6 +30,19 @@ public static class ServiceConfiguration
                 services.AddDbContext<ApplicationDbContext>(option => option.UseSqlite(ConnectionString, x => x.MigrationsAssembly(migrationAssembly.FullName)));
                 break;
         }
+
+        services.DependencyInjections();
         return services;
     }
+
+    private static IServiceCollection DependencyInjections(this IServiceCollection services)
+    {
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IBasketRepository, BasketRepository>();
+        services.AddScoped<IBasketItemRepository, BasketItemRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        return services;
+    }
+
 }

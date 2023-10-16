@@ -4,18 +4,18 @@ namespace Clean.Domain.Users;
 
 public class User : MongoUserIdentity
 {
-    private List<Role> _roles;
-    public IReadOnlyCollection<Role> Roles => _roles;
+    private List<Role> _roles = new();
+    public ICollection<Role> Roles { get => _roles; }
     public string? RefreshToken { get; private set; }
     public DateTime? ExpiredDate { get; private set; }
 
-    public User(string firstName, string lastName, string username, string email, string passwprd)
+    public User(string firstName, string lastName, string username, string email, string password)
     {
         FirstName = firstName;
         LastName = lastName;
         Username = username;
         Email = email;
-        PasswordHash = passwprd;
+        PasswordHash = password;
     }
 
     private User() { }

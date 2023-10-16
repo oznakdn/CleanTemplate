@@ -1,0 +1,29 @@
+info: 16.10.2023 12:50:31 - POST - /api/Account/Register - 200
+fail: 16.10.2023 12:50:32 - POST - /api/Account/Register - 500 - Error constructing handler for request of type MediatR.IRequestHandler`2[Clean.Application.Features.Users.Commands.Register.RegisterRequest,Clean.Application.Features.Users.Commands.Register.RegisterResponse]. Register your handlers with the container. See the samples in GitHub for examples.
+info: 16.10.2023 12:51:08 - POST - /api/Account/Register - 200
+fail: 16.10.2023 12:51:08 - POST - /api/Account/Register - 500 - Error constructing handler for request of type MediatR.IRequestHandler`2[Clean.Application.Features.Users.Commands.Register.RegisterRequest,Clean.Application.Features.Users.Commands.Register.RegisterResponse]. Register your handlers with the container. See the samples in GitHub for examples.
+info: 16.10.2023 12:51:59 - POST - /api/Account/Register - 200
+info: 16.10.2023 12:56:02 - POST - /api/Account/Register - 200
+info: 16.10.2023 12:58:30 - POST - /api/Account/Register - 200
+info: 16.10.2023 14:07:04 - PUT - /api/Account/Login - 200
+info: 16.10.2023 14:09:55 - PUT - /api/Account/Login - 200
+info: 16.10.2023 14:12:05 - PUT - /api/Account/Login - 200
+info: 16.10.2023 14:17:37 - PUT - /api/Account/Login - 200
+info: 16.10.2023 14:18:16 - PUT - /api/Account/Login - 200
+info: 16.10.2023 14:18:59 - PUT - /api/Account/Login - 200
+info: 16.10.2023 14:20:25 - PUT - /api/Account/Login - 200
+info: 16.10.2023 14:23:24 - PUT - /api/Account/Login - 200
+info: 16.10.2023 14:24:40 - PUT - /api/Account/Login - 200
+info: 16.10.2023 14:29:31 - PUT - /api/Account/Login - 200
+info: 16.10.2023 14:36:02 - PUT - /api/Account/Login - 200
+info: 16.10.2023 15:04:27 - PUT - /api/Account/Login - 200
+info: 16.10.2023 15:06:03 - PUT - /api/Account/Login - 200
+info: 16.10.2023 15:18:01 - PUT - /api/Account/Login - 200
+info: 16.10.2023 15:20:15 - PUT - /api/Account/Login - 200
+info: 16.10.2023 15:21:24 - PUT - /api/Account/Login - 200
+fail: 16.10.2023 15:21:25 - PUT - /api/Account/Login - 500 - Value cannot be null. (Parameter 'value')
+info: 16.10.2023 15:21:57 - PUT - /api/Account/Login - 200
+info: 16.10.2023 15:23:26 - PUT - /api/Account/Login - 200
+info: 16.10.2023 15:23:56 - PUT - /api/Account/Login - 200
+info: 16.10.2023 15:25:42 - PUT - /api/Account/Login - 200
+info: 16.10.2023 15:30:22 - POST - /api/Account/Register - 200

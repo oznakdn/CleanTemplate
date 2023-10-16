@@ -6,7 +6,7 @@ namespace Clean.Persistence.Repositories;
 
 public class UserRepository : MongoRepository<User>,IUserRepository
 {
-    public UserRepository(IOptions<MongoSettings> setting, string collectionName) : base(setting, collectionName)
+    public UserRepository(IOptions<MongoSettings> setting) : base(setting)
     {
     }
 }
