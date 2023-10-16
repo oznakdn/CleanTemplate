@@ -27,3 +27,19 @@ info: 16.10.2023 15:23:26 - PUT - /api/Account/Login - 200
 info: 16.10.2023 15:23:56 - PUT - /api/Account/Login - 200
 info: 16.10.2023 15:25:42 - PUT - /api/Account/Login - 200
 info: 16.10.2023 15:30:22 - POST - /api/Account/Register - 200
+info: 16.10.2023 15:58:39 - POST - /api/Customers/CreateCustomer - 200
+info: 16.10.2023 16:01:15 - POST - /api/Customers/CreateCustomer - 200
+info: 16.10.2023 16:21:04 - POST - /api/Customers/CreateCustomer - 200
+info: 16.10.2023 16:23:12 - POST - /api/Customers/CreateCustomer - 200
+info: 16.10.2023 16:24:23 - POST - /api/Customers/CreateCustomer - 200
+fail: 16.10.2023 16:24:24 - POST - /api/Customers/CreateCustomer - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 16.10.2023 16:27:28 - POST - /api/Customers/CreateCustomer - 200
+info: 16.10.2023 16:29:04 - POST - /api/Customers/CreateCustomer - 200
+info: 16.10.2023 16:31:28 - POST - /api/Customers/CreateCustomer - 200
+info: 16.10.2023 16:36:09 - POST - /api/Customers/CreateCustomer - 200
+info: 16.10.2023 16:42:42 - POST - /api/Customers/CreateCustomer - 200
+info: 16.10.2023 16:47:59 - POST - /api/Customers/CreateCustomer - 200
+info: 16.10.2023 16:50:08 - POST - /api/Customers/CreateCustomer - 200
+info: 16.10.2023 16:56:36 - POST - /api/Customers/CreateCustomer - 200
+fail: 16.10.2023 16:56:37 - POST - /api/Customers/CreateCustomer - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 16.10.2023 16:57:51 - POST - /api/Customers/CreateCustomer - 200

@@ -23,7 +23,7 @@ public class Customer : AggregateRoot<Customer,Guid>
         Password = password;
     }
 
-    private Customer() : base(Guid.Empty) { }
+    private Customer() : base(Guid.NewGuid()) { }
 
     public void AddBasket(Guid basketId)
     {

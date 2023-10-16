@@ -2,19 +2,23 @@
 
 namespace Clean.Domain.Contracts.Abstracts;
 
-public abstract class DomainEventHandler<TDomainEvent>
+public abstract class DomainEventHandler<TDomainEvent, TResponse>
 where TDomainEvent : IDomaintEvent
+where TResponse : class
 {
     public event EventHandler<TDomainEvent> Event;
+    public TResponse Response { get; set; }
 
-    public virtual async Task<TDomainEvent> Handle(TDomainEvent @event)
+    public virtual async Task<TResponse> Handle(TDomainEvent @event, CancellationToken cancellationToken)
     {
         Event.Invoke(this, @event);
-        return await Task.Run(() => @event);
+        await Task.CompletedTask;
+        return Response;
     }
 
-    public async Task<TDomainEvent> Publish(TDomainEvent @event)
+    public async Task<TResponse> Publish(TDomainEvent @event, CancellationToken cancellationToken)
     {
-        return await Task.Run(() => Handle(@event));
+        Response = await Handle(@event, cancellationToken);
+        return Response;
     }
 }

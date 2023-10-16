@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApiService(builder.Configuration);
-builder.Services.AddApplicationService(builder.Configuration, providerType: ProviderType.SQLite, Assembly.GetExecutingAssembly());
+builder.Services.AddApplicationService(builder.Configuration, providerType: ProviderType.PostgreSQL, Assembly.GetExecutingAssembly());
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
