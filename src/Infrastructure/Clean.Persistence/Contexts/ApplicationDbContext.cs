@@ -1,7 +1,7 @@
-﻿using Clean.Domain.Entities.Category;
-using Clean.Domain.Entities.Product;
-using Clean.Domain.Identities.Role;
-using Clean.Domain.Identities.User;
+﻿using Clean.Domain.Baskets;
+using Clean.Domain.Customers;
+using Clean.Domain.Orders;
+using Clean.Domain.Products;
 using Clean.Persistence.Configurations;
 using Clean.Persistence.EntityConfigurations;
 
@@ -19,14 +19,22 @@ public class ApplicationDbContext:DbContext
 
     
     public DbSet<Product> Products { get; set; }
-    public DbSet<Category>Categories { get; set; }
-    public DbSet<AppUser> Users { get; set; }
-    public DbSet<AppRole> Roles { get; set; }
+    public DbSet<Inventory>Inventories { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<Basket> Baskets { get; set; }
+    public DbSet<BasketItem> BasketItems { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CategoryConfiguration).Assembly);
-
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrderItemConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrderConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CustomerConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BasketItemConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BasketConfiguration).Assembly);
     }
+
 }

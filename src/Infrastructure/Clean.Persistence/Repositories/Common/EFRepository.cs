@@ -1,5 +1,4 @@
-﻿using Clean.Domain.Contracts.Entities;
-using Clean.Domain.Contracts.Repositories;
+﻿using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Persistence.Repositories.Common;
 
@@ -69,4 +68,8 @@ where TContext : DbContext
 
     public virtual IQueryable<TEntity> GetQueryable() => _table.AsQueryable();
 
+    public async Task<int> SaveAsync(CancellationToken cancellationToken = default) => await _dbContext.SaveChangesAsync(cancellationToken);
+
+    public async ValueTask DisposeAsync() =>await _dbContext.DisposeAsync();
+  
 }

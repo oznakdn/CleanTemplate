@@ -11,4 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Clean.Domain.Contracts\Clean.Domain.Contracts.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Specifications\" />
+  </ItemGroup>
 </Project>

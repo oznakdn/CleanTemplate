@@ -1,0 +1,21 @@
+﻿using Clean.Domain.Contracts.Abstracts;
+
+namespace Clean.Domain.Orders;
+
+public class OrderItem : Entity<Guid>
+{
+    public Guid ProductId { get; private set; }
+    public Guid OrderId { get; private set; }
+    public int Quantity { get; private set; }
+    public decimal TotalAmount { get; }
+    public Order Order { get; private set; }
+
+    public OrderItem(Guid productId, int quantity) : base(Guid.NewGuid())
+    {
+        ProductId = productId;
+        Quantity = quantity;
+    }
+
+    private OrderItem() : base(Guid.Empty) { }
+
+}

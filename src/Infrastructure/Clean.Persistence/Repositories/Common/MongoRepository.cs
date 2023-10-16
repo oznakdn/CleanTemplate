@@ -1,11 +1,11 @@
-using Clean.Domain.Contracts.Entities;
-using Clean.Domain.Contracts.Repositories;
+using Clean.Domain.Contracts.Abstracts;
+using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Persistence.Repositories.Common;
 
 
 public abstract class MongoRepository<TEntity> : IMongoRepositroy<TEntity>
-where TEntity : MongoEntity, new()
+where TEntity : MongoEntity
 {
 
     private readonly IMongoCollection<TEntity> _collection;
