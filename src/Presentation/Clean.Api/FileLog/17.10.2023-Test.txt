@@ -3,3 +3,8 @@ fail: 17.10.2023 06:40:42    PUT - /api/Account/Login - 500 - An error occurred 
 info: 17.10.2023 06:41:16    PUT - /api/Account/Login - 200
 fail: 17.10.2023 06:41:16    PUT - /api/Account/Login - 500 - An error occurred while saving the entity changes. See the inner exception for details.
 info: 17.10.2023 06:41:49    PUT - /api/Account/Login - 200
+info: 17.10.2023 06:48:48    POST - /api/Customers/CreateCustomer - 200
+info: 17.10.2023 06:50:27    POST - /api/Customers/CreateCustomer - 200
+info: 17.10.2023 06:57:01    POST - /api/Customers/CreateCustomer - 200
+info: 17.10.2023 07:47:28    POST - /api/Customers/CreateCustomer - 200
+info: 17.10.2023 07:56:26    POST - /api/Customers/CreateCustomer - 200

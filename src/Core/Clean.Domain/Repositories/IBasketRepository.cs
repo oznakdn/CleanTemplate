@@ -5,4 +5,5 @@ namespace Clean.Domain.Repositories;
 
 public interface IBasketRepository:IEFRepository<Basket,Guid>
 {
+    Task<Basket> InsertAsync(Basket basket);
 }

@@ -9,4 +9,10 @@ public class BasketRepository : EFRepository<Basket, ApplicationDbContext, Guid>
     public BasketRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
     }
+
+    public async Task<Basket> InsertAsync(Basket basket)
+    {
+        await _dbContext.AddAsync(basket);
+        return basket;
+    }
 }
