@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Gleeman.EffectiveLogger" Version="2.0.5" />
+    <PackageReference Include="Gleeman.EffectiveLogger" Version="2.0.6" />
     <PackageReference Include="Gleeman.EffectiveLogger.SQLite" Version="2.0.4" />
   </ItemGroup>
 

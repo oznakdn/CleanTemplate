@@ -16,7 +16,7 @@ public class GlobalExceptionHandler : IMiddleware
     {
         try
         {
-            _logger.Information($"{DateTime.Now} - {context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+            _logger.Information($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
             await next.Invoke(context);
         }
         catch (Exception ex)
@@ -25,8 +25,8 @@ public class GlobalExceptionHandler : IMiddleware
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             var response = new ExceptionResponse(statusCode: context.Response.StatusCode, message);
+            _logger.Fail($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode} - {ex.Message}");
             await context.Response.WriteAsJsonAsync<ExceptionResponse>(response);
-            _logger.Fail($"{DateTime.Now} - {context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode} - {ex.Message}");
         }
     }
 }

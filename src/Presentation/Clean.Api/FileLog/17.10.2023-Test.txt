@@ -1,0 +1,5 @@
+info: 17.10.2023 06:40:41    PUT - /api/Account/Login - 200
+fail: 17.10.2023 06:40:42    PUT - /api/Account/Login - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 17.10.2023 06:41:16    PUT - /api/Account/Login - 200
+fail: 17.10.2023 06:41:16    PUT - /api/Account/Login - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 17.10.2023 06:41:49    PUT - /api/Account/Login - 200
