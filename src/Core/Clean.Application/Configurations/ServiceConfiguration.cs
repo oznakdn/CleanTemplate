@@ -1,4 +1,6 @@
-﻿using Clean.Application.Features.Customers.Commands.Create;
+﻿using Clean.Application.Features.Baskets.Commands.AddBasketItem;
+using Clean.Application.Features.Customers.Commands.Create;
+using Clean.Application.Features.Products.Commands.Create;
 using Clean.Notification.Configurations;
 
 namespace Clean.Application.Configurations;
@@ -30,6 +32,10 @@ public static class ServiceConfiguration
     private static IServiceCollection DependencyInjections(this IServiceCollection services)
     {
         services.AddScoped(typeof(CreateBasketEventHandler));
+        services.AddScoped(typeof(AddBasketItemEventHandler));
+        services.AddScoped(typeof(AddInventoryEventHandler));
+
+
         return services;
     }
 

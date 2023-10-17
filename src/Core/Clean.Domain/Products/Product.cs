@@ -2,7 +2,7 @@
 
 namespace Clean.Domain.Products;
 
-public class Product : AggregateRoot<Product,Guid>
+public class Product : AggregateRoot<Product, Guid>
 {
     public string DisplayName { get; private set; }
     public Money Price { get; private set; }
@@ -10,20 +10,27 @@ public class Product : AggregateRoot<Product,Guid>
     public Category Category { get; private set; }
 
 
-    public Product(string displayName, Money price, Category category) : base(Guid.NewGuid())
+    public Product(string displayName) : base(Guid.NewGuid())
     {
         DisplayName = displayName;
-        Price = price;
-        Category = category;
     }
 
     private Product() : base(Guid.Empty) { }
 
 
-
-    public void AddInventory(int quantity)
+    public void AddMoney(MoneyType moneyType, decimal amount)
     {
-        Inventory = new(this.Id, quantity);
+        Price = new Money(moneyType, amount);
+    }
+
+    public void AddCategory(string displayName)
+    {
+        Category = new Category(displayName);
+    }
+
+    public void AddInventory(Inventory inventory)
+    {
+        Inventory = new(inventory.ProductId, inventory.Quantity);
     }
 
 }
