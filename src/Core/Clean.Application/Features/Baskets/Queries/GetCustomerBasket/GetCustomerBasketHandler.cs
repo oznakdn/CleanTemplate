@@ -4,7 +4,7 @@ using Clean.Domain.Repositories;
 namespace Clean.Application.Features.Baskets.Queries.GetCustomerBasket;
 
 public record GetCustomerBasketRequest(string CustomerId) : IRequest<GetCustomerBasketResponse>;
-public record GetBasketItems(string ProductName, int Quantity);
+public record GetBasketItems(string Id, string ProductName, int Quantity);
 public class GetCustomerBasketResponse : Response
 {
     public string BasketId { get; set; }
@@ -41,6 +41,7 @@ public class GetCustomerBasketHandler : IRequestHandler<GetCustomerBasketRequest
         response.TotalAmount = basket.TotalAmount;
 
         response.BasketItems = basketItems.Select(x => new GetBasketItems(
+            x.Id.ToString(),
             _product.GetAsync(cancellationToken, y => y.Id == x.ProductId).Result.DisplayName,
             x.ProductQuantity
             )).ToList();
