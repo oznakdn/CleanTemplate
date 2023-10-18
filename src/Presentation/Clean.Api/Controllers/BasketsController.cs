@@ -1,5 +1,6 @@
 ﻿using Clean.Api.Controllers.Abstract;
 using Clean.Application.Features.Baskets.Commands.AddBasketItem;
+using Clean.Application.Features.Baskets.Commands.DeleteBasketItem;
 using Clean.Application.Features.Baskets.Queries.GetCustomerBasket;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ public class BasketsController : AbstractController
         return NotFound(result.Message);
     }
 
+
     [HttpPost]
     public async Task<IActionResult> AddBasketItem([FromBody] AddBasketItemRequest addBasketItem)
     {
@@ -31,5 +33,13 @@ public class BasketsController : AbstractController
         if(result.Successed)
             return Ok(result);
         return BadRequest(result.Message);
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> RemoveBasketItem([FromQuery] string BasketId, [FromQuery] string BasketItemId)
+    {
+        var result = await _mediator.Send(new DeleteBasketItemRequest(BasketId, BasketItemId));
+        if(result.IsSuccessed) return Ok(result.Message);
+        return NotFound(result.Message);
     }
 }

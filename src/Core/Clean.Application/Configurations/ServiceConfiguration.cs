@@ -1,4 +1,5 @@
 ﻿using Clean.Application.Features.Baskets.Commands.AddBasketItem;
+using Clean.Application.Features.Baskets.Commands.DeleteBasketItem;
 using Clean.Application.Features.Customers.Commands.Create;
 using Clean.Application.Features.Products.Commands.Create;
 using Clean.Notification.Configurations;
@@ -35,6 +36,7 @@ public static class ServiceConfiguration
         services.AddScoped(typeof(AddBasketItemEventHandler));
         services.AddScoped(typeof(AddInventoryEventHandler));
         services.AddScoped(typeof(UpdateInventoryEventHandler));
+        services.AddScoped(typeof(DeleteBasketItemEventHandler));
 
 
         return services;

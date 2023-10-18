@@ -36,3 +36,6 @@ info: 18.10.2023 08:14:21    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-
 info: 18.10.2023 08:16:12    POST - /api/baskets/AddBasketItem - 200
 info: 18.10.2023 08:16:17    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
 info: 18.10.2023 08:18:04    GET - /api/products/GetProducts - 200
+info: 18.10.2023 08:54:53    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
+info: 18.10.2023 08:55:25    PUT - /api/baskets/RemoveBasketItem - 200
+info: 18.10.2023 08:55:32    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
