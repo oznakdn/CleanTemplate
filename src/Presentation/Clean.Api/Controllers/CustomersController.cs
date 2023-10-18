@@ -1,5 +1,6 @@
 using Clean.Api.Controllers.Abstract;
 using Clean.Application.Features.Customers.Commands.Create;
+using Clean.Application.Features.Customers.Queries.GetCustomer;
 using Clean.Application.Features.Customers.Queries.GetCustomers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,18 @@ public class CustomersController : AbstractController
 {
     public CustomersController(IMediator mediator) : base(mediator)
     {
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetCustomer([FromQuery]string? CustomerId, [FromQuery] string? NameOrSurname)
+    {
+        var result = await _mediator.Send(new GetCustomerRequest(CustomerId, NameOrSurname));
+
+        if(result.Data != null)
+        {
+            return Ok(result.Data);
+        }
+        return Ok(result.Datas);
     }
 
     [HttpGet]
