@@ -5,7 +5,7 @@ using Clean.Domain.Repositories;
 namespace Clean.Application.Features.Products.Commands.Create;
 
 
-public record CreateProductRequest(string DisplayName, MoneyType MoneyType, decimal Amount, string CategoryName, int Quantity) : IRequest<CreateProductResponse>;
+public record CreateProductRequest(string DisplayName, Currency currency, decimal Amount, string CategoryName, int Quantity) : IRequest<CreateProductResponse>;
 public class CreateProductResponse : Response { }
 
 public class CreateProductHandler : IRequestHandler<CreateProductRequest, CreateProductResponse>
@@ -21,7 +21,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, Create
     public async Task<CreateProductResponse> Handle(CreateProductRequest request, CancellationToken cancellationToken)
     {
         Product product = new(request.DisplayName);
-        product.AddMoney(request.MoneyType, request.Amount);
+        product.AddMoney(request.currency, request.Amount);
         product.AddCategory(request.CategoryName);
 
 

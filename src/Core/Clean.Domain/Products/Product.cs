@@ -18,9 +18,9 @@ public class Product : AggregateRoot<Product, Guid>
     private Product() : base(Guid.Empty) { }
 
 
-    public void AddMoney(MoneyType moneyType, decimal amount)
+    public void AddMoney(Currency currency, decimal amount)
     {
-        Price = new Money(moneyType, amount);
+        Price = new Money(currency, amount);
     }
 
     public void AddCategory(string displayName)

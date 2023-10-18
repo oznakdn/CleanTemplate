@@ -4,21 +4,21 @@ namespace Clean.Domain.Products;
 
 public class Money : ValueObject
 {
-    public Money(MoneyType moneyType, decimal amount)
+    public Money(Currency moneyType, decimal amount)
     {
-        MoneyType = moneyType;
+        Currency = moneyType;
         Amount = amount;
     }
 
     private Money() { }
 
-    public MoneyType MoneyType { get; private set; }
+    public Currency Currency { get; private set; }
     public decimal Amount { get; private set; }
 
 
-    public void UpdateMoneyType(MoneyType moneyType)
+    public void UpdateMoneyType(Currency moneyType)
     {
-        MoneyType = moneyType;
+        Currency = moneyType;
     }
 
     public void UpdateMoneyAmount(decimal amount)
@@ -28,7 +28,7 @@ public class Money : ValueObject
 
     protected override IEnumerable<object> GetAtomicValues()
     {
-        yield return MoneyType.ToString();
+        yield return Currency.ToString();
         yield return Amount;
     }
 }

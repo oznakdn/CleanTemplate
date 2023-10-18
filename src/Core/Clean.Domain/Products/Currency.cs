@@ -1,6 +1,6 @@
 ﻿namespace Clean.Domain.Products;
 
-public enum MoneyType
+public enum Currency
 {
     TL,
     DOLAR,
