@@ -64,7 +64,7 @@ where TContext : DbContext
     #endregion
 
 
-    public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate = null, 
+    public virtual IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate = null, 
         params Expression<Func<TEntity, object>>[] includeProperties)
     {
         IQueryable<TEntity> _query = _table;
@@ -100,7 +100,7 @@ where TContext : DbContext
         return await _query.AsNoTracking().ToListAsync(cancellationToken);
     }
 
-    public TEntity GetAsync(Expression<Func<TEntity, bool>> predicate, 
+    public virtual TEntity Get(Expression<Func<TEntity, bool>> predicate, 
         params Expression<Func<TEntity, object>>[] includeProperties)
     {
         IQueryable<TEntity> _query = _table;

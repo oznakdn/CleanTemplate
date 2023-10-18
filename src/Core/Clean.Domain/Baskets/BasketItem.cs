@@ -22,4 +22,12 @@ public class BasketItem : Entity<Guid>
     private BasketItem() : base(Guid.Empty)
     {
     }
+
+    public void UpdateQuantity(int quantity)
+    {
+        ProductQuantity += quantity;
+        if(ProductQuantity < 0)
+        { ProductQuantity = 0; }
+    }
+
 }

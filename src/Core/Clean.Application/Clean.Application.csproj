@@ -20,8 +20,4 @@
 
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Baskets\Commands\UpdateBasket\" />
-  </ItemGroup>
-
 </Project>

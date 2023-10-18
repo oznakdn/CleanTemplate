@@ -36,6 +36,11 @@ namespace Clean.Domain.Baskets
             TotalAmount -= TotalAmountCalculate(basketItem.ProductPrice, basketItem.ProductQuantity);
         }
 
+        public void UpdateBasketItemQuantity(decimal basketItemPrice,int quantity)
+        {
+            TotalAmount += TotalAmountCalculate(basketItemPrice, quantity);
+        }
+
         private decimal TotalAmountCalculate(decimal price, int quantity) => price * quantity;
 
     }

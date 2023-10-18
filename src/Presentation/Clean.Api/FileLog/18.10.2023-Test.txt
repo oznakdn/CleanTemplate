@@ -44,3 +44,13 @@ info: 18.10.2023 08:58:37    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-
 info: 18.10.2023 08:58:48    GET - /api/products/GetProducts - 200
 info: 18.10.2023 09:05:04    POST - /api/baskets/AddBasketItem - 200
 info: 18.10.2023 09:05:08    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
+info: 18.10.2023 11:19:00    PUT - /api/baskets/UpdateBasketItem/1 - 200
+info: 18.10.2023 11:19:52    PUT - /api/baskets/UpdateBasketItem/1 - 200
+info: 18.10.2023 11:20:54    PUT - /api/baskets/UpdateBasketItem/1 - 200
+info: 18.10.2023 11:22:45    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
+info: 18.10.2023 11:23:09    PUT - /api/baskets/UpdateBasketItem/-1 - 200
+info: 18.10.2023 11:23:15    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
+info: 18.10.2023 11:23:30    PUT - /api/baskets/UpdateBasketItem/-1 - 200
+info: 18.10.2023 11:23:35    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
+info: 18.10.2023 11:23:58    PUT - /api/baskets/UpdateBasketItem/-1 - 200
+info: 18.10.2023 11:24:02    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200

@@ -22,7 +22,7 @@ where TEntity : class, IEntity<TId>
 
     Task<TEntity> GetAsync(CancellationToken cancellation, Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
 
-    TEntity GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
+    TEntity Get(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
     int Save();
 
     //TODO: Pagination ile ilgili metot eklenecek
