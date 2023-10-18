@@ -10,3 +10,29 @@ info: 18.10.2023 07:21:54    POST - /api/Baskets/AddBasketItem - 200
 info: 18.10.2023 07:21:57    GET - /api/Baskets/GetCustomerBasket/d59fface-6d81-4454-8fa7-42acbc526e3d - 200
 info: 18.10.2023 07:37:37    GET - /api/Customers/GetCustomers - 200
 info: 18.10.2023 07:38:10    GET - /api/Customers/GetCustomers - 200
+info: 18.10.2023 07:49:52    GET - /api/Products/GetProducts - 200
+fail: 18.10.2023 07:49:53    GET - /api/Products/GetProducts - 500 - 42703: column p.Price_Currency does not exist
+
+POSITION: 92
+info: 18.10.2023 07:50:32    GET - /api/Customers/GetCustomers - 200
+info: 18.10.2023 07:56:53    GET - /api/Products/GetProducts - 200
+info: 18.10.2023 07:57:18    GET - /api/products/GetProducts - 200
+info: 18.10.2023 07:58:48    GET - /api/products/GetProducts - 200
+info: 18.10.2023 08:00:08    POST - /api/products/CreatePropduct - 200
+info: 18.10.2023 08:00:15    POST - /api/products/CreateProduct - 200
+info: 18.10.2023 08:00:18    GET - /api/products/GetProducts - 200
+info: 18.10.2023 08:00:39    GET - /api/Products/GetProducts - 200
+info: 18.10.2023 08:03:45    GET - /api/products/GetProducts - 200
+info: 18.10.2023 08:06:44    POST - /api/products/CreateProduct - 200
+info: 18.10.2023 08:06:49    GET - /api/products/GetProducts - 200
+info: 18.10.2023 08:07:21    GET - /api/products/GetProducts - 200
+info: 18.10.2023 08:08:06    GET - /api/Customers/GetCustomers - 200
+info: 18.10.2023 08:10:06    POST - /api/Customers/CreateCustomer - 200
+info: 18.10.2023 08:10:10    GET - /api/Customers/GetCustomers - 200
+info: 18.10.2023 08:13:33    GET - /api/baskets/GetCustomerBasket - 200
+info: 18.10.2023 08:13:46    GET - /api/Baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
+info: 18.10.2023 08:14:02    GET - /api/baskets/GetCustomerBasket/ - 200
+info: 18.10.2023 08:14:21    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
+info: 18.10.2023 08:16:12    POST - /api/baskets/AddBasketItem - 200
+info: 18.10.2023 08:16:17    GET - /api/baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
+info: 18.10.2023 08:18:04    GET - /api/products/GetProducts - 200

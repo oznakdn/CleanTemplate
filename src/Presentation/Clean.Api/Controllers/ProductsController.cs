@@ -1,5 +1,6 @@
 ﻿using Clean.Api.Controllers.Abstract;
 using Clean.Application.Features.Products.Commands.Create;
+using Clean.Application.Features.Products.Queries.GetProducts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,13 @@ public class ProductsController : AbstractController
     {
     }
 
+
+    [HttpGet]
+    public async Task<IActionResult>GetProducts()
+    {
+        var result = await _mediator.Send(new GetProductsRequest());
+        return Ok(result.Datas);
+    }
 
     [HttpPost]
     public async Task<IActionResult> CreateProduct([FromBody]CreateProductRequest createProduct)
