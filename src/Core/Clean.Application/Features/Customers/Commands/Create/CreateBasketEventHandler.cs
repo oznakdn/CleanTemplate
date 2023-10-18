@@ -28,8 +28,8 @@ public class CreateBasketEventHandler : DomainEventHandler<CreateBasketEvent, Ba
     protected async override Task<Basket> Handle(CreateBasketEvent @event, CancellationToken cancellationToken)
     {
        
-        this.Event += (s, e) => _basket.Insert(@event.Basket = new Basket(Guid.Parse(e.CustomerId)));
-        this.OnStarted(@event);
+        Event += (s, e) => _basket.Insert(@event.Basket = new Basket(Guid.Parse(e.CustomerId)));
+        EventInvoke(@event);
         await Task.FromResult(@event.Basket);
         return @event.Basket;
     }

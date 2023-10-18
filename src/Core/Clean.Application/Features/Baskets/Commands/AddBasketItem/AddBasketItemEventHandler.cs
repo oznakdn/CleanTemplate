@@ -36,7 +36,7 @@ public class AddBasketItemEventHandler : DomainEventHandler<AddBasketItemEvent, 
     {
         Event += (s, e) => _basketItem.Insert(@event.BasketItem =
             new BasketItem(e.Basket.Id, e.Product.Id, e.Quantity, e.Product.Price.Amount));
-        this.OnStarted(@event);
+        EventInvoke(@event);
         await Task.CompletedTask;
         return @event.BasketItem;
     }

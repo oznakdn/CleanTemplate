@@ -1,0 +1,5 @@
+info: 18.10.2023 07:01:09    POST - /api/Baskets/AddBasketItem - 200
+info: 18.10.2023 07:02:56    POST - /api/Baskets/AddBasketItem - 200
+info: 18.10.2023 07:03:54    POST - /api/Baskets/AddBasketItem - 200
+info: 18.10.2023 07:05:30    GET - /api/Baskets/GetCustomerBasket/d59fface-6d81-4454-8fa7-42acbc526e3d - 200
+info: 18.10.2023 07:05:33    GET - /api/Baskets/GetCustomerBasket/d59fface-6d81-4454-8fa7-42acbc526e3d - 200

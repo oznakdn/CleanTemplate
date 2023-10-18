@@ -17,6 +17,10 @@ public class Inventory : Entity<Guid>
     public void DecreaseStock(int quantity)
     {
         Quantity -= quantity;
+        if(Quantity == 0)
+        {
+            HasStock = false;
+        }
     }
 
     public void IncreaseStock(int quantity)

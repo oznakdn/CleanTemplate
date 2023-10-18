@@ -10,7 +10,7 @@ where TResponse : class
     protected TResponse Response { get; set; }
 
     protected abstract Task<TResponse> Handle(TDomainEvent @event, CancellationToken cancellationToken);
-    protected void OnStarted(TDomainEvent @event) => Event.Invoke(this, @event);
+    protected void EventInvoke(TDomainEvent @event) => Event.Invoke(this, @event);
 
     public async Task<TResponse> Publish(TDomainEvent @event, CancellationToken cancellationToken) => await Handle(@event, cancellationToken);
 

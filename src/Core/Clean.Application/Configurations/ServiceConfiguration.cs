@@ -34,6 +34,7 @@ public static class ServiceConfiguration
         services.AddScoped(typeof(CreateBasketEventHandler));
         services.AddScoped(typeof(AddBasketItemEventHandler));
         services.AddScoped(typeof(AddInventoryEventHandler));
+        services.AddScoped(typeof(UpdateInventoryEventHandler));
 
 
         return services;
