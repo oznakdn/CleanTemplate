@@ -5,10 +5,10 @@ using Clean.Domain.Repositories;
 
 namespace Clean.Application.Features.Baskets.Commands.AddBasketItem;
 
-public record AddBasketItemRequest(string BasketId, string ProductId, int Quantity) : IRequest<AddBasketItemResponse>;
-public class AddBasketItemResponse : Response { }
+public record AddBasketItemRequest(string BasketId, string ProductId, int Quantity) : IRequest<IDataResult<AddBasketItemResponse>>;
+public record AddBasketItemResponse;
 
-public class AddBasketItemHandler : IRequestHandler<AddBasketItemRequest, AddBasketItemResponse>
+public class AddBasketItemHandler : IRequestHandler<AddBasketItemRequest, IDataResult<AddBasketItemResponse>>
 {
     private readonly IBasketRepository _basket;
     private readonly IProductRepository _product;
@@ -23,25 +23,22 @@ public class AddBasketItemHandler : IRequestHandler<AddBasketItemRequest, AddBas
         _updateInventoryEvent = updateInventoryEvent;
     }
 
-    public async Task<AddBasketItemResponse> Handle(AddBasketItemRequest request, CancellationToken cancellationToken)
+    public async Task<IDataResult<AddBasketItemResponse>> Handle(AddBasketItemRequest request, CancellationToken cancellationToken)
     {
-        AddBasketItemResponse response = new();
+        new DataResult<AddBasketItemResponse>();
+
         var basket = await _basket.GetAsync(cancellationToken, x => x.Id == Guid.Parse(request.BasketId));
         if (basket is null)
         {
-            response.Successed = false;
-            response.Message = "Basket not found!";
-            return response;
+           return new DataResult<AddBasketItemResponse>("Basket not found",false);
         }
 
         var product = await _product.GetAsync(cancellationToken, x => x.Id == Guid.Parse(request.ProductId));
         if (product is null)
         {
-            response.Successed = false;
-            response.Message = "Product not found!";
-            return response;
-        }
+           return new DataResult<AddBasketItemResponse>("Product not found",false);
 
+        }
 
         // Updated inventory
         Inventory inventory = await _updateInventoryEvent.Publish(new UpdateInventoryEvent(product.Id,request.Quantity), cancellationToken);
@@ -53,8 +50,7 @@ public class AddBasketItemHandler : IRequestHandler<AddBasketItemRequest, AddBas
         // Saving in database
         _basket.Update(basket);
         await _basket.SaveAsync(cancellationToken);
-        response.Successed = true;
-        response.Message = "Item was added.";
-        return response;
+
+        return new DataResult<AddBasketItemResponse>("Item added in the basket", true);
     }
 }

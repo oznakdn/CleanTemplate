@@ -30,9 +30,9 @@ public class BasketsController : AbstractController
     public async Task<IActionResult> AddBasketItem([FromBody] AddBasketItemRequest addBasketItem)
     {
         var result = await _mediator.Send(addBasketItem);
-        if(result.Successed)
-            return Ok(result);
-        return BadRequest(result.Message);
+        if(result.IsSuccessed)
+            return Ok(result.Message);
+        return NotFound(result.Message);
     }
 
     [HttpPut]
