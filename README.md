@@ -37,13 +37,13 @@
 - [x] Generic repository pattern
 - [ ] Pagination and Filtering
 - [x] Unit Of Work pattern
-- [ ] Domain driven design (DDD)
+- [X] Domain driven design (DDD)
 - [x] CQRS
 - [x] Claim based authentication with Json Web Token
 - [x] Password hashing
 - [x] Logging
 - [ ] Caching with Redis,Memcache and InMemoryCache
-- [ ] HealthCheck
+- [X] HealthCheck
 - [x] Object mapping
 - [x] Validations
 - [X] Email and Notification Service
