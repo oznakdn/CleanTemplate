@@ -10,7 +10,7 @@ builder.Services.AddHealthChecks();
 
 
 var app = builder.Build();
-app.MapHealthChecks("/healtCheck");
+app.MapHealthChecks("/healtCheck"); //http://localhost:5019/healtCheck
 
 if (app.Environment.IsDevelopment())
 {

@@ -45,3 +45,5 @@ info: 20.10.2023 13:30:29    GET - /api/Customers/GetCustomer - 200
 info: 20.10.2023 13:31:10    PUT - /api/Account/Login - 200
 info: 20.10.2023 13:31:26    GET - /api/Customers/GetCustomer - 200
 info: 20.10.2023 13:31:52    GET - /api/Customers/GetCustomer - 200
+info: 20.10.2023 13:40:30    GET - /healtCheck - 200
+info: 20.10.2023 13:41:46    GET - /healtCheck - 200
