@@ -36,17 +36,11 @@ POST {{host}}/register
 Content-Type:  {{contentType}}
 
 {
-  "firstName": "Jhony",
-  "lastName": "Walker",
-  "username": "jhony_wolker",
-  "email": "jhonyn@mail.com",
-  "password": "123456",
-  "roles": [
-    {
-      "title": "Admin",
-      "description": "It has all transactions"
-    }
-  ]
+  "firstName": "John",
+  "lastName": "Doe",
+  "username": "john_doe",
+  "email": "john@mail.com",
+  "password": "123456"
 }
 
 <!--
@@ -72,3 +66,12 @@ Transfer-Encoding: chunked
   ]
 }
 -->
+
+### CreateRole
+POST {{host}}/createrole
+Content-Type:  {{contentType}}
+
+{
+  "roleTitle":"Admin",
+  "description":"This role has all the authorization."
+}

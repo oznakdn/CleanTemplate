@@ -13,7 +13,7 @@ public class CustomersController : AbstractController
     }
 
     [HttpGet]
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public async Task<IActionResult> GetCustomer([FromQuery]string? CustomerId, [FromQuery] string? NameOrSurname)
     {
         var result = await _mediator.Send(new GetCustomerRequest(CustomerId, NameOrSurname));
@@ -26,7 +26,7 @@ public class CustomersController : AbstractController
     }
 
     [HttpGet]
-    [Authorize]
+    [Authorize(Roles="Admin")]
     public async Task<IActionResult>GetCustomers()
     {
         var result = await _mediator.Send(new GetCustomersRequest());
@@ -34,7 +34,7 @@ public class CustomersController : AbstractController
     }
 
     [HttpPost]
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest createCustomer)
     {
         var result = await _mediator.Send(createCustomer);

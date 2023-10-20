@@ -1,4 +1,5 @@
-﻿using Clean.Application.Features.Users.Commands.Register;
+﻿using Clean.Application.Features.Roles.Commands.Create;
+using Clean.Application.Features.Users.Commands.Register;
 using Clean.Application.Features.Users.Queries.Login;
 
 namespace Clean.Api.Controllers;
@@ -35,6 +36,13 @@ public class AccountController : AbstractController
         }
         return Created(result.message!, register);
 
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateRole([FromBody] CreateRoleRequest createRole)
+    {
+        var result = await _mediator.Send(createRole);
+        return Created(result.Message, createRole);
     }
 
 

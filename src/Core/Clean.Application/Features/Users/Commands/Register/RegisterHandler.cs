@@ -1,12 +1,11 @@
-﻿using Clean.Domain.Repositories;
-using Clean.Domain.Users;
+﻿using Clean.Domain.Account;
+using Clean.Domain.Repositories;
 using Clean.Identity.Helpers;
 
 namespace Clean.Application.Features.Users.Commands.Register;
 
 
-public record RegisterRequest(string FirstName, string LastName, string Username, string Email, string Password, List<AddRoleRegister> Roles) : IRequest<RegisterResponse>;
-public record AddRoleRegister(string Title, string Description);
+public record RegisterRequest(string FirstName, string LastName, string Username, string Email, string Password, string? RoleId) : IRequest<RegisterResponse>;
 public record RegisterResponse(bool Successed, string? message, List<string?> Errors);
 
 public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse>
@@ -35,14 +34,10 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
             request.LastName,
             request.Username,
             request.Email,
-            request.Password.HashPassword());
+            request.Password.HashPassword(),
+            request.RoleId!);
 
         await _user.InsertAsync(user, cancellationToken);
-        var roles = request.Roles.Select(x => new Role(x.Title, x.Description)).ToList();
-
-        user.AddRoles(roles);
-        await _user.UpdateAsync(user, cancellationToken);
-
         return new RegisterResponse(true, "User is be register.", null);
     }
 

@@ -20,12 +20,14 @@ public class LoginResponse : Response
 public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
 {
     private readonly IUserRepository _user;
+    private readonly IRoleRepository _role;
     private readonly ITokenGenerator _token;
 
-    public LoginHandler(IUserRepository user, ITokenGenerator token)
+    public LoginHandler(IUserRepository user, ITokenGenerator token, IRoleRepository role)
     {
         _user = user;
         _token = token;
+        _role = role;
     }
 
     public async Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
@@ -45,6 +47,8 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
         }
 
         var user = await _user.GetAsync(x => x.Email == request.Email, cancellationToken);
+        var userRole = await _role.GetAsync(x => x.Id == user.RoleId, cancellationToken);
+
         if (user == null)
         {
             return new LoginResponse
@@ -53,6 +57,8 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
                 Successed = false
             };
         }
+
+
 
         bool passwordIsValid = request.Password.VerifyHashPassword(user.PasswordHash);
 
@@ -72,23 +78,19 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
             Username = user.Username
         };
 
-
-        var roles = user.Roles.Select(x => new RoleParameter
-        {
-            Role = x.RoleTitle
-
-        }).ToList();
-
         TokenResult access;
-
-        if (roles.Any())
+        if (userRole != null)
         {
-            access = _token.GenerateAccessToken(userParameter, roles, ExpireType.Day, 5);
-
+            RoleParameter roleParameter = new();
+            roleParameter.Role = userRole.RoleTitle;
+            access = _token.GenerateAccessToken(userParameter, roleParameter, ExpireType.Day, 5);
+        }
+        else
+        {
+            access = _token.GenerateAccessToken(userParameter, ExpireType.Day, 5);
         }
 
-        access = _token.GenerateAccessToken(userParameter, ExpireType.Day, 5);
-        var refresh = _token.GenerateRefreshToken(ExpireType.Day, 6);
+        TokenResult refresh = _token.GenerateRefreshToken(ExpireType.Day, 6);
 
         user.SetRefreshToken(refresh.Token, refresh.ExpireDate);
 

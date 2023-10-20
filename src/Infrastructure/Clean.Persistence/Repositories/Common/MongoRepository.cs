@@ -11,12 +11,12 @@ where TEntity : MongoEntity
     private readonly IMongoCollection<TEntity> _collection;
     private readonly MongoSettings _setting;
     private readonly IMongoClient _mongoClient;
-    public MongoRepository(IOptions<MongoSettings> setting)
+    public MongoRepository(IOptions<MongoSettings> setting,string collection)
     {
         _setting = setting.Value;
         _mongoClient = new MongoClient(_setting.Connection);
         IMongoDatabase database = _mongoClient.GetDatabase(_setting.Database);
-        _collection = database.GetCollection<TEntity>(_setting.Collection);
+        _collection = database.GetCollection<TEntity>(collection);
     }
 
     public virtual void Delete(string id, CancellationToken cancellationToken) => _collection.DeleteOne(x => x.Id == id, cancellationToken);

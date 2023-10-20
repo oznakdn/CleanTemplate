@@ -4,9 +4,9 @@ using Clean.Persistence.Repositories.Common;
 
 namespace Clean.Persistence.Repositories;
 
-public class UserRepository : MongoRepository<User>,IUserRepository
+public class RoleRepository : MongoRepository<Role>, IRoleRepository
 {
-    public UserRepository(IOptions<MongoSettings> setting) : base(setting, nameof(User))
+    public RoleRepository(IOptions<MongoSettings> setting) : base(setting,nameof(Role))
     {
     }
 }
