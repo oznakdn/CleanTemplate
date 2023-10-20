@@ -29,11 +29,11 @@
 
 ## Features
 
+- [x] Clean Architecture
 - [x] Asp .Net Core 7
 - [x] Entity Framework Core 7
 - [x] Sqlite, SqlServer, PostgreSQL, MySql
-- [x] Mongo Driver 
-- [x] SQL and NoSQL databases
+- [x] MongoDB
 - [x] Generic repository pattern
 - [ ] Pagination and Filtering
 - [x] Unit Of Work pattern
@@ -43,6 +43,7 @@
 - [x] Password hashing
 - [x] Logging
 - [ ] Caching with Redis,Memcache and InMemoryCache
+- [ ] HealthCheck
 - [x] Object mapping
 - [x] Validations
 - [X] Email and Notification Service
