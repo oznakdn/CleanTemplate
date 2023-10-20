@@ -4,5 +4,5 @@ namespace Clean.Application.UnitOfWork.Queries;
 
 public interface IQueryUnitOfWork
 {
-    IBasketItemQuery basketItemQuery { get; }
+    IBasketItemQuery BasketItem { get; }
 }

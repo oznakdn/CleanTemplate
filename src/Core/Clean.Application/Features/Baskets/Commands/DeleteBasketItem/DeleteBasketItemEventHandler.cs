@@ -1,7 +1,8 @@
-﻿using Clean.Domain.Baskets;
+﻿using Clean.Application.UnitOfWork.Commands;
+using Clean.Application.UnitOfWork.Queries;
+using Clean.Domain.Baskets;
 using Clean.Domain.Contracts.Abstracts;
 using Clean.Domain.Contracts.Interfaces;
-using Clean.Domain.Repositories;
 
 namespace Clean.Application.Features.Baskets.Commands.DeleteBasketItem;
 
@@ -21,21 +22,23 @@ public class DeleteBasketItemEvent : IDomaintEvent
 
 public class DeleteBasketItemEventHandler : DomainEventHandler<DeleteBasketItemEvent, BasketItem>
 {
-    private readonly IBasketItemRepository _basketItem;
+    private readonly IQueryUnitOfWork _query;
+    private readonly ICommandUnitOfWork _command;
 
-    public DeleteBasketItemEventHandler(IBasketItemRepository basketItem)
+    public DeleteBasketItemEventHandler(IQueryUnitOfWork query, ICommandUnitOfWork command)
     {
-        _basketItem = basketItem;
+        _query = query;
+        _command = command;
     }
 
     protected async override Task<BasketItem> Handle(DeleteBasketItemEvent @event, CancellationToken cancellationToken)
     {
         Event += (s, e) =>
         {
-            @event.BasketItem = _basketItem.GetAsync(cancellationToken,
+            @event.BasketItem = _query.BasketItem.ReadSingleOrDefault(true,
                                 x => x.BasketId == e.BasketId &&
-                               x.Id == e.BasketItemId).Result;
-            _basketItem.Delete(@event.BasketItem);
+                               x.Id == e.BasketItemId);
+            _command.BasketItem.Remove(@event.BasketItem);
         };
 
         EventInvoke(@event);

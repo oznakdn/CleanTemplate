@@ -47,3 +47,8 @@ info: 20.10.2023 13:31:26    GET - /api/Customers/GetCustomer - 200
 info: 20.10.2023 13:31:52    GET - /api/Customers/GetCustomer - 200
 info: 20.10.2023 13:40:30    GET - /healtCheck - 200
 info: 20.10.2023 13:41:46    GET - /healtCheck - 200
+info: 20.10.2023 14:20:55    PUT - /api/Account/Login - 200
+info: 20.10.2023 14:21:14    GET - /api/Customers/GetCustomer - 200
+info: 20.10.2023 14:21:19    GET - /api/Customers/GetCustomers - 200
+info: 20.10.2023 14:21:27    GET - /api/Baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
+info: 20.10.2023 14:22:07    GET - /api/Baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200

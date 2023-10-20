@@ -11,9 +11,9 @@ public class QueryUnitOfWork : IQueryUnitOfWork
     public QueryUnitOfWork(ApplicationDbContext context)
     {
         _context = context;
-        basketItemQuery = basketItemQuery ?? new BasketItemQuery(_context);
+        BasketItem = BasketItem ?? new BasketItemQuery(_context);
     }
 
-    public IBasketItemQuery basketItemQuery { get; }
+    public IBasketItemQuery BasketItem { get; }
 
 }

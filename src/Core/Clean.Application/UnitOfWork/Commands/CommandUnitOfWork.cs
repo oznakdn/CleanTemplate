@@ -9,7 +9,7 @@ public class CommandUnitOfWork : ICommandUnitOfWork
     public CommandUnitOfWork(ApplicationDbContext context)
     {
         _context = context;
-        basketItemCommand = basketItemCommand ?? new BasketItemCommand(_context);
+        BasketItem = BasketItem ?? new BasketItemCommand(_context);
     }
 
     public CommandUnitOfWork()
@@ -17,7 +17,7 @@ public class CommandUnitOfWork : ICommandUnitOfWork
 
     }
 
-    public IBasketItemCommand basketItemCommand { get; }
+    public IBasketItemCommand BasketItem { get; }
 
 
 

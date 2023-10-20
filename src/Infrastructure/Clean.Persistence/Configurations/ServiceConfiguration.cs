@@ -40,7 +40,6 @@ public static class ServiceConfiguration
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IBasketRepository, BasketRepository>();
-        services.AddScoped<IBasketItemRepository, BasketItemRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IInventoryRepository, InventoryRepository>();

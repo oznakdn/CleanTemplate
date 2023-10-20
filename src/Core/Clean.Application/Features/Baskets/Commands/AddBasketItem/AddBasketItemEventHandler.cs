@@ -1,4 +1,5 @@
-﻿using Clean.Domain.Baskets;
+﻿using Clean.Application.UnitOfWork.Commands;
+using Clean.Domain.Baskets;
 using Clean.Domain.Contracts.Abstracts;
 using Clean.Domain.Contracts.Interfaces;
 using Clean.Domain.Products;
@@ -25,16 +26,16 @@ public class AddBasketItemEvent : IDomaintEvent
 
 public class AddBasketItemEventHandler : DomainEventHandler<AddBasketItemEvent, BasketItem>
 {
-    private readonly IBasketItemRepository _basketItem;
+    private readonly ICommandUnitOfWork _command;
 
-    public AddBasketItemEventHandler(IBasketItemRepository basketItem)
+    public AddBasketItemEventHandler(ICommandUnitOfWork command)
     {
-        _basketItem = basketItem;
+        _command = command;
     }
 
     protected override async Task<BasketItem> Handle(AddBasketItemEvent @event, CancellationToken cancellationToken)
     {
-        Event += (s, e) => _basketItem.Insert(@event.BasketItem =
+        Event += (s, e) => _command.BasketItem.Insert(@event.BasketItem =
             new BasketItem(e.Basket.Id, e.Product.Id, e.Quantity, e.Product.Price.Amount));
         EventInvoke(@event);
         await Task.CompletedTask;
