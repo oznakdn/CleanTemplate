@@ -1,9 +1,6 @@
-using Clean.Api.Controllers.Abstract;
 using Clean.Application.Features.Customers.Commands.Create;
 using Clean.Application.Features.Customers.Queries.GetCustomer;
 using Clean.Application.Features.Customers.Queries.GetCustomers;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Clean.Api.Controllers;
 

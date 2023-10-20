@@ -1,8 +1,4 @@
-using Clean.Application.GlobalException;
-using System.Reflection;
-
 var builder = WebApplication.CreateBuilder(args);
-
 
 
 builder.Services.AddControllers();

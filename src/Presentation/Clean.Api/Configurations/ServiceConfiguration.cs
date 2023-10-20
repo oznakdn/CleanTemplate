@@ -1,8 +1,4 @@
-﻿using Clean.Application.GlobalException;
-using Clean.Persistence;
-using Microsoft.OpenApi.Models;
-
-namespace Clean.Api.Configurations;
+﻿namespace Clean.Api.Configurations;
 
 public static class ServiceConfiguration
 {

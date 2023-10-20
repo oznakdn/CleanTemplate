@@ -1,10 +1,7 @@
-﻿using Clean.Api.Controllers.Abstract;
-using Clean.Application.Features.Baskets.Commands.AddBasketItem;
+﻿using Clean.Application.Features.Baskets.Commands.AddBasketItem;
 using Clean.Application.Features.Baskets.Commands.DeleteBasketItem;
 using Clean.Application.Features.Baskets.Commands.UpdateBasket;
 using Clean.Application.Features.Baskets.Queries.GetCustomerBasket;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Clean.Api.Controllers;
 

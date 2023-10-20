@@ -1,8 +1,5 @@
-﻿using Clean.Api.Controllers.Abstract;
-using Clean.Application.Features.Products.Commands.Create;
+﻿using Clean.Application.Features.Products.Commands.Create;
 using Clean.Application.Features.Products.Queries.GetProducts;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Clean.Api.Controllers;
 

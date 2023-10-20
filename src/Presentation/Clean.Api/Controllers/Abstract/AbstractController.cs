@@ -1,7 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Clean.Api.Controllers.Abstract;
+﻿namespace Clean.Api.Controllers.Abstract;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
