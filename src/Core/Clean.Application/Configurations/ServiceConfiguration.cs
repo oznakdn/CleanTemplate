@@ -3,6 +3,8 @@ using Clean.Application.Features.Baskets.Commands.DeleteBasketItem;
 using Clean.Application.Features.Baskets.Commands.UpdateBasket;
 using Clean.Application.Features.Customers.Commands.Create;
 using Clean.Application.Features.Products.Commands.Create;
+using Clean.Application.UnitOfWork.Commands;
+using Clean.Application.UnitOfWork.Queries;
 using Clean.Notification.Configurations;
 
 namespace Clean.Application.Configurations;
@@ -39,6 +41,9 @@ public static class ServiceConfiguration
         services.AddScoped(typeof(UpdateInventoryEventHandler));
         services.AddScoped(typeof(DeleteBasketItemEventHandler));
         services.AddScoped(typeof(UpdateBasketItemEventHandler));
+
+        services.AddScoped<ICommandUnitOfWork, CommandUnitOfWork>();
+        services.AddScoped<IQueryUnitOfWork,QueryUnitOfWork>();
         return services;
     }
 
