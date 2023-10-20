@@ -4,3 +4,15 @@ info: 20.10.2023 11:03:15    GET - /api/Products/healtcheck - 200
 info: 20.10.2023 11:03:25    GET - /healtcheck - 200
 info: 20.10.2023 11:03:25    GET - /favicon.ico - 200
 info: 20.10.2023 11:05:23    GET - /api/Products/GetProducts - 200
+info: 20.10.2023 11:17:55    PUT - /api/account/login - 200
+info: 20.10.2023 11:18:29    PUT - /api/account/login - 200
+info: 20.10.2023 11:19:53    POST - /api/account/register - 200
+info: 20.10.2023 11:26:03    GET - /api/products/GetProducts - 200
+info: 20.10.2023 11:29:32    GET - /api/products/getproducts - 200
+info: 20.10.2023 11:56:55    GET - /api/products/getproducts - 200
+info: 20.10.2023 11:58:04    POST - /api/products/createproduct - 200
+info: 20.10.2023 12:02:23    GET - /api/Customers/GetCustomers - 200
+info: 20.10.2023 12:02:56    GET - /api/customers/getcustomers - 200
+info: 20.10.2023 12:03:34    GET - /api/products/getproducts - 200
+info: 20.10.2023 12:05:50    GET - /api/customers/GetCustomer - 200
+info: 20.10.2023 12:14:39    POST - /api/customers/createcustomer - 200

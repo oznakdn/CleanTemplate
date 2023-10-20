@@ -1,0 +1,74 @@
+@hostname = localhost
+@port = 5019
+@host = http://{{hostname}}:{{port}}/api/account
+@contentType = application/json
+
+
+### Login
+PUT {{host}}/login
+Content-Type:  {{contentType}}
+
+{
+  "email": "john@mail.com",
+  "password": "123456"
+}
+
+
+<!--
+HTTP/1.1 200 OK
+Connection: close
+Content-Type: application/json; charset=utf-8
+Date: Fri, 20 Oct 2023 11:17:55 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NTJkMDk0NzFjMDFjMjcyOGU1NjkxYmQiLCJlbWFpbCI6ImpvaG5AbWFpbC5jb20iLCJ1bmlxdWVfbmFtZSI6ImpvaG5fZG9lIiwibmJmIjoxNjk3ODAwNjc2LCJleHAiOjE2OTgyMzI2NzYsImlhdCI6MTY5NzgwMDY3NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDE5IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDoyNzI1MCJ9.XP9f5FgifxZQsrljBK3BZnL_Y8waYeSk0OmxAL4Qx94",
+  "accessExpires": "25.10.2023 14:17:56",
+  "refresh": "qZOfNrdxppeTV2YhZVWhDXPl6UezBVJPVWYepjl8Owg=",
+  "refreshExpires": "26.10.2023 14:17:56"
+}
+-->
+
+
+### Register
+POST {{host}}/register
+Content-Type:  {{contentType}}
+
+{
+  "firstName": "Jhony",
+  "lastName": "Walker",
+  "username": "jhony_wolker",
+  "email": "jhonyn@mail.com",
+  "password": "123456",
+  "roles": [
+    {
+      "title": "Admin",
+      "description": "It has all transactions"
+    }
+  ]
+}
+
+<!--
+HTTP/1.1 201 Created
+Connection: close
+Content-Type: application/json; charset=utf-8
+Date: Fri, 20 Oct 2023 11:19:53 GMT
+Server: Kestrel
+Location: User is be register.
+Transfer-Encoding: chunked
+
+{
+  "firstName": "Jhony",
+  "lastName": "Walker",
+  "username": "jhony_wolker",
+  "email": "jhonyn@mail.com",
+  "password": "123456",
+  "roles": [
+    {
+      "title": "Admin",
+      "description": "It has all transactions"
+    }
+  ]
+}
+-->

@@ -1,0 +1,70 @@
+@hostname = localhost
+@port = 5019
+@host = http://{{hostname}}:{{port}}/api/products
+@contentType = application/json
+
+
+### GetProducts
+GET {{host}}/getproducts
+Content-Type: {{contentType}}
+
+<!--HTTP/1.1 200 OK
+Connection: close
+Content-Type: application/json; charset=utf-8
+Date: Fri, 20 Oct 2023 11:29:33 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+[
+  {
+    "id": "4cc0b472-3cd1-4245-8eb4-08ed4171d6f6",
+    "displayName": "IPhone 14",
+    "money": {
+      "currency": "TL",
+      "price": 60000
+    },
+    "category": {
+      "displayName": "Electronic"
+    },
+    "inventory": {
+      "quantity": 148,
+      "hasStock": true
+    }
+  },
+  {
+    "id": "03a3859b-61d2-4833-8e72-6a2c0859c6cb",
+    "displayName": "IPhone 12",
+    "money": {
+      "currency": "TL",
+      "price": 50000
+    },
+    "category": {
+      "displayName": "Electronic"
+    },
+    "inventory": {
+      "quantity": 98,
+      "hasStock": true
+    }
+  }
+]-->
+
+### CreateProduct
+POST {{host}}/createproduct
+Content-Type: {{contentType}}
+
+{
+  "displayName": "IPhone 14",
+  "currency": 0,
+  "amount": 60000,
+  "categoryName": "Electronic",
+  "quantity": 150
+}
+
+<!--HTTP/1.1 200 OK
+Connection: close
+Content-Type: text/plain; charset=utf-8
+Date: Fri, 20 Oct 2023 11:58:03 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+Product was added.-->

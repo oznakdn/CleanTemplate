@@ -1,6 +1,7 @@
 using Clean.Application.Features.Customers.Commands.Create;
 using Clean.Application.Features.Customers.Queries.GetCustomer;
 using Clean.Application.Features.Customers.Queries.GetCustomers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Clean.Api.Controllers;
 
@@ -12,6 +13,7 @@ public class CustomersController : AbstractController
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetCustomer([FromQuery]string? CustomerId, [FromQuery] string? NameOrSurname)
     {
         var result = await _mediator.Send(new GetCustomerRequest(CustomerId, NameOrSurname));
@@ -24,6 +26,7 @@ public class CustomersController : AbstractController
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult>GetCustomers()
     {
         var result = await _mediator.Send(new GetCustomersRequest());
@@ -31,6 +34,7 @@ public class CustomersController : AbstractController
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest createCustomer)
     {
         var result = await _mediator.Send(createCustomer);

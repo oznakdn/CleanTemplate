@@ -1,5 +1,6 @@
 ﻿using Clean.Application.Features.Products.Commands.Create;
 using Clean.Application.Features.Products.Queries.GetProducts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Clean.Api.Controllers;
 

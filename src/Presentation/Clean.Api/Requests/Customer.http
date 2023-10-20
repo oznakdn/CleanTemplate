@@ -1,0 +1,88 @@
+@hostname = localhost
+@port = 5019
+@host = http://{{hostname}}:{{port}}/api/customers
+@contentType = application/json
+
+
+### GetCustomers
+GET {{host}}/getcustomers
+Content-Type: {{contentType}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NTJkMDk0NzFjMDFjMjcyOGU1NjkxYmQiLCJlbWFpbCI6ImpvaG5AbWFpbC5jb20iLCJ1bmlxdWVfbmFtZSI6ImpvaG5fZG9lIiwibmJmIjoxNjk3ODAwNjc2LCJleHAiOjE2OTgyMzI2NzYsImlhdCI6MTY5NzgwMDY3NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDE5IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDoyNzI1MCJ9.XP9f5FgifxZQsrljBK3BZnL_Y8waYeSk0OmxAL4Qx94
+
+<!--HTTP/1.1 200 OK
+Connection: close
+Content-Type: application/json; charset=utf-8
+Date: Fri, 20 Oct 2023 12:02:55 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+[
+  {
+    "id": "5cd7a0b4-624c-4bf0-bd89-f22a69d58e32",
+    "firstName": "Ahmet",
+    "lastName": "Koşar",
+    "email": "ahmet@gmail.com",
+    "phoneNumber": "05003002010"
+  }
+]-->
+
+
+### GetCustomer
+GET {{host}}/GetCustomer?CustomerId=5cd7a0b4-624c-4bf0-bd89-f22a69d58e32&NameOrSurname
+Content-Type: {{contentType}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NTJkMDk0NzFjMDFjMjcyOGU1NjkxYmQiLCJlbWFpbCI6ImpvaG5AbWFpbC5jb20iLCJ1bmlxdWVfbmFtZSI6ImpvaG5fZG9lIiwibmJmIjoxNjk3ODAwNjc2LCJleHAiOjE2OTgyMzI2NzYsImlhdCI6MTY5NzgwMDY3NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDE5IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDoyNzI1MCJ9.XP9f5FgifxZQsrljBK3BZnL_Y8waYeSk0OmxAL4Qx94
+
+<!--HTTP/1.1 200 OK
+Connection: close
+Content-Type: application/json; charset=utf-8
+Date: Fri, 20 Oct 2023 12:05:51 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{
+  "firstName": "Ahmet",
+  "lastName": "Koşar",
+  "email": "ahmet@gmail.com",
+  "phoneNumber": "05003002010"
+}-->
+
+### CreateCustomer
+POST {{host}}/createcustomer
+Content-Type: {{contentType}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NTJkMDk0NzFjMDFjMjcyOGU1NjkxYmQiLCJlbWFpbCI6ImpvaG5AbWFpbC5jb20iLCJ1bmlxdWVfbmFtZSI6ImpvaG5fZG9lIiwibmJmIjoxNjk3ODAwNjc2LCJleHAiOjE2OTgyMzI2NzYsImlhdCI6MTY5NzgwMDY3NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDE5IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDoyNzI1MCJ9.XP9f5FgifxZQsrljBK3BZnL_Y8waYeSk0OmxAL4Qx94
+
+{
+  "firstName": "Ahmet",
+  "lastName": "Koşar",
+  "email": "ahmet@gmail.com",
+  "phoneNumber": "05003002010",
+  "password": "123456",
+  "address": {
+    "title": "İş",
+    "district": "Atakum",
+    "number": 1,
+    "city": "Samsun"
+  }
+}
+
+<!--HTTP/1.1 201 Created
+Connection: close
+Content-Type: application/json; charset=utf-8
+Date: Fri, 20 Oct 2023 12:14:39 GMT
+Server: Kestrel
+Location: Customer was be register.
+Transfer-Encoding: chunked
+
+{
+  "firstName": "Ahmet",
+  "lastName": "Koşar",
+  "email": "ahmet@gmail.com",
+  "phoneNumber": "05003002010",
+  "password": "123456",
+  "address": {
+    "title": "İş",
+    "district": "Atakum",
+    "number": 1,
+    "city": "Samsun"
+  }
+}-->
