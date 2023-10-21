@@ -1,4 +1,5 @@
 ﻿using Clean.Application.Results;
+using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Repositories;
 
 namespace Clean.Application.Features.Products.Queries.GetProducts;
@@ -16,16 +17,16 @@ public record ProductInventory(int Quantity, bool HasStock);
 public class GetProductsHandler : IRequestHandler<GetProductsRequest, IDataResult<GetProductsResponse>>
 {
 
-    private readonly IProductRepository _product;
+    private readonly IQueryUnitOfWork _query;
 
-    public GetProductsHandler(IProductRepository product)
+    public GetProductsHandler(IQueryUnitOfWork query)
     {
-        _product = product;
+        _query = query;
     }
 
     public async Task<IDataResult<GetProductsResponse>> Handle(GetProductsRequest request, CancellationToken cancellationToken)
     {
-        var products = await _product.GetAllAsync(cancellationToken, null, x => x.Inventory);
+        var products = await _query.Product.ReadAllAsync(true, cancellationToken: cancellationToken, includeProperties: x => x.Inventory);
 
         List<GetProductsResponse> result = products
             .Select(x => new GetProductsResponse

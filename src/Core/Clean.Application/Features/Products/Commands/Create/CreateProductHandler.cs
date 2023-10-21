@@ -1,4 +1,5 @@
 ﻿using Clean.Application.Results;
+using Clean.Application.UnitOfWork.Commands;
 using Clean.Domain.Products;
 using Clean.Domain.Repositories;
 
@@ -10,11 +11,12 @@ public class CreateProductResponse : Response { }
 
 public class CreateProductHandler : IRequestHandler<CreateProductRequest, CreateProductResponse>
 {
-    private readonly IProductRepository _product;
+
+    private readonly ICommandUnitOfWork _command;
     private readonly AddInventoryEventHandler _addInventoryEvent;
-    public CreateProductHandler(IProductRepository product, AddInventoryEventHandler addInventoryEvent)
+    public CreateProductHandler(ICommandUnitOfWork command, AddInventoryEventHandler addInventoryEvent)
     {
-        _product = product;
+        _command = command;
         _addInventoryEvent = addInventoryEvent;
     }
 
@@ -25,12 +27,12 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, Create
         product.AddCategory(request.CategoryName);
 
 
-        Inventory inventory = await _addInventoryEvent.Publish(new AddInventoryEvent(product.Id,request.Quantity),cancellationToken);
+        Inventory inventory = await _addInventoryEvent.Publish(new AddInventoryEvent(product.Id, request.Quantity), cancellationToken);
         product.AddInventory(inventory);
 
-        _product.Insert(product);
+        _command.Product.Insert(product);
 
-        await _product.SaveAsync(cancellationToken);
+        await _command.Product.ExecuteAsync(cancellationToken);
         return new CreateProductResponse
         {
             Successed = true,

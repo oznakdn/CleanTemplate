@@ -3,7 +3,6 @@ using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Baskets;
 using Clean.Domain.Products;
-using Clean.Domain.Repositories;
 
 namespace Clean.Application.Features.Baskets.Commands.AddBasketItem;
 
@@ -14,15 +13,17 @@ public class AddBasketItemHandler : IRequestHandler<AddBasketItemRequest, IDataR
 {
     private readonly ICommandUnitOfWork _command;
     private readonly IQueryUnitOfWork _query;
-    private readonly IProductRepository _product;
     private readonly AddBasketItemEventHandler _addBasketItemEvent;
     private readonly UpdateInventoryEventHandler _updateInventoryEvent;
 
-    public AddBasketItemHandler(ICommandUnitOfWork command, IQueryUnitOfWork query, AddBasketItemEventHandler addBasketItemEvent, IProductRepository product, UpdateInventoryEventHandler updateInventoryEvent)
+    public AddBasketItemHandler(
+        ICommandUnitOfWork command, 
+        IQueryUnitOfWork query, 
+        AddBasketItemEventHandler addBasketItemEvent, 
+        UpdateInventoryEventHandler updateInventoryEvent)
     {
         _command = command;
         _query = query;
-        _product = product;
         _addBasketItemEvent = addBasketItemEvent;
         _updateInventoryEvent = updateInventoryEvent;
     }
@@ -37,7 +38,7 @@ public class AddBasketItemHandler : IRequestHandler<AddBasketItemRequest, IDataR
            return new DataResult<AddBasketItemResponse>("Basket not found",false);
         }
 
-        var product = await _product.GetAsync(cancellationToken, x => x.Id == Guid.Parse(request.ProductId));
+        var product = await _query.Product.ReadSingleOrDefaultAsync(true, x => x.Id == Guid.Parse(request.ProductId), cancellationToken);
         if (product is null)
         {
            return new DataResult<AddBasketItemResponse>("Product not found",false);

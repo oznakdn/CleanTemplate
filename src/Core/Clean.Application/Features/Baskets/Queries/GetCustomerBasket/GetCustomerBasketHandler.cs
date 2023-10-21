@@ -18,12 +18,10 @@ public class GetCustomerBasketHandler : IRequestHandler<GetCustomerBasketRequest
     private readonly IQueryUnitOfWork _query;
     private readonly ICommandUnitOfWork _command;
 
-    private readonly IProductRepository _product;
-    public GetCustomerBasketHandler(IQueryUnitOfWork query,ICommandUnitOfWork command, IProductRepository product)
+    public GetCustomerBasketHandler(IQueryUnitOfWork query, ICommandUnitOfWork command)
     {
         _query = query;
         _command = command;
-        _product = product;
     }
 
     public async Task<GetCustomerBasketResponse> Handle(GetCustomerBasketRequest request, CancellationToken cancellationToken)
@@ -31,7 +29,7 @@ public class GetCustomerBasketHandler : IRequestHandler<GetCustomerBasketRequest
         GetCustomerBasketResponse response = new();
         var basket = await _query.Basket.ReadSingleOrDefaultAsync(true, x => x.CustomerId == Guid.Parse(request.CustomerId), cancellationToken);
         var basketItems = await _query.BasketItem.ReadAllAsync(true,
-            filter: x => x.BasketId == basket.Id,cancellationToken:cancellationToken);
+            filter: x => x.BasketId == basket.Id, cancellationToken: cancellationToken);
 
 
         if (basket is null)
@@ -46,7 +44,7 @@ public class GetCustomerBasketHandler : IRequestHandler<GetCustomerBasketRequest
 
         response.BasketItems = basketItems.Select(x => new GetBasketItems(
             x.Id.ToString(),
-            _product.GetAsync(cancellationToken, y => y.Id == x.ProductId).Result.DisplayName,
+            _query.Product.ReadSingleOrDefault(true, y => y.Id == x.ProductId).DisplayName,
             x.ProductQuantity
             )).ToList();
 

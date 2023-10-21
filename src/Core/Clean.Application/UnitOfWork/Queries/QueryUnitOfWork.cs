@@ -14,6 +14,7 @@ public class QueryUnitOfWork : IQueryUnitOfWork
         BasketItem = BasketItem ?? new BasketItemQuery(_context);
         Basket = Basket ?? new BasketQuery(_context);
         Customer = Customer ?? new CustomerQuery(_context);
+        Product = Product ?? new ProductQuery(_context);
     }
 
     public IBasketItemQuery BasketItem { get; }
@@ -21,4 +22,6 @@ public class QueryUnitOfWork : IQueryUnitOfWork
     public IBasketQuery Basket { get; }
 
     public ICustomerQuery Customer { get; }
+
+    public IProductQuery Product { get; }
 }

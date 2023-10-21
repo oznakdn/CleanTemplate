@@ -7,4 +7,5 @@ public interface IQueryUnitOfWork
     IBasketItemQuery BasketItem { get; }
     IBasketQuery Basket { get; }
     ICustomerQuery Customer { get; }
+    IProductQuery Product { get; }
 }
