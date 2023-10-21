@@ -38,7 +38,6 @@ public static class ServiceConfiguration
     private static IServiceCollection DependencyInjections(this IServiceCollection services)
     {
         services.AddScoped<IProductRepository, ProductRepository>();
-        services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IInventoryRepository, InventoryRepository>();

@@ -1,7 +1,7 @@
 ﻿using Clean.Application.Results;
+using Clean.Application.UnitOfWork.Commands;
 using Clean.Domain.Baskets;
 using Clean.Domain.Customers;
-using Clean.Domain.Repositories;
 
 namespace Clean.Application.Features.Customers.Commands.Create;
 
@@ -13,12 +13,12 @@ public class CreateCustomerResponse : Response { }
 
 public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, CreateCustomerResponse>
 {
-    private readonly ICustomerRepository _customer;
+    private readonly ICommandUnitOfWork _command;
     private readonly CreateBasketEventHandler _createBasketEvent;
 
-    public CreateCustomerHandler(ICustomerRepository customer, CreateBasketEventHandler createBasketEvent)
+    public CreateCustomerHandler(ICommandUnitOfWork command, CreateBasketEventHandler createBasketEvent)
     {
-        _customer = customer;
+        _command = command;
         _createBasketEvent = createBasketEvent;
     }
 
@@ -38,12 +38,12 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, Crea
             request.Address.Number,
             request.Address.City);
 
-        _customer.Insert(customer);
+        _command.Customer.Insert(customer);
 
         Basket result = await _createBasketEvent.Publish(new CreateBasketEvent(customer.Id.ToString()), cancellationToken);
         customer.AddBasket(result.Id);
 
-        await _customer.SaveAsync(cancellationToken);
+        await _command.Customer.ExecuteAsync(cancellationToken);
 
         return new CreateCustomerResponse
         {

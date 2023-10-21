@@ -1,6 +1,6 @@
 ﻿using Clean.Application.Results;
+using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Customers;
-using Clean.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Clean.Application.Features.Customers.Queries.GetCustomer;
@@ -11,29 +11,37 @@ public record GetCustomerResponse(string FirstName, string LastName, string Emai
 
 public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, IDataResult<GetCustomerResponse>>
 {
-    private readonly ICustomerRepository _customer;
+    private readonly IQueryUnitOfWork _query;
 
-    public GetCustomerHandler(ICustomerRepository customer)
+    public GetCustomerHandler(IQueryUnitOfWork query)
     {
-        _customer = customer;
+        _query = query;
     }
 
     public async Task<IDataResult<GetCustomerResponse>> Handle(GetCustomerRequest request, CancellationToken cancellationToken)
     {
-        var query = _customer.GetQueryable();
-     
+        var query = await _query.Customer.QueryAsync(true, cancellationToken: cancellationToken);
+
         if (!string.IsNullOrEmpty(request.CustomerId))
         {
-            Customer customer =  await query.Where(x => x.Id == Guid.Parse(request.CustomerId)).SingleOrDefaultAsync(cancellationToken);
-            var result = new GetCustomerResponse(customer.FirstName, customer.LastName,customer.Email,customer.PhoneNumber);
+            Customer customer = await query.Where(x => x.Id == Guid.Parse(request.CustomerId)).SingleOrDefaultAsync(cancellationToken);
+            if(customer is null)
+            {
+                return new DataResult<GetCustomerResponse>("Customer not found!",false);
+            }
+            var result = new GetCustomerResponse(customer.FirstName, customer.LastName, customer.Email, customer.PhoneNumber);
             return new DataResult<GetCustomerResponse>(result);
         }
 
         if (!string.IsNullOrEmpty(request.Name))
         {
             var customer = await query
-                .Where(x=> x.FirstName.ToLower().Contains(request.Name.ToLower()) || x.LastName.ToLower().Contains(request.Name.ToLower()))
+                .Where(x => x.FirstName.ToLower().Contains(request.Name.ToLower()) || x.LastName.ToLower().Contains(request.Name.ToLower()))
                 .ToListAsync(cancellationToken);
+            if (customer is null)
+            {
+                return new DataResult<GetCustomerResponse>("Customer not found!",false);
+            }
 
             var result = customer.Select(x => new GetCustomerResponse(
                 x.FirstName,
@@ -41,7 +49,7 @@ public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, IDataResul
                 x.Email,
                 x.PhoneNumber
                 )).ToList();
-            
+
             return new DataResult<GetCustomerResponse>(result);
         }
 

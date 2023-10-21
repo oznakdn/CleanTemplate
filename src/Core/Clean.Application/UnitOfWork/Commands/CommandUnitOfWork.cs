@@ -11,6 +11,7 @@ public class CommandUnitOfWork : ICommandUnitOfWork
         _context = context;
         BasketItem = BasketItem ?? new BasketItemCommand(_context);
         Basket = Basket ?? new BasketCommand(_context);
+        Customer = Customer ?? new CustomerCommand(_context);
     }
 
     public CommandUnitOfWork()
@@ -20,4 +21,5 @@ public class CommandUnitOfWork : ICommandUnitOfWork
 
     public IBasketItemCommand BasketItem { get; }
     public IBasketCommand Basket { get; }
+    public ICustomerCommand Customer { get; }
 }
