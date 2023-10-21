@@ -47,6 +47,7 @@
 - [x] Object mapping
 - [x] Validations
 - [X] Email and Notification Service
+- [ ] SignalR 
 - [ ] Unit tests
 - [ ] Integration tests
 
