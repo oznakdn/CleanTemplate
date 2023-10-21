@@ -35,7 +35,7 @@
 - [x] Sqlite, SqlServer, PostgreSQL, MySql
 - [x] MongoDB
 - [x] Generic repository pattern
-- [ ] Pagination and Filtering
+- [X] Pagination and Filtering
 - [x] Unit Of Work pattern
 - [X] Domain driven design (DDD)
 - [x] CQRS
@@ -65,8 +65,10 @@ $ dotnet ef database update --context [ContextName] --startup-project [ProjectDi
 
 ## Packages
 ```csharp
+Gleeman.EffectiveLogger
 Gleeman.EffectiveLogger.SQLite
 Gleeman.JwtGenerator
+Gleeman.Repository.EFCore
 BCrypt.Net-Next
 MongoDB.Driver
 Microsoft.EntityFrameworkCore.Sqlite
