@@ -1,4 +1,5 @@
 ﻿using Clean.Application.Results;
+using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Repositories;
 
@@ -14,20 +15,21 @@ public class GetCustomerBasketResponse : Response
 }
 public class GetCustomerBasketHandler : IRequestHandler<GetCustomerBasketRequest, GetCustomerBasketResponse>
 {
-    private readonly IBasketRepository _basket;
     private readonly IQueryUnitOfWork _query;
+    private readonly ICommandUnitOfWork _command;
+
     private readonly IProductRepository _product;
-    public GetCustomerBasketHandler(IBasketRepository basket, IProductRepository product, IQueryUnitOfWork query)
+    public GetCustomerBasketHandler(IQueryUnitOfWork query,ICommandUnitOfWork command, IProductRepository product)
     {
-        _basket = basket;
-        _product = product;
         _query = query;
+        _command = command;
+        _product = product;
     }
 
     public async Task<GetCustomerBasketResponse> Handle(GetCustomerBasketRequest request, CancellationToken cancellationToken)
     {
         GetCustomerBasketResponse response = new();
-        var basket = await _basket.GetAsync(cancellationToken, x => x.CustomerId == Guid.Parse(request.CustomerId));
+        var basket = await _query.Basket.ReadSingleOrDefaultAsync(true, x => x.CustomerId == Guid.Parse(request.CustomerId), cancellationToken);
         var basketItems = await _query.BasketItem.ReadAllAsync(true,
             filter: x => x.BasketId == basket.Id,cancellationToken:cancellationToken);
 

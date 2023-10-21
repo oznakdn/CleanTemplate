@@ -12,8 +12,10 @@ public class QueryUnitOfWork : IQueryUnitOfWork
     {
         _context = context;
         BasketItem = BasketItem ?? new BasketItemQuery(_context);
+        Basket = Basket ?? new BasketQuery(_context);
     }
 
     public IBasketItemQuery BasketItem { get; }
 
+    public IBasketQuery Basket { get; }
 }

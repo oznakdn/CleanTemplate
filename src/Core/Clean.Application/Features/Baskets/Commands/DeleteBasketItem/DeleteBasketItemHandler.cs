@@ -1,6 +1,7 @@
 ﻿using Clean.Application.Results;
+using Clean.Application.UnitOfWork.Commands;
+using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Baskets;
-using Clean.Domain.Repositories;
 
 namespace Clean.Application.Features.Baskets.Commands.DeleteBasketItem;
 
@@ -10,18 +11,20 @@ public record DeleteBasketItemResponse;
 
 public class DeleteBasketItemHandler : IRequestHandler<DeleteBasketItemRequest, IDataResult<DeleteBasketItemResponse>>
 {
-    private readonly IBasketRepository _basket;
+    private readonly IQueryUnitOfWork _query;
+    private readonly ICommandUnitOfWork _command;
     private readonly DeleteBasketItemEventHandler _deleteBasketItemEvent;
 
-    public DeleteBasketItemHandler(IBasketRepository basket, DeleteBasketItemEventHandler deleteBasketItemEvent)
+    public DeleteBasketItemHandler(IQueryUnitOfWork query, ICommandUnitOfWork command, DeleteBasketItemEventHandler deleteBasketItemEvent)
     {
-        _basket = basket;
+        _query = query;
+        _command = command;
         _deleteBasketItemEvent = deleteBasketItemEvent;
     }
 
     public async Task<IDataResult<DeleteBasketItemResponse>> Handle(DeleteBasketItemRequest request, CancellationToken cancellationToken)
     {
-        var basket = await _basket.GetAsync(cancellationToken, x => x.Id == Guid.Parse(request.BasketId));
+        var basket = await _query.Basket.ReadSingleOrDefaultAsync(true, x => x.Id == Guid.Parse(request.BasketId), cancellationToken);
 
         if (basket is null)
             return new DataResult<DeleteBasketItemResponse>("Basket not found", false);
@@ -29,13 +32,13 @@ public class DeleteBasketItemHandler : IRequestHandler<DeleteBasketItemRequest, 
         BasketItem basketItem = await _deleteBasketItemEvent.Publish(new DeleteBasketItemEvent(
            Guid.Parse(request.BasketId),
            Guid.Parse(request.BasketItemId)
-            ),cancellationToken);
+            ), cancellationToken);
 
         basket.RemoveBasketItem(basketItem);
 
-        _basket.Update(basket);
-        await _basket.SaveAsync(cancellationToken);
+        _command.Basket.Edit(basket);
+        await _command.Basket.ExecuteAsync(cancellationToken);
 
-        return new DataResult<DeleteBasketItemResponse>("Item was removed",true);
+        return new DataResult<DeleteBasketItemResponse>("Item was removed", true);
     }
 }

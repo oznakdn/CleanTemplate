@@ -1,0 +1,2 @@
+info: 21.10.2023 06:52:11    GET - /api/Products/GetProducts - 200
+info: 21.10.2023 06:52:48    GET - /api/Products/GetProducts - 200

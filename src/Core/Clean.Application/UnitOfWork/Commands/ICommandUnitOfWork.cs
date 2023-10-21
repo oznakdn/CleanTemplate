@@ -6,5 +6,6 @@ namespace Clean.Application.UnitOfWork.Commands;
 public interface ICommandUnitOfWork
 {
     IBasketItemCommand BasketItem { get; }
+    IBasketCommand Basket { get; }
 
 }
