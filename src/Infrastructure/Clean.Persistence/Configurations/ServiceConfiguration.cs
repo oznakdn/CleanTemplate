@@ -39,8 +39,6 @@ public static class ServiceConfiguration
     {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
-        services.AddScoped<IInventoryRepository, InventoryRepository>();
-
         return services;
     }
 

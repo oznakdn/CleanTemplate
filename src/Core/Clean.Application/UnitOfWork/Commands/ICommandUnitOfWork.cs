@@ -8,5 +8,6 @@ public interface ICommandUnitOfWork
     IBasketCommand Basket { get; }
     ICustomerCommand Customer { get; }
     IProductCommand Product { get; }
+    IInventoryCommand Inventory { get; }
 
 }

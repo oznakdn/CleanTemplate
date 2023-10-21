@@ -1,11 +1,11 @@
-﻿using Clean.Domain.Contracts.Abstracts;
+﻿using Clean.Application.UnitOfWork.Commands;
+using Clean.Domain.Contracts.Abstracts;
 using Clean.Domain.Contracts.Interfaces;
 using Clean.Domain.Products;
-using Clean.Domain.Repositories;
 
 namespace Clean.Application.Features.Products.Commands.Create;
 
-public class AddInventoryEvent: IDomaintEvent
+public class AddInventoryEvent : IDomaintEvent
 {
     public AddInventoryEvent(Guid productId, int quantity)
     {
@@ -21,16 +21,16 @@ public class AddInventoryEvent: IDomaintEvent
 
 public class AddInventoryEventHandler : DomainEventHandler<AddInventoryEvent, Inventory>
 {
-    private readonly IInventoryRepository _inventory;
+    private readonly ICommandUnitOfWork _command;
 
-    public AddInventoryEventHandler(IInventoryRepository inventory)
+    public AddInventoryEventHandler(ICommandUnitOfWork command)
     {
-        _inventory = inventory;
+        _command = command;
     }
 
     protected override async Task<Inventory> Handle(AddInventoryEvent @event, CancellationToken cancellationToken)
     {
-        Event += (s, e) => _inventory.Insert(@event.Inventory = new Inventory(e.ProductId, e.Quantity));
+        Event += (s, e) => _command.Inventory.Insert(@event.Inventory = new Inventory(e.ProductId, e.Quantity));
         this.EventInvoke(@event);
         await Task.CompletedTask;
         return @event.Inventory;
