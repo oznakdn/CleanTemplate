@@ -30,15 +30,15 @@
 ## Features
 
 - [x] Clean Architecture
+- [X] Domain driven design (DDD)
 - [x] Asp .Net Core 7
 - [x] Entity Framework Core 7
 - [x] Sqlite, SqlServer, PostgreSQL, MySql
 - [x] MongoDB
 - [x] Generic repository pattern
-- [X] Pagination and Filtering
 - [x] Unit Of Work pattern
-- [X] Domain driven design (DDD)
 - [x] CQRS
+- [X] Pagination and Filtering
 - [x] Claim based authentication with Json Web Token
 - [x] Password hashing
 - [x] Logging
