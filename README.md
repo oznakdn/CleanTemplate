@@ -69,6 +69,7 @@ Gleeman.EffectiveLogger
 Gleeman.EffectiveLogger.SQLite
 Gleeman.JwtGenerator
 Gleeman.Repository.EFCore
+Gleeman.Repository.MongoDriver
 BCrypt.Net-Next
 MongoDB.Driver
 Microsoft.EntityFrameworkCore.Sqlite
