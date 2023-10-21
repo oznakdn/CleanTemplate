@@ -2,9 +2,8 @@
 
 public static class ServiceConfiguration
 {
-    public static IServiceCollection AddApiService(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApiService(this IServiceCollection services)
     {
-        services.Configure<MongoSettings>(configuration.GetSection(nameof(MongoSettings)));
         services.AddTransient<GlobalExceptionHandler>();
         services.AddSwaggerService();
 

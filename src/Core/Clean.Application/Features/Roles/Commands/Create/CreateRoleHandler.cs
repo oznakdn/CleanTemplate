@@ -1,6 +1,6 @@
 ﻿using Clean.Application.Results;
 using Clean.Domain.Account;
-using Clean.Domain.Repositories;
+using Clean.Domain.Repositories.Commands;
 
 namespace Clean.Application.Features.Roles.Commands.Create;
 
@@ -9,16 +9,16 @@ public record CreateRoleResponse;
 
 public class CreateRoleHandler : IRequestHandler<CreateRoleRequest, IDataResult<CreateRoleResponse>>
 {
-    private readonly IRoleRepository _role;
+    private readonly IRoleCommand _command;
 
-    public CreateRoleHandler(IRoleRepository role)
+    public CreateRoleHandler(IRoleCommand command)
     {
-        _role = role;
+        _command = command;
     }
 
     public async Task<IDataResult<CreateRoleResponse>> Handle(CreateRoleRequest request, CancellationToken cancellationToken)
     {
-        await _role.InsertAsync(new Role(request.RoleTitle, request.Description), cancellationToken);
+        await _command.InsertAsync(new Role(request.RoleTitle, request.Description), cancellationToken);
         return new DataResult<CreateRoleResponse>("Role was created.",true);
     }
 }

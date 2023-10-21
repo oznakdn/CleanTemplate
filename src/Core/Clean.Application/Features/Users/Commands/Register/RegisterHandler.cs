@@ -1,5 +1,5 @@
 ﻿using Clean.Domain.Account;
-using Clean.Domain.Repositories;
+using Clean.Domain.Repositories.Commands;
 using Clean.Identity.Helpers;
 
 namespace Clean.Application.Features.Users.Commands.Register;
@@ -10,11 +10,12 @@ public record RegisterResponse(bool Successed, string? message, List<string?> Er
 
 public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse>
 {
-    private readonly IUserRepository _user;
+   
+    private readonly IUserCommand _command;
 
-    public RegisterHandler(IUserRepository user)
+    public RegisterHandler(IUserCommand command)
     {
-        _user = user;
+        _command = command;
     }
 
     public async Task<RegisterResponse> Handle(RegisterRequest request, CancellationToken cancellationToken)
@@ -37,7 +38,7 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
             request.Password.HashPassword(),
             request.RoleId!);
 
-        await _user.InsertAsync(user, cancellationToken);
+        await _command.CreateAsync(user, cancellationToken);
         return new RegisterResponse(true, "User is be register.", null);
     }
 

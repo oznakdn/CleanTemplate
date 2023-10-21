@@ -1,5 +1,10 @@
 ﻿using Clean.Domain.Repositories;
+using Clean.Domain.Repositories.Commands;
+using Clean.Domain.Repositories.Queries;
 using Clean.Persistence.Repositories;
+using Clean.Persistence.Repositories.Commands;
+using Clean.Persistence.Repositories.Queries;
+using Gleeman.Repository.MongoDriver.Configuration;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
@@ -32,13 +37,22 @@ public static class ServiceConfiguration
         }
 
         services.DependencyInjections();
+        services.AddMongoService(configuration);
         return services;
     }
 
     private static IServiceCollection DependencyInjections(this IServiceCollection services)
     {
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IUserCommand, UserCommand>();
+        services.AddScoped<IUserQuery, UserQuery>();
+        services.AddScoped<IRoleCommand, RoleCommand>();
+        services.AddScoped<IRoleQuery, RoleQuery>();
+        return services;
+    }
+
+    private static IServiceCollection AddMongoService(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddMongoRepository(configuration);
         return services;
     }
 

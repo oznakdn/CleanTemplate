@@ -1,8 +1,11 @@
 ﻿using Clean.Application.Results;
-using Clean.Domain.Repositories;
+using Clean.Domain.Account;
+using Clean.Domain.Repositories.Commands;
+using Clean.Domain.Repositories.Queries;
 using Clean.Identity.Helpers;
 using Gleeman.JwtGenerator;
 using Gleeman.JwtGenerator.Generator;
+using MongoDB.Driver;
 
 namespace Clean.Application.Features.Users.Queries.Login;
 
@@ -19,15 +22,18 @@ public class LoginResponse : Response
 
 public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
 {
-    private readonly IUserRepository _user;
-    private readonly IRoleRepository _role;
+    private readonly IUserCommand _userCommand;
+    private readonly IUserQuery _userQuery;
+    private readonly IRoleQuery _roleQuery;
     private readonly ITokenGenerator _token;
 
-    public LoginHandler(IUserRepository user, ITokenGenerator token, IRoleRepository role)
+    public LoginHandler(IUserCommand userCommand, IUserQuery userQuery,IRoleQuery roleQuery,  ITokenGenerator token)
     {
-        _user = user;
+        _userCommand = userCommand;
+        _userQuery = userQuery;
+        _roleQuery = roleQuery;
         _token = token;
-        _role = role;
+
     }
 
     public async Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
@@ -46,8 +52,8 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
             };
         }
 
-        var user = await _user.GetAsync(x => x.Email == request.Email, cancellationToken);
-        var userRole = await _role.GetAsync(x => x.Id == user.RoleId, cancellationToken);
+        var user = await _userQuery.ReadSingleOrDefaultAsync(x => x.Email == request.Email, cancellationToken);
+        var userRole = await _roleQuery.ReadSingleOrDefaultAsync(x => x.Id == user.RoleId, cancellationToken);
 
         if (user == null)
         {
@@ -94,7 +100,10 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
 
         user.SetRefreshToken(refresh.Token, refresh.ExpireDate);
 
-        await _user.UpdateAsync(user, cancellationToken);
+        var filter = Builders<User>.Filter
+        .Eq(x => x.Id, user.Id);
+
+        await _userCommand.EditAsync(filter,user, cancellationToken);
 
         return new LoginResponse
         {

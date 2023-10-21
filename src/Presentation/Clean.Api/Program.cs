@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddApiService(builder.Configuration);
+builder.Services.AddApiService();
 builder.Services.AddApplicationService(builder.Configuration, providerType: ProviderType.PostgreSQL, Assembly.GetExecutingAssembly());
 builder.Services.AddHealthChecks();
 
