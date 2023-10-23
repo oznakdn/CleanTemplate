@@ -1,17 +1,29 @@
-﻿using Clean.Domain.Contracts.Abstracts;
+﻿using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Domain.Account;
 
-public class Role : MongoRoleIdentity
+public class Role : IEntity<string>
 {
+
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    [BsonElement]
+    public string Id { get; private set; }
+    public string RoleTitle { get; private set; }
+    public string Description { get; private set; }
+    public bool IsDeleted { get; private set; }
+
     public Role(string roleTitle, string description)
     {
         RoleTitle = roleTitle;
         Description = description;
-        Users = new HashSet<User>();
     }
     private Role() { }
 
-    public ICollection<User> Users { get; set; }
+    
 
+    public bool Equals(IEntity<string>? other)
+    {
+        return Id.GetHashCode() == other.GetHashCode();
+    }
 }

@@ -30,6 +30,7 @@ public class ApplicationDbContext:DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(InventoryConfiguration).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrderItemConfiguration).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrderConfiguration).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(CustomerConfiguration).Assembly);

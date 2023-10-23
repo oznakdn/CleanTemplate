@@ -27,3 +27,39 @@ info: 23.10.2023 12:41:14    POST - /api/Account/Register - 200
 info: 23.10.2023 12:42:22    POST - /api/Account/CreateRole - 200
 info: 23.10.2023 12:42:55    POST - /api/Account/Register - 200
 info: 23.10.2023 12:43:13    PUT - /api/Account/Login - 200
+info: 23.10.2023 12:50:22    POST - /api/Account/CreateRole - 200
+fail: 23.10.2023 12:50:22    POST - /api/Account/CreateRole - 500 - The property 'System.String Id' of class 'Clean.Domain.Account.Role' has no 'set' accessor. To avoid this exception, call IsReadOnly to ensure that setting a value is allowed.
+info: 23.10.2023 12:51:37    POST - /api/Account/CreateRole - 200
+info: 23.10.2023 12:52:11    POST - /api/Account/Register - 200
+info: 23.10.2023 12:52:26    PUT - /api/Account/Login - 200
+info: 23.10.2023 12:53:54    GET - /api/Products/GetProducts - 200
+info: 23.10.2023 12:54:51    GET - /api/Products/GetProducts - 200
+info: 23.10.2023 12:57:34    GET - /api/Products/GetProducts - 200
+info: 23.10.2023 12:58:12    PUT - /api/Account/Login - 200
+info: 23.10.2023 12:58:28    GET - /api/Customers/GetCustomer - 200
+info: 23.10.2023 12:58:34    GET - /api/Customers/GetCustomers - 200
+info: 23.10.2023 12:58:50    GET - /api/Baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
+info: 23.10.2023 12:59:24    POST - /api/Baskets/AddBasketItem - 200
+fail: 23.10.2023 12:59:25    POST - /api/Baskets/AddBasketItem - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 23.10.2023 13:00:01    POST - /api/Baskets/AddBasketItem - 200
+fail: 23.10.2023 13:00:01    POST - /api/Baskets/AddBasketItem - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 23.10.2023 13:01:28    GET - /api/Products/GetProducts - 200
+info: 23.10.2023 13:01:47    PUT - /api/Account/Login - 200
+info: 23.10.2023 13:02:05    GET - /api/Customers/GetCustomer - 200
+info: 23.10.2023 13:02:09    GET - /api/Customers/GetCustomers - 200
+info: 23.10.2023 13:03:20    GET - /api/Baskets/GetCustomerBasket/5cd7a0b4-624c-4bf0-bd89-f22a69d58e32 - 200
+info: 23.10.2023 13:03:31    GET - /api/Baskets/GetCustomerBasket/f4171854-ad48-4ddc-8034-71471a735dae - 200
+info: 23.10.2023 13:04:03    POST - /api/Baskets/AddBasketItem - 200
+info: 23.10.2023 13:16:49    PUT - /api/Account/Login - 200
+info: 23.10.2023 13:17:10    GET - /api/Customers/GetCustomer - 200
+info: 23.10.2023 13:17:59    POST - /api/Customers/CreateCustomer - 200
+info: 23.10.2023 13:18:26    GET - /api/Customers/GetCustomers - 200
+info: 23.10.2023 13:18:39    GET - /api/Baskets/GetCustomerBasket/2774d6c6-a529-4af8-b955-2be71b79ef08 - 200
+info: 23.10.2023 13:18:59    GET - /api/Products/GetProducts - 200
+info: 23.10.2023 13:19:23    POST - /api/Products/CreateProduct - 200
+info: 23.10.2023 13:19:28    GET - /api/Products/GetProducts - 200
+info: 23.10.2023 13:19:38    POST - /api/Baskets/AddBasketItem - 200
+info: 23.10.2023 13:20:25    GET - /api/Baskets/GetCustomerBasket/2774d6c6-a529-4af8-b955-2be71b79ef08 - 200
+info: 23.10.2023 13:20:36    PUT - /api/Baskets/RemoveBasketItem - 200
+info: 23.10.2023 13:20:55    GET - /api/Baskets/GetCustomerBasket/2774d6c6-a529-4af8-b955-2be71b79ef08 - 200
+info: 23.10.2023 13:21:00    GET - /api/Customers/GetCustomers - 200

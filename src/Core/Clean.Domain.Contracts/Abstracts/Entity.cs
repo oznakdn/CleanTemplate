@@ -4,14 +4,16 @@ namespace Clean.Domain.Contracts.Abstracts;
 
 public abstract class Entity<TId> : IEntity<TId>
 {
-    public virtual TId Id { get; set; }
-    public bool IsDeleted { get; set; } = false;
+    public virtual TId Id { get;}
+
+    public bool IsDeleted { get; }
 
     public Entity(TId id)
     {
         if (!IsValid(id))
             throw new ArgumentException("Identifier format is wrong!");
         Id = id;
+        IsDeleted = true;
     }
 
 
