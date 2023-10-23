@@ -29,4 +29,9 @@
     <ProjectReference Include="..\..\Core\Clean.Domain\Clean.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\Dapper\Commands\" />
+    <Folder Include="Repositories\Dapper\Queries\" />
+  </ItemGroup>
+
 </Project>

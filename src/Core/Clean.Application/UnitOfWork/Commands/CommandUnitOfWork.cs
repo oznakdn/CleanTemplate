@@ -1,5 +1,5 @@
 ﻿using Clean.Domain.Repositories.Commands;
-using Clean.Persistence.Repositories.Commands;
+using Clean.Persistence.Repositories.EntityFramework.Commands;
 
 namespace Clean.Application.UnitOfWork.Commands;
 

@@ -1,5 +1,5 @@
 ﻿using Clean.Domain.Repositories.Queries;
-using Clean.Persistence.Repositories.Queries;
+using Clean.Persistence.Repositories.EntityFramework.Queries;
 
 namespace Clean.Application.UnitOfWork.Queries;
 

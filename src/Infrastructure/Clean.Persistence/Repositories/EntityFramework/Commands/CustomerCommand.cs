@@ -2,9 +2,9 @@
 using Clean.Domain.Repositories.Commands;
 using Gleeman.Repository.EFCore.Abstracts.Command;
 
-namespace Clean.Persistence.Repositories.Commands;
+namespace Clean.Persistence.Repositories.EntityFramework.Commands;
 
-public class CustomerCommand : EFCommandRepository<Customer, ApplicationDbContext>,ICustomerCommand
+public class CustomerCommand : EFCommandRepository<Customer, ApplicationDbContext>, ICustomerCommand
 {
     public CustomerCommand(ApplicationDbContext dbContext) : base(dbContext)
     {

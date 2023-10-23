@@ -2,8 +2,8 @@
 using Clean.Domain.Repositories.Commands;
 using Clean.Domain.Repositories.Queries;
 using Clean.Persistence.Repositories;
-using Clean.Persistence.Repositories.Commands;
-using Clean.Persistence.Repositories.Queries;
+using Clean.Persistence.Repositories.MongoDriver.Commands;
+using Clean.Persistence.Repositories.MongoDriver.Queries;
 using Gleeman.Repository.MongoDriver.Configuration;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
