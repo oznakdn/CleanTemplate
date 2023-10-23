@@ -63,3 +63,6 @@ info: 23.10.2023 13:20:25    GET - /api/Baskets/GetCustomerBasket/2774d6c6-a529-
 info: 23.10.2023 13:20:36    PUT - /api/Baskets/RemoveBasketItem - 200
 info: 23.10.2023 13:20:55    GET - /api/Baskets/GetCustomerBasket/2774d6c6-a529-4af8-b955-2be71b79ef08 - 200
 info: 23.10.2023 13:21:00    GET - /api/Customers/GetCustomers - 200
+info: 23.10.2023 13:22:18    GET - /api/Products/GetProducts - 200
+info: 23.10.2023 13:22:48    PUT - /api/Account/Login - 200
+info: 23.10.2023 13:24:03    GET - /api/Products/GetProducts - 200
