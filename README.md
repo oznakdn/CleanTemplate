@@ -33,6 +33,7 @@
 - [X] Domain driven design (DDD)
 - [x] Asp .Net Core 7
 - [x] Entity Framework Core 7
+- [x] MongoDriver
 - [x] Sqlite, SqlServer, PostgreSQL, MySql
 - [x] MongoDB
 - [x] Generic repository pattern
