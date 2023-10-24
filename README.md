@@ -45,6 +45,7 @@
 - [x] Logging
 - [ ] Caching with Redis,Memcache and InMemoryCache
 - [X] HealthCheck
+- [ ] Rate Limiting
 - [x] Object mapping
 - [x] Validations
 - [X] Email and Notification Service
