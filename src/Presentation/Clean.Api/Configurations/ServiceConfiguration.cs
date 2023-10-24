@@ -1,4 +1,6 @@
-﻿namespace Clean.Api.Configurations;
+﻿using Microsoft.AspNetCore.RateLimiting;
+
+namespace Clean.Api.Configurations;
 
 public static class ServiceConfiguration
 {
@@ -37,6 +39,31 @@ public static class ServiceConfiguration
                         new string[] {}
                     }
                 });
+        });
+
+        services.AddRateLimiterService();
+
+        return services;
+    }
+
+    private static IServiceCollection AddRateLimiterService(this IServiceCollection services)
+    {
+        services.AddRateLimiter(options =>
+        {
+            options.AddFixedWindowLimiter("Api", options =>
+            {
+                options.AutoReplenishment = true;
+                options.PermitLimit = 10;
+                options.Window = TimeSpan.FromMinutes(1);
+            });
+
+            options.AddFixedWindowLimiter("Web", options =>
+            {
+                options.AutoReplenishment = true;
+                options.PermitLimit = 20;
+                options.Window = TimeSpan.FromMinutes(1);
+            });
+
         });
 
         return services;

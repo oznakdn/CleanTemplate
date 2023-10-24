@@ -1,10 +1,10 @@
 ﻿using Clean.Application.Features.Products.Commands.Create;
 using Clean.Application.Features.Products.Queries.GetProducts;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace Clean.Api.Controllers;
 
-//[Authorize]
+
 public class ProductsController : AbstractController
 {
     public ProductsController(IMediator mediator) : base(mediator)
@@ -13,6 +13,7 @@ public class ProductsController : AbstractController
 
 
     [HttpGet]
+    [EnableRateLimiting("Api")]
     public async Task<IActionResult>GetProducts()
     {
         var result = await _mediator.Send(new GetProductsRequest());
