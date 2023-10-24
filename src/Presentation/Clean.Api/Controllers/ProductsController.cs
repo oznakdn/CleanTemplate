@@ -14,17 +14,22 @@ public class ProductsController : AbstractController
 
     [HttpGet]
     [EnableRateLimiting("Api")]
-    public async Task<IActionResult>GetProducts()
+    public async Task<IActionResult> GetProducts()
     {
         var result = await _mediator.Send(new GetProductsRequest());
         return Ok(result.Datas);
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateProduct([FromBody]CreateProductRequest createProduct)
+    public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest createProduct)
     {
         var result = await _mediator.Send(createProduct);
+        if (!result.IsSuccessed && result.Messages.Count > 0)
+        {
+            return BadRequest(result.Messages);
+        }
+
         return Ok(result.Message);
     }
-    
+
 }

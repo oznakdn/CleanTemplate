@@ -1,4 +1,5 @@
 ﻿using Clean.Domain.Contracts.Abstracts;
+using Clean.Domain.Shared;
 
 namespace Clean.Domain.Products;
 
@@ -18,19 +19,39 @@ public class Product : AggregateRoot<Product, Guid>
     private Product() : base(Guid.Empty) { }
 
 
-    public void AddMoney(Currency currency, decimal amount)
+    public Result AddMoney(Currency currency, decimal amount)
     {
+        if (currency < 0)
+        {
+            return new Error($"{nameof(Price.Currency)} cannot be less than 0!");
+        }
+
+        if (amount < 0)
+            return new Error($"{nameof(Price.Amount)} cannot be less than 0!");
+
         Price = new Money(currency, amount);
+        return new Result("", false, true);
     }
 
-    public void AddCategory(string displayName)
+    public Result AddCategory(string displayName)
     {
+        if (displayName.Length < 3 || displayName.Length > 20)
+        {
+            return new Error($"{nameof(Category.DisplayName)} can be between 3 and 20 characters!");
+        }
+
         Category = new Category(displayName);
+        return new Result("", false, true);
+
     }
 
-    public void AddInventory(Inventory inventory)
+    public Result AddInventory(Guid productId, int quantity)
     {
-        Inventory = new(inventory.ProductId, inventory.Quantity);
+        if (quantity < 0)
+            return new Error("Quantity cannot be less than 0!");
+
+        Inventory = new(productId, quantity);
+        return new Result("",false,true);
     }
 
 }
