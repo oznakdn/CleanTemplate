@@ -1,6 +1,9 @@
 ﻿namespace Clean.Domain.Contracts.Interfaces;
 
-public interface ISpecification<TEntity>
+public interface ISpecification<T>
 {
-    bool IsSatisfiedBy(TEntity entity);
+    ISpecification<T> And (ISpecification<T> specification);
+    ISpecification<T> Or(ISpecification<T> specification);
+    ISpecification<T> Not(ISpecification<T> specification);
+    bool IsSatisfiedBy(T o);
 }

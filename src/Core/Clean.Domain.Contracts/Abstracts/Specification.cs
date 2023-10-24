@@ -1,15 +1,25 @@
 ﻿using Clean.Domain.Contracts.Interfaces;
-using System.Linq.Expressions;
+using Clean.Domain.Contracts.Specifications;
 
 namespace Clean.Domain.Contracts.Abstracts;
 
-public abstract class Specification<TEntity> : ISpecification<TEntity>
+public abstract class Specification<T> : ISpecification<T>
 {
-    public abstract Expression<Func<TEntity, bool>> ToExpression();
-
-    public bool IsSatisfiedBy(TEntity entity)
+    public ISpecification<T> And(ISpecification<T> specification)
     {
-        Func<TEntity, bool> predicate = ToExpression().Compile();
-        return predicate(entity);
+        return new AndSpecificationz<T>(this, specification);
     }
+
+    public ISpecification<T> Or(ISpecification<T> specification)
+    {
+        return new OrSpecification<T>(this, specification);
+    }
+
+    public ISpecification<T> Not(ISpecification<T> specification)
+    {
+        return new NotSpecification<T>(specification);
+    }
+
+    public abstract bool IsSatisfiedBy(T o);
+
 }
