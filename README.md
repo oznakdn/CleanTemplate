@@ -88,8 +88,53 @@ MediatR.Extensions.Microsoft.DependencyInjection
 MailKit
 ```
 
-## If you'd like to use this template in your projects!
-#### 1- In Microsoft Visual Studio, Solution Explorer, right-click the project you want to rename and click Rename.
-#### 2- In the In-place text editor, enter a new name
-![GUID-7E331960-6D23-43B4-B175-F7DD0DD312E0](https://github.com/oznakdn/CleanTemplate/assets/79724084/485e1ed0-0d0e-4b44-b29d-749a2ef730d1)
+## Rate Limiting
+### Program.cs
+```csharp
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddFixedWindowLimiter("Api", options =>
+    {
+        options.AutoReplenishment = true;
+        options.PermitLimit = 10;
+        options.Window = TimeSpan.FromMinutes(1);
+    });
+
+    options.AddFixedWindowLimiter("Web", options =>
+    {
+        options.AutoReplenishment = true;
+        options.PermitLimit = 20;
+        options.Window = TimeSpan.FromMinutes(1);
+    });
+});
+```
+```csharp
+app.UseRateLimiter();
+```
+### Controller
+```csharp
+public class ProductsController : AbstractController
+{
+    public ProductsController(IMediator mediator) : base(mediator)
+    {
+    }
+
+    [HttpGet]
+    [EnableRateLimiting("Api")]
+    public async Task<IActionResult>GetProducts()
+    {
+        var result = await _mediator.Send(new GetProductsRequest());
+        return Ok(result.Datas);
+    }
+}
+
+```
+<hr>
+
+## Health Check
+### Program.cs
+```csharp
+//http://localhost:5019/healtCheck
+app.MapHealthChecks("/healtCheck");
+```
 
