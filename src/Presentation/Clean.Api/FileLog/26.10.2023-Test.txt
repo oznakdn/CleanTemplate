@@ -41,3 +41,5 @@ info: 26.10.2023 07:47:00    PUT - /api/baskets/UpdateBasketItem/1 - 200
 info: 26.10.2023 07:47:09    GET - /api/baskets/GetCustomerBasket/2774d6c6-a529-4af8-b955-2be71b79ef08 - 200
 info: 26.10.2023 07:47:15    PUT - /api/baskets/UpdateBasketItem/-1 - 200
 info: 26.10.2023 07:47:22    GET - /api/baskets/GetCustomerBasket/2774d6c6-a529-4af8-b955-2be71b79ef08 - 200
+info: 26.10.2023 08:23:30    GET - /api/Products/GetProducts - 200
+info: 26.10.2023 08:26:39    POST - /api/Customers/CreateCustomer - 200

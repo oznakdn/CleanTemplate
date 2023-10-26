@@ -6,9 +6,11 @@ using Clean.Domain.Customers;
 namespace Clean.Application.Features.Customers.Commands.Create;
 
 
-public record CreateCustomerRequest(string FirstName, string LastName, string Email, string PhoneNumber, string Password, AddressRequest Address) : IRequest<CreateCustomerResponse>;
+public record CreateCustomerRequest(string FirstName, string LastName, string Email, string PhoneNumber, string Password, AddressRequest Address, CrediCardRequest CrediCard) : IRequest<CreateCustomerResponse>;
 
 public record AddressRequest(string Title, string District, int Number, string City);
+public record CrediCardRequest(string Name, string CardNumber, string CardDate, string Cvv, decimal TotalLimit);
+
 public class CreateCustomerResponse : Response { }
 
 public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, CreateCustomerResponse>
@@ -37,6 +39,14 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, Crea
             request.Address.District,
             request.Address.Number,
             request.Address.City);
+
+        customer.AddCreditCard(
+            request.CrediCard.Name,
+            request.CrediCard.CardNumber,
+            request.CrediCard.CardDate,
+            request.CrediCard.Cvv,
+            request.CrediCard.TotalLimit
+            );
 
         _command.Customer.Insert(customer);
 

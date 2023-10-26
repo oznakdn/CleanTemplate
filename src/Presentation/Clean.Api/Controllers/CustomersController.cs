@@ -34,7 +34,6 @@ public class CustomersController : AbstractController
     }
 
     [HttpPost]
-    [Authorize(Roles ="Admin")]
     public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest createCustomer)
     {
         var result = await _mediator.Send(createCustomer);

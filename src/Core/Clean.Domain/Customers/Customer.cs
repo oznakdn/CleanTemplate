@@ -11,6 +11,7 @@ public class Customer : AggregateRoot<Customer,Guid>
     public string PhoneNumber { get; private set; }
     public string Password { get; private set; }
     public Guid? BasketId { get; private set; }
+    public CreditCard CreditCard { get; private set; }
     public IReadOnlyCollection<Address> Addresses => _adresses;
 
 
@@ -40,6 +41,11 @@ public class Customer : AggregateRoot<Customer,Guid>
     public void ClearAddresses()
     {
         _adresses.Clear();
+    }
+
+    public void AddCreditCard(string name,string cardNumber,string cardDate,string cvv, decimal totalLimit)
+    {
+        CreditCard = new CreditCard(name,cardNumber,cardDate,cvv,totalLimit);
     }
 
 }
