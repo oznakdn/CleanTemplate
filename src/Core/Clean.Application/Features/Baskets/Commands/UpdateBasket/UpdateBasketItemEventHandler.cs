@@ -36,12 +36,20 @@ public class UpdateBasketItemEventHandler : DomainEventHandler<UpdateBasketItemE
     {
         Event += (s, e) =>
         {
-            @event.BasketItem = _query.BasketItem.ReadSingleOrDefault(true,x => x.Id == e.BasketItemId);
-            @event.BasketItem.UpdateQuantity(e.Quantity);
+            e.BasketItem = _query.BasketItem.ReadSingleOrDefault(true, x => x.Id == e.BasketItemId);
+            e.BasketItem.UpdateQuantity(e.Quantity);
         };
 
         EventInvoke(@event);
-        _command.BasketItem.Edit(@event.BasketItem);
+        if (@event.BasketItem.ProductQuantity == 0)
+        {
+            _command.BasketItem.Remove(@event.BasketItem);
+        }
+        else
+        {
+            _command.BasketItem.Edit(@event.BasketItem);
+        }
+
         await Task.CompletedTask;
         return @event.BasketItem;
     }
