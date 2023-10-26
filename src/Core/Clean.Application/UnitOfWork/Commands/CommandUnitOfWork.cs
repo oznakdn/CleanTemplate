@@ -14,6 +14,7 @@ public class CommandUnitOfWork : ICommandUnitOfWork
         Customer = Customer ?? new CustomerCommand(_context);
         Product = Product ?? new ProductCommand(_context);
         Inventory = Inventory ?? new InventoryCommand(_context);
+        Order = Order ?? new OrderCommand(_context);
     }
 
 
@@ -22,4 +23,6 @@ public class CommandUnitOfWork : ICommandUnitOfWork
     public ICustomerCommand Customer { get; }
     public IProductCommand Product { get; }
     public IInventoryCommand Inventory { get; }
+    public IOrderCommand Order { get; }
+
 }

@@ -14,7 +14,7 @@ public class Order : AggregateRoot<Order,Guid>
     public Order(Guid customerId) : base(Guid.NewGuid())
     {
         CustomerId = customerId;
-        OrderDate = DateTime.Now;
+        OrderDate = DateTime.UtcNow;
     }
 
     private Order() : base(Guid.Empty) { }

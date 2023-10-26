@@ -1,6 +1,7 @@
 using Clean.Application.Features.Customers.Commands.Create;
 using Clean.Application.Features.Customers.Queries.GetCustomer;
 using Clean.Application.Features.Customers.Queries.GetCustomers;
+using Clean.Application.Features.Orders.Commands.Create;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Clean.Api.Controllers;
@@ -13,12 +14,12 @@ public class CustomersController : AbstractController
     }
 
     [HttpGet]
-    [Authorize(Roles ="Admin")]
-    public async Task<IActionResult> GetCustomer([FromQuery]string? CustomerId, [FromQuery] string? NameOrSurname)
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> GetCustomer([FromQuery] string? CustomerId, [FromQuery] string? NameOrSurname)
     {
         var result = await _mediator.Send(new GetCustomerRequest(CustomerId, NameOrSurname));
 
-        if(result.Data != null)
+        if (result.Data != null)
         {
             return Ok(result.Data);
         }
@@ -26,8 +27,8 @@ public class CustomersController : AbstractController
     }
 
     [HttpGet]
-    [Authorize(Roles="Admin")]
-    public async Task<IActionResult>GetCustomers()
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> GetCustomers()
     {
         var result = await _mediator.Send(new GetCustomersRequest());
         return Ok(result.Datas);
@@ -37,11 +38,24 @@ public class CustomersController : AbstractController
     public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest createCustomer)
     {
         var result = await _mediator.Send(createCustomer);
-        if(result.Successed)
+        if (result.Successed)
         {
             return Created(result.Message, createCustomer);
         }
         return BadRequest(result.Errors);
     }
-   
+
+
+    [HttpPost]
+    public async Task<IActionResult> CreateOrder([FromQuery]string customerId)
+    {
+        var result = await _mediator.Send(new CreateOrderRequest(customerId));
+        if (result.IsSuccessed)
+        {
+            return Created("", result.Message);
+        }
+
+        return BadRequest(result.Message);
+    }
+
 }

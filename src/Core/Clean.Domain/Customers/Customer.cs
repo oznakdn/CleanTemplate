@@ -4,7 +4,6 @@ namespace Clean.Domain.Customers;
 
 public class Customer : AggregateRoot<Customer,Guid>
 {
-    private List<Address> _adresses = new();
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public string Email { get; private set; }
@@ -12,7 +11,7 @@ public class Customer : AggregateRoot<Customer,Guid>
     public string Password { get; private set; }
     public Guid? BasketId { get; private set; }
     public CreditCard CreditCard { get; private set; }
-    public IReadOnlyCollection<Address> Addresses => _adresses;
+    public Address Address { get; private set; }
 
 
     public Customer(string firstName, string lastName, string email, string phoneNumber, string password) : base(Guid.NewGuid())
@@ -24,7 +23,9 @@ public class Customer : AggregateRoot<Customer,Guid>
         Password = password;
     }
 
+
     private Customer() : base(Guid.NewGuid()) { }
+
 
     public void AddBasket(Guid basketId)
     {
@@ -34,14 +35,9 @@ public class Customer : AggregateRoot<Customer,Guid>
 
     public void AddAddress(string title, string district, int number, string city)
     {
-        _adresses.Add(new Address(title,district,number,city));
+        Address = new Address(title, district, number, city);
     }
 
-
-    public void ClearAddresses()
-    {
-        _adresses.Clear();
-    }
 
     public void AddCreditCard(string name,string cardNumber,string cardDate,string cvv, decimal totalLimit)
     {

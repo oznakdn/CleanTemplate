@@ -8,7 +8,7 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     public void Configure(EntityTypeBuilder<Customer> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.OwnsMany(x => x.Addresses);
+        builder.OwnsOne(x => x.Address);
         builder.OwnsOne(x => x.CreditCard);
     }
 }

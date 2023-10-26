@@ -5,13 +5,14 @@ namespace Clean.Domain.Customers;
 
 public class CreditCard : ValueObject
 {
-    public CreditCard(string name,string cardNumber, string cardDate, string cvv, decimal totalLimit)
+    public CreditCard(string name, string cardNumber, string cardDate, string cvv, decimal totalLimit)
     {
         Name = name;
         CardNumber = cardNumber;
         CardDate = cardDate;
         Cvv = cvv;
         TotalLimit = totalLimit;
+        SetAvailableLimit();
     }
 
     protected CreditCard() { }
@@ -22,18 +23,15 @@ public class CreditCard : ValueObject
     public string Cvv { get; private set; }
     public decimal TotalLimit { get; private set; }
     public decimal TotalDebt { get; private set; }
-    public decimal AvailableLimit 
-    { 
-        get=> TotalLimit - TotalDebt;
-    }
+    public decimal AvailableLimit { get; private set; }
 
 
     protected override IEnumerable<object> GetAtomicValues()
     {
         yield return Name;
-        yield return CardNumber; 
-        yield return CardDate; 
-        yield return Cvv; 
+        yield return CardNumber;
+        yield return CardDate;
+        yield return Cvv;
         yield return TotalLimit;
         yield return TotalDebt;
         yield return AvailableLimit;
@@ -41,11 +39,16 @@ public class CreditCard : ValueObject
 
     public Result CardSpend(decimal amount)
     {
+        SetAvailableLimit();
         if (AvailableLimit >= amount)
         {
             TotalDebt += amount;
+            AvailableLimit = TotalLimit - TotalDebt;
             return new Result();
         }
         return new Error("Card limit is not available!");
     }
+
+    private decimal SetAvailableLimit() => AvailableLimit = TotalLimit - TotalDebt;
+
 }
