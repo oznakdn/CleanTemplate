@@ -6,7 +6,7 @@ using Mapster;
 namespace Clean.Application.Features.Customers.Queries.GetCustomers;
 
 
-public record GetCustomersRequest : IRequest<IDataResult<GetCustomersResponse>>;
+public record GetCustomersRequest(int MaxPage, int PageSize, int PageNumber) : IRequest<IDataResult<GetCustomersResponse>>;
 public record GetCustomersResponse(string Id, string FirstName, string LastName, string Email, string PhoneNumber);
 
 public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, IDataResult<GetCustomersResponse>>
@@ -19,7 +19,13 @@ public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, IDataRes
 
     public async Task<IDataResult<GetCustomersResponse>> Handle(GetCustomersRequest request, CancellationToken cancellationToken)
     {
-        var customers = await _query.Customer.ReadAllAsync(true, cancellationToken: cancellationToken);
+
+        var customers = await _query.Customer.ReadAllAsync(true, pagination: page =>
+        {
+            page.MaxPageSize = request.MaxPage;
+            page.PageSize = request.PageSize;
+            page.PageNumber = request.PageNumber;
+        }, cancellationToken: cancellationToken);
 
         var config = new TypeAdapterConfig();
 
@@ -27,7 +33,7 @@ public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, IDataRes
             .Map(dest => dest.Id, src => src.Id.ToString());
 
         IEnumerable<GetCustomersResponse> response = customers.Adapt<IEnumerable<GetCustomersResponse>>(config);
-        
+
         return new DataResult<GetCustomersResponse>(response.ToList());
     }
 }

@@ -33,9 +33,9 @@ public class CustomersController : AbstractController
 
     [HttpGet]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> GetCustomers()
+    public async Task<IActionResult> GetCustomers([FromQuery] int MaxPage, [FromQuery] int PageSize, [FromQuery] int PageNumber)
     {
-        var result = await _mediator.Send(new GetCustomersRequest());
+        var result = await _mediator.Send(new GetCustomersRequest(MaxPage,PageSize,PageNumber));
         return Ok(result.Datas);
     }
 
