@@ -16,8 +16,33 @@ public class GlobalExceptionHandler : IMiddleware
     {
         try
         {
-            _logger.Information($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+            
             await next.Invoke(context);
+            switch (context.Response.StatusCode)
+            {
+                case 200: _logger.Information($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+                    break;
+                case 201:
+                    _logger.Information($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+                    break;
+                case 204:
+                    _logger.Information($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+                    break;
+                case 400:
+                    _logger.Fail($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+                    break;
+                case 401:
+                    _logger.Fail($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+                    break;
+                case 403:
+                    _logger.Fail($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+                    break;
+                case 404: _logger.Fail($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+                    break;
+                default:
+                    _logger.Warning($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+                    break;
+            }
         }
         catch (Exception ex)
         {
