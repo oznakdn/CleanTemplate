@@ -15,6 +15,7 @@
     │   |    ├── Clean.Domain.Contracts
     |   |    └── Clean.Domain
     │   ├── Infrastructure
+    |   |    ├── Clean.Caching
     |   |    ├── Clean.Identity
     |   |    ├── Clean.Logging
     |   |    ├── Clean.Notification
@@ -31,19 +32,18 @@
 
 - [x] Clean Architecture
 - [X] Domain driven design (DDD)
+- [x] CQRS
 - [x] Asp .Net Core 7
 - [x] Entity Framework Core 7
 - [x] MongoDriver
-- [x] Sqlite, SqlServer, PostgreSQL, MySql
-- [x] MongoDB
+- [x] Sqlite, SqlServer, PostgreSQL, MySql, MongoDB
 - [x] Generic repository pattern
 - [x] Unit Of Work pattern
-- [x] CQRS
 - [X] Pagination and Filtering
 - [x] Claim based authentication with Json Web Token
 - [x] Password hashing
 - [x] Logging
-- [ ] Caching with Redis,Memcache and InMemoryCache
+- [X] Redis and InMemoryCache
 - [X] HealthCheck
 - [X] Rate Limiting
 - [x] Object mapping
