@@ -21,7 +21,7 @@
     |   |    └── Clean.Persistence
     |   └── Presentation
     |        ├── Clean.Api
-    |        └── Clean.WebUI
+    |        └── Clean.Mvc
     └── test
         ├── UnitTests
         └── IntegrationTests
