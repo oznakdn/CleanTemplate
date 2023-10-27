@@ -45,8 +45,8 @@
 - [X] Redis and InMemoryCache
 - [X] HealthCheck
 - [X] Rate Limiting
-- [x] Object mapping
-- [x] Validations
+- [x] MapSter
+- [x] FluentValidation
 - [X] Email and Notification Service
 - [ ] SignalR 
 - [ ] Unit tests
