@@ -32,7 +32,8 @@
 - [x] Clean Architecture
 - [X] Domain driven design (DDD)
 - [x] CQRS
-- [x] Asp .Net Core 7
+- [x] Asp .Net Core Web Api
+- [x] Asp .Net Core Mvc
 - [x] Entity Framework Core 7
 - [x] MongoDriver
 - [x] Sqlite, SqlServer, PostgreSQL, MySql, MongoDB
