@@ -19,6 +19,11 @@ public class CustomersController : AbstractController
     {
         var result = await _mediator.Send(new GetCustomerRequest(CustomerId, NameOrSurname));
 
+        if (!result.IsSuccessed)
+        {
+            return NotFound(result.Message);
+        }
+
         if (result.Data != null)
         {
             return Ok(result.Data);

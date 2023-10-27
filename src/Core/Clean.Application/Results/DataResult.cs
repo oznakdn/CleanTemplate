@@ -21,11 +21,13 @@ public class DataResult<TData> : IDataResult<TData>
     public DataResult(TData data) : this()
     {
         Data = data;
+        IsSuccessed = true;
     }
     public DataResult(TData data, string message) : this()
     {
         Data = data;
         Message = message;
+        IsSuccessed = true;
     }
 
     public DataResult(TData data, string message, bool isSuccessed) : this()
@@ -38,12 +40,14 @@ public class DataResult<TData> : IDataResult<TData>
     public DataResult(List<TData> datas) : this()
     {
         Datas = datas;
+        IsSuccessed = true;
     }
 
     public DataResult(List<TData> datas, string message) : this()
     {
         Datas = datas;
         Message = message;
+        IsSuccessed = true;
     }
 
     public DataResult(List<TData> datas, string message, bool isSuccessed) : this()

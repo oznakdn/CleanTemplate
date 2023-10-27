@@ -1,6 +1,7 @@
 ﻿using Clean.Application.Results;
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Customers;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace Clean.Application.Features.Customers.Queries.GetCustomer;
@@ -25,11 +26,13 @@ public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, IDataResul
         if (!string.IsNullOrEmpty(request.CustomerId))
         {
             Customer customer = await query.Where(x => x.Id == Guid.Parse(request.CustomerId)).SingleOrDefaultAsync(cancellationToken);
+
             if(customer is null)
             {
                 return new DataResult<GetCustomerResponse>("Customer not found!",false);
             }
-            var result = new GetCustomerResponse(customer.FirstName, customer.LastName, customer.Email, customer.PhoneNumber);
+
+            GetCustomerResponse result = query.Adapt<GetCustomerResponse>();
             return new DataResult<GetCustomerResponse>(result);
         }
 
@@ -38,30 +41,19 @@ public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, IDataResul
             var customer = await query
                 .Where(x => x.FirstName.ToLower().Contains(request.Name.ToLower()) || x.LastName.ToLower().Contains(request.Name.ToLower()))
                 .ToListAsync(cancellationToken);
-            if (customer is null)
+
+            if (customer.Count == 0)
             {
                 return new DataResult<GetCustomerResponse>("Customer not found!",false);
             }
 
-            var result = customer.Select(x => new GetCustomerResponse(
-                x.FirstName,
-                x.LastName,
-                x.Email,
-                x.PhoneNumber
-                )).ToList();
-
-            return new DataResult<GetCustomerResponse>(result);
+            IEnumerable<GetCustomerResponse> result = customer.Adapt<IEnumerable<GetCustomerResponse>>();
+            return new DataResult<GetCustomerResponse>(result.ToList());
         }
 
         var customers = await query.ToListAsync();
-        var response = customers.Select(x => new GetCustomerResponse(
-            x.FirstName,
-            x.LastName,
-            x.Email,
-            x.PhoneNumber)).ToList();
-
-        return new DataResult<GetCustomerResponse>(response);
-
+        IEnumerable<GetCustomerResponse> response = customers.Adapt<IEnumerable<GetCustomerResponse>>();
+        return new DataResult<GetCustomerResponse>(response.ToList());
 
     }
 }
