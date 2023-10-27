@@ -1,7 +1,7 @@
+using Clean.Application.Features.Baskets.Queries.GetCustomerBasket;
 using Clean.Application.Features.Customers.Commands.Create;
 using Clean.Application.Features.Customers.Queries.GetCustomer;
 using Clean.Application.Features.Customers.Queries.GetCustomers;
-using Clean.Application.Features.Orders.Commands.Create;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Clean.Api.Controllers;
@@ -46,16 +46,13 @@ public class CustomersController : AbstractController
     }
 
 
-    [HttpPost]
-    public async Task<IActionResult> CreateOrder([FromQuery]string customerId)
+    [HttpGet("{CustomerId}")]
+    public async Task<IActionResult> GetCustomerBasket(string CustomerId)
     {
-        var result = await _mediator.Send(new CreateOrderRequest(customerId));
-        if (result.IsSuccessed)
-        {
-            return Created("", result.Message);
-        }
-
-        return BadRequest(result.Message);
+        var result = await _mediator.Send(new GetCustomerBasketRequest(CustomerId));
+        if (result.Successed)
+            return Ok(result);
+        return NotFound(result.Message);
     }
 
 }

@@ -14,15 +14,6 @@ public class BasketsController : AbstractController
     }
 
 
-    [HttpGet("{CustomerId}")]
-    public async Task<IActionResult>GetCustomerBasket(string CustomerId)
-    {
-        var result = await _mediator.Send(new GetCustomerBasketRequest(CustomerId));
-        if(result.Successed)
-            return Ok(result);
-        return NotFound(result.Message);
-    }
-
 
     [HttpPost]
     public async Task<IActionResult> AddBasketItem([FromBody] AddBasketItemRequest addBasketItem)
