@@ -7,6 +7,7 @@ using Clean.Application.Features.Products.Commands.Create;
 using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Notification.Configurations;
+using Mapster;
 
 namespace Clean.Application.Configurations;
 
@@ -26,11 +27,14 @@ public static class ServiceConfiguration
         services.AddIdentityService(configuration);
         services.AddLoggerService(configuration, migrationAssembly);
         services.AddNotificationService(configuration);
+        services.AddMapSterService();
 
         return services;
     }
 
     private static IServiceCollection AddAutoMapperService(this IServiceCollection service) => service.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+    private static void AddMapSterService(this IServiceCollection services) => services.AddMapster();
     private static IServiceCollection AddFluentValidationService(this IServiceCollection service) => service.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
     private static IServiceCollection AddMediatRService(this IServiceCollection service) => service.AddMediatR(Assembly.GetExecutingAssembly());
 

@@ -14,3 +14,10 @@ info: 27.10.2023 08:29:28    GET - /api/products/GetProductsCache - 200
 info: 27.10.2023 08:29:29    GET - /api/products/GetProductsCache - 200
 info: 27.10.2023 08:29:30    GET - /api/products/GetProductsCache - 200
 info: 27.10.2023 08:29:32    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 10:29:00    GET - /api/products/GetProducts - 200
+info: 27.10.2023 10:29:03    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 10:29:05    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 10:29:06    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 10:29:07    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 10:29:07    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 10:29:08    GET - /api/products/GetProductsCache - 200

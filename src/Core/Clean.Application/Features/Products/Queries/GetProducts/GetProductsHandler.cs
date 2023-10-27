@@ -1,6 +1,5 @@
 ﻿using Clean.Application.Results;
 using Clean.Application.UnitOfWork.Queries;
-using Clean.Domain.Repositories;
 
 namespace Clean.Application.Features.Products.Queries.GetProducts;
 
