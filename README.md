@@ -2,7 +2,6 @@
 
 <p>
     This repo was created to be an example of clean architecture and to be easily integrated into our future projects. 
-    If you want to contribute to the project, fork the project and submit a pull request.
 </p>
 
 ```bash
