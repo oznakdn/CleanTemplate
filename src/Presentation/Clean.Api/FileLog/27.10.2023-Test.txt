@@ -1,1 +1,16 @@
 info: 27.10.2023 06:45:09    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 27.10.2023 08:17:29    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:20:36    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:24:21    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:13    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:18    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:20    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:21    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:23    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:24    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:26    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:27    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:28    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:29    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:30    GET - /api/products/GetProductsCache - 200
+info: 27.10.2023 08:29:32    GET - /api/products/GetProductsCache - 200

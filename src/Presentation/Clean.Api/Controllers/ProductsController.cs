@@ -1,5 +1,6 @@
 ﻿using Clean.Application.Features.Products.Commands.Create;
 using Clean.Application.Features.Products.Queries.GetProducts;
+using Clean.Persistence.Caching;
 using Microsoft.AspNetCore.RateLimiting;
 
 namespace Clean.Api.Controllers;
@@ -7,9 +8,13 @@ namespace Clean.Api.Controllers;
 
 public class ProductsController : AbstractController
 {
-    public ProductsController(IMediator mediator) : base(mediator)
+    private readonly IProductCacheService _productCache;
+
+    public ProductsController(IMediator mediator, IProductCacheService productCache) : base(mediator)
     {
+        _productCache = productCache;
     }
+
 
 
     [HttpGet]
@@ -18,6 +23,13 @@ public class ProductsController : AbstractController
     {
         var result = await _mediator.Send(new GetProductsRequest());
         return Ok(result.Datas);
+    }
+
+    [HttpGet]
+    public IActionResult GetProductsCache()
+    {
+        var result = _productCache.GetProductFromCache();
+        return Ok(result);
     }
 
     [HttpPost]

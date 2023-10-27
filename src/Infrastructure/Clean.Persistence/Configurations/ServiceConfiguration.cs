@@ -1,12 +1,13 @@
-﻿using Clean.Domain.Repositories;
-using Clean.Domain.Repositories.Commands;
+﻿using Clean.Domain.Repositories.Commands;
 using Clean.Domain.Repositories.Queries;
-using Clean.Persistence.Repositories;
 using Clean.Persistence.Repositories.MongoDriver.Commands;
 using Clean.Persistence.Repositories.MongoDriver.Queries;
 using Gleeman.Repository.MongoDriver.Configuration;
 using Microsoft.Extensions.Configuration;
+using Clean.Caching.Configurations;
 using System.Reflection;
+using Clean.Caching;
+using Clean.Persistence.Caching;
 
 namespace Clean.Persistence.Configurations;
 
@@ -37,7 +38,10 @@ public static class ServiceConfiguration
         }
 
         services.DependencyInjections();
+        services.CacheServiceDependencyInjections();
         services.AddMongoService(configuration);
+        services.AddCacheService(CacheType.InMemoryCache, configuration);
+
         return services;
     }
 
@@ -47,6 +51,12 @@ public static class ServiceConfiguration
         services.AddScoped<IUserQuery, UserQuery>();
         services.AddScoped<IRoleCommand, RoleCommand>();
         services.AddScoped<IRoleQuery, RoleQuery>();
+        return services;
+    }
+
+    private static IServiceCollection CacheServiceDependencyInjections(this IServiceCollection services)
+    {
+        services.AddScoped<IProductCacheService, ProductCacheService>();
         return services;
     }
 
