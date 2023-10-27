@@ -1,5 +1,7 @@
 ﻿using Clean.Application.Results;
 using Clean.Application.UnitOfWork.Queries;
+using Clean.Domain.Customers;
+using Mapster;
 
 namespace Clean.Application.Features.Customers.Queries.GetCustomers;
 
@@ -10,7 +12,6 @@ public record GetCustomersResponse(string Id, string FirstName, string LastName,
 public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, IDataResult<GetCustomersResponse>>
 {
     private readonly IQueryUnitOfWork _query;
-
     public GetCustomersHandler(IQueryUnitOfWork query)
     {
         _query = query;
@@ -20,10 +21,13 @@ public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, IDataRes
     {
         var customers = await _query.Customer.ReadAllAsync(true, cancellationToken: cancellationToken);
 
-        List<GetCustomersResponse> customersDto = customers
-            .Select(x => new GetCustomersResponse(x.Id.ToString(), x.FirstName, x.LastName, x.Email, x.PhoneNumber))
-            .ToList();
+        var config = new TypeAdapterConfig();
 
-        return new DataResult<GetCustomersResponse>(customersDto);
+        config.NewConfig<Customer, GetCustomersResponse>()
+            .Map(dest => dest.Id, src => src.Id.ToString());
+
+        IEnumerable<GetCustomersResponse> response = customers.Adapt<IEnumerable<GetCustomersResponse>>(config);
+        
+        return new DataResult<GetCustomersResponse>(response.ToList());
     }
 }
