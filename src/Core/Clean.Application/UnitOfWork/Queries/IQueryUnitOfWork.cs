@@ -9,4 +9,5 @@ public interface IQueryUnitOfWork
     ICustomerQuery Customer { get; }
     IProductQuery Product { get; }
     IInventoryQuery Inventory { get; }
+    IOrderQuery Order { get; }
 }
