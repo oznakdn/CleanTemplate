@@ -10,10 +10,11 @@ public class OrderItem : Entity<Guid>
     public decimal TotalAmount { get; }
     public Order Order { get; private set; }
 
-    public OrderItem(Guid productId, int quantity) : base(Guid.NewGuid())
+    public OrderItem(Guid productId,Guid orderId, int quantity) : base(Guid.NewGuid())
     {
         ProductId = productId;
         Quantity = quantity;
+        OrderId = orderId;
     }
 
     private OrderItem() : base(Guid.Empty) { }

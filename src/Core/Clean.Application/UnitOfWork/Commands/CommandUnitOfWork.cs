@@ -15,6 +15,7 @@ public class CommandUnitOfWork : ICommandUnitOfWork
         Product = Product ?? new ProductCommand(_context);
         Inventory = Inventory ?? new InventoryCommand(_context);
         Order = Order ?? new OrderCommand(_context);
+        OrderItem = OrderItem ?? new OrderItemCommand(_context);
     }
 
 
@@ -24,5 +25,5 @@ public class CommandUnitOfWork : ICommandUnitOfWork
     public IProductCommand Product { get; }
     public IInventoryCommand Inventory { get; }
     public IOrderCommand Order { get; }
-
+    public IOrderItemCommand OrderItem { get; }
 }

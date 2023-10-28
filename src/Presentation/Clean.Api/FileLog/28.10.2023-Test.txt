@@ -64,3 +64,36 @@ info: 28.10.2023 08:05:19    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4
 info: 28.10.2023 08:05:57    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
 info: 28.10.2023 08:07:40    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
 info: 28.10.2023 08:11:01    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 09:14:20    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 09:14:29    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 09:15:01    POST - /api/baskets/AddBasketItem - 200
+info: 28.10.2023 09:15:05    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+fail: 28.10.2023 09:15:19    POST - /api/Customers/CreateOrder - 404
+fail: 28.10.2023 09:16:13    POST - /api/Customers/CreateOrder - 404
+fail: 28.10.2023 09:18:07    POST - /api/orders/CreateOrder - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+fail: 28.10.2023 09:19:13    POST - /api/orders/CreateOrder - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 28.10.2023 09:19:41    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 09:20:00    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 09:20:11    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+fail: 28.10.2023 09:21:59    POST - /api/orders/CreateOrder - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+fail: 28.10.2023 09:24:31    POST - /api/orders/CreateOrder - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 28.10.2023 09:29:05    POST - /api/orders/CreateOrder - 201
+info: 28.10.2023 09:29:10    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 10:06:26    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 10:06:35    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 10:06:39    POST - /api/baskets/AddBasketItem - 200
+info: 28.10.2023 10:06:44    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+fail: 28.10.2023 10:07:53    POST - /api/orders/CreateOrder - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 28.10.2023 10:18:29    POST - /api/orders/CreateOrder - 201
+info: 28.10.2023 10:19:58    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 10:20:01    POST - /api/baskets/AddBasketItem - 200
+info: 28.10.2023 10:20:03    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 10:21:12    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+fail: 28.10.2023 10:21:15    POST - /api/orders/CreateOrder - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+fail: 28.10.2023 10:22:19    POST - /api/orders/CreateOrder - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 28.10.2023 10:25:55    POST - /api/orders/CreateOrder - 201
+info: 28.10.2023 10:26:23    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 10:26:26    POST - /api/baskets/AddBasketItem - 200
+info: 28.10.2023 10:26:29    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 10:26:52    POST - /api/orders/CreateOrder - 201
+info: 28.10.2023 10:27:16    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200

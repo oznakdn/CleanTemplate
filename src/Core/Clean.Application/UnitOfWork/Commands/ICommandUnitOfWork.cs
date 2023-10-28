@@ -10,5 +10,6 @@ public interface ICommandUnitOfWork
     IProductCommand Product { get; }
     IInventoryCommand Inventory { get; }
     IOrderCommand Order { get; }
+    IOrderItemCommand OrderItem { get; }
 
 }

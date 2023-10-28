@@ -21,7 +21,7 @@ public class Order : AggregateRoot<Order,Guid>
 
     public void AddOrderItem(Guid productId, int quantity)
     {
-        _orderItems.Add(new OrderItem(productId, quantity));
+        _orderItems.Add(new OrderItem(productId,this.Id, quantity));
     }
 
     public void PaymentRecived()

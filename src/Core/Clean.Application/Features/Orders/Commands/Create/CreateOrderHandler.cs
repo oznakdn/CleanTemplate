@@ -1,6 +1,7 @@
 ﻿using Clean.Application.Results;
 using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
+using Clean.Domain.Baskets;
 using Clean.Domain.Orders;
 
 namespace Clean.Application.Features.Orders.Commands.Create;
@@ -15,26 +16,36 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, IDataResul
     private readonly ICommandUnitOfWork _command;
     private readonly UpdateCustomerEventHandler _updateCustomerEventHandler;
     private readonly DeletedBasketItemsEventHandler _deletedBasketItemsEventHandler;
+    private readonly CreateOrderItemEventHandler _createOrderItemEventHandler;
 
     public CreateOrderHandler(
         IQueryUnitOfWork query,
         ICommandUnitOfWork command,
         UpdateCustomerEventHandler updateCustomerEventHandler,
-        DeletedBasketItemsEventHandler deletedBasketItemsEventHandler)
+        DeletedBasketItemsEventHandler deletedBasketItemsEventHandler,
+        CreateOrderItemEventHandler createOrderItemEventHandler)
     {
         _query = query;
         _command = command;
         _updateCustomerEventHandler = updateCustomerEventHandler;
         _deletedBasketItemsEventHandler = deletedBasketItemsEventHandler;
+        _createOrderItemEventHandler = createOrderItemEventHandler;
     }
 
     public async Task<IDataResult<CreateOrderResponse>> Handle(CreateOrderRequest request, CancellationToken cancellationToken)
     {
 
-        var basket = await _query.Basket.ReadSingleOrDefaultAsync(true, filter: x => x.CustomerId == Guid.Parse(request.customerId));
-        var customer = await _query.Customer.ReadFirstOrDefaultAsync(true, filter: x => x.Id == Guid.Parse(request.customerId));
+        var basket = await _query.Basket.ReadSingleOrDefaultAsync(
+            noTracking: true,
+            filter: x => x.CustomerId == Guid.Parse(request.customerId));
 
+        var customer = await _query.Customer.ReadFirstOrDefaultAsync(
+            noTracking: true,
+            filter: x => x.Id == Guid.Parse(request.customerId));
 
+        var basketItems = await _query.BasketItem.ReadAllAsync(
+            noTracking: true,
+            filter: x => x.BasketId == basket.Id);
 
         if (customer is null)
             return new DataResult<CreateOrderResponse>("Customer not found!", false);
@@ -55,6 +66,9 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, IDataResul
             else
             {
                 order.PaymentRecived();
+                // Burada basketItemlar orderItem lara setlenecek
+
+                await _createOrderItemEventHandler.Publish(new CreateOrderItemEvent(basket.Id,order.Id), cancellationToken);
                 await _deletedBasketItemsEventHandler.Publish(new DeletedBasketItemsEvent(basket.Id), cancellationToken);
                 basket.ClearTotalAmount();
                 _command.Basket.Update(basket);

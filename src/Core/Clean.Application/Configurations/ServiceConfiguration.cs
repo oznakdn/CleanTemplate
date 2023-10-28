@@ -48,6 +48,7 @@ public static class ServiceConfiguration
         services.AddScoped(typeof(UpdateBasketItemEventHandler));
         services.AddScoped(typeof(UpdateCustomerEventHandler));
         services.AddScoped(typeof(DeletedBasketItemsEventHandler));
+        services.AddScoped(typeof(CreateOrderItemEventHandler));
 
         services.AddScoped<ICommandUnitOfWork, CommandUnitOfWork>();
         services.AddScoped<IQueryUnitOfWork,QueryUnitOfWork>();
