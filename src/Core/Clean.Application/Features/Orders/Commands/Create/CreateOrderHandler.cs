@@ -1,7 +1,6 @@
 ﻿using Clean.Application.Results;
 using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
-using Clean.Domain.Baskets;
 using Clean.Domain.Orders;
 
 namespace Clean.Application.Features.Orders.Commands.Create;
@@ -43,16 +42,13 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, IDataResul
             noTracking: true,
             filter: x => x.Id == Guid.Parse(request.customerId));
 
-        var basketItems = await _query.BasketItem.ReadAllAsync(
-            noTracking: true,
-            filter: x => x.BasketId == basket.Id);
+        if (basket is null)
+            return new DataResult<CreateOrderResponse>("Basket not found!", false);
 
         if (customer is null)
             return new DataResult<CreateOrderResponse>("Customer not found!", false);
 
-        if (basket is null)
-            return new DataResult<CreateOrderResponse>("Basket not found!", false);
-
+      
 
         if (basket.TotalAmount > 0)
         {
@@ -66,8 +62,6 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, IDataResul
             else
             {
                 order.PaymentRecived();
-                // Burada basketItemlar orderItem lara setlenecek
-
                 await _createOrderItemEventHandler.Publish(new CreateOrderItemEvent(basket.Id,order.Id), cancellationToken);
                 await _deletedBasketItemsEventHandler.Publish(new DeletedBasketItemsEvent(basket.Id), cancellationToken);
                 basket.ClearTotalAmount();

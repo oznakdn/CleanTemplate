@@ -97,3 +97,9 @@ info: 28.10.2023 10:26:26    POST - /api/baskets/AddBasketItem - 200
 info: 28.10.2023 10:26:29    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
 info: 28.10.2023 10:26:52    POST - /api/orders/CreateOrder - 201
 info: 28.10.2023 10:27:16    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 10:29:11    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 10:29:15    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 10:29:20    POST - /api/baskets/AddBasketItem - 200
+info: 28.10.2023 10:29:22    POST - /api/baskets/AddBasketItem - 200
+info: 28.10.2023 10:29:26    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 28.10.2023 10:29:33    POST - /api/orders/CreateOrder - 201
