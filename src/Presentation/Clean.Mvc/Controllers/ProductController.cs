@@ -15,7 +15,7 @@ namespace Clean.Mvc.Controllers
         public async Task<IActionResult> Index()
         {
             var result = await _productService.GetProductsAsync();
-            return View(result);
+            return RedirectToAction("Index","Home",result);
         }
     }
 }

@@ -5,11 +5,7 @@ namespace Clean.Application.Features.Products.Queries.GetProducts;
 
 
 public record GetProductsRequest() : IRequest<IDataResult<GetProductsResponse>>;
-public record GetProductsResponse(string Id, string DisplayName, ProductMoney Money, ProductCategory Category, ProductInventory Inventory);
-public record ProductMoney(string Currency, decimal Price);
-public record ProductCategory(string DisplayName);
-public record ProductInventory(int Quantity, bool HasStock);
-
+public record GetProductsResponse(string Id, string DisplayName, string Currency, decimal Price, string Category);
 
 
 
@@ -32,10 +28,9 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, IDataResul
                    (
                      x.Id.ToString(),
                      x.DisplayName,
-                     new ProductMoney(x.Price.Currency.ToString(), x.Price.Amount),
-                     new ProductCategory(x.Category.DisplayName),
-                     new ProductInventory(x.Inventory.Quantity, x.Inventory.HasStock)
-                    )).ToList();
+                     x.Price.Currency.ToString(), 
+                     x.Price.Amount,
+                     x.Category.DisplayName)).ToList();
 
         return new DataResult<GetProductsResponse>(result);
     }

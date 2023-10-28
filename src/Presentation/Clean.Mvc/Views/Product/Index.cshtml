@@ -2,23 +2,28 @@
 
     <div class="row">
         <div class="col-8 offset-2">
+            <h2 class="text-center text-bg-primary">Products</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Currency</th>
+                        <th>Category</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach(var item in Model)
                 {
                     <tr>
-                        <td>@item.DisplayName</td>
-                        <td>@item.Price</td>
+                        <td>@item.displayName</td>
+                        <td>@item.price</td>
                         <td>@item.currency</td>
-                        <td>@item.Category</td>
+                        <td>@item.category</td>
                     </tr>
                 }
             </tbody>

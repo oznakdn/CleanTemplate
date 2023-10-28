@@ -15,12 +15,12 @@ public class ProductCacheService : MemoryCacheService<Product>, IProductCacheSer
     public IEnumerable<Product> GetProductFromCache()
     {
         var cacheData = GetDatas("products");
-        if(cacheData != null)
+        if (cacheData != null)
         {
             return cacheData;
         }
 
-        cacheData = _dbContext.Products.ToList();
+        cacheData = _dbContext.Products.Include(x => x.Inventory).ToList();
         var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
         SetDatas("products", cacheData, expirationTime);
         return cacheData;
