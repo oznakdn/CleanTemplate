@@ -17,6 +17,7 @@ public class QueryUnitOfWork : IQueryUnitOfWork
         Product = Product ?? new ProductQuery(_context);
         Inventory = Inventory ?? new InventoryQuery(_context);
         Order = Order ?? new OrderQuery(_context);
+        OrderItem = OrderItem ?? new OrderItemQuery(_context);
     }
 
     public IBasketItemQuery BasketItem { get; }
@@ -30,4 +31,7 @@ public class QueryUnitOfWork : IQueryUnitOfWork
     public IInventoryQuery Inventory { get; }
 
     public IOrderQuery Order { get; }
+
+    public IOrderItemQuery OrderItem { get; }
+
 }

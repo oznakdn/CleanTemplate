@@ -10,4 +10,5 @@ public interface IQueryUnitOfWork
     IProductQuery Product { get; }
     IInventoryQuery Inventory { get; }
     IOrderQuery Order { get; }
+    IOrderItemQuery OrderItem { get; }
 }
