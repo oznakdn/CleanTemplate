@@ -1,0 +1,27 @@
+﻿@model IEnumerable<GetProductsModel>
+
+    <div class="row">
+        <div class="col-8 offset-2">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.DisplayName</td>
+                        <td>@item.Price</td>
+                        <td>@item.currency</td>
+                        <td>@item.Category</td>
+                    </tr>
+                }
+            </tbody>
+            </table>
+        </div>
+    </div>

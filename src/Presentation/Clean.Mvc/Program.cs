@@ -1,11 +1,18 @@
+using Clean.Mvc.ClientServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient("CleanClient", conf =>
+{
+    conf.BaseAddress = new Uri("http://localhost:5019/api/"); 
+});
+
+builder.Services.AddScoped<ProductService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

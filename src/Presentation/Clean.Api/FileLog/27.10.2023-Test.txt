@@ -66,3 +66,8 @@ info: 27.10.2023 12:59:19    GET - /api/Customers/GetCustomers - 200
 info: 27.10.2023 12:59:23    GET - /api/Customers/GetCustomers - 200
 info: 27.10.2023 12:59:28    GET - /api/Customers/GetCustomers - 200
 info: 27.10.2023 12:59:35    GET - /api/Customers/GetCustomers - 200
+fail: 27.10.2023 13:46:35    GET - /api/GetProducts - 404
+fail: 27.10.2023 13:47:16    GET - /api/GetProducts - 404
+fail: 27.10.2023 13:51:19    GET - /api/GetProducts - 404
+fail: 27.10.2023 13:52:45    GET - /api/GetProducts - 404
+info: 27.10.2023 13:55:01    GET - /api/products/getproducts - 200
