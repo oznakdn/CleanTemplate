@@ -1,7 +1,5 @@
 ﻿using Clean.Domain.Contracts.Abstracts;
 using Clean.Domain.Shared;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System.Numerics;
 
 namespace Clean.Domain.Customers;
 
