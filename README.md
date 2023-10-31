@@ -39,6 +39,7 @@
 - [x] Sqlite, SqlServer, PostgreSQL, MySql, MongoDB
 - [x] Generic repository pattern
 - [x] Unit Of Work pattern
+- [x] Result pattern
 - [X] Pagination and Filtering
 - [x] Claim based authentication with Json Web Token
 - [x] Password hashing
