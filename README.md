@@ -49,6 +49,7 @@
 - [X] Rate Limiting
 - [x] MapSter
 - [x] FluentValidation
+- [x] MediatR
 - [X] Email and Notification Service
 - [ ] SignalR 
 - [ ] Unit tests
@@ -84,6 +85,7 @@ Microsoft.EntityFrameworkCore.Tools
 Microsoft.EntityFrameworkCore.Design
 Microsoft.EntityFrameworkCore.Proxies
 AutoMapper.Extensions.Microsoft.DependencyInjection
+Mapster
 FluentValidation.DependencyInjectionExtensions
 MediatR.Extensions.Microsoft.DependencyInjection
 MailKit
