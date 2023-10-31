@@ -21,37 +21,47 @@ public class Product : AggregateRoot<Product, Guid>
 
     public Result AddMoney(Currency currency, decimal amount)
     {
+        var errors = new List<string>();
+
         if (currency < 0)
         {
-            return new Error($"{nameof(Price.Currency)} cannot be less than 0!");
+            errors.Add($"{nameof(Price.Currency)} cannot be less than 0!");
         }
 
         if (amount < 0)
-            return new Error($"{nameof(Price.Amount)} cannot be less than 0!");
+        {
+            errors.Add($"{nameof(Price.Amount)} cannot be less than 0!");
+
+        }
+     
+        if(errors.Count > 0) 
+        {
+            return Result.Fail(errors);
+        }
 
         Price = new Money(currency, amount);
-        return new Result("", false, true);
+        return  Result.Ok();
     }
 
     public Result AddCategory(string displayName)
     {
         if (displayName.Length < 3 || displayName.Length > 20)
         {
-            return new Error($"{nameof(Category.DisplayName)} can be between 3 and 20 characters!");
+            return Result.Fail($"{nameof(Category.DisplayName)} can be between 3 and 20 characters!");
         }
 
         Category = new Category(displayName);
-        return new Result("", false, true);
+        return  Result.Ok();
 
     }
 
     public Result AddInventory(Guid productId, int quantity)
     {
         if (quantity < 0)
-            return new Error("Quantity cannot be less than 0!");
+            return  Result.Fail("Quantity cannot be less than 0!");
 
         Inventory = new(productId, quantity);
-        return new Result("",false,true);
+        return  Result.Ok();
     }
 
 }

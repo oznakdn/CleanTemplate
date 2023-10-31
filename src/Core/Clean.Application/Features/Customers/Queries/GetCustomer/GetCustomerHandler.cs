@@ -1,16 +1,16 @@
-﻿using Clean.Application.Results;
-using Clean.Application.UnitOfWork.Queries;
+﻿using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Customers;
+using Clean.Domain.Shared;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace Clean.Application.Features.Customers.Queries.GetCustomer;
 
-public record GetCustomerRequest(string? CustomerId, string? Name) : IRequest<IDataResult<GetCustomerResponse>>;
+public record GetCustomerRequest(string? CustomerId, string? Name) : IRequest<TResult<GetCustomerResponse>>;
 public record GetCustomerResponse(string FirstName, string LastName, string Email, string PhoneNumber);
 
 
-public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, IDataResult<GetCustomerResponse>>
+public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, TResult<GetCustomerResponse>>
 {
     private readonly IQueryUnitOfWork _query;
 
@@ -19,7 +19,7 @@ public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, IDataResul
         _query = query;
     }
 
-    public async Task<IDataResult<GetCustomerResponse>> Handle(GetCustomerRequest request, CancellationToken cancellationToken)
+    public async Task<TResult<GetCustomerResponse>> Handle(GetCustomerRequest request, CancellationToken cancellationToken)
     {
         var query = await _query.Customer.QueryAsync(true, cancellationToken: cancellationToken);
 
@@ -27,13 +27,13 @@ public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, IDataResul
         {
             Customer customer = await query.Where(x => x.Id == Guid.Parse(request.CustomerId)).SingleOrDefaultAsync(cancellationToken);
 
-            if(customer is null)
+            if (customer is null)
             {
-                return new DataResult<GetCustomerResponse>("Customer not found!",false);
+                return TResult<GetCustomerResponse>.Fail("Customer not found!");
             }
 
             GetCustomerResponse result = query.Adapt<GetCustomerResponse>();
-            return new DataResult<GetCustomerResponse>(result);
+            return TResult<GetCustomerResponse>.Ok(result);
         }
 
         if (!string.IsNullOrEmpty(request.Name))
@@ -44,16 +44,16 @@ public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, IDataResul
 
             if (customer.Count == 0)
             {
-                return new DataResult<GetCustomerResponse>("Customer not found!",false);
+                return  TResult<GetCustomerResponse>.Fail("Customer not found!");
             }
 
             IEnumerable<GetCustomerResponse> result = customer.Adapt<IEnumerable<GetCustomerResponse>>();
-            return new DataResult<GetCustomerResponse>(result.ToList());
+            return  TResult<GetCustomerResponse>.Ok(result.ToList());
         }
 
         var customers = await query.ToListAsync();
         IEnumerable<GetCustomerResponse> response = customers.Adapt<IEnumerable<GetCustomerResponse>>();
-        return new DataResult<GetCustomerResponse>(response.ToList());
+        return  TResult<GetCustomerResponse>.Ok(response.ToList());
 
     }
 }

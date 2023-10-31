@@ -1,0 +1,10 @@
+info: 31.10.2023 08:26:27    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 31.10.2023 08:26:32    GET - /api/Customers/GetCustomerBasket/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 31.10.2023 08:26:35    GET - /api/products/GetProducts - 200
+info: 31.10.2023 08:26:39    GET - /api/products/GetProductDetail/7c006871-2a46-4530-8901-17a87ec6418f - 200
+info: 31.10.2023 08:26:42    GET - /api/products/GetProductsCache - 200
+info: 31.10.2023 08:26:43    GET - /api/products/GetProductsCache - 200
+info: 31.10.2023 08:26:44    GET - /api/products/GetProductsCache - 200
+info: 31.10.2023 08:26:45    GET - /api/products/GetProductsCache - 200
+info: 31.10.2023 08:26:54    GET - /api/orders/GetCustomerOrders/a6ad9306-bd8a-4db0-894d-1f707b882df6 - 200
+info: 31.10.2023 08:27:02    PUT - /api/account/Login - 200

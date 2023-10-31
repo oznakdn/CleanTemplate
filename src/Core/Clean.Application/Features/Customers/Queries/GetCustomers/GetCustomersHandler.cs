@@ -1,15 +1,15 @@
-﻿using Clean.Application.Results;
-using Clean.Application.UnitOfWork.Queries;
+﻿using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Customers;
+using Clean.Domain.Shared;
 using Mapster;
 
 namespace Clean.Application.Features.Customers.Queries.GetCustomers;
 
 
-public record GetCustomersRequest(int MaxPage, int PageSize, int PageNumber) : IRequest<IDataResult<GetCustomersResponse>>;
+public record GetCustomersRequest(int MaxPage, int PageSize, int PageNumber) : IRequest<TResult<GetCustomersResponse>>;
 public record GetCustomersResponse(string Id, string FirstName, string LastName, string Email, string PhoneNumber);
 
-public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, IDataResult<GetCustomersResponse>>
+public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, TResult<GetCustomersResponse>>
 {
     private readonly IQueryUnitOfWork _query;
     public GetCustomersHandler(IQueryUnitOfWork query)
@@ -17,7 +17,7 @@ public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, IDataRes
         _query = query;
     }
 
-    public async Task<IDataResult<GetCustomersResponse>> Handle(GetCustomersRequest request, CancellationToken cancellationToken)
+    public async Task<TResult<GetCustomersResponse>> Handle(GetCustomersRequest request, CancellationToken cancellationToken)
     {
 
         var customers = await _query.Customer.ReadAllAsync(true, pagination: page =>
@@ -34,6 +34,6 @@ public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, IDataRes
 
         IEnumerable<GetCustomersResponse> response = customers.Adapt<IEnumerable<GetCustomersResponse>>(config);
 
-        return new DataResult<GetCustomersResponse>(response.ToList());
+        return TResult<GetCustomersResponse>.Ok(response.ToList());
     }
 }

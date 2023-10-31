@@ -15,15 +15,11 @@ public class AccountController : AbstractController
     public async Task<IActionResult> Login([FromBody] LoginRequest login)
     {
         var result = await _mediator.Send(login);
-        if (result.Errors.Count > 0 && !result.Successed) return BadRequest(result.Errors);
-        if (!string.IsNullOrEmpty(result.Message) && !result.Successed) return NotFound(result.Message);
-        return Ok(new
-        {
-            Access = result.AccessToken,
-            AccessExpires = result.AccessExpire,
-            Refresh = result.RefreshToken,
-            RefreshExpires = result.RefreshExpire
-        });
+        if (result.Errors.Count() > 0 && result.IsFailed) return BadRequest(result.Errors);
+
+        if (!string.IsNullOrEmpty(result.Message) && result.IsFailed) return NotFound(result.Message);
+
+        return Ok(result.Value);
     }
 
     [HttpPost]

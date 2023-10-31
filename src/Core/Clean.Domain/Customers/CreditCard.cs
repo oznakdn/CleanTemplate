@@ -44,9 +44,9 @@ public class CreditCard : ValueObject
         {
             TotalDebt += amount;
             AvailableLimit = TotalLimit - TotalDebt;
-            return new Result();
+            return Result.Ok();
         }
-        return new Error("Card limit is not available!");
+        return Result.Fail("Card limit is not available!");
     }
 
     private decimal SetAvailableLimit() => AvailableLimit = TotalLimit - TotalDebt;

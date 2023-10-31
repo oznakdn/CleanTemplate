@@ -1,7 +1,7 @@
-﻿using Clean.Application.Results;
-using Clean.Domain.Account;
+﻿using Clean.Domain.Account;
 using Clean.Domain.Repositories.Commands;
 using Clean.Domain.Repositories.Queries;
+using Clean.Domain.Shared;
 using Clean.Identity.Helpers;
 using Gleeman.JwtGenerator;
 using Gleeman.JwtGenerator.Generator;
@@ -10,24 +10,18 @@ using MongoDB.Driver;
 namespace Clean.Application.Features.Users.Queries.Login;
 
 
-public record LoginRequest(string Email, string Password) : IRequest<LoginResponse>;
-public class LoginResponse : Response
-{
-    public string AccessExpire { get; set; }
-    public string RefreshToken { get; set; }
-    public string RefreshExpire { get; set; }
-    public string AccessToken { get; set; }
-}
+public record LoginRequest(string Email, string Password) : IRequest<TResult<LoginResponse>>;
+public record LoginResponse(string AccessExpire, string RefreshToken, string RefreshExpire, string AccessToken);
 
 
-public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
+public class LoginHandler : IRequestHandler<LoginRequest, TResult<LoginResponse>>
 {
     private readonly IUserCommand _userCommand;
     private readonly IUserQuery _userQuery;
     private readonly IRoleQuery _roleQuery;
     private readonly ITokenGenerator _token;
 
-    public LoginHandler(IUserCommand userCommand, IUserQuery userQuery,IRoleQuery roleQuery,  ITokenGenerator token)
+    public LoginHandler(IUserCommand userCommand, IUserQuery userQuery, IRoleQuery roleQuery, ITokenGenerator token)
     {
         _userCommand = userCommand;
         _userQuery = userQuery;
@@ -36,7 +30,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
 
     }
 
-    public async Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
+    public async Task<TResult<LoginResponse>> Handle(LoginRequest request, CancellationToken cancellationToken)
     {
         var validator = new LoginValidator();
         var validation = validator.Validate(request);
@@ -45,11 +39,8 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
         if (!validation.IsValid)
         {
             validation.Errors.ForEach(error => errors.Add(error.ErrorMessage));
-            return new LoginResponse
-            {
-                Errors = errors,
-                Successed = false
-            };
+
+            return TResult< LoginResponse >.Fail(errors);
         }
 
         var user = await _userQuery.ReadSingleOrDefaultAsync(x => x.Email == request.Email, cancellationToken);
@@ -57,24 +48,15 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
 
         if (user == null)
         {
-            return new LoginResponse
-            {
-                Message = "User not found!",
-                Successed = false
-            };
+            return TResult<LoginResponse>.Fail("User not found!");
+
         }
-
-
 
         bool passwordIsValid = request.Password.VerifyHashPassword(user.PasswordHash);
 
         if (!passwordIsValid)
         {
-            return new LoginResponse
-            {
-                Message = "User not found!",
-                Successed = false
-            };
+            return TResult<LoginResponse>.Fail("Password is wrong!");
         }
 
         var userParameter = new UserParameter
@@ -103,17 +85,16 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
         var filter = Builders<User>.Filter
         .Eq(x => x.Id, user.Id);
 
-        await _userCommand.EditAsync(filter,user, cancellationToken);
+        await _userCommand.EditAsync(filter, user, cancellationToken);
 
-        return new LoginResponse
-        {
-            AccessToken = access.Token,
-            AccessExpire = access.ExpireDate.ToString(),
-            RefreshToken = refresh.Token,
-            RefreshExpire = refresh.ExpireDate.ToString(),
-            Successed = true
-        };
 
+        var response = new LoginResponse(
+            access.Token,
+            access.ExpireDate.ToString(),
+            refresh.Token,
+            refresh.ExpireDate.ToString());
+
+        return TResult<LoginResponse>.Ok(response);
 
     }
 }

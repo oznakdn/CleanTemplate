@@ -26,6 +26,6 @@ public class OrdersController : AbstractController
     public async Task<IActionResult>GetCustomerOrders(string customerId)
     {
         var result = await _mediator.Send(new GetCustomerOrdersRequest(customerId));
-        return Ok(result.Datas);
+        return Ok(result.Values);
     }
 }

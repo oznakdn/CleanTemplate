@@ -1,17 +1,16 @@
-﻿using Clean.Application.Results;
-using Clean.Application.UnitOfWork.Queries;
+﻿using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Orders;
-using Mapster;
+using Clean.Domain.Shared;
 
 namespace Clean.Application.Features.Orders.Queries.GetCustomerOrders;
 
 
 
-public record GetCustomerOrdersRequest(string customerId) : IRequest<IDataResult<GetCustomerOrdersResponse>>;
+public record GetCustomerOrdersRequest(string customerId) : IRequest<TResult<GetCustomerOrdersResponse>>;
 public record GetCustomerOrdersResponse(string Date, string Status, List<CustomerOrderItems> OrderItems);
 public record CustomerOrderItems(string ProductId,int Quantity, decimal TotalAmount);
 
-public class GetCustomerOrdersHandler : IRequestHandler<GetCustomerOrdersRequest, IDataResult<GetCustomerOrdersResponse>>
+public class GetCustomerOrdersHandler : IRequestHandler<GetCustomerOrdersRequest, TResult<GetCustomerOrdersResponse>>
 {
     private readonly IQueryUnitOfWork _query;
 
@@ -20,7 +19,7 @@ public class GetCustomerOrdersHandler : IRequestHandler<GetCustomerOrdersRequest
         _query = query;
     }
 
-    public async Task<IDataResult<GetCustomerOrdersResponse>> Handle(GetCustomerOrdersRequest request, CancellationToken cancellationToken)
+    public async Task<TResult<GetCustomerOrdersResponse>> Handle(GetCustomerOrdersRequest request, CancellationToken cancellationToken)
     {
         IEnumerable<Order> customerOrders = await _query.Order.ReadAllAsync(
             noTracking: true,
@@ -48,6 +47,6 @@ public class GetCustomerOrdersHandler : IRequestHandler<GetCustomerOrdersRequest
             )).ToList();
 
 
-        return new DataResult<GetCustomerOrdersResponse>(response);
+        return TResult<GetCustomerOrdersResponse>.Ok(response);
     }
 }

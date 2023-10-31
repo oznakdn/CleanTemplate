@@ -1,14 +1,14 @@
-﻿using Clean.Application.Results;
-using Clean.Application.UnitOfWork.Commands;
+﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Baskets;
+using Clean.Domain.Shared;
 
 namespace Clean.Application.Features.Baskets.Commands.UpdateBasket;
 
-public record UpdateBasketRequest(string BasketId, string BasketItemId, int Quantity) : IRequest<IDataResult<UpdateBasketResponse>>;
+public record UpdateBasketRequest(string BasketId, string BasketItemId, int Quantity) : IRequest<TResult<UpdateBasketResponse>>;
 public record UpdateBasketResponse;
 
-public class UpdateBasketHandler : IRequestHandler<UpdateBasketRequest, IDataResult<UpdateBasketResponse>>
+public class UpdateBasketHandler : IRequestHandler<UpdateBasketRequest, TResult<UpdateBasketResponse>>
 {
     private readonly IQueryUnitOfWork _query;
     private readonly ICommandUnitOfWork _command;
@@ -21,12 +21,12 @@ public class UpdateBasketHandler : IRequestHandler<UpdateBasketRequest, IDataRes
         _updateBasketItemEvent = updateBasketItemEvent;
     }
 
-    public async Task<IDataResult<UpdateBasketResponse>> Handle(UpdateBasketRequest request, CancellationToken cancellationToken)
+    public async Task<TResult<UpdateBasketResponse>> Handle(UpdateBasketRequest request, CancellationToken cancellationToken)
     {
         var basket = await _query.Basket.ReadSingleOrDefaultAsync(true, x => x.Id == Guid.Parse(request.BasketId), cancellationToken);
 
         if (basket is null)
-            return new DataResult<UpdateBasketResponse>("Basket not found!", false);
+            return TResult<UpdateBasketResponse>.Fail("Basket not found!");
 
 
         BasketItem basketItem = await _updateBasketItemEvent.Publish(new UpdateBasketItemEvent(
@@ -38,6 +38,6 @@ public class UpdateBasketHandler : IRequestHandler<UpdateBasketRequest, IDataRes
 
         _command.Basket.Edit(basket);
         await _command.Basket.ExecuteAsync(cancellationToken);
-        return new DataResult<UpdateBasketResponse>($"Item was updated to {request.Quantity}", true);
+        return TResult<UpdateBasketResponse>.Ok($"Item was updated to {request.Quantity}");
     }
 }

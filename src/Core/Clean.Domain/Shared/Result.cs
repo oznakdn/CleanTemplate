@@ -1,21 +1,77 @@
-﻿namespace Clean.Domain.Shared;
+﻿using Clean.Domain.Contracts.Abstracts;
 
-public class Result
+namespace Clean.Domain.Shared;
+
+public class Result:AbstractResult
 {
-    public Result(string message, bool isFailed, bool isSuccessed)
+   
+    protected Result() { }
+
+
+    #region Success
+
+    public static Result Ok()
     {
-        Message = message;
-        IsFailed = isFailed;
-        IsSuccessed = isSuccessed;
+        return new Result
+        {
+            IsSuccessed = true,
+            IsFailed = false,
+            Errors = Enumerable.Empty<string>(),
+            Message = string.Empty
+        };
     }
 
-    public Result()
+    public static Result Ok(string message)
     {
-
+        return new Result
+        {
+            IsSuccessed = true,
+            IsFailed = false,
+            Message = message,
+            Errors = Enumerable.Empty<string>(),
+        };
     }
 
-    public string Message { get;}
-    public bool IsFailed { get;}
-    public bool IsSuccessed { get;}
+
+    #endregion
+
+
+    #region Fail
+
+    public static Result Fail()
+    {
+        return new Result
+        {
+            IsSuccessed = false,
+            IsFailed = true,
+            Errors = Enumerable.Empty<string>(),
+            Message = string.Empty
+        };
+    }
+
+    public static Result Fail(string message)
+    {
+        return new Result
+        {
+            IsSuccessed = false,
+            IsFailed = true,
+            Message = message,
+            Errors = Enumerable.Empty<string>(),
+        };
+    }
+
+    public static Result Fail(List<string> errors)
+    {
+        return new Result
+        {
+            IsSuccessed = false,
+            IsFailed = true,
+            Errors = errors,
+            Message = string.Empty,
+        };
+    }
+
+    #endregion
+ 
 
 }

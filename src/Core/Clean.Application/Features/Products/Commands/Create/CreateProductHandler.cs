@@ -1,14 +1,14 @@
-﻿using Clean.Application.Results;
-using Clean.Application.UnitOfWork.Commands;
+﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Domain.Products;
+using Clean.Domain.Shared;
 
 namespace Clean.Application.Features.Products.Commands.Create;
 
 
-public record CreateProductRequest(string DisplayName, Currency currency, decimal Amount, string CategoryName, int Quantity) : IRequest<IDataResult<CreateProductResponse>>;
-public class CreateProductResponse : Response { }
+public record CreateProductRequest(string DisplayName, Currency currency, decimal Amount, string CategoryName, int Quantity) : IRequest<TResult<CreateProductResponse>>;
+public record CreateProductResponse;
 
-public class CreateProductHandler : IRequestHandler<CreateProductRequest, IDataResult<CreateProductResponse>>
+public class CreateProductHandler : IRequestHandler<CreateProductRequest, TResult<CreateProductResponse>>
 {
 
     private readonly ICommandUnitOfWork _command;
@@ -19,7 +19,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, IDataR
         _addInventoryEvent = addInventoryEvent;
     }
 
-    public async Task<IDataResult<CreateProductResponse>> Handle(CreateProductRequest request, CancellationToken cancellationToken)
+    public async Task<TResult<CreateProductResponse>> Handle(CreateProductRequest request, CancellationToken cancellationToken)
     {
         var errors = new List<string>();
 
@@ -47,12 +47,12 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, IDataR
 
         if (errors.Count > 0)
         {
-            return new DataResult<CreateProductResponse>(errors, false);
+            return  TResult<CreateProductResponse>.Fail(errors);
         }
 
         _command.Product.Insert(product);
         await _command.Product.ExecuteAsync(cancellationToken);
 
-        return new DataResult<CreateProductResponse>("Product was added.", true);
+        return  TResult<CreateProductResponse>.Ok("Product was added.");
     }
 }

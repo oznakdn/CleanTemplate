@@ -19,16 +19,16 @@ public class CustomersController : AbstractController
     {
         var result = await _mediator.Send(new GetCustomerRequest(CustomerId, NameOrSurname));
 
-        if (!result.IsSuccessed)
+        if (result.IsFailed)
         {
             return NotFound(result.Message);
         }
 
-        if (result.Data != null)
+        if (result.Value != null)
         {
-            return Ok(result.Data);
+            return Ok(result.Value);
         }
-        return Ok(result.Datas);
+        return Ok(result.Values);
     }
 
     [HttpGet]
@@ -36,14 +36,14 @@ public class CustomersController : AbstractController
     public async Task<IActionResult> GetCustomers([FromQuery] int MaxPage, [FromQuery] int PageSize, [FromQuery] int PageNumber)
     {
         var result = await _mediator.Send(new GetCustomersRequest(MaxPage,PageSize,PageNumber));
-        return Ok(result.Datas);
+        return Ok(result.Values);
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest createCustomer)
     {
         var result = await _mediator.Send(createCustomer);
-        if (result.Successed)
+        if (result.IsSuccessed)
         {
             return Created(result.Message, createCustomer);
         }
@@ -55,8 +55,9 @@ public class CustomersController : AbstractController
     public async Task<IActionResult> GetCustomerBasket(string CustomerId)
     {
         var result = await _mediator.Send(new GetCustomerBasketRequest(CustomerId));
-        if (result.Successed)
+        if (result.IsSuccessed)
             return Ok(result);
+
         return NotFound(result.Message);
     }
 

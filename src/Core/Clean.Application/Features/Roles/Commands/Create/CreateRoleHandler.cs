@@ -1,13 +1,13 @@
-﻿using Clean.Application.Results;
-using Clean.Domain.Account;
+﻿using Clean.Domain.Account;
 using Clean.Domain.Repositories.Commands;
+using Clean.Domain.Shared;
 
 namespace Clean.Application.Features.Roles.Commands.Create;
 
-public record CreateRoleRequest(string RoleTitle, string Description) : IRequest<IDataResult<CreateRoleResponse>>;
+public record CreateRoleRequest(string RoleTitle, string Description) : IRequest<TResult<CreateRoleResponse>>;
 public record CreateRoleResponse;
 
-public class CreateRoleHandler : IRequestHandler<CreateRoleRequest, IDataResult<CreateRoleResponse>>
+public class CreateRoleHandler : IRequestHandler<CreateRoleRequest, TResult<CreateRoleResponse>>
 {
     private readonly IRoleCommand _command;
 
@@ -16,9 +16,9 @@ public class CreateRoleHandler : IRequestHandler<CreateRoleRequest, IDataResult<
         _command = command;
     }
 
-    public async Task<IDataResult<CreateRoleResponse>> Handle(CreateRoleRequest request, CancellationToken cancellationToken)
+    public async Task<TResult<CreateRoleResponse>> Handle(CreateRoleRequest request, CancellationToken cancellationToken)
     {
         await _command.InsertAsync(new Role(request.RoleTitle, request.Description), cancellationToken);
-        return new DataResult<CreateRoleResponse>("Role was created.",true);
+        return  TResult<CreateRoleResponse>.Ok("Role was created.");
     }
 }

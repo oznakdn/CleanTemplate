@@ -1,15 +1,15 @@
-﻿using Clean.Application.Results;
-using Clean.Application.UnitOfWork.Commands;
+﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Baskets;
 using Clean.Domain.Products;
+using Clean.Domain.Shared;
 
 namespace Clean.Application.Features.Baskets.Commands.AddBasketItem;
 
-public record AddBasketItemRequest(string BasketId, string ProductId, int Quantity) : IRequest<IDataResult<AddBasketItemResponse>>;
+public record AddBasketItemRequest(string BasketId, string ProductId, int Quantity) : IRequest<TResult<AddBasketItemResponse>>;
 public record AddBasketItemResponse;
 
-public class AddBasketItemHandler : IRequestHandler<AddBasketItemRequest, IDataResult<AddBasketItemResponse>>
+public class AddBasketItemHandler : IRequestHandler<AddBasketItemRequest, TResult<AddBasketItemResponse>>
 {
     private readonly ICommandUnitOfWork _command;
     private readonly IQueryUnitOfWork _query;
@@ -28,20 +28,20 @@ public class AddBasketItemHandler : IRequestHandler<AddBasketItemRequest, IDataR
         _updateInventoryEvent = updateInventoryEvent;
     }
 
-    public async Task<IDataResult<AddBasketItemResponse>> Handle(AddBasketItemRequest request, CancellationToken cancellationToken)
+    public async Task<TResult<AddBasketItemResponse>> Handle(AddBasketItemRequest request, CancellationToken cancellationToken)
     {
-        new DataResult<AddBasketItemResponse>();
-
+        
         var basket = await _query.Basket.ReadSingleOrDefaultAsync(true,x => x.Id == Guid.Parse(request.BasketId),cancellationToken);
         if (basket is null)
         {
-           return new DataResult<AddBasketItemResponse>("Basket not found",false);
+            return TResult<AddBasketItemResponse>.Fail("Basket not found!");
+            
         }
 
         var product = await _query.Product.ReadSingleOrDefaultAsync(true, x => x.Id == Guid.Parse(request.ProductId), cancellationToken);
         if (product is null)
         {
-           return new DataResult<AddBasketItemResponse>("Product not found",false);
+           return TResult<AddBasketItemResponse>.Fail("Product not found");
 
         }
 
@@ -56,6 +56,6 @@ public class AddBasketItemHandler : IRequestHandler<AddBasketItemRequest, IDataR
         _command.Basket.Edit(basket);
         await _command.Basket.ExecuteAsync(cancellationToken);
 
-        return new DataResult<AddBasketItemResponse>("Item added in the basket", true);
+        return  TResult<AddBasketItemResponse>.Ok("Item added in the basket");
     }
 }

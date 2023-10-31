@@ -1,19 +1,19 @@
-﻿using Clean.Application.Results;
-using Clean.Application.UnitOfWork.Commands;
+﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Domain.Baskets;
 using Clean.Domain.Customers;
+using Clean.Domain.Shared;
 
 namespace Clean.Application.Features.Customers.Commands.Create;
 
 
-public record CreateCustomerRequest(string FirstName, string LastName, string Email, string PhoneNumber, string Password, AddressRequest Address, CrediCardRequest CrediCard) : IRequest<CreateCustomerResponse>;
+public record CreateCustomerRequest(string FirstName, string LastName, string Email, string PhoneNumber, string Password, AddressRequest Address, CrediCardRequest CrediCard) : IRequest<TResult<CreateCustomerResponse>>;
 
 public record AddressRequest(string Title, string District, int Number, string City);
 public record CrediCardRequest(string Name, string CardNumber, string CardDate, string Cvv, decimal TotalLimit);
 
-public class CreateCustomerResponse : Response { }
+public record CreateCustomerResponse;
 
-public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, CreateCustomerResponse>
+public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, TResult<CreateCustomerResponse>>
 {
     private readonly ICommandUnitOfWork _command;
     private readonly CreateBasketEventHandler _createBasketEvent;
@@ -24,7 +24,7 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, Crea
         _createBasketEvent = createBasketEvent;
     }
 
-    public async Task<CreateCustomerResponse> Handle(CreateCustomerRequest request, CancellationToken cancellationToken)
+    public async Task<TResult<CreateCustomerResponse>> Handle(CreateCustomerRequest request, CancellationToken cancellationToken)
     {
         Customer customer = new(
             request.FirstName,
@@ -55,10 +55,7 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, Crea
 
         await _command.Customer.ExecuteAsync(cancellationToken);
 
-        return new CreateCustomerResponse
-        {
-            Successed = true,
-            Message = "Customer was be register."
-        };
+        return TResult<CreateCustomerResponse>.Ok("Customer was be register.");
+
     }
 }

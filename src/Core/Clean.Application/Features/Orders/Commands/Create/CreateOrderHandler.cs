@@ -1,15 +1,15 @@
-﻿using Clean.Application.Results;
-using Clean.Application.UnitOfWork.Commands;
+﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Orders;
+using Clean.Domain.Shared;
 
 namespace Clean.Application.Features.Orders.Commands.Create;
 
 
-public record CreateOrderRequest(string customerId) : IRequest<IDataResult<CreateOrderResponse>>;
+public record CreateOrderRequest(string customerId) : IRequest<TResult<CreateOrderResponse>>;
 public record CreateOrderResponse();
 
-public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, IDataResult<CreateOrderResponse>>
+public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, TResult<CreateOrderResponse>>
 {
     private readonly IQueryUnitOfWork _query;
     private readonly ICommandUnitOfWork _command;
@@ -31,7 +31,7 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, IDataResul
         _createOrderItemEventHandler = createOrderItemEventHandler;
     }
 
-    public async Task<IDataResult<CreateOrderResponse>> Handle(CreateOrderRequest request, CancellationToken cancellationToken)
+    public async Task<TResult<CreateOrderResponse>> Handle(CreateOrderRequest request, CancellationToken cancellationToken)
     {
 
         var basket = await _query.Basket.ReadSingleOrDefaultAsync(
@@ -43,10 +43,10 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, IDataResul
             filter: x => x.Id == Guid.Parse(request.customerId));
 
         if (basket is null)
-            return new DataResult<CreateOrderResponse>("Basket not found!", false);
+            return  TResult<CreateOrderResponse>.Fail("Basket not found!");
 
         if (customer is null)
-            return new DataResult<CreateOrderResponse>("Customer not found!", false);
+            return TResult<CreateOrderResponse>.Fail("Customer not found!");
 
       
 
@@ -72,9 +72,9 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, IDataResul
             await _command.Order.InsertAsync(order, cancellationToken);
             await _command.Order.ExecuteAsync(cancellationToken);
 
-            return new DataResult<CreateOrderResponse>("Order has been created.", true);
+            return  TResult<CreateOrderResponse>.Ok("Order has been created.");
         }
 
-        return new DataResult<CreateOrderResponse>("Basket is empty!", false);
+        return  TResult<CreateOrderResponse>.Fail("Basket is empty!");
     }
 }
