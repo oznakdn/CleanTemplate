@@ -31,6 +31,7 @@
 
 - [x] Clean Architecture
 - [X] Domain driven design (DDD)
+- [X] Domain Events
 - [x] CQRS
 - [x] Asp .Net Core Web Api
 - [x] Asp .Net Core Mvc
