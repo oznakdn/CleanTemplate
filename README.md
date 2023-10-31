@@ -1,7 +1,9 @@
 # Clean Template 
 
 <p>
-    This repo was created to be an example of clean architecture and to be easily integrated into our future projects. 
+    The Clean Template Project is an open source project written in .NETCore.<br>
+    The goal of this project is to apply widely used technologies and share them with communities. <br>
+    If you like the project please give it a star :star:
 </p>
 
 ```bash
