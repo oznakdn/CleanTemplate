@@ -1,11 +1,29 @@
-﻿namespace DomainTests;
+﻿using Clean.Domain.Account;
+
+namespace DomainTests;
 
 public class AccountTest
 {
     [Fact]
-    public void Login_When_EmailandPassword_Valid_Should_Return_Token()
+    public void CreateUserWithoutRole_When_PropertiesAreValid_Should_Return_Successed()
     {
-        string email = "test@mail.com";
-        string password = "test123";
+        var result = User.CreateUser("Jonh","Doe","john_doe","john@mail.com","Test123");
+        Assert.True(result.IsSuccessed);
+    }
+
+    [Fact]
+    public void CreateUserWithoutRole_When_PropertiesAreNotValid_Should_Return_IsFailed()
+    {
+        var result = User.CreateUser("Jonh","Doe","john_doe","","Test123");
+        Assert.True(result.IsFailed);
+        Assert.Equal<string>(result.Errors.Single(),"Email cannot be empty!");
+    }
+
+    [Fact]
+    public void CreateUserWithRole_When_PropertiesAreValid_Should_Return_Successed()
+    {
+        string roleId = "1552df121dfs31fd214sdf";
+        var result = User.CreateUser("Jonh","Doe","john_doe","john@mail.com","Test123",roleId);
+        Assert.True(result.IsSuccessed);
     }
 }
