@@ -1,4 +1,5 @@
 ﻿using Clean.Domain.Contracts.Abstracts;
+using Clean.Domain.Shared;
 
 namespace Clean.Domain.Orders;
 
@@ -19,9 +20,15 @@ public class Order : AggregateRoot<Order,Guid>
 
     private Order() : base(Guid.Empty) { }
 
-    public void AddOrderItem(Guid productId, int quantity)
+    public TResult<OrderItem> AddOrderItem(Guid productId, int quantity)
     {
-        _orderItems.Add(new OrderItem(productId,this.Id, quantity));
+        if(quantity<=0)
+        {
+            return TResult<OrderItem>.Fail($"Quantity should be greater than 0!");
+        }
+         var orderItem = new OrderItem(productId,this.Id, quantity);
+        _orderItems.Add(orderItem);
+        return TResult<OrderItem>.Ok(orderItem);
     }
 
     public void PaymentRecived()
