@@ -26,11 +26,11 @@ public class AccountController : AbstractController
     public async Task<IActionResult> Register([FromBody] RegisterRequest register)
     {
         var result = await _mediator.Send(register);
-        if (!result.Successed)
+        if (result.IsFailed)
         {
             return BadRequest(result.Errors);
         }
-        return Created(result.message!, register);
+        return Created(result.Message, register);
 
     }
 
