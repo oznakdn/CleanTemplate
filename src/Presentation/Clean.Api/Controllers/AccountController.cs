@@ -1,4 +1,5 @@
 ﻿using Clean.Application.Features.Roles.Commands.Create;
+using Clean.Application.Features.Roles.Queries.GetRoles;
 using Clean.Application.Features.Users.Commands.Register;
 using Clean.Application.Features.Users.Queries.Login;
 
@@ -44,5 +45,11 @@ public class AccountController : AbstractController
         return Created(result.Message, createRole);
     }
 
+    [HttpGet]
+    public async Task<IActionResult>GetRoles()
+    {
+        var result = await _mediator.Send(new GetRolesRequest());
+        return Ok(result.Values);
+    }
 
 }
