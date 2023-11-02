@@ -18,7 +18,13 @@ public class CreateRoleHandler : IRequestHandler<CreateRoleRequest, TResult<Crea
 
     public async Task<TResult<CreateRoleResponse>> Handle(CreateRoleRequest request, CancellationToken cancellationToken)
     {
-        await _command.InsertAsync(new Role(request.RoleTitle, request.Description), cancellationToken);
+        var result = Role.CreateRole(request.RoleTitle,request.Description);
+        if(result.IsFailed)
+        {
+            return TResult<CreateRoleResponse>.Fail(result.Errors.ToList());
+        }
+
+        await _command.InsertAsync(result.Value, cancellationToken);
         return  TResult<CreateRoleResponse>.Ok("Role was created.");
     }
 }

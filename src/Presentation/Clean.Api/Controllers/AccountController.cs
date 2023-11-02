@@ -38,6 +38,9 @@ public class AccountController : AbstractController
     public async Task<IActionResult> CreateRole([FromBody] CreateRoleRequest createRole)
     {
         var result = await _mediator.Send(createRole);
+
+        if(result.IsFailed) return BadRequest(result.Errors);
+        
         return Created(result.Message, createRole);
     }
 
