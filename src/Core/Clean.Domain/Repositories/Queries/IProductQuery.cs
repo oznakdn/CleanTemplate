@@ -7,4 +7,5 @@ public interface IProductQuery :
     IEFQueryAsyncRepository<Product>,
     IEFQuerySyncRepository<Product>
 {
+    Task<List<Product>> GetAllProductsWithInventoryAsync(CancellationToken cancellationToken = default(CancellationToken));
 }

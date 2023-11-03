@@ -21,7 +21,7 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, TResult<Ge
 
     public async Task<TResult<GetProductsResponse>> Handle(GetProductsRequest request, CancellationToken cancellationToken)
     {
-        var products = await _query.Product.ReadAllAsync(true, cancellationToken: cancellationToken, includeProperties: x => x.Inventory);
+        var products = await _query.Product.GetAllProductsWithInventoryAsync(default);
 
         List<GetProductsResponse> result = products
             .Select(x => new GetProductsResponse
@@ -31,6 +31,11 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, TResult<Ge
                      x.Price.Currency.ToString(), 
                      x.Price.Amount,
                      x.Category.DisplayName)).ToList();
+
+        if(products is null)
+        {
+            return TResult<GetProductsResponse>.Fail("Product not found!");
+        }
 
         return TResult<GetProductsResponse>.Ok(result);
     }

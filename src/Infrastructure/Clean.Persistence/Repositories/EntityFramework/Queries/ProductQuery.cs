@@ -9,4 +9,8 @@ public class ProductQuery : EFQueryRepository<Product, ApplicationDbContext>, IP
     public ProductQuery(ApplicationDbContext dbContext) : base(dbContext)
     {
     }
+
+    public async Task<List<Product>> GetAllProductsWithInventoryAsync(CancellationToken cancellationToken = default)
+        => await _dbContext.Products.Include(x => x.Inventory).ToListAsync(cancellationToken);
+    
 }
