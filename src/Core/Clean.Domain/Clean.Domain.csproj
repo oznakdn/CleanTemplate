@@ -5,6 +5,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Specifications\**" />
+    <EmbeddedResource Remove="Specifications\**" />
+    <None Remove="Specifications\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Gleeman.Repository.EFCore" Version="7.0.0" />
     <PackageReference Include="Gleeman.Repository.MongoDriver" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
@@ -12,8 +17,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Clean.Domain.Contracts\Clean.Domain.Contracts.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Specifications\" />
   </ItemGroup>
 </Project>
