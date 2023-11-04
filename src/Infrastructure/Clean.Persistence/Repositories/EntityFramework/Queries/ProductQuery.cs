@@ -10,7 +10,11 @@ public class ProductQuery : EFQueryRepository<Product, ApplicationDbContext>, IP
     {
     }
 
-    public async Task<List<Product>> GetAllProductsWithInventoryAsync(CancellationToken cancellationToken = default)
-        => await _dbContext.Products.Include(x => x.Inventory).ToListAsync(cancellationToken);
-    
+    public async Task<List<Product>> GetAllProductsWithInventoryAsync(int maxPage, int pageSize, int pageNumber, CancellationToken cancellationToken = default)
+        => await _dbContext.Products
+        .Include(x => x.Inventory)
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .ToListAsync(cancellationToken);
+
 }
