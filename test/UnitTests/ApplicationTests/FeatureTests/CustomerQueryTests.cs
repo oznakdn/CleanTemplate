@@ -18,20 +18,20 @@ public class CustomerQueryTests
 
 
     [Fact]
-    public void GetCustomers_ShouldBe_Return_Success()
+    public async Task GetCustomers_ShouldBe_Return_Customers()
     {
+        var customers = new List<Customer>();
         var result = Customer.CreateCustomer("TestName", "TestSurname", "test@mail.com", "5001002030", "123456");
-        Customer customer = result.Value;
+        customers.Add(result.Value);
 
-        _moq.Setup(m => m.Customer.ReadSingle(true, x => x.Id == result.Value.Id)).Returns(customer);
-        var handle = _customersHandler.Handle(new GetCustomersRequest(50, 1, 1), CancellationToken.None).Result;
+        _moq.Setup(m => m.Customer.GetCustomersAsync(default).Result).Returns(customers);
 
-        GetCustomersResponse actualResult = handle.Value;
+        var actualResult = customers.Select(x => new GetCustomersResponse(x.Id.ToString(), x.FirstName, x.LastName, x.Email, x.PhoneNumber));
 
-        GetCustomersResponse expectedResult = new(customer.Id.ToString(), customer.FirstName, customer.LastName, customer.Email, customer.PhoneNumber);
+        var expectedResult = await _customersHandler.Handle(new GetCustomersRequest(), default);
 
 
-        Assert.Equal<string>(expectedResult.Id, actualResult.Id);
+        Assert.Equal<GetCustomersResponse>(expectedResult.Values, actualResult);
 
     }
 }

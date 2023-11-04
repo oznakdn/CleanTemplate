@@ -7,4 +7,5 @@ public interface ICustomerQuery :
     IEFQueryAsyncRepository<Customer>,
     IEFQuerySyncRepository<Customer>
 {
+    Task<List<Customer>> GetCustomersAsync(CancellationToken cancellationToken=default(CancellationToken));
 }

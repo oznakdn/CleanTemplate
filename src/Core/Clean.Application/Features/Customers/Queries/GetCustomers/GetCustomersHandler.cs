@@ -6,7 +6,7 @@ using Mapster;
 namespace Clean.Application.Features.Customers.Queries.GetCustomers;
 
 
-public record GetCustomersRequest(int MaxPage, int PageSize, int PageNumber) : IRequest<TResult<GetCustomersResponse>>;
+public record GetCustomersRequest() : IRequest<TResult<GetCustomersResponse>>;
 public record GetCustomersResponse(string Id, string FirstName, string LastName, string Email, string PhoneNumber);
 
 public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, TResult<GetCustomersResponse>>
@@ -20,12 +20,7 @@ public class GetCustomersHandler : IRequestHandler<GetCustomersRequest, TResult<
     public async Task<TResult<GetCustomersResponse>> Handle(GetCustomersRequest request, CancellationToken cancellationToken)
     {
 
-        var customers = await _query.Customer.ReadAllAsync(true, pagination: page =>
-        {
-            page.MaxPageSize = request.MaxPage;
-            page.PageSize = request.PageSize;
-            page.PageNumber = request.PageNumber;
-        }, cancellationToken: cancellationToken);
+        var customers = await _query.Customer.GetCustomersAsync(cancellationToken);
 
         var config = new TypeAdapterConfig();
 

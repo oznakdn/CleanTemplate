@@ -9,4 +9,7 @@ public class CustomerQuery : EFQueryRepository<Customer, ApplicationDbContext>, 
     public CustomerQuery(ApplicationDbContext dbContext) : base(dbContext)
     {
     }
+
+    public async Task<List<Customer>> GetCustomersAsync(CancellationToken cancellationToken = default)
+    => await _dbContext.Customers.AsNoTracking().ToListAsync(cancellationToken);
 }
