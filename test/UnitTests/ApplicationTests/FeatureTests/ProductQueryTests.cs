@@ -27,7 +27,7 @@ public class ProductQueryTests
         product.AddInventory(product.Id, 100);
         products.Add(product);
 
-        List<GetProductsResponse> dto = products.Select(p => new GetProductsResponse(
+        List<GetProductsResponse> expectedResult = products.Select(p => new GetProductsResponse(
             p.Id.ToString(), 
             p.DisplayName, 
             p.Price.Currency.ToString(), 
@@ -37,10 +37,10 @@ public class ProductQueryTests
 
          _moq.Setup(x => x.Product.GetAllProductsWithInventoryAsync(default).Result).Returns(products);
 
-        TResult<GetProductsResponse> result = await _getProductsHandler.Handle(new GetProductsRequest(), default);
+        TResult<GetProductsResponse> actualResult = await _getProductsHandler.Handle(new GetProductsRequest(), default);
 
-        Assert.True(result.IsSuccessed);
-        Assert.Equal<GetProductsResponse>(dto, result.Values);
+        Assert.True(actualResult.IsSuccessed);
+        Assert.Equal<GetProductsResponse>(expectedResult, actualResult.Values);
 
 
     }
