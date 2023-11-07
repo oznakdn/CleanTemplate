@@ -37,7 +37,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainTests", "test\UnitTests\DomainTests\DomainTests.csproj", "{524515D7-A313-48F5-B568-4C7F2AC0355E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationTests", "test\UnitTests\ApplicationTests\ApplicationTests.csproj", "{9FE22DEC-3A51-451C-9145-A0ABBCDF11C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTests", "test\UnitTests\ApplicationTests\ApplicationTests.csproj", "{9FE22DEC-3A51-451C-9145-A0ABBCDF11C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{18D1D8E6-53D1-4E5E-A1AD-248BCCF5DD59}"
+	ProjectSection(SolutionItems) = preProject
+		CQRS.md = CQRS.md
+		CustomDomainEvents.md = CustomDomainEvents.md
+		DomainDrivenDesign.md = DomainDrivenDesign.md
+		HealthCheck.md = HealthCheck.md
+		RateLimiting.md = RateLimiting.md
+		UnitOfWork.md = UnitOfWork.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
