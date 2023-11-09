@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositories\Dapper\**" />
+    <EmbeddedResource Remove="Repositories\Dapper\**" />
+    <None Remove="Repositories\Dapper\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -28,11 +34,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Clean.Domain\Clean.Domain.csproj" />
     <ProjectReference Include="..\Clean.Caching\Clean.Caching.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\Dapper\Commands\" />
-    <Folder Include="Repositories\Dapper\Queries\" />
   </ItemGroup>
 
 </Project>

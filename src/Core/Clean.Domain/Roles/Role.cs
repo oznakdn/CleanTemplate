@@ -3,7 +3,7 @@ using Clean.Domain.Shared;
 
 namespace Clean.Domain.Roles;
 
-public class Role : IEntity<string>
+public class Role : IDocument
 {
 
     [BsonId]

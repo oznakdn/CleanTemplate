@@ -1,11 +1,7 @@
-﻿using Clean.Domain.Users;
-using Gleeman.Repository.MongoDriver.Interfaces.Command.Create;
-using Gleeman.Repository.MongoDriver.Interfaces.Command.Update;
+﻿using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Domain.Users.Repositories;
 
-public interface IUserCommand :
-    IMongoCreateAsyncRepository<User>,
-    IMongoUpdateAsyncRepository<User>
+public interface IUserCommand : IMongoCommandRepository<User>
 {
 }

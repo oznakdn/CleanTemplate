@@ -1,8 +1,7 @@
-﻿using Clean.Domain.Orders;
-using Gleeman.Repository.EFCore.Interfaces.Query;
+﻿using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Domain.Orders.Repositories;
 
-public interface IOrderQuery : IEFQueryAsyncRepository<Order>
+public interface IOrderQuery : IEFQueryRepository<Order,Guid>
 {
 }

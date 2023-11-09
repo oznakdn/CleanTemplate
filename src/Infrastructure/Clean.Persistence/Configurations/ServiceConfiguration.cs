@@ -1,6 +1,5 @@
 ﻿using Clean.Persistence.Repositories.MongoDriver.Commands;
 using Clean.Persistence.Repositories.MongoDriver.Queries;
-using Gleeman.Repository.MongoDriver.Configuration;
 using Microsoft.Extensions.Configuration;
 using Clean.Caching.Configurations;
 using System.Reflection;
@@ -8,6 +7,8 @@ using Clean.Caching;
 using Clean.Persistence.Caching;
 using Clean.Domain.Users.Repositories;
 using Clean.Domain.Roles.Repositories;
+using Clean.Persistence.Options.Interfaces;
+using Clean.Persistence.Options;
 
 namespace Clean.Persistence.Configurations;
 
@@ -17,23 +18,23 @@ public static class ServiceConfiguration
     public static bool AutoMigration;
     public static IServiceCollection AddPersistenceService(this IServiceCollection services, IConfiguration configuration, ProviderType providerType, Assembly migrationAssembly)
     {
-        services.Configure<DatabaseSettings>(configuration.GetSection(nameof(DatabaseSettings)));
+        services.Configure<DatabaseOption>(configuration.GetSection(nameof(DatabaseOption)));
         ConnectionString = configuration.GetValue<string>("DatabaseSettings:ConnectionString")!;
         AutoMigration = configuration.GetValue<bool>("DatabaseSettings:AutoMigration");
 
         switch (providerType)
         {
             case ProviderType.MsSQLServer:
-                services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(ConnectionString, x => x.MigrationsAssembly(migrationAssembly.FullName)));
+                services.AddDbContext<EFContext>(option => option.UseSqlServer(ConnectionString, x => x.MigrationsAssembly(migrationAssembly.FullName)));
                 break;
             case ProviderType.MySQL:
-                services.AddDbContext<ApplicationDbContext>(option => option.UseMySql(ServerVersion.AutoDetect(ConnectionString), x => x.MigrationsAssembly(migrationAssembly.FullName)));
+                services.AddDbContext<EFContext>(option => option.UseMySql(ServerVersion.AutoDetect(ConnectionString), x => x.MigrationsAssembly(migrationAssembly.FullName)));
                 break;
             case ProviderType.PostgreSQL:
-                services.AddDbContext<ApplicationDbContext>(option => option.UseNpgsql(ConnectionString, x => x.MigrationsAssembly(migrationAssembly.FullName)));
+                services.AddDbContext<EFContext>(option => option.UseNpgsql(ConnectionString, x => x.MigrationsAssembly(migrationAssembly.FullName)));
                 break;
             case ProviderType.SQLite:
-                services.AddDbContext<ApplicationDbContext>(option => option.UseSqlite(ConnectionString, x => x.MigrationsAssembly(migrationAssembly.FullName)));
+                services.AddDbContext<EFContext>(option => option.UseSqlite(ConnectionString, x => x.MigrationsAssembly(migrationAssembly.FullName)));
                 break;
         }
 
@@ -62,7 +63,8 @@ public static class ServiceConfiguration
 
     private static IServiceCollection AddMongoService(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddMongoRepository(configuration);
+        services.Configure<MongoOption>(configuration.GetSection(nameof(MongoOption)));
+        services.AddScoped<IMongoOption>(opt=> opt.GetRequiredService<IOptions<MongoOption>>().Value);
         return services;
     }
 

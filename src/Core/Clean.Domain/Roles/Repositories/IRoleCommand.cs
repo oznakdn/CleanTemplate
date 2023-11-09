@@ -1,9 +1,7 @@
-﻿using Clean.Domain.Roles;
-using Gleeman.Repository.MongoDriver.Interfaces.Command.Create;
-using Gleeman.Repository.MongoDriver.Interfaces.Command.Update;
+﻿using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Domain.Roles.Repositories;
 
-public interface IRoleCommand : IMongoCreateAsyncRepository<Role>, IMongoUpdateAsyncRepository<Role>
+public interface IRoleCommand : IMongoCommandRepository<Role>
 {
 }

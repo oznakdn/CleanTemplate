@@ -12,9 +12,9 @@ namespace Clean.Application.UnitOfWork.Queries;
 public class QueryUnitOfWork : IQueryUnitOfWork
 {
 
-    private readonly ApplicationDbContext _context;
+    private readonly EFContext _context;
 
-    public QueryUnitOfWork(ApplicationDbContext context)
+    public QueryUnitOfWork(EFContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         BasketItem = BasketItem ?? new BasketItemQuery(_context);

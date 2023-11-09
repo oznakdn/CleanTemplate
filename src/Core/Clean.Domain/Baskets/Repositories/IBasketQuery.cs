@@ -1,8 +1,7 @@
-﻿using Clean.Domain.Baskets;
-using Gleeman.Repository.EFCore.Interfaces.Query;
+﻿using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Domain.Baskets.Repositories;
 
-public interface IBasketQuery : IEFQueryAsyncRepository<Basket>, IEFQuerySyncRepository<Basket>
+public interface IBasketQuery : IEFQueryRepository<Basket,Guid>
 {
 }

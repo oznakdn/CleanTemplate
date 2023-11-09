@@ -4,9 +4,9 @@ namespace Clean.Domain.Contracts.Abstracts;
 
 public abstract class Entity<TId> : IEntity<TId>
 {
-    public virtual TId Id { get;}
+    public virtual TId Id { get; protected set; }
 
-    public bool IsDeleted { get; }
+    public bool IsDeleted { get; protected set; }
 
     public Entity(TId id)
     {

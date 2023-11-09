@@ -1,10 +1,7 @@
-﻿using Clean.Domain.Inventories;
-using Gleeman.Repository.EFCore.Interfaces.Query;
+﻿using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Domain.Inventories.Repositories;
 
-public interface IInventoryQuery :
-    IEFQueryAsyncRepository<Inventory>,
-    IEFQuerySyncRepository<Inventory>
+public interface IInventoryQuery : IEFQueryRepository<Inventory,Guid>
 {
 }

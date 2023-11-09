@@ -1,12 +1,12 @@
 ﻿using Clean.Domain.Orders;
 using Clean.Domain.Orders.Repositories;
-using Gleeman.Repository.EFCore.Abstracts.Command;
+using Clean.Persistence.Repositories.EntityFramework.Common;
 
 namespace Clean.Persistence.Repositories.EntityFramework.Commands;
 
-public class OrderCommand : EFCommandRepository<Order, ApplicationDbContext>, IOrderCommand
+public class OrderCommand : EFCommandRepository<Order, EFContext, Guid>, IOrderCommand
 {
-    public OrderCommand(ApplicationDbContext dbContext) : base(dbContext)
+    public OrderCommand(EFContext context) : base(context)
     {
     }
 }

@@ -1,8 +1,7 @@
-﻿using Clean.Domain.Users;
-using Gleeman.Repository.MongoDriver.Interfaces.Query;
+﻿using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Domain.Users.Repositories;
 
-public interface IUserQuery : IMongoQueryAsyncRepository<User>
+public interface IUserQuery : IMongoQueryRepository<User>
 {
 }

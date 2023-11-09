@@ -1,8 +1,7 @@
-﻿using Clean.Domain.Roles;
-using Gleeman.Repository.MongoDriver.Interfaces.Query;
+﻿using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Domain.Roles.Repositories;
 
-public interface IRoleQuery : IMongoQueryAsyncRepository<Role>
+public interface IRoleQuery : IMongoQueryRepository<Role>
 {
 }

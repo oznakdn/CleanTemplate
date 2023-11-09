@@ -6,7 +6,7 @@ using Mapster;
 namespace Clean.Application.Features.Roles.Queries.GetRoles;
 
 public record GetRolesRequest:IRequest<TResult<GetRolesResponse>>;
-public record GetRolesResponse(string Title, string Description);
+public record GetRolesResponse(string Id, string Title, string Description);
 
 
 public class GetRolesHandler : IRequestHandler<GetRolesRequest, TResult<GetRolesResponse>>
@@ -25,7 +25,8 @@ public class GetRolesHandler : IRequestHandler<GetRolesRequest, TResult<GetRoles
         var config = new TypeAdapterConfig();
 
         config.NewConfig<Role,GetRolesResponse>()
-        .Map(dest=> dest.Title,src=> src.RoleTitle);
+        .Map(dest=> dest.Title,src=> src.RoleTitle)
+        .Map(dest=> dest.Id, src=>src.Id.ToString());
 
         var result = roles.Adapt<IEnumerable<GetRolesResponse>>(config);
         return TResult<GetRolesResponse>.Ok(result);

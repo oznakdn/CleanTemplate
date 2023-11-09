@@ -6,8 +6,8 @@ namespace Clean.Persistence.Caching;
 
 public class ProductCacheService : MemoryCacheService<Product>, IProductCacheService
 {
-    private readonly ApplicationDbContext _dbContext;
-    public ProductCacheService(IMemoryCache memoryCache, ApplicationDbContext dbContext) : base(memoryCache)
+    private readonly EFContext _dbContext;
+    public ProductCacheService(IMemoryCache memoryCache, EFContext dbContext) : base(memoryCache)
     {
         _dbContext = dbContext;
     }

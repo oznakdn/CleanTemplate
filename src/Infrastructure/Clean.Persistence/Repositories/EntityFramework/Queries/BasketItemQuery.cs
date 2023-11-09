@@ -1,13 +1,13 @@
 ﻿using Clean.Domain.BasketItems;
 using Clean.Domain.BasketItems.Repositories;
-using Gleeman.Repository.EFCore.Abstracts.Query;
+using Clean.Persistence.Repositories.EntityFramework.Common;
 
 namespace Clean.Persistence.Repositories.EntityFramework.Queries;
 
 
-public class BasketItemQuery : EFQueryRepository<BasketItem, ApplicationDbContext>, IBasketItemQuery
+public class BasketItemQuery : EFQueryRepository<BasketItem, EFContext, Guid>,IBasketItemQuery
 {
-    public BasketItemQuery(ApplicationDbContext dbContext) : base(dbContext)
+    public BasketItemQuery(EFContext context) : base(context)
     {
     }
 }

@@ -1,13 +1,13 @@
 ﻿using Clean.Domain.Users;
 using Clean.Domain.Users.Repositories;
-using Gleeman.Repository.MongoDriver;
-using Gleeman.Repository.MongoDriver.Abstracts.Command;
+using Clean.Persistence.Options.Interfaces;
+using Clean.Persistence.Repositories.MongoDriver.Common;
 
 namespace Clean.Persistence.Repositories.MongoDriver.Commands;
 
 public class UserCommand : MongoCommandRepository<User>, IUserCommand
 {
-    public UserCommand(IOptions<MongoOption>? option) : base(option, nameof(User))
+    public UserCommand(IMongoOption option) : base(option,nameof(User))
     {
     }
 }

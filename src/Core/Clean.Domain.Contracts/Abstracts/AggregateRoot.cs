@@ -2,17 +2,14 @@
 
 namespace Clean.Domain.Contracts.Abstracts;
 
-public abstract class AggregateRoot<T, TId> : IEntity<TId>
+public abstract class AggregateRoot<T, TId> : Entity<TId>
 where T : IEntity<TId>
 {
-    public virtual TId Id { get; set; }
-    public bool IsDeleted { get; set; } = false;
-
-    public AggregateRoot(TId id)
+    protected AggregateRoot(TId id) : base(id)
     {
         if (!IsValid(id))
             throw new ArgumentException("Identifier format is wrong!");
-        Id = id;
+         Id = id;
     }
 
     public override bool Equals(object? obj)

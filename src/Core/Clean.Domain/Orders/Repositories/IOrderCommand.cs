@@ -1,8 +1,7 @@
-﻿using Clean.Domain.Orders;
-using Gleeman.Repository.EFCore.Interfaces.Command.Create;
+﻿using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Domain.Orders.Repositories;
 
-public interface IOrderCommand : IEFCreateAsyncRepository<Order>
+public interface IOrderCommand : IEFCommandRepository<Order,Guid>
 {
 }

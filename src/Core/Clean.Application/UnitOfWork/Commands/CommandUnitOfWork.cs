@@ -11,8 +11,8 @@ namespace Clean.Application.UnitOfWork.Commands;
 
 public class CommandUnitOfWork : ICommandUnitOfWork
 {
-    private readonly ApplicationDbContext _context;
-    public CommandUnitOfWork(ApplicationDbContext context)
+    private readonly EFContext _context;
+    public CommandUnitOfWork(EFContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         BasketItem = BasketItem ?? new BasketItemCommand(_context);

@@ -3,7 +3,7 @@ using Clean.Domain.Shared;
 
 namespace Clean.Domain.Users;
 
-public class User : IEntity<string>
+public class User : IDocument
 {
 
     [BsonId]
@@ -19,7 +19,6 @@ public class User : IEntity<string>
     public DateTime? ExpiredDate { get; private set; }
     public string? RoleId { get; private set; }
     public bool IsDeleted { get; private set; }
-
 
     public static TResult<User> CreateUser(string firstName, string lastName, string username, string email, string password)
     {

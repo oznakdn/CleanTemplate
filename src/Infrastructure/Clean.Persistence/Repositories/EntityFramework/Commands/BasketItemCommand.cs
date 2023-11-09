@@ -1,13 +1,12 @@
 ﻿using Clean.Domain.BasketItems;
 using Clean.Domain.BasketItems.Repositories;
-using Gleeman.Repository.EFCore.Abstracts.Command;
+using Clean.Persistence.Repositories.EntityFramework.Common;
 
 namespace Clean.Persistence.Repositories.EntityFramework.Commands;
 
-public class BasketItemCommand : EFCommandRepository<BasketItem, ApplicationDbContext>, IBasketItemCommand
+public class BasketItemCommand : EFCommandRepository<BasketItem, EFContext, Guid>, IBasketItemCommand
 {
-    public BasketItemCommand(ApplicationDbContext dbContext) : base(dbContext)
+    public BasketItemCommand(EFContext context) : base(context)
     {
     }
-
 }

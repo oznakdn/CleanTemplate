@@ -1,6 +1,7 @@
 ﻿using Clean.Domain.Shared;
 using Clean.Domain.Users;
 using Clean.Domain.Users.Repositories;
+using Clean.Identity.Helpers;
 
 namespace Clean.Application.Features.Users.Commands.Register;
 
@@ -10,7 +11,7 @@ public record RegisterResponse;
 
 public class RegisterHandler : IRequestHandler<RegisterRequest, TResult<RegisterResponse>>
 {
-   
+
     private readonly IUserCommand _command;
 
     public RegisterHandler(IUserCommand command)
@@ -23,19 +24,29 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, TResult<Register
         var validator = new RegisterValidator();
         var validation = validator.Validate(request);
         var errors = new List<string>();
-        
+        TResult<User> result;
+
         if (!validation.IsValid)
         {
             validation.Errors.ForEach(error => errors.Add(error.ErrorMessage));
             return TResult<RegisterResponse>.Fail(errors);
         }
 
-        var result = User.CreateUser(request.FirstName,request.LastName,request.Username,request.Email,request.Password);
-        if(result.IsFailed)
+        if (string.IsNullOrEmpty(request.RoleId))
+        {
+             result = User.CreateUser(request.FirstName, request.LastName, request.Username, request.Email, request.Password.HashPassword());
+
+        }
+        else
+        {
+            result = User.CreateUser(request.FirstName, request.LastName, request.Username, request.Email, request.Password.HashPassword(),request.RoleId);
+        }
+
+        if (result.IsFailed)
         {
             return TResult<RegisterResponse>.Fail(errors);
         }
-        
+
         await _command.CreateAsync(result.Value, cancellationToken);
         return TResult<RegisterResponse>.Ok("User was be register.");
     }

@@ -1,17 +1,17 @@
 ﻿using Clean.Domain.Products;
 using Clean.Domain.Products.Repositories;
-using Gleeman.Repository.EFCore.Abstracts.Query;
+using Clean.Persistence.Repositories.EntityFramework.Common;
 
 namespace Clean.Persistence.Repositories.EntityFramework.Queries;
 
-public class ProductQuery : EFQueryRepository<Product, ApplicationDbContext>, IProductQuery
+public class ProductQuery : EFQueryRepository<Product, EFContext,Guid>, IProductQuery
 {
-    public ProductQuery(ApplicationDbContext dbContext) : base(dbContext)
+    public ProductQuery(EFContext context) : base(context)
     {
     }
 
     public async Task<List<Product>> GetAllProductsWithInventoryAsync(int maxPage, int pageSize, int pageNumber, CancellationToken cancellationToken = default)
-        => await _dbContext.Products
+        => await _context.Products
         .Include(x => x.Inventory)
         .Skip((pageNumber - 1) * pageSize)
         .Take(pageSize)

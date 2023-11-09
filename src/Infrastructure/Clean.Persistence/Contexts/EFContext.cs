@@ -10,9 +10,9 @@ using Clean.Persistence.EntityConfigurations;
 
 namespace Clean.Persistence.Contexts;
 
-public class ApplicationDbContext:DbContext
+public class EFContext:DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext>options):base(options)
+    public EFContext(DbContextOptions<EFContext>options):base(options)
     {
         if(!string.IsNullOrEmpty(ServiceConfiguration.ConnectionString) && ServiceConfiguration.AutoMigration == true)
         {

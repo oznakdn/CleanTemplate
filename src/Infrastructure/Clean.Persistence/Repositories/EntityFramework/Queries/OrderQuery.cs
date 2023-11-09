@@ -1,12 +1,12 @@
 ﻿using Clean.Domain.Orders;
 using Clean.Domain.Orders.Repositories;
-using Gleeman.Repository.EFCore.Abstracts.Query;
+using Clean.Persistence.Repositories.EntityFramework.Common;
 
 namespace Clean.Persistence.Repositories.EntityFramework.Queries;
 
-public class OrderQuery : EFQueryRepository<Order, ApplicationDbContext>, IOrderQuery
+public class OrderQuery : EFQueryRepository<Order, EFContext, Guid>, IOrderQuery
 {
-    public OrderQuery(ApplicationDbContext dbContext) : base(dbContext)
+    public OrderQuery(EFContext context) : base(context)
     {
     }
 }
