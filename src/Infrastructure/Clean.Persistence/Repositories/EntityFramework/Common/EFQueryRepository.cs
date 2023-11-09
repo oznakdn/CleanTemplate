@@ -330,7 +330,7 @@ public abstract class EFQueryRepository<T, TContext, TId> : IEFQueryRepository<T
 
     public virtual bool Exist(Expression<Func<T, bool>> filter) => _table.Any(filter);
 
-    public async Task<IQueryable<T>> QueryFilterAsync(
+    public virtual async Task<IQueryable<T>> QueryFilterAsync(
         bool noTracking, 
         Expression<Func<T, bool>> filter, 
         CancellationToken cancellationToken = default)
@@ -340,7 +340,7 @@ public abstract class EFQueryRepository<T, TContext, TId> : IEFQueryRepository<T
         return await Task.Run(() => query.AsQueryable(), cancellationToken);
     }
 
-    public async Task<IQueryable<T>> QueryFilterAndIncludeAsync(
+    public virtual async Task<IQueryable<T>> QueryFilterAndIncludeAsync(
         bool noTracking, 
         Expression<Func<T, bool>> filter,
         Expression<Func<T, object>>[] includeProperties, 
@@ -359,7 +359,7 @@ public abstract class EFQueryRepository<T, TContext, TId> : IEFQueryRepository<T
         return await Task.Run(() => query.AsQueryable(), cancellationToken);
     }
 
-    public async Task<IEnumerable<T>> ReadAllWithPaginationAsync(
+    public virtual async Task<IEnumerable<T>> ReadAllWithPaginationAsync(
         bool noTracking, 
         int pageSize = 10,
         int PageNumber = 1, 
@@ -385,7 +385,7 @@ public abstract class EFQueryRepository<T, TContext, TId> : IEFQueryRepository<T
         return await Task.Run(() => query.AsQueryable(), cancellationToken);
     }
 
-    public async Task<IEnumerable<T>> ReadAllWithFilterAsync(
+    public virtual async Task<IEnumerable<T>> ReadAllWithFilterAsync(
         bool noTracking,
         Expression<Func<T, bool>> filter,
         CancellationToken cancellationToken = default)
@@ -395,7 +395,7 @@ public abstract class EFQueryRepository<T, TContext, TId> : IEFQueryRepository<T
         return await Task.Run(() => query.AsQueryable(), cancellationToken);
     }
 
-    public async Task<IEnumerable<T>> ReadAllWithFilterAndIncludeAsync(
+    public virtual async Task<IEnumerable<T>> ReadAllWithFilterAndIncludeAsync(
         bool noTracking,
         Expression<Func<T, bool>> filter,
         Expression<Func<T, object>>[] includeProperties,
@@ -412,7 +412,7 @@ public abstract class EFQueryRepository<T, TContext, TId> : IEFQueryRepository<T
         return await Task.Run(() => query.AsQueryable(), cancellationToken);
     }
 
-    public IQueryable<T> QueryFilter(
+    public virtual IQueryable<T> QueryFilter(
         bool noTracking,
         Expression<Func<T, bool>> filter)
     {
@@ -421,7 +421,7 @@ public abstract class EFQueryRepository<T, TContext, TId> : IEFQueryRepository<T
         return query;
     }
 
-    public IQueryable<T> QueryFilterAndInclude(
+    public virtual IQueryable<T> QueryFilterAndInclude(
         bool noTracking,
         Expression<Func<T, bool>> filter,
         Expression<Func<T, object>>[] includeProperties)
@@ -439,7 +439,7 @@ public abstract class EFQueryRepository<T, TContext, TId> : IEFQueryRepository<T
         return query;
     }
 
-    public IEnumerable<T> ReadAllWithPagination(
+    public virtual IEnumerable<T> ReadAllWithPagination(
         bool noTracking,
         int pageSize = 10,
         int PageNumber = 1,

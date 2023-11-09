@@ -19,8 +19,8 @@ public static class ServiceConfiguration
     public static IServiceCollection AddPersistenceService(this IServiceCollection services, IConfiguration configuration, ProviderType providerType, Assembly migrationAssembly)
     {
         services.Configure<DatabaseOption>(configuration.GetSection(nameof(DatabaseOption)));
-        ConnectionString = configuration.GetValue<string>("DatabaseSettings:ConnectionString")!;
-        AutoMigration = configuration.GetValue<bool>("DatabaseSettings:AutoMigration");
+        ConnectionString = configuration.GetValue<string>("DatabaseOption:ConnectionString")!;
+        AutoMigration = configuration.GetValue<bool>("DatabaseOption:AutoMigration");
 
         switch (providerType)
         {

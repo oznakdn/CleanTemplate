@@ -6,7 +6,7 @@ using Mapster;
 namespace Clean.Application.Features.Products.Queries.GetProducts;
 
 
-public record GetProductsRequest(int MaxPage, int PageSize, int PageNumber) : IRequest<TResult<GetProductsResponse>>;
+public record GetProductsRequest(int MaxPage, int PageSize, int PageNumber, string? query) : IRequest<TResult<GetProductsResponse>>;
 public record GetProductsResponse(string Id, string DisplayName, string Currency, decimal Price, string Category);
 
 
@@ -23,7 +23,8 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, TResult<Ge
 
     public async Task<TResult<GetProductsResponse>> Handle(GetProductsRequest request, CancellationToken cancellationToken)
     {
-        var products = await _query.Product.GetAllProductsWithInventoryAsync(request.MaxPage,request.PageSize,request.PageNumber,default);
+    
+        var products = await _query.Product.ProductSortingAsync(request.MaxPage, request.PageSize, request.PageNumber, request.query, default);
 
         var config = new TypeAdapterConfig();
         config.NewConfig<Product, GetProductsResponse>()
@@ -34,7 +35,7 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, TResult<Ge
 
         var result = products.Adapt<IEnumerable<GetProductsResponse>>(config);
 
-        if(products is null)
+        if (products is null)
         {
             return TResult<GetProductsResponse>.Fail("Product not found!");
         }

@@ -3,7 +3,7 @@ using Clean.Persistence.Options.Interfaces;
 
 namespace Clean.Persistence.Repositories.MongoDriver.Common;
 
-public class MongoQueryRepository<TCollection> : MongoContext<TCollection>,IMongoQueryRepository<TCollection>
+public abstract class MongoQueryRepository<TCollection> : MongoContext<TCollection>,IMongoQueryRepository<TCollection>
 where TCollection : IDocument
 {
     public MongoQueryRepository(IMongoOption option, string CollectionName) : base(option, $"{CollectionName}s")
@@ -62,12 +62,12 @@ where TCollection : IDocument
         return _collection.Find(filter).First();
     }
 
-    public async Task<IEnumerable<TCollection>> ReadAllWithPaginationAsync(int pageSize = 10, int pageNumber = 1, CancellationToken cancellationToken = default, Expression<Func<TCollection, bool>> filter = null)
+    public virtual async Task<IEnumerable<TCollection>> ReadAllWithPaginationAsync(int pageSize = 10, int pageNumber = 1, CancellationToken cancellationToken = default, Expression<Func<TCollection, bool>> filter = null)
     {
         return await _collection.Find(filter == null ? x => true : filter).Skip((pageNumber - 1) * pageSize).Limit(pageSize).ToListAsync(cancellationToken);
     }
 
-    public IEnumerable<TCollection> ReadAllWithPagination(int pageSize = 10, int pageNumber = 1, Expression<Func<TCollection, bool>> filter = null)
+    public virtual IEnumerable<TCollection> ReadAllWithPagination(int pageSize = 10, int pageNumber = 1, Expression<Func<TCollection, bool>> filter = null)
     {
        return _collection.Find(filter == null ? x => true : filter).Skip((pageNumber - 1) * pageSize).Limit(pageSize).ToList();
     }

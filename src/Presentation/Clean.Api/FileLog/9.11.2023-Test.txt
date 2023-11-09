@@ -35,3 +35,27 @@ info: 9.11.2023 10:57:11    POST - /api/Account/CreateRole - 201
 info: 9.11.2023 10:57:16    GET - /api/Account/GetRoles - 200
 info: 9.11.2023 10:57:47    POST - /api/Account/Register - 201
 info: 9.11.2023 10:58:11    PUT - /api/Account/Login - 200
+fail: 9.11.2023 12:21:37    GET - /api/Products/GetProducts - 400
+fail: 9.11.2023 12:22:20    GET - /api/Products/GetProducts - 500 - The ConnectionString property has not been initialized.
+fail: 9.11.2023 12:22:54    GET - /api/Products/GetProducts - 500 - The ConnectionString property has not been initialized.
+fail: 9.11.2023 12:24:17    GET - /api/Products/GetProducts - 500 - 42703: column i.IsDeleted does not exist
+
+POSITION: 134
+info: 9.11.2023 12:28:47    GET - /api/Products/GetProducts - 200
+info: 9.11.2023 12:29:17    POST - /api/Products/CreateProduct - 200
+info: 9.11.2023 12:29:37    POST - /api/Products/CreateProduct - 200
+info: 9.11.2023 12:30:01    POST - /api/Products/CreateProduct - 200
+info: 9.11.2023 12:30:04    GET - /api/Products/GetProducts - 200
+fail: 9.11.2023 12:30:19    GET - /api/Products/GetProducts - 500 - Syntax error
+info: 9.11.2023 12:30:28    GET - /api/Products/GetProducts - 200
+info: 9.11.2023 12:32:14    GET - /api/Products/GetProducts - 200
+info: 9.11.2023 12:32:27    GET - /api/Products/GetProducts - 200
+info: 9.11.2023 12:33:31    GET - /api/Products/GetProducts - 200
+info: 9.11.2023 12:33:48    GET - /api/Products/GetProducts - 200
+info: 9.11.2023 12:33:56    GET - /api/Products/GetProductsCache - 200
+info: 9.11.2023 12:34:09    GET - /api/Products/GetProducts - 200
+info: 9.11.2023 12:34:13    GET - /api/Products/GetProducts - 200
+fail: 9.11.2023 12:34:23    GET - /api/Products/GetProducts - 500 - Value cannot be empty. (Parameter 'ordering')
+info: 9.11.2023 12:34:28    GET - /api/Products/GetProducts - 200
+info: 9.11.2023 12:35:13    GET - /api/Products/GetProducts - 200
+info: 9.11.2023 12:35:23    GET - /api/Products/GetProducts - 200
