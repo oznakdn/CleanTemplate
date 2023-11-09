@@ -43,7 +43,7 @@
 - [x] Generic repository pattern
 - [x] Unit Of Work pattern
 - [x] Result pattern
-- [X] Pagination and Filtering
+- [X] Pagination, Filtering and Sorting
 - [x] Claim based authentication with Json Web Token
 - [x] Password hashing
 - [x] Logging
