@@ -1,7 +1,7 @@
-﻿using Clean.Domain.Account;
-using Clean.Domain.Repositories.Commands;
-using Clean.Domain.Repositories.Queries;
+﻿using Clean.Domain.Roles.Repositories;
 using Clean.Domain.Shared;
+using Clean.Domain.Users;
+using Clean.Domain.Users.Repositories;
 using Clean.Identity.Helpers;
 using Gleeman.JwtGenerator;
 using Gleeman.JwtGenerator.Generator;

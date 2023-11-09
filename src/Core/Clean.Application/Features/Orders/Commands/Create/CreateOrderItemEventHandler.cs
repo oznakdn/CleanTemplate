@@ -1,25 +1,11 @@
 ﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
-using Clean.Domain.Baskets;
 using Clean.Domain.Contracts.Abstracts;
-using Clean.Domain.Contracts.Interfaces;
-using Clean.Domain.Orders;
+using Clean.Domain.OrderItems;
+using Clean.Domain.OrderItems.Events;
 
 namespace Clean.Application.Features.Orders.Commands.Create;
 
-
-public class CreateOrderItemEvent : IDomaintEvent
-{
-    public CreateOrderItemEvent(Guid basketId, Guid orderId)
-    {
-        BasketId = basketId;
-        OrderId = orderId;
-    }
-
-    public Guid BasketId { get; set; }
-    public Guid OrderId { get; set; }
-    public OrderItem OrderItem { get; set; }
-}
 public class CreateOrderItemEventHandler : DomainEventHandler<CreateOrderItemEvent, OrderItem>
 {
     private readonly IQueryUnitOfWork _query;
@@ -32,8 +18,6 @@ public class CreateOrderItemEventHandler : DomainEventHandler<CreateOrderItemEve
 
     protected async override Task<OrderItem> Handle(CreateOrderItemEvent @event, CancellationToken cancellationToken)
     {
-
-
         Event += (s, e) =>
         {
             var basketItems = _query.BasketItem.ReadAll(

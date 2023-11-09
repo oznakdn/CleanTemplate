@@ -1,5 +1,8 @@
 ﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
+using Clean.Domain.BasketItems.Events;
+using Clean.Domain.Customers.Events;
+using Clean.Domain.OrderItems.Events;
 using Clean.Domain.Orders;
 using Clean.Domain.Shared;
 

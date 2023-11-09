@@ -1,4 +1,5 @@
 ﻿using Clean.Domain.Contracts.Abstracts;
+using Clean.Domain.Customers.ValueObjects;
 using Clean.Domain.Shared;
 
 namespace Clean.Domain.Customers;

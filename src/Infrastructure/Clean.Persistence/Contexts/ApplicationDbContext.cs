@@ -1,5 +1,8 @@
-﻿using Clean.Domain.Baskets;
+﻿using Clean.Domain.BasketItems;
+using Clean.Domain.Baskets;
 using Clean.Domain.Customers;
+using Clean.Domain.Inventories;
+using Clean.Domain.OrderItems;
 using Clean.Domain.Orders;
 using Clean.Domain.Products;
 using Clean.Persistence.Configurations;

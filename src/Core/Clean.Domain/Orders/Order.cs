@@ -1,4 +1,6 @@
 ﻿using Clean.Domain.Contracts.Abstracts;
+using Clean.Domain.OrderItems;
+using Clean.Domain.Orders.Enums;
 using Clean.Domain.Shared;
 
 namespace Clean.Domain.Orders;

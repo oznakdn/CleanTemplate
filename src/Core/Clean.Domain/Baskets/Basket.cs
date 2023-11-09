@@ -1,4 +1,5 @@
-﻿using Clean.Domain.Contracts.Abstracts;
+﻿using Clean.Domain.BasketItems;
+using Clean.Domain.Contracts.Abstracts;
 
 namespace Clean.Domain.Baskets
 {

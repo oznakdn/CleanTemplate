@@ -1,0 +1,11 @@
+﻿using Clean.Domain.Customers;
+using Gleeman.Repository.EFCore.Interfaces.Query;
+
+namespace Clean.Domain.Customers.Repositories;
+
+public interface ICustomerQuery :
+    IEFQueryAsyncRepository<Customer>,
+    IEFQuerySyncRepository<Customer>
+{
+    Task<List<Customer>> GetCustomersAsync(CancellationToken cancellationToken = default);
+}

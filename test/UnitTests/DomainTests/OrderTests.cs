@@ -1,3 +1,4 @@
+using Clean.Domain.OrderItems;
 using Clean.Domain.Orders;
 using Clean.Domain.Shared;
 

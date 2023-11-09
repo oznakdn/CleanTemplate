@@ -1,5 +1,6 @@
 ﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Domain.Products;
+using Clean.Domain.Products.Enums;
 using Clean.Domain.Shared;
 
 namespace Clean.Application.Features.Products.Commands.Create;

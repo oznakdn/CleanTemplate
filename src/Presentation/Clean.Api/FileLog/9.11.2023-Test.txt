@@ -1,0 +1,1 @@
+info: 9.11.2023 07:36:53    GET - /api/Products/GetProducts - 200

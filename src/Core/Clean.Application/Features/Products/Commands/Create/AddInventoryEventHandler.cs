@@ -1,7 +1,7 @@
 ﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Domain.Contracts.Abstracts;
 using Clean.Domain.Contracts.Interfaces;
-using Clean.Domain.Products;
+using Clean.Domain.Inventories;
 
 namespace Clean.Application.Features.Products.Commands.Create;
 

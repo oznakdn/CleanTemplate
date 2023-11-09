@@ -1,5 +1,6 @@
 ﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Domain.Baskets;
+using Clean.Domain.Baskets.Events;
 using Clean.Domain.Customers;
 using Clean.Domain.Shared;
 

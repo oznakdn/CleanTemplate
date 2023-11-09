@@ -1,4 +1,5 @@
 using Clean.Domain.Products;
+using Clean.Domain.Products.Enums;
 
 namespace DomainTests;
 

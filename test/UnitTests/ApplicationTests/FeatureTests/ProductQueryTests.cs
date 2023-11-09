@@ -1,6 +1,7 @@
 ﻿using Clean.Application.Features.Products.Queries.GetProducts;
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Products;
+using Clean.Domain.Products.Enums;
 using Clean.Domain.Shared;
 using Moq;
 

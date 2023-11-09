@@ -1,6 +1,4 @@
-﻿using Clean.Domain.Repositories.Commands;
-using Clean.Domain.Repositories.Queries;
-using Clean.Persistence.Repositories.MongoDriver.Commands;
+﻿using Clean.Persistence.Repositories.MongoDriver.Commands;
 using Clean.Persistence.Repositories.MongoDriver.Queries;
 using Gleeman.Repository.MongoDriver.Configuration;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +6,8 @@ using Clean.Caching.Configurations;
 using System.Reflection;
 using Clean.Caching;
 using Clean.Persistence.Caching;
+using Clean.Domain.Users.Repositories;
+using Clean.Domain.Roles.Repositories;
 
 namespace Clean.Persistence.Configurations;
 

@@ -1,4 +1,4 @@
-﻿using Clean.Domain.Products;
+﻿using Clean.Domain.Inventories;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Clean.Persistence.EntityConfigurations;

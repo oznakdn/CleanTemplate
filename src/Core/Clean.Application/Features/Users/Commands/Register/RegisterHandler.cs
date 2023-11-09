@@ -1,6 +1,6 @@
-﻿using Clean.Domain.Account;
-using Clean.Domain.Repositories.Commands;
-using Clean.Domain.Shared;
+﻿using Clean.Domain.Shared;
+using Clean.Domain.Users;
+using Clean.Domain.Users.Repositories;
 
 namespace Clean.Application.Features.Users.Commands.Register;
 

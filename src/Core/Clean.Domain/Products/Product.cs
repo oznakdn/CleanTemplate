@@ -1,4 +1,7 @@
 ﻿using Clean.Domain.Contracts.Abstracts;
+using Clean.Domain.Inventories;
+using Clean.Domain.Products.Enums;
+using Clean.Domain.Products.ValueObjects;
 using Clean.Domain.Shared;
 
 namespace Clean.Domain.Products;

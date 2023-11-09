@@ -1,21 +1,12 @@
 ﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Domain.Baskets;
+using Clean.Domain.Baskets.Events;
 using Clean.Domain.Contracts.Abstracts;
-using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Application.Features.Customers.Commands.Create;
 
 
-public class CreateBasketEvent : IDomaintEvent
-{
-    public CreateBasketEvent(string customerId)
-    {
-        CustomerId = customerId;
-    }
 
-    public string CustomerId { get; set; }
-    public Basket Basket { get; set; }
-}
 public class CreateBasketEventHandler : DomainEventHandler<CreateBasketEvent, Basket>
 {
     private readonly ICommandUnitOfWork _command;

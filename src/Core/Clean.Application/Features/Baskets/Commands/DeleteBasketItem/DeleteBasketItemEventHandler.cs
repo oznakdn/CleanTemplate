@@ -1,24 +1,11 @@
 ﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
-using Clean.Domain.Baskets;
+using Clean.Domain.BasketItems;
+using Clean.Domain.BasketItems.Events;
 using Clean.Domain.Contracts.Abstracts;
-using Clean.Domain.Contracts.Interfaces;
 
 namespace Clean.Application.Features.Baskets.Commands.DeleteBasketItem;
 
-
-public class DeleteBasketItemEvent : IDomaintEvent
-{
-    public DeleteBasketItemEvent(Guid basketId, Guid basketItemId)
-    {
-        BasketId = basketId;
-        BasketItemId = basketItemId;
-    }
-
-    public Guid BasketId { get; set; }
-    public Guid BasketItemId { get; set; }
-    public BasketItem BasketItem { get; set; }
-}
 
 public class DeleteBasketItemEventHandler : DomainEventHandler<DeleteBasketItemEvent, BasketItem>
 {

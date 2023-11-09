@@ -1,7 +1,8 @@
 ﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
-using Clean.Domain.Baskets;
-using Clean.Domain.Products;
+using Clean.Domain.BasketItems;
+using Clean.Domain.BasketItems.Events;
+using Clean.Domain.Inventories;
 using Clean.Domain.Shared;
 
 namespace Clean.Application.Features.Baskets.Commands.AddBasketItem;

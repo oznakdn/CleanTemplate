@@ -1,21 +1,11 @@
 ﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Contracts.Abstracts;
-using Clean.Domain.Contracts.Interfaces;
 using Clean.Domain.Customers;
+using Clean.Domain.Customers.Events;
 
 namespace Clean.Application.Features.Orders.Commands.Create;
 
-
-public class UpdateCustomerEvent : IDomaintEvent
-{
-    public UpdateCustomerEvent(Customer customer)
-    {
-        Customer = customer;
-    }
-
-    public Customer Customer { get; set; }
-}
 
 public class UpdateCustomerEventHandler : DomainEventHandler<UpdateCustomerEvent, Customer>
 {

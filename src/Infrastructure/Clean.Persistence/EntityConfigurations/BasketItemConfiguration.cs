@@ -1,4 +1,4 @@
-﻿using Clean.Domain.Baskets;
+﻿using Clean.Domain.BasketItems;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Clean.Persistence.EntityConfigurations;

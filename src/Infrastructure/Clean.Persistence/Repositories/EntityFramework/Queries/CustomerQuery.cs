@@ -1,5 +1,5 @@
 ﻿using Clean.Domain.Customers;
-using Clean.Domain.Repositories.Queries;
+using Clean.Domain.Customers.Repositories;
 using Gleeman.Repository.EFCore.Abstracts.Query;
 
 namespace Clean.Persistence.Repositories.EntityFramework.Queries;

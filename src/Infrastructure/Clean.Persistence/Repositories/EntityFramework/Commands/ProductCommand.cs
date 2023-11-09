@@ -1,5 +1,5 @@
 ﻿using Clean.Domain.Products;
-using Clean.Domain.Repositories.Commands;
+using Clean.Domain.Products.Repositories;
 using Gleeman.Repository.EFCore.Abstracts.Command;
 
 namespace Clean.Persistence.Repositories.EntityFramework.Commands;

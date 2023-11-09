@@ -1,5 +1,5 @@
-﻿using Clean.Domain.Account;
-using Clean.Domain.Repositories.Commands;
+﻿using Clean.Domain.Roles;
+using Clean.Domain.Roles.Repositories;
 using Clean.Domain.Shared;
 
 namespace Clean.Application.Features.Roles.Commands.Create;

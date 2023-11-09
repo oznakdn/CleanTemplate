@@ -1,27 +1,9 @@
 ﻿using Clean.Application.UnitOfWork.Commands;
-using Clean.Domain.Baskets;
+using Clean.Domain.BasketItems;
+using Clean.Domain.BasketItems.Events;
 using Clean.Domain.Contracts.Abstracts;
-using Clean.Domain.Contracts.Interfaces;
-using Clean.Domain.Products;
-using Clean.Domain.Repositories;
 
 namespace Clean.Application.Features.Baskets.Commands.AddBasketItem;
-
-
-public class AddBasketItemEvent : IDomaintEvent
-{
-    public AddBasketItemEvent(Basket basket, Product product, int quantity)
-    {
-        Basket = basket;
-        Product = product;
-        Quantity = quantity;
-    }
-
-    public BasketItem BasketItem { get; set; }
-    public Basket Basket { get; set; }
-    public Product Product { get; set; }
-    public int Quantity { get; set; }
-}
 
 
 public class AddBasketItemEventHandler : DomainEventHandler<AddBasketItemEvent, BasketItem>

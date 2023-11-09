@@ -1,5 +1,5 @@
-﻿using Clean.Domain.Baskets;
-using Clean.Domain.Repositories.Commands;
+﻿using Clean.Domain.BasketItems;
+using Clean.Domain.BasketItems.Repositories;
 using Gleeman.Repository.EFCore.Abstracts.Command;
 
 namespace Clean.Persistence.Repositories.EntityFramework.Commands;

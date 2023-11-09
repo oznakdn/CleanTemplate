@@ -1,4 +1,5 @@
-﻿using Clean.Domain.Baskets;
+﻿using Clean.Domain.BasketItems;
+using Clean.Domain.Baskets;
 
 namespace DomainTests;
 
