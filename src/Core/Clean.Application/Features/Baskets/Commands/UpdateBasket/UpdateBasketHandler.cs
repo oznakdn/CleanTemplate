@@ -30,7 +30,7 @@ public class UpdateBasketHandler : IRequestHandler<UpdateBasketRequest, TResult<
             return TResult<UpdateBasketResponse>.Fail("Basket not found!");
 
 
-        BasketItem basketItem = await _updateBasketItemEvent.Publish(new UpdateBasketItemEvent(
+        BasketItem basketItem = await _updateBasketItemEvent.PublishAsync(new UpdateBasketItemEvent(
             Guid.Parse(request.BasketItemId),
             request.Quantity
             ), cancellationToken);

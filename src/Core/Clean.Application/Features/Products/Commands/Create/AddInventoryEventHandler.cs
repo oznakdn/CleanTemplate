@@ -28,11 +28,11 @@ public class AddInventoryEventHandler : DomainEventHandler<AddInventoryEvent, In
         _command = command;
     }
 
-    protected override async Task<Inventory> Handle(AddInventoryEvent @event, CancellationToken cancellationToken)
+    protected override Inventory Handle(AddInventoryEvent @event)
     {
         Event += (s, e) => _command.Inventory.Insert(@event.Inventory = new Inventory(e.ProductId, e.Quantity));
         this.EventInvoke(@event);
-        await Task.CompletedTask;
         return @event.Inventory;
     }
+
 }

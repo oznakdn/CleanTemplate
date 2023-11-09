@@ -19,7 +19,28 @@ public class UpdateBasketItemEventHandler : DomainEventHandler<UpdateBasketItemE
         _command = command;
     }
 
-    protected override async Task<BasketItem> Handle(UpdateBasketItemEvent @event, CancellationToken cancellationToken)
+    protected override BasketItem Handle(UpdateBasketItemEvent @event)
+    {
+        Event += (s, e) =>
+        {
+            e.BasketItem = _query.BasketItem.ReadSingleOrDefault(true, x => x.Id == e.BasketItemId);
+            e.BasketItem.UpdateQuantity(e.Quantity);
+        };
+
+        EventInvoke(@event);
+        if (@event.BasketItem.ProductQuantity == 0)
+        {
+            _command.BasketItem.Remove(@event.BasketItem);
+        }
+        else
+        {
+            _command.BasketItem.Edit(@event.BasketItem);
+        }
+
+        return @event.BasketItem;
+    }
+
+    protected override async Task<BasketItem> HandleAsync(UpdateBasketItemEvent @event, CancellationToken cancellationToken)
     {
         Event += (s, e) =>
         {
@@ -40,4 +61,5 @@ public class UpdateBasketItemEventHandler : DomainEventHandler<UpdateBasketItemE
         await Task.CompletedTask;
         return @event.BasketItem;
     }
+
 }

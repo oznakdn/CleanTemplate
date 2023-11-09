@@ -18,7 +18,21 @@ public class DeleteBasketItemEventHandler : DomainEventHandler<DeleteBasketItemE
         _command = command;
     }
 
-    protected async override Task<BasketItem> Handle(DeleteBasketItemEvent @event, CancellationToken cancellationToken)
+    protected override BasketItem Handle(DeleteBasketItemEvent @event)
+    {
+        Event += (s, e) =>
+        {
+            @event.BasketItem = _query.BasketItem.ReadSingleOrDefault(true,
+                                x => x.BasketId == e.BasketId &&
+                               x.Id == e.BasketItemId);
+            _command.BasketItem.Remove(@event.BasketItem);
+        };
+
+        EventInvoke(@event);
+        return @event.BasketItem;
+    }
+
+    protected override async Task<BasketItem> HandleAsync(DeleteBasketItemEvent @event, CancellationToken cancellationToken)
     {
         Event += (s, e) =>
         {
@@ -32,4 +46,5 @@ public class DeleteBasketItemEventHandler : DomainEventHandler<DeleteBasketItemE
         await Task.CompletedTask;
         return @event.BasketItem;
     }
+
 }

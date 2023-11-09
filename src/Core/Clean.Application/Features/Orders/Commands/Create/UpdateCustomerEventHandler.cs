@@ -17,7 +17,18 @@ public class UpdateCustomerEventHandler : DomainEventHandler<UpdateCustomerEvent
         _command = command;
     }
 
-    protected async override Task<Customer> Handle(UpdateCustomerEvent @event, CancellationToken cancellationToken)
+    protected override Customer Handle(UpdateCustomerEvent @event)
+    {
+        Event += (s, e) =>
+        {
+            _command.Customer.Update(@event.Customer);
+        };
+
+        EventInvoke(@event);
+        return @event.Customer;
+    }
+
+    protected override async Task<Customer> HandleAsync(UpdateCustomerEvent @event, CancellationToken cancellationToken)
     {
         Event += (s, e) =>
         {
@@ -28,4 +39,5 @@ public class UpdateCustomerEventHandler : DomainEventHandler<UpdateCustomerEvent
         await Task.FromResult(@event.Customer);
         return @event.Customer;
     }
+
 }

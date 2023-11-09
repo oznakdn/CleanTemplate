@@ -1,1 +1,4 @@
 info: 9.11.2023 07:36:53    GET - /api/Products/GetProducts - 200
+info: 9.11.2023 08:03:47    POST - /api/Products/CreateProduct - 200
+info: 9.11.2023 08:03:55    GET - /api/Products/GetProducts - 200
+info: 9.11.2023 08:04:01    GET - /api/Products/GetProducts - 200

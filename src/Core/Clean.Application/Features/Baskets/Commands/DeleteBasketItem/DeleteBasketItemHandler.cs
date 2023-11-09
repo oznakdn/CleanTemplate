@@ -30,7 +30,7 @@ public class DeleteBasketItemHandler : IRequestHandler<DeleteBasketItemRequest, 
         if (basket is null)
             return  TResult<DeleteBasketItemResponse>.Fail("Basket not found!");
 
-        BasketItem basketItem = await _deleteBasketItemEvent.Publish(new DeleteBasketItemEvent(
+        BasketItem basketItem = await _deleteBasketItemEvent.PublishAsync(new DeleteBasketItemEvent(
            Guid.Parse(request.BasketId),
            Guid.Parse(request.BasketItemId)
             ), cancellationToken);

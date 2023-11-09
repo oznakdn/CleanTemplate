@@ -16,7 +16,24 @@ public class CreateOrderItemEventHandler : DomainEventHandler<CreateOrderItemEve
         _command = command;
     }
 
-    protected async override Task<OrderItem> Handle(CreateOrderItemEvent @event, CancellationToken cancellationToken)
+    protected override OrderItem Handle(CreateOrderItemEvent @event)
+    {
+        Event += (s, e) =>
+        {
+            var basketItems = _query.BasketItem.ReadAll(
+                               noTracking: true,
+                               filter: x => x.BasketId == e.BasketId);
+            foreach (var item in basketItems)
+            {
+                _command.OrderItem.Create(@event.OrderItem = new OrderItem(item.ProductId, e.OrderId, item.ProductQuantity));
+            }
+        };
+
+        EventInvoke(@event);
+        return @event.OrderItem;
+    }
+
+    protected override async Task<OrderItem> HandleAsync(CreateOrderItemEvent @event, CancellationToken cancellationToken)
     {
         Event += (s, e) =>
         {
@@ -33,4 +50,5 @@ public class CreateOrderItemEventHandler : DomainEventHandler<CreateOrderItemEve
         await Task.CompletedTask;
         return @event.OrderItem;
     }
+
 }

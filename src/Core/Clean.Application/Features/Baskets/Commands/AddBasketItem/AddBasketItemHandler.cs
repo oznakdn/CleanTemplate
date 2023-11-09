@@ -47,10 +47,10 @@ public class AddBasketItemHandler : IRequestHandler<AddBasketItemRequest, TResul
         }
 
         // Updated inventory
-        Inventory inventory = await _updateInventoryEvent.Publish(new UpdateInventoryEvent(product.Id,request.Quantity), cancellationToken);
+        Inventory inventory =await _updateInventoryEvent.PublishAsync(new UpdateInventoryEvent(product.Id,request.Quantity),cancellationToken);
 
         // Adding basketItem
-        BasketItem basketItem = await _addBasketItemEvent.Publish(new AddBasketItemEvent(basket, product, request.Quantity), cancellationToken);
+        BasketItem basketItem =await _addBasketItemEvent.PublishAsync(new AddBasketItemEvent(basket, product, request.Quantity), cancellationToken);
         basket.AddBasketItem(basketItem);
 
         // Saving in database

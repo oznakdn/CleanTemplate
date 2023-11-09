@@ -32,7 +32,20 @@ public class UpdateInventoryEventHandler : DomainEventHandler<UpdateInventoryEve
         _command = command;
     }
 
-    protected async override Task<Inventory> Handle(UpdateInventoryEvent @event, CancellationToken cancellationToken)
+    protected override Inventory Handle(UpdateInventoryEvent @event)
+    {
+        Event += (s, e) =>
+        {
+            @event.Inventory = _query.Inventory.ReadSingleOrDefault(true, x => x.ProductId == e.ProdcutId);
+            @event.Inventory.DecreaseStock(e.Quantity);
+        };
+
+        EventInvoke(@event);
+        _command.Inventory.Edit(@event.Inventory);
+        return @event.Inventory;
+    }
+
+    protected override async Task<Inventory> HandleAsync(UpdateInventoryEvent @event, CancellationToken cancellationToken)
     {
         Event += (s, e) =>
         {

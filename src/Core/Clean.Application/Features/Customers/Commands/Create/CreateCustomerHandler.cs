@@ -68,7 +68,7 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, TRes
 
 
         _command.Customer.Insert(customer.Value);
-        Basket result = await _createBasketEvent.Publish(new CreateBasketEvent(customer.Value.Id.ToString()), cancellationToken);
+        Basket result = await _createBasketEvent.PublishAsync(new CreateBasketEvent(customer.Value.Id.ToString()), cancellationToken);
         customer.Value.AddBasket(result.Id);
 
         await _command.Customer.ExecuteAsync(cancellationToken);

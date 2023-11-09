@@ -29,7 +29,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, TResul
         var productResult = product.AddMoney(request.currency, request.Amount);
 
         var inventoryResult = product.AddInventory(product.Id,request.Quantity);
-        await _addInventoryEvent.Publish(new AddInventoryEvent(product.Id, request.Quantity), cancellationToken);
+        _addInventoryEvent.Publish(new AddInventoryEvent(product.Id, request.Quantity));
 
         if(categoryResult.IsFailed)
         {

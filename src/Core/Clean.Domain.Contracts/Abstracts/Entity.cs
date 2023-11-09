@@ -13,7 +13,7 @@ public abstract class Entity<TId> : IEntity<TId>
         if (!IsValid(id))
             throw new ArgumentException("Identifier format is wrong!");
         Id = id;
-        IsDeleted = true;
+        IsDeleted = false;
     }
 
 

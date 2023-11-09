@@ -17,7 +17,19 @@ public class DeletedBasketItemsEventHandler : DomainEventHandler<DeletedBasketIt
         _command = command;
     }
 
-    protected async override Task<IList<BasketItem>> Handle(DeletedBasketItemsEvent @event, CancellationToken cancellationToken)
+    protected override IList<BasketItem> Handle(DeletedBasketItemsEvent @event)
+    {
+        Event += (s, e) =>
+        {
+            @event.BasketItems = _query.BasketItem.ReadAll(true, filter: x => x.BasketId == e.BasketId).ToList();
+        };
+
+        EventInvoke(@event);
+        _command.BasketItem.RemoveRange(@event.BasketItems);
+        return @event.BasketItems;
+    }
+
+    protected override async Task<IList<BasketItem>> HandleAsync(DeletedBasketItemsEvent @event, CancellationToken cancellationToken)
     {
         Event += (s, e) =>
         {
@@ -28,6 +40,6 @@ public class DeletedBasketItemsEventHandler : DomainEventHandler<DeletedBasketIt
         _command.BasketItem.RemoveRange(@event.BasketItems);
         await Task.CompletedTask;
         return @event.BasketItems;
-
     }
+
 }

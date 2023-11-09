@@ -57,7 +57,7 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, TResult<Cr
         {
             Order order = new(customer.Id);
             var result = customer.CreditCard.CardSpend(basket.TotalAmount);
-            await _updateCustomerEventHandler.Publish(new UpdateCustomerEvent(customer), cancellationToken);
+            await _updateCustomerEventHandler.PublishAsync(new UpdateCustomerEvent(customer), cancellationToken);
             if (result.IsFailed)
             {
                 order.PaymentFailed();
@@ -65,8 +65,8 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, TResult<Cr
             else
             {
                 order.PaymentRecived();
-                await _createOrderItemEventHandler.Publish(new CreateOrderItemEvent(basket.Id,order.Id), cancellationToken);
-                await _deletedBasketItemsEventHandler.Publish(new DeletedBasketItemsEvent(basket.Id), cancellationToken);
+                await _createOrderItemEventHandler.PublishAsync(new CreateOrderItemEvent(basket.Id,order.Id), cancellationToken);
+                await _deletedBasketItemsEventHandler.PublishAsync(new DeletedBasketItemsEvent(basket.Id), cancellationToken);
                 basket.ClearTotalAmount();
                 _command.Basket.Update(basket);
 

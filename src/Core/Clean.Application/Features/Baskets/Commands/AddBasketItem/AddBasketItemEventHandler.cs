@@ -15,12 +15,20 @@ public class AddBasketItemEventHandler : DomainEventHandler<AddBasketItemEvent, 
         _command = command;
     }
 
-    protected override async Task<BasketItem> Handle(AddBasketItemEvent @event, CancellationToken cancellationToken)
+    protected override BasketItem Handle(AddBasketItemEvent @event)
     {
         Event += (s, e) => _command.BasketItem.Insert(@event.BasketItem =
-            new BasketItem(e.Basket.Id, e.Product.Id, e.Quantity, e.Product.Price.Amount));
+           new BasketItem(e.Basket.Id, e.Product.Id, e.Quantity, e.Product.Price.Amount));
         EventInvoke(@event);
-        await Task.CompletedTask;
         return @event.BasketItem;
     }
+
+    //protected override async Task<BasketItem> Handle(AddBasketItemEvent @event, CancellationToken cancellationToken)
+    //{
+    //    Event += (s, e) => _command.BasketItem.Insert(@event.BasketItem =
+    //        new BasketItem(e.Basket.Id, e.Product.Id, e.Quantity, e.Product.Price.Amount));
+    //    EventInvoke(@event);
+    //    await Task.CompletedTask;
+    //    return @event.BasketItem;
+    //}
 }
