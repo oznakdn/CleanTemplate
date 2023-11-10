@@ -136,8 +136,9 @@ public class ProductsController : AbstractController
 }
 ```
 
-![DataShaping1](https://github.com/oznakdn/CleanTemplate/assets/79724084/9196c29e-f78d-436c-927f-57beb2bf15b9)
 
-![DataShaping2](https://github.com/oznakdn/CleanTemplate/assets/79724084/58fda627-cfe8-4c7f-b565-0fa0481c7912)
+![DataShaping1](https://github.com/oznakdn/CleanTemplate/assets/79724084/817b3e8d-924c-45e5-9a19-b56826f93d89)
+
+![DataShaping2](https://github.com/oznakdn/CleanTemplate/assets/79724084/2f2be3c5-e8cc-4233-9c14-2750dcadcefb)
 
 
