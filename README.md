@@ -32,31 +32,31 @@
 ## Features
 
 - [x] Clean Architecture
-- [X] Domain driven design (DDD)
+- [X] Domain driven design (DDD) <a href="https://github.com/oznakdn/CleanTemplate/blob/master/docs/DomainDrivenDesign.md">View</a>
 - [X] Custom Domain Events
 - [x] CQRS
 - [x] Asp .Net Core Web Api
 - [x] Asp .Net Core Mvc
-- [x] Entity Framework Core 7
+- [x] Entity Framework Core 7 <a href="https://github.com/oznakdn/CleanTemplate/blob/master/docs/EFCore.md">View</a>
 - [x] MongoDriver
 - [x] Sqlite, SqlServer, PostgreSQL, MySql, MongoDB
-- [x] Generic repository pattern
-- [x] Unit Of Work pattern
+- [x] Generic repository pattern <a href="https://github.com/oznakdn/CleanTemplate/blob/master/docs/GenericRepository.md">View</a>
+- [x] Unit Of Work pattern <a href="https://github.com/oznakdn/CleanTemplate/blob/master/docs/UnitOfWork.md">View</a>
 - [x] Result pattern
 - [X] Pagination, Filtering and Sorting
+- [X] Data Shaping <a href="https://github.com/oznakdn/CleanTemplate/blob/master/docs/DataShaping.md">View</a>
 - [x] Claim based authentication with Json Web Token
-- [x] Password hashing
+- [x] Password Hashing
 - [x] Logging
-- [X] Redis and InMemoryCache
-- [X] HealthCheck
-- [X] Rate Limiting
+- [X] Redis and InMemory Caching
+- [X] Health Check <a href="https://github.com/oznakdn/CleanTemplate/blob/master/docs/HealthCheck.md">View</a>
+- [X] Rate Limiting <a href="https://github.com/oznakdn/CleanTemplate/blob/master/docs/RateLimiting.md">View</a>
 - [x] MapSter
 - [x] FluentValidation
 - [x] MediatR
 - [X] Email and Notification Service
-- [ ] SignalR 
-- [ ] Unit tests
-- [ ] Integration tests
+- [X] Unit tests
+
 
 ## Migration Commands
 #### Terminal
@@ -69,6 +69,7 @@ $ dotnet ef migrations add [MigrationName] --context [ContextName] --startup-pro
 ```csharp
 $ dotnet ef database update --context [ContextName] --startup-project [ProjectDirectoryPath]
 ```
+
 
 
 ## Packages
