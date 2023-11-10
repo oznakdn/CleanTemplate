@@ -1,4 +1,5 @@
-﻿using Clean.Application.Features.Baskets.Commands.AddBasketItem;
+﻿using Clean.Application.DataShaping;
+using Clean.Application.Features.Baskets.Commands.AddBasketItem;
 using Clean.Application.Features.Baskets.Commands.DeleteBasketItem;
 using Clean.Application.Features.Baskets.Commands.UpdateBasket;
 using Clean.Application.Features.Customers.Commands.Create;
@@ -52,6 +53,7 @@ public static class ServiceConfiguration
 
         services.AddScoped<ICommandUnitOfWork, CommandUnitOfWork>();
         services.AddScoped<IQueryUnitOfWork,QueryUnitOfWork>();
+        services.AddScoped(typeof(IDataShaper<>), typeof(DataShaper<>));
         return services;
     }
 

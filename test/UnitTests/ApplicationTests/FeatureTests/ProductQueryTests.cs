@@ -38,7 +38,7 @@ public class ProductQueryTests
 
          _moq.Setup(x => x.Product.GetAllProductsWithInventoryAsync(50,5,1,default).Result).Returns(products);
 
-        TResult<GetProductsResponse> actualResult = await _getProductsHandler.Handle(new GetProductsRequest(50,5,1), default);
+        TResult<GetProductsResponse> actualResult = await _getProductsHandler.Handle(new GetProductsRequest(50,5,1,null), default);
 
         Assert.True(actualResult.IsSuccessed);
         Assert.Equal<GetProductsResponse>(expectedResult, actualResult.Values);
