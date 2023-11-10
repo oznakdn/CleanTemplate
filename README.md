@@ -25,8 +25,7 @@
     |        ├── Clean.Api
     |        └── Clean.Mvc
     └── test
-        ├── UnitTests
-        └── IntegrationTests
+        └── UnitTests
 ```
 
 ## Features
