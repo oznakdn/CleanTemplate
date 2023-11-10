@@ -74,24 +74,21 @@ $ dotnet ef database update --context [ContextName] --startup-project [ProjectDi
 
 ## Packages
 ```csharp
-Gleeman.EffectiveLogger
+MediatR.Extensions.Microsoft.DependencyInjection
+FluentValidation.DependencyInjectionExtensions
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Proxies
+Npgsql.EntityFrameworkCore.PostgreSQL
+Microsoft.EntityFrameworkCore.Sqlite
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Tools
+Pomelo.EntityFrameworkCore.MySql
 Gleeman.EffectiveLogger.SQLite
+Gleeman.EffectiveLogger
 Gleeman.JwtGenerator
-Gleeman.Repository.EFCore
-Gleeman.Repository.MongoDriver
 BCrypt.Net-Next
 MongoDB.Driver
-Microsoft.EntityFrameworkCore.Sqlite
-Microsoft.EntityFrameworkCore.SqlServer
-Npgsql.EntityFrameworkCore.PostgreSQL
-Pomelo.EntityFrameworkCore.MySql
-Microsoft.EntityFrameworkCore.Tools
-Microsoft.EntityFrameworkCore.Design
-Microsoft.EntityFrameworkCore.Proxies
-AutoMapper.Extensions.Microsoft.DependencyInjection
 Mapster
-FluentValidation.DependencyInjectionExtensions
-MediatR.Extensions.Microsoft.DependencyInjection
 MailKit
 ```
 
