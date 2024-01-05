@@ -5,7 +5,6 @@ using Clean.Domain.Users.Repositories;
 using Clean.Identity.Helpers;
 using Gleeman.JwtGenerator;
 using Gleeman.JwtGenerator.Generator;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Clean.Application.Features.Users.Queries.Login;

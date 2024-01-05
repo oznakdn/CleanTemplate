@@ -39,18 +39,7 @@ public class CustomersController : AbstractController
         return Ok(result.Values);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest createCustomer)
-    {
-        var result = await _mediator.Send(createCustomer);
-        if (result.IsSuccessed)
-        {
-            return Created(result.Message, createCustomer);
-        }
-        return BadRequest(result.Errors);
-    }
-
-
+   
     [HttpGet("{CustomerId}")]
     public async Task<IActionResult> GetCustomerBasket(string CustomerId)
     {

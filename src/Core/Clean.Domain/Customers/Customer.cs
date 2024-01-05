@@ -12,7 +12,7 @@ public class Customer : AggregateRoot<Customer, Guid>
     public string PhoneNumber { get; private set; }
     public string Password { get; private set; }
     public Guid? BasketId { get; private set; }
-    public CreditCard CreditCard { get; private set; }
+    public CreditCard? CreditCard { get; private set; }
     public Address Address { get; private set; }
 
 

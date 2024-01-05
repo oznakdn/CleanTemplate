@@ -1,5 +1,5 @@
-﻿using Clean.Application.Features.Users.Commands.Register;
-using Clean.Application.Features.Users.Queries.Login;
+﻿using Clean.Application.Features.Customers.Commands.Create;
+using Clean.Application.Features.Customers.Queries.LoginCustomer;
 
 namespace Clean.Api.Controllers;
 
@@ -11,7 +11,7 @@ public class AccountController : AbstractController
 
 
     [HttpPut]
-    public async Task<IActionResult> Login([FromBody] LoginRequest login)
+    public async Task<IActionResult> Login([FromBody] LoginCustomerRequest login)
     {
         var result = await _mediator.Send(login);
         if (result.Errors.Count() > 0 && result.IsFailed) return BadRequest(result.Errors);
@@ -22,7 +22,7 @@ public class AccountController : AbstractController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register([FromBody] RegisterRequest register)
+    public async Task<IActionResult> Register([FromBody] CreateCustomerRequest register)
     {
         var result = await _mediator.Send(register);
         if (result.IsFailed)

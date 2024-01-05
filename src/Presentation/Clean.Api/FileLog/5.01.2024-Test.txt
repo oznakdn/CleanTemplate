@@ -12,3 +12,6 @@ info: 5.01.2024 20:39:45    PUT - /api/Account/Login - 200
 fail: 5.01.2024 20:42:25    PUT - /api/Account/Login - 404
 info: 5.01.2024 20:42:31    PUT - /api/Account/Login - 200
 info: 5.01.2024 20:45:08    GET - /api/Auth/GetRoles - 200
+fail: 5.01.2024 20:55:18    POST - /api/Account/Register - 500 - An error occurred while saving the entity changes. See the inner exception for details.
+info: 5.01.2024 20:57:04    POST - /api/Account/Register - 201
+info: 5.01.2024 20:59:07    POST - /api/Account/Register - 201

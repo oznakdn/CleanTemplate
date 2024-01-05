@@ -3,11 +3,12 @@ using Clean.Domain.Baskets;
 using Clean.Domain.Baskets.Events;
 using Clean.Domain.Customers;
 using Clean.Domain.Shared;
+using Clean.Identity.Helpers;
 
 namespace Clean.Application.Features.Customers.Commands.Create;
 
 
-public record CreateCustomerRequest(string FirstName, string LastName, string Email, string PhoneNumber, string Password, AddressRequest Address, CrediCardRequest CrediCard) : IRequest<TResult<CreateCustomerResponse>>;
+public record CreateCustomerRequest(string FirstName, string LastName, string Email, string PhoneNumber, string Password, AddressRequest Address) : IRequest<TResult<CreateCustomerResponse>>;
 
 public record AddressRequest(string Title, string District, int Number, string City);
 public record CrediCardRequest(string Name, string CardNumber, string CardDate, string Cvv, decimal TotalLimit);
@@ -33,7 +34,7 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, TRes
             request.LastName,
             request.Email,
             request.PhoneNumber,
-            request.Password);
+            request.Password.HashPassword());
 
         if (customer.IsFailed)
         {
@@ -50,15 +51,15 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, TRes
             if (address.IsFailed)
                 errors.AddRange(address.Errors);
 
-            Result crediCard = customer.Value.AddCreditCard(
-                 request.CrediCard.Name,
-                 request.CrediCard.CardNumber,
-                 request.CrediCard.CardDate,
-                 request.CrediCard.Cvv,
-                 request.CrediCard.TotalLimit);
+            //Result crediCard = customer.Value.AddCreditCard(
+            //     request.CrediCard.Name,
+            //     request.CrediCard.CardNumber,
+            //     request.CrediCard.CardDate,
+            //     request.CrediCard.Cvv,
+            //     request.CrediCard.TotalLimit);
 
-            if (crediCard.IsFailed)
-                errors.AddRange(crediCard.Errors);
+            //if (crediCard.IsFailed)
+            //    errors.AddRange(crediCard.Errors);
         }
 
 
