@@ -12,7 +12,7 @@ namespace Clean.Application.Features.Users.Queries.Login;
 
 
 public record LoginRequest(string Email, string Password) : IRequest<TResult<LoginResponse>>;
-public record LoginResponse(string AccessExpire, string RefreshToken, string RefreshExpire, string AccessToken);
+public record LoginResponse(string AccessToken, string AccessExpire, string RefreshToken, string RefreshExpire);
 
 
 public class LoginHandler : IRequestHandler<LoginRequest, TResult<LoginResponse>>
