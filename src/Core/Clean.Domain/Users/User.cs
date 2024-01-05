@@ -83,6 +83,11 @@ public class User : IDocument
         ExpiredDate = expiredDate;
     }
 
+    public void AssignRole(string roleId)
+    {
+        this.RoleId = roleId;
+    }
+
     public bool Equals(IEntity<string>? other)
     {
         return Id.GetHashCode() == other.GetHashCode();
