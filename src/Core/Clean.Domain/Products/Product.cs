@@ -8,10 +8,12 @@ namespace Clean.Domain.Products;
 
 public class Product : AggregateRoot<Product, Guid>
 {
+    private List<Image> _images { get; set; } = new();
     public string DisplayName { get; private set; }
     public Money Price { get; private set; }
     public Inventory Inventory { get; private set; }
     public Category Category { get; private set; }
+    public IReadOnlyCollection<Image> Images => _images;
 
 
     public Product(string displayName) : base(Guid.NewGuid())
@@ -20,6 +22,17 @@ public class Product : AggregateRoot<Product, Guid>
     }
 
     private Product() : base(Guid.Empty) { }
+
+
+    public void AddImage(Image image)
+    {
+        _images.Add(image);
+    }
+
+    public void AddImages(List<Image> images)
+    {
+        _images.AddRange(images);
+    }
 
 
     public Result AddMoney(Currency currency, decimal amount)
@@ -36,14 +49,14 @@ public class Product : AggregateRoot<Product, Guid>
             errors.Add($"{nameof(Price.Amount)} cannot be less than 0!");
 
         }
-     
-        if(errors.Count > 0) 
+
+        if (errors.Count > 0)
         {
             return Result.Fail(errors);
         }
 
         Price = new Money(currency, amount);
-        return  Result.Ok();
+        return Result.Ok();
     }
 
     public Result AddCategory(string displayName)
@@ -54,17 +67,17 @@ public class Product : AggregateRoot<Product, Guid>
         }
 
         Category = new Category(displayName);
-        return  Result.Ok();
+        return Result.Ok();
 
     }
 
     public Result AddInventory(Guid productId, int quantity)
     {
         if (quantity < 0)
-            return  Result.Fail("Quantity cannot be less than 0!");
+            return Result.Fail("Quantity cannot be less than 0!");
 
         Inventory = new(productId, quantity);
-        return  Result.Ok();
+        return Result.Ok();
     }
 
 }

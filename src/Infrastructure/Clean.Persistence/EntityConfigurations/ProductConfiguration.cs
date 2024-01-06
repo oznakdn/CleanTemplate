@@ -10,5 +10,6 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.HasKey(x => x.Id);
         builder.OwnsOne(x => x.Category);
         builder.OwnsOne(x => x.Price);
+        builder.OwnsMany(x => x.Images);
     }
 }

@@ -51,6 +51,10 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, TResult<Cr
         if (customer is null)
             return TResult<CreateOrderResponse>.Fail("Customer not found!");
 
+        if(customer.CreditCard is null)
+        {
+            // Will create a new credit card for this customer if has not
+        }
       
 
         if (basket.TotalAmount > 0)
