@@ -34,8 +34,6 @@
 - [X] Domain driven design (DDD) <a href="https://github.com/oznakdn/CleanTemplate/blob/master/docs/DomainDrivenDesign.md">View</a>
 - [X] Custom Domain Events
 - [x] CQRS
-- [x] Asp .Net Core Web Api <a href="https://github.com/oznakdn/CleanTemplate/tree/master/src/Presentation/Clean.Api">View</a>
-- [x] Asp .Net Core Mvc <a href="https://github.com/oznakdn/CleanTemplate/tree/master/src/Presentation/Clean.Mvc">View</a>
 - [x] Entity Framework Core 7 <a href="https://github.com/oznakdn/CleanTemplate/blob/master/docs/EFCore.md">View</a>
 - [x] MongoDriver
 - [x] Sqlite, SqlServer, PostgreSQL, MySql, MongoDB
@@ -55,6 +53,8 @@
 - [x] MediatR
 - [X] Email and Notification Service
 - [X] Unit tests
+- [x] Asp .Net Core Web Api <a href="https://github.com/oznakdn/CleanTemplate/tree/master/src/Presentation/Clean.Api">View</a>
+- [x] Asp .Net Core Mvc <a href="https://github.com/oznakdn/CleanTemplate/tree/master/src/Presentation/Clean.Mvc">View</a>
 
 
 ## Migration Commands
