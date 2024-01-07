@@ -23,8 +23,16 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, TResult<Ge
 
     public async Task<TResult<GetProductsResponse>> Handle(GetProductsRequest request, CancellationToken cancellationToken)
     {
-    
-        var products = await _query.Product.ProductSortingAsync(request.MaxPage, request.PageSize, request.PageNumber, request.query, default);
+        IEnumerable<Product> products;
+
+        if (request.MaxPage == 0 || request.PageNumber == 0 || string.IsNullOrEmpty(request.query))
+        {
+            products = await _query.Product.ReadAllAsync(true);
+        }
+        else
+        {
+            products = await _query.Product.ProductSortingAsync(request.MaxPage, request.PageSize, request.PageNumber, request.query, default);
+        }
 
         var config = new TypeAdapterConfig();
         config.NewConfig<Product, GetProductsResponse>()

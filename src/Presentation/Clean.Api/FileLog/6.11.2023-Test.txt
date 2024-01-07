@@ -1,3 +1,0 @@
-info: 6.11.2023 12:18:36    GET - /api/Products/GetProducts - 200
-info: 6.11.2023 12:18:42    GET - /api/Products/GetProductsCache - 200
-info: 6.11.2023 12:18:44    GET - /api/Products/GetProductsCache - 200

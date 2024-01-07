@@ -8,6 +8,7 @@ using Clean.Application.Features.Products.Commands.Create;
 using Clean.Application.UnitOfWork.Commands;
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Notification.Configurations;
+using Clean.Logging.Configurations;
 using Mapster;
 
 namespace Clean.Application.Configurations;
@@ -26,7 +27,7 @@ public static class ServiceConfiguration
                 .DependencyInjections();
         services.AddPersistenceService(configuration, providerType, migrationAssembly);
         services.AddIdentityService(configuration);
-        services.AddLoggerService(configuration, migrationAssembly);
+        services.AddLoggerService(configuration);
         services.AddNotificationService(configuration);
         services.AddMapSterService();
 

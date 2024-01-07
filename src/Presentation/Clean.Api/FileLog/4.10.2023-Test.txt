@@ -1,2 +1,0 @@
-info: 4.10.2023 14:45:05 - GET - /api/Customers/GetCustomers - 200
-info: 4.10.2023 15:38:22 - GET - /api/Customers/GetCustomers - 200

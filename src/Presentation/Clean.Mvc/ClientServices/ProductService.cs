@@ -15,7 +15,7 @@ public class ProductService : ClientService
     {
         string url = $"products/getproducts";
         HttpResponseMessage responseMessage = await _client.GetAsync(url);
-        GetProductsModel? response =  await responseMessage.Content.ReadFromJsonAsync<GetProductsModel>();
-        return TResult<GetProductsModel>.Ok(response!);
+        var response =  await responseMessage.Content.ReadFromJsonAsync<IEnumerable<GetProductsModel>>();
+        return TResult<GetProductsModel>.Ok(response);
     }
 }

@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Net;
+using Gleeman.EffectiveLogger.ConsoleFile.Interfaces;
 
 namespace Clean.Application.GlobalException;
 
 public class GlobalExceptionHandler : IMiddleware
 {
-    private readonly IEffectiveLog<GlobalExceptionHandler> _logger;
+    private readonly IEffectiveLogger<GlobalExceptionHandler> _logger;
 
-    public GlobalExceptionHandler(IEffectiveLog<GlobalExceptionHandler> logger)
+    public GlobalExceptionHandler(IEffectiveLogger<GlobalExceptionHandler> logger)
     {
         _logger = logger;
     }
@@ -20,13 +21,13 @@ public class GlobalExceptionHandler : IMiddleware
             await next.Invoke(context);
             switch (context.Response.StatusCode)
             {
-                case 200: _logger.Information($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+                case 200: _logger.Info($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
                     break;
                 case 201:
-                    _logger.Information($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+                    _logger.Info($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
                     break;
                 case 204:
-                    _logger.Information($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
+                    _logger.Info($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");
                     break;
                 case 400:
                     _logger.Fail($"{context.Request.Method} - {context.Request.Path} - {context.Response.StatusCode}");

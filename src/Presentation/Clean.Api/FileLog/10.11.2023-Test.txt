@@ -1,5 +1,0 @@
-info: 10.11.2023 06:43:48    GET - /api/Products/GetProductsWithDataShaping - 200
-info: 10.11.2023 06:43:55    GET - /api/Products/GetProducts - 200
-info: 10.11.2023 06:44:04    GET - /api/Products/GetProducts - 200
-info: 10.11.2023 06:46:41    GET - /api/Products/GetProductsWithDataShaping - 200
-info: 10.11.2023 06:49:23    GET - /api/Products/GetProductsWithDataShaping - 200
