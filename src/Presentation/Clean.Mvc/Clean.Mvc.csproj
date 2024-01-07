@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
+    <ProjectReference Include="..\..\Core\Clean.Domain\Clean.Domain.csproj" />
   </ItemGroup>
 
 </Project>

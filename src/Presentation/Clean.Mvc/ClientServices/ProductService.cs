@@ -1,4 +1,5 @@
-﻿using Clean.Mvc.Models.Product;
+﻿using Clean.Domain.Shared;
+using Clean.Mvc.Models.Product;
 
 namespace Clean.Mvc.ClientServices;
 
@@ -10,11 +11,11 @@ public class ProductService : ClientService
         _client = _httpClient.CreateClient("CleanClient");
     }
 
-    public async Task<IEnumerable<GetProductsModel>> GetProductsAsync()
+    public async Task<TResult<GetProductsModel>> GetProductsAsync()
     {
         string url = $"products/getproducts";
-        HttpResponseMessage res = await _client.GetAsync(url);
-
-        return await res.Content.ReadFromJsonAsync<IEnumerable<GetProductsModel>>();
+        HttpResponseMessage responseMessage = await _client.GetAsync(url);
+        GetProductsModel? response =  await responseMessage.Content.ReadFromJsonAsync<GetProductsModel>();
+        return TResult<GetProductsModel>.Ok(response!);
     }
 }
