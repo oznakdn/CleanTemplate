@@ -8,39 +8,20 @@
                     App
                 </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBrands"
-                   aria-expanded="false" aria-controls="collapseBrands">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Products
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapseBrands" aria-labelledby="headingOne"
-                     data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" asp-controller="Product" asp-action="Index" asp-area="Admin">List</a>
-                        <a class="nav-link" asp-controller="Brand" asp-action="Insert" asp-area="Admin">Insert</a>
-                    </nav>
-                </div>
 
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseModels"
-                   aria-expanded="false" aria-controls="collapseModels">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    MODEL
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                <a class="nav-link" asp-controller="Product" asp-action="Index" asp-area="Admin">
+                    <div class="sb-nav-link-icon"><i class="fa-brands fa-product-hunt"></i></div>
+                    Product
                 </a>
-                <div class="collapse" id="collapseModels" aria-labelledby="headingOne"
-                     data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" asp-controller="Model" asp-action="Index" asp-area="Admin">List</a>
-                        <a class="nav-link" asp-controller="Model" asp-action="Insert" asp-area="Admin">Insert</a>
-                    </nav>
-                </div>
-
+                <a class="nav-link" asp-controller="Product" asp-action="Index" asp-area="Admin">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    Category
+                </a>
 
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                    aria-expanded="false" aria-controls="collapsePages">
-                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                    AUTH
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-key"></i></div>
+                    Security
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
@@ -49,7 +30,7 @@
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                            data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                             Authentication
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fa-solid fa-key"></i></div>
                         </a>
                         <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                              data-bs-parent="#sidenavAccordionPages">
