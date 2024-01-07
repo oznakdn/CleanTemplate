@@ -10,7 +10,7 @@ builder.Services.AddHttpClient("CleanClient", conf =>
 });
 
 builder.Services.AddSession();
-//builder.Services.AddScoped<AuthorizationFilter>();
+builder.Services.AddScoped<AuthorizationFilter>();
 
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<AuthService>();
@@ -34,7 +34,7 @@ app.UseAuthorization();
 app.MapAreaControllerRoute(
     name: "Admin", 
     areaName: "Admin", 
-    pattern: "Admin/{controller=Auth}/{action=Login}/{id?}");
+    pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
 
 
 app.MapControllerRoute(

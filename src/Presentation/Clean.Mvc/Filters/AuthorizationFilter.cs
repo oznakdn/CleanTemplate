@@ -11,7 +11,7 @@ public class AuthorizationFilter :ActionFilterAttribute, IAuthorizationFilter
         string cookie = context.HttpContext.Request.Cookies["token"]!;
         if(string.IsNullOrEmpty(cookie))
         {
-            new RedirectToActionResult(actionName: "Login", controllerName: "Auth",new {});
+            context.Result = new RedirectToActionResult("Login", "Auth", context.Result);
         }
     }
 
