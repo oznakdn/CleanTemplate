@@ -7,7 +7,8 @@ namespace Clean.Application.Features.Products.Queries.GetProducts;
 
 
 public record GetProductsRequest(int MaxPage, int PageSize, int PageNumber, string? query) : IRequest<TResult<GetProductsResponse>>;
-public record GetProductsResponse(string Id, string DisplayName, string Currency, decimal Price, string Category);
+public record GetProductsResponse(string Id, string DisplayName, string Currency, decimal Price, string Category, List<ProductImage> Images);
+public record ProductImage(string ImageName, string ImageSize);
 
 
 
@@ -39,7 +40,8 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, TResult<Ge
             .Map(src => src.Id, dest => dest.Id.ToString())
             .Map(src => src.Currency, src => src.Price.Currency.ToString())
             .Map(src => src.Price, dest => dest.Price.Amount)
-            .Map(src => src.Category, src => src.Category.DisplayName);
+            .Map(src => src.Category, src => src.Category.DisplayName)
+            .Map(src => src.Images, src => src.Images);
 
         var result = products.Adapt<IEnumerable<GetProductsResponse>>(config);
 
