@@ -4,6 +4,7 @@
 
 public class GetProductsModel
 {
+    public string id { get; set; }
     public string displayName {  get; set; }
     public decimal price { get; set; }
     public string currency { get; set; }

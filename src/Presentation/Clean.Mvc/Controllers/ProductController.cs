@@ -17,5 +17,12 @@ namespace Clean.Mvc.Controllers
             var result = await _productService.GetProductsAsync();
             return View(result.Values);
         }
+
+        public async Task<IActionResult>Detail([FromRoute]string id)
+        {
+            var products = await _productService.GetProductsAsync();
+            var product = products.Values.Where(x => x.id == id).SingleOrDefault();
+            return View(product);
+        }
     }
 }

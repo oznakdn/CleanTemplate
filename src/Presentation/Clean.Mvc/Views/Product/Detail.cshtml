@@ -1,0 +1,106 @@
+﻿
+@model GetProductsModel
+
+<style type="text/css">
+    .carousel-inner {
+        width: auto;
+        height: auto;
+        max-height: 200px !important;
+    }
+
+    .carousel-content {
+        color: black;
+        display: flex;
+        text-align: center;
+    }
+</style>
+
+
+    <div class="col-2 offset-5 ">
+        <div id="" class="carousel slide" data-ride="carousel" data-interval="2000" data-pause="hover">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                @for (int i = 0; i < Model.images.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        <li data-target="#myData" data-slide-to="@i" class="active"></li>
+                    }
+                    else
+                    {
+                        <li data-target="#myData" data-slide-to="@i"></li>
+                    }
+                }
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                @for (int i = 0; i < Model.images.Count; i++)
+                {
+                    var file = Model.images[i];
+                    if (i == 0)
+                    {
+                        <div class="item active">
+                            <div class="carousel-content">
+                                <div style="margin: 0 auto">
+                                    <p>
+                                        <img alt="@file.imageName" src="@file.imageName"
+                                             style="width: 100%;height: 200px" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="item">
+                            <div class="carousel-content">
+                                <div style="margin: 0 auto;text-align:center;">
+                                    <p>
+                                        <img alt="@file.imageName" src="@file.imageName"
+                                             style="width: 100%;height: 200px" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <div class="card" style="width: 50rem;">
+            <div class="display-6 text-center shadow-lg">@Model.displayName</div>
+            <div class="card-body">
+                <h5 class="card-title text-center shadow">@Model.category</h5>
+                <p class="card-text text-center">@Model.price.ToString("c2")</p>
+                <div class="btn-group d-flex">
+                    <a asp-controller="Product" asp-action="Detail" asp-route-id="@Model.id" asp-area="" class="btn btn-warning"><i class="fa-solid fa-basket-shopping"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.carousel').carousel();
+    });
+</script>
+
+
+
+
+
+
+
