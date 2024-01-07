@@ -3,6 +3,7 @@ using Clean.Application.Features.Products.Queries.GetProductDetail;
 using Clean.Application.Features.Products.Queries.GetProducts;
 using Clean.Application.Features.Products.Queries.GetProductsWithDataShaping;
 using Clean.Persistence.Caching;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
 
 namespace Clean.Api.Controllers;
@@ -21,6 +22,7 @@ public class ProductsController : AbstractController
 
     [HttpGet]
     [EnableRateLimiting("Api")]
+    [Authorize]
     public async Task<IActionResult> GetProducts([FromQuery] int PageSize, [FromQuery] int PageNumber, [FromQuery] string? Query)
     {
         var result = await _mediator.Send(new GetProductsRequest(50,PageSize,PageNumber, Query));

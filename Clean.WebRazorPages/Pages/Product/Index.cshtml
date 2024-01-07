@@ -1,0 +1,30 @@
+﻿@page
+@model Clean.WebRazorPages.Pages.Product.IndexModel
+
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.displayName</td>
+                        <td>@item.price</td>
+                        <td>@item.category</td>
+                    </tr>
+                }
+            </tbody>
+           
+        </table>
+    </div>
+</div>
