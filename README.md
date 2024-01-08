@@ -23,7 +23,8 @@
     |   |    └── Clean.Persistence
     |   └── Presentation
     |        ├── Clean.Api
-    |        └── Clean.Mvc
+    |        ├── Clean.Mvc
+    |        └── Clean.WebRazorPages
     └── test
         └── UnitTests
 ```
@@ -55,6 +56,8 @@
 - [X] Unit tests
 - [x] Asp .Net Core Web Api <a href="https://github.com/oznakdn/CleanTemplate/tree/master/src/Presentation/Clean.Api">View</a>
 - [x] Asp .Net Core Mvc <a href="https://github.com/oznakdn/CleanTemplate/tree/master/src/Presentation/Clean.Mvc">View</a>
+- [x] Asp .Net Core WebApp(Razor Pages) <a href="https://github.com/oznakdn/CleanTemplate/tree/master/src/Presentation/Clean.WebRazorPages">View</a>
+
 
 
 ## Migration Commands
