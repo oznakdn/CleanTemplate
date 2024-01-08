@@ -1,6 +1,6 @@
 ﻿using Clean.Domain.Contracts.Abstracts;
 using Clean.Domain.Customers.ValueObjects;
-using Clean.Domain.Shared;
+using Clean.Shared;
 
 namespace Clean.Domain.Customers;
 
@@ -28,7 +28,7 @@ public class Customer : AggregateRoot<Customer, Guid>
 
     private Customer() : base(Guid.NewGuid()) { }
 
-    public static TResult<Customer> CreateCustomer(string firstName, string lastName, string email, string phoneNumber, string password)
+    public static IResult<Customer> CreateCustomer(string firstName, string lastName, string email, string phoneNumber, string password)
     {
         var errors = new List<string>();
         if (string.IsNullOrEmpty(firstName)) errors.Add($"{nameof(firstName)} cannot be empty!");
@@ -38,10 +38,10 @@ public class Customer : AggregateRoot<Customer, Guid>
         if (string.IsNullOrEmpty(password)) errors.Add($"{nameof(password)} cannot be empty!");
 
         if (errors.Count > 0)
-            return TResult<Customer>.Fail(errors);
+            return Result<Customer>.Fail(errors: errors);
 
         Customer customer = new(firstName, lastName, email, phoneNumber, password);
-        return TResult<Customer>.Ok(customer);
+        return Result<Customer>.Success(value: customer);
 
     }
     public void AddBasket(Guid basketId)
@@ -50,7 +50,7 @@ public class Customer : AggregateRoot<Customer, Guid>
     }
 
 
-    public Result AddAddress(string title, string district, int number, string city)
+    public IResult AddAddress(string title, string district, int number, string city)
     {
         var errors = new List<string>();
         if (string.IsNullOrEmpty(title)) errors.Add($"{nameof(title)} cannot be empty!");
@@ -59,14 +59,14 @@ public class Customer : AggregateRoot<Customer, Guid>
         if (number < 0) errors.Add($"{nameof(number)} cannot be less than 0!");
 
         if (errors.Count > 0)
-            return Result.Fail(errors);
+            return Result.Fail(errors: errors);
 
         Address = new Address(title, district, number, city);
-        return Result.Ok();
+        return Result.Fail();
     }
 
 
-    public Result AddCreditCard(string name, string cardNumber, string cardDate, string cvv, decimal totalLimit)
+    public IResult AddCreditCard(string name, string cardNumber, string cardDate, string cvv, decimal totalLimit)
     {
         var errors = new List<string>();
         if (string.IsNullOrEmpty(name)) errors.Add($"{nameof(this.CreditCard.Name)} cannot be empty!");
@@ -76,10 +76,10 @@ public class Customer : AggregateRoot<Customer, Guid>
         if (totalLimit < 0) errors.Add($"{nameof(this.CreditCard.TotalLimit)} cannot be less than 0!");
 
         if (errors.Count > 0)
-            return Result.Fail(errors);
+            return Result.Fail(errors: errors);
 
         CreditCard = new CreditCard(name, cardNumber, cardDate, cvv, totalLimit);
-        return Result.Ok();
+        return Result.Success();
     }
 
 }

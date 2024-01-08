@@ -1,17 +1,18 @@
 ﻿using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.OrderItems;
 using Clean.Domain.Orders;
-using Clean.Domain.Shared;
+using Clean.Shared;
+
 
 namespace Clean.Application.Features.Orders.Queries.GetCustomerOrders;
 
 
 
-public record GetCustomerOrdersRequest(string customerId) : IRequest<TResult<GetCustomerOrdersResponse>>;
+public record GetCustomerOrdersRequest(string customerId) : IRequest<IResult<GetCustomerOrdersResponse>>;
 public record GetCustomerOrdersResponse(string Date, string Status, List<CustomerOrderItems> OrderItems);
 public record CustomerOrderItems(string ProductId,int Quantity, decimal TotalAmount);
 
-public class GetCustomerOrdersHandler : IRequestHandler<GetCustomerOrdersRequest, TResult<GetCustomerOrdersResponse>>
+public class GetCustomerOrdersHandler : IRequestHandler<GetCustomerOrdersRequest, IResult<GetCustomerOrdersResponse>>
 {
     private readonly IQueryUnitOfWork _query;
 
@@ -20,7 +21,7 @@ public class GetCustomerOrdersHandler : IRequestHandler<GetCustomerOrdersRequest
         _query = query;
     }
 
-    public async Task<TResult<GetCustomerOrdersResponse>> Handle(GetCustomerOrdersRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<GetCustomerOrdersResponse>> Handle(GetCustomerOrdersRequest request, CancellationToken cancellationToken)
     {
         IEnumerable<Order> customerOrders = await _query.Order.ReadAllAsync(
             noTracking: true,
@@ -48,6 +49,6 @@ public class GetCustomerOrdersHandler : IRequestHandler<GetCustomerOrdersRequest
             )).ToList();
 
 
-        return TResult<GetCustomerOrdersResponse>.Ok(response);
+        return Result<GetCustomerOrdersResponse>.Success(values: response);
     }
 }

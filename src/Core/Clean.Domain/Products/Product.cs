@@ -2,7 +2,7 @@
 using Clean.Domain.Inventories;
 using Clean.Domain.Products.Enums;
 using Clean.Domain.Products.ValueObjects;
-using Clean.Domain.Shared;
+using Clean.Shared;
 
 namespace Clean.Domain.Products;
 
@@ -35,7 +35,7 @@ public class Product : AggregateRoot<Product, Guid>
     }
 
 
-    public Result AddMoney(Currency currency, decimal amount)
+    public IResult AddMoney(Currency currency, decimal amount)
     {
         var errors = new List<string>();
 
@@ -52,32 +52,32 @@ public class Product : AggregateRoot<Product, Guid>
 
         if (errors.Count > 0)
         {
-            return Result.Fail(errors);
+            return Result.Fail(errors: errors);
         }
 
         Price = new Money(currency, amount);
-        return Result.Ok();
+        return Result.Success();
     }
 
-    public Result AddCategory(string displayName)
+    public IResult AddCategory(string displayName)
     {
         if (displayName.Length < 3 || displayName.Length > 20)
         {
-            return Result.Fail($"{nameof(Category.DisplayName)} can be between 3 and 20 characters!");
+            return Result.Fail(error: $"{nameof(Category.DisplayName)} can be between 3 and 20 characters!");
         }
 
         Category = new Category(displayName);
-        return Result.Ok();
+        return Result.Success();
 
     }
 
-    public Result AddInventory(Guid productId, int quantity)
+    public IResult AddInventory(Guid productId, int quantity)
     {
         if (quantity < 0)
             return Result.Fail("Quantity cannot be less than 0!");
 
         Inventory = new(productId, quantity);
-        return Result.Ok();
+        return Result.Success();
     }
 
 }

@@ -1,15 +1,15 @@
-﻿using Clean.Domain.Shared;
-using Clean.Domain.Users;
+﻿using Clean.Domain.Users;
 using Clean.Domain.Users.Repositories;
 using Clean.Identity.Helpers;
+using Clean.Shared;
 
 namespace Clean.Application.Features.Users.Commands.Register;
 
 
-public record RegisterRequest(string FirstName, string LastName, string Username, string Email, string Password, string? RoleId) : IRequest<TResult<RegisterResponse>>;
+public record RegisterRequest(string FirstName, string LastName, string Username, string Email, string Password, string? RoleId) : IRequest<IResult<RegisterResponse>>;
 public record RegisterResponse;
 
-public class RegisterHandler : IRequestHandler<RegisterRequest, TResult<RegisterResponse>>
+public class RegisterHandler : IRequestHandler<RegisterRequest, IResult<RegisterResponse>>
 {
 
     private readonly IUserCommand _command;
@@ -19,36 +19,36 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, TResult<Register
         _command = command;
     }
 
-    public async Task<TResult<RegisterResponse>> Handle(RegisterRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<RegisterResponse>> Handle(RegisterRequest request, CancellationToken cancellationToken)
     {
         var validator = new RegisterValidator();
         var validation = validator.Validate(request);
         var errors = new List<string>();
-        TResult<User> result;
+        IResult<User> result;
 
         if (!validation.IsValid)
         {
             validation.Errors.ForEach(error => errors.Add(error.ErrorMessage));
-            return TResult<RegisterResponse>.Fail(errors);
+            return Result<RegisterResponse>.Fail(errors: errors);
         }
 
         if (string.IsNullOrEmpty(request.RoleId))
         {
-             result = User.CreateUser(request.FirstName, request.LastName, request.Username, request.Email, request.Password.HashPassword());
+            result = User.CreateUser(request.FirstName, request.LastName, request.Username, request.Email, request.Password.HashPassword());
 
         }
         else
         {
-            result = User.CreateUser(request.FirstName, request.LastName, request.Username, request.Email, request.Password.HashPassword(),request.RoleId);
+            result = User.CreateUser(request.FirstName, request.LastName, request.Username, request.Email, request.Password.HashPassword(), request.RoleId);
         }
 
-        if (result.IsFailed)
+        if (!result.IsSuccess)
         {
-            return TResult<RegisterResponse>.Fail(errors);
+            return Result<RegisterResponse>.Fail(errors: errors);
         }
 
         await _command.CreateAsync(result.Value, cancellationToken);
-        return TResult<RegisterResponse>.Ok("User was be register.");
+        return Result<RegisterResponse>.Success("User was be register.");
     }
 
 }

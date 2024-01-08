@@ -1,4 +1,4 @@
-﻿using Clean.Domain.Shared;
+﻿using Clean.Shared;
 using Clean.WebRazorPages.Pages.Product.Models;
 
 namespace Clean.WebRazorPages.Pages.Product;
@@ -9,19 +9,19 @@ public class ProductService : ClientServiceBase
     {
     }
 
-    public async Task<TResult<ProductsResponse>> GetProductsAsync()
+    public async Task<IResult<ProductsResponse>> GetProductsAsync()
     {
         string? url = base.EndPoints.Product[0].GetProducts;
         bool isAdded = base.AddAuthenticationHeader();
-        if(isAdded)
+        if (isAdded)
         {
             HttpResponseMessage responseMessage = await HttpClient.GetAsync(url);
             IEnumerable<ProductsResponse>? response = await responseMessage.Content.ReadFromJsonAsync<IEnumerable<ProductsResponse>>();
-            return TResult<ProductsResponse>.Ok(response!);
+            return Result<ProductsResponse>.Success(values: response);
         }
 
-        return TResult<ProductsResponse>.Fail();
-        
+        return Result<ProductsResponse>.Fail();
+
     }
 
 }

@@ -1,16 +1,16 @@
 ﻿using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Customers;
-using Clean.Domain.Shared;
+using Clean.Shared;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace Clean.Application.Features.Customers.Queries.GetCustomer;
 
-public record GetCustomerRequest(string? CustomerId, string? Name) : IRequest<TResult<GetCustomerResponse>>;
+public record GetCustomerRequest(string? CustomerId, string? Name) : IRequest<IResult<GetCustomerResponse>>;
 public record GetCustomerResponse(string FirstName, string LastName, string Email, string PhoneNumber);
 
 
-public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, TResult<GetCustomerResponse>>
+public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, IResult<GetCustomerResponse>>
 {
     private readonly IQueryUnitOfWork _query;
 
@@ -19,7 +19,7 @@ public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, TResult<Ge
         _query = query;
     }
 
-    public async Task<TResult<GetCustomerResponse>> Handle(GetCustomerRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<GetCustomerResponse>> Handle(GetCustomerRequest request, CancellationToken cancellationToken)
     {
         var query = await _query.Customer.QueryAsync(true, cancellationToken: cancellationToken);
 
@@ -29,11 +29,11 @@ public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, TResult<Ge
 
             if (customer is null)
             {
-                return TResult<GetCustomerResponse>.Fail("Customer not found!");
+                return Result<GetCustomerResponse>.Fail("Customer not found!");
             }
 
             GetCustomerResponse result = query.Adapt<GetCustomerResponse>();
-            return TResult<GetCustomerResponse>.Ok(result);
+            return Result<GetCustomerResponse>.Success(value: result);
         }
 
         if (!string.IsNullOrEmpty(request.Name))
@@ -44,16 +44,16 @@ public class GetCustomerHandler : IRequestHandler<GetCustomerRequest, TResult<Ge
 
             if (customer.Count == 0)
             {
-                return  TResult<GetCustomerResponse>.Fail("Customer not found!");
+                return Result<GetCustomerResponse>.Fail("Customer not found!");
             }
 
             IEnumerable<GetCustomerResponse> result = customer.Adapt<IEnumerable<GetCustomerResponse>>();
-            return  TResult<GetCustomerResponse>.Ok(result.ToList());
+            return Result<GetCustomerResponse>.Success(values: result.ToList());
         }
 
         var customers = await query.ToListAsync();
         IEnumerable<GetCustomerResponse> response = customers.Adapt<IEnumerable<GetCustomerResponse>>();
-        return  TResult<GetCustomerResponse>.Ok(response.ToList());
+        return Result<GetCustomerResponse>.Success(values: response.ToList());
 
     }
 }

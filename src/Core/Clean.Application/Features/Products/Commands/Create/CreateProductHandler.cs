@@ -2,15 +2,16 @@
 using Clean.Domain.Products;
 using Clean.Domain.Products.Enums;
 using Clean.Domain.Products.ValueObjects;
-using Clean.Domain.Shared;
+using Clean.Shared;
+
 
 namespace Clean.Application.Features.Products.Commands.Create;
 
 
-public record CreateProductRequest(string DisplayName, Currency currency,Image image, decimal Amount, string CategoryName, int Quantity) : IRequest<TResult<CreateProductResponse>>;
+public record CreateProductRequest(string DisplayName, Currency currency,Image image, decimal Amount, string CategoryName, int Quantity) : IRequest<IResult<CreateProductResponse>>;
 public record CreateProductResponse;
 
-public class CreateProductHandler : IRequestHandler<CreateProductRequest, TResult<CreateProductResponse>>
+public class CreateProductHandler : IRequestHandler<CreateProductRequest, IResult<CreateProductResponse>>
 {
 
     private readonly ICommandUnitOfWork _command;
@@ -21,7 +22,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, TResul
         _addInventoryEvent = addInventoryEvent;
     }
 
-    public async Task<TResult<CreateProductResponse>> Handle(CreateProductRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<CreateProductResponse>> Handle(CreateProductRequest request, CancellationToken cancellationToken)
     {
         var errors = new List<string>();
 
@@ -33,29 +34,29 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, TResul
         var inventoryResult = product.AddInventory(product.Id,request.Quantity);
         _addInventoryEvent.Publish(new AddInventoryEvent(product.Id, request.Quantity));
 
-        if(categoryResult.IsFailed)
+        if(!categoryResult.IsSuccess)
         {
             errors.Add(categoryResult.Message);
         }
 
-        if (productResult.IsFailed)
+        if (!productResult.IsSuccess)
         {
             errors.Add(productResult.Message);
         }
 
-        if (inventoryResult.IsFailed)
+        if (!inventoryResult.IsSuccess)
         {
             errors.Add(inventoryResult.Message);
         }
 
         if (errors.Count > 0)
         {
-            return  TResult<CreateProductResponse>.Fail(errors);
+            return  Result<CreateProductResponse>.Fail(errors:errors);
         }
 
         _command.Product.Insert(product);
         await _command.Product.ExecuteAsync(cancellationToken);
 
-        return  TResult<CreateProductResponse>.Ok("Product was added.");
+        return  Result<CreateProductResponse>.Success("Product was added.");
     }
 }

@@ -1,6 +1,6 @@
 using Clean.Domain.OrderItems;
 using Clean.Domain.Orders;
-using Clean.Domain.Shared;
+using Clean.Shared;
 
 namespace DomainTests;
 
@@ -21,8 +21,8 @@ public class OrderTests
     public void AddOrderItem_ShouldBe_Return_Successed()
     {
         var order = new Order(CustomerId);
-        TResult<OrderItem> orderResult = order.AddOrderItem(ProductId,1);
-        Assert.True(orderResult.IsSuccessed);
+        IResult<OrderItem> orderResult = order.AddOrderItem(ProductId,1);
+        Assert.True(orderResult.IsSuccess);
         Assert.IsType(typeof(Guid),orderResult.Value.OrderId);
     }
 
@@ -30,7 +30,7 @@ public class OrderTests
     public void AddOrderIte_When_QuantityEqualOrLess_Than_Zero_ShouldBe_Return_Failed()
     {
         var order = new Order(CustomerId);
-        TResult<OrderItem> orderResult = order.AddOrderItem(ProductId,-1);
-        Assert.True(orderResult.IsFailed);
+        IResult<OrderItem> orderResult = order.AddOrderItem(ProductId,-1);
+        Assert.False(orderResult.IsSuccess);
     }
 }

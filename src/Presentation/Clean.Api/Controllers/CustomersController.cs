@@ -19,7 +19,7 @@ public class CustomersController : AbstractController
     {
         var result = await _mediator.Send(new GetCustomerRequest(CustomerId, NameOrSurname));
 
-        if (result.IsFailed)
+        if (!result.IsSuccess)
         {
             return NotFound(result.Message);
         }
@@ -44,7 +44,7 @@ public class CustomersController : AbstractController
     public async Task<IActionResult> GetCustomerBasket(string CustomerId)
     {
         var result = await _mediator.Send(new GetCustomerBasketRequest(CustomerId));
-        if (result.IsSuccessed)
+        if (result.IsSuccess)
             return Ok(result);
 
         return NotFound(result.Message);

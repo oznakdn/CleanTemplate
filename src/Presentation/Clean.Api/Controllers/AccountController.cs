@@ -14,9 +14,9 @@ public class AccountController : AbstractController
     public async Task<IActionResult> Login([FromBody] LoginCustomerRequest login)
     {
         var result = await _mediator.Send(login);
-        if (result.Errors.Count() > 0 && result.IsFailed) return BadRequest(result.Errors);
+        if (result.Errors.Count() > 0 && !result.IsSuccess) return BadRequest(result.Errors);
 
-        if (!string.IsNullOrEmpty(result.Message) && result.IsFailed) return NotFound(result.Message);
+        if (!string.IsNullOrEmpty(result.Message) && !result.IsSuccess) return NotFound(result.Message);
 
         return Ok(result.Value);
     }
@@ -25,7 +25,7 @@ public class AccountController : AbstractController
     public async Task<IActionResult> Register([FromBody] CreateCustomerRequest register)
     {
         var result = await _mediator.Send(register);
-        if (result.IsFailed)
+        if (!result.IsSuccess)
         {
             return BadRequest(result.Errors);
         }

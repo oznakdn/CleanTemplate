@@ -2,14 +2,15 @@
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.BasketItems;
 using Clean.Domain.BasketItems.Events;
-using Clean.Domain.Shared;
+using Clean.Shared;
+
 
 namespace Clean.Application.Features.Baskets.Commands.UpdateBasket;
 
-public record UpdateBasketRequest(string BasketId, string BasketItemId, int Quantity) : IRequest<TResult<UpdateBasketResponse>>;
+public record UpdateBasketRequest(string BasketId, string BasketItemId, int Quantity) : IRequest<IResult<UpdateBasketResponse>>;
 public record UpdateBasketResponse;
 
-public class UpdateBasketHandler : IRequestHandler<UpdateBasketRequest, TResult<UpdateBasketResponse>>
+public class UpdateBasketHandler : IRequestHandler<UpdateBasketRequest, IResult<UpdateBasketResponse>>
 {
     private readonly IQueryUnitOfWork _query;
     private readonly ICommandUnitOfWork _command;
@@ -22,12 +23,12 @@ public class UpdateBasketHandler : IRequestHandler<UpdateBasketRequest, TResult<
         _updateBasketItemEvent = updateBasketItemEvent;
     }
 
-    public async Task<TResult<UpdateBasketResponse>> Handle(UpdateBasketRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<UpdateBasketResponse>> Handle(UpdateBasketRequest request, CancellationToken cancellationToken)
     {
         var basket = await _query.Basket.ReadSingleOrDefaultAsync(true, x => x.Id == Guid.Parse(request.BasketId), cancellationToken);
 
         if (basket is null)
-            return TResult<UpdateBasketResponse>.Fail("Basket not found!");
+            return Result<UpdateBasketResponse>.Fail("Basket not found!");
 
 
         BasketItem basketItem = await _updateBasketItemEvent.PublishAsync(new UpdateBasketItemEvent(
@@ -39,6 +40,6 @@ public class UpdateBasketHandler : IRequestHandler<UpdateBasketRequest, TResult<
 
         _command.Basket.Edit(basket);
         await _command.Basket.ExecuteAsync(cancellationToken);
-        return TResult<UpdateBasketResponse>.Ok($"Item was updated to {request.Quantity}");
+        return Result<UpdateBasketResponse>.Success($"Item was updated to {request.Quantity}");
     }
 }

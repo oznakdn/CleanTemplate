@@ -9,14 +9,14 @@ public class AccountTest
     public void CreateUserWithoutRole_When_PropertiesAreValid_Should_Return_Successed()
     {
         var result = User.CreateUser("Jonh","Doe","john_doe","john@mail.com","Test123");
-        Assert.True(result.IsSuccessed);
+        Assert.True(result.IsSuccess);
     }
 
     [Fact]
     public void CreateUserWithoutRole_When_PropertiesAreNotValid_Should_Return_IsFailed()
     {
         var result = User.CreateUser("Jonh","Doe","john_doe","","Test123");
-        Assert.True(result.IsFailed);
+        Assert.True(!result.IsSuccess);
         Assert.Equal<string>(result.Errors.Single(),"Email cannot be empty!");
     }
 
@@ -25,21 +25,21 @@ public class AccountTest
     {
         string roleId = "1552df121dfs31fd214sdf";
         var result = User.CreateUser("Jonh","Doe","john_doe","john@mail.com","Test123",roleId);
-        Assert.True(result.IsSuccessed);
+        Assert.True(result.IsSuccess);
     }
 
     [Fact]
     public void CreateRole_When_PropertiesAreValid_Should_Return_Successed()
     {
         var result = Role.CreateRole("TestRole","This is testrole's description");
-        Assert.True(result.IsSuccessed);
+        Assert.True(result.IsSuccess);
     }
 
     [Fact]
     public void CreateRole_When_PropertiesAreValid_Should_Return_Failed()
     {
         var result = Role.CreateRole("","This is testrole's description");
-        Assert.True(result.IsFailed);
+        Assert.True(!result.IsSuccess);
         Assert.Equal<string>(result.Errors.First(),"Role title cannot be empty!");
     }
 }

@@ -19,9 +19,9 @@ public class AuthController : AbstractController
     public async Task<IActionResult> Login([FromBody] LoginRequest login)
     {
         var result = await _mediator.Send(login);
-        if (result.Errors.Count() > 0 && result.IsFailed) return BadRequest(result.Errors);
+        if (result.Errors.Count() > 0 && !result.IsSuccess) return BadRequest(result.Errors);
 
-        if (!string.IsNullOrEmpty(result.Message) && result.IsFailed) return NotFound(result.Message);
+        if (!string.IsNullOrEmpty(result.Message) && !result.IsSuccess) return NotFound(result.Message);
 
         return Ok(result.Value);
     }
@@ -30,7 +30,7 @@ public class AuthController : AbstractController
     public async Task<IActionResult> Register([FromBody] RegisterRequest register)
     {
         var result = await _mediator.Send(register);
-        if (result.IsFailed)
+        if (!result.IsSuccess)
         {
             return BadRequest(result.Errors);
         }
@@ -43,7 +43,7 @@ public class AuthController : AbstractController
     {
         var result = await _mediator.Send(createRole);
 
-        if (result.IsFailed) return BadRequest(result.Errors);
+        if (!result.IsSuccess) return BadRequest(result.Errors);
 
         return Created(result.Message, createRole);
     }
@@ -59,6 +59,6 @@ public class AuthController : AbstractController
     public async Task<IActionResult> AssignRole([FromBody] AssignRoleRequest assignRole)
     {
         var result = await _mediator.Send(assignRole, default);
-        return result.IsFailed ? NotFound(result.Message) : Ok(result.Message);
+        return !result.IsSuccess ? NotFound(result.Message) : Ok(result.Message);
     }
 }

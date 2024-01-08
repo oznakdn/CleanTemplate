@@ -1,11 +1,11 @@
 ﻿using Clean.Domain.Contracts.Abstracts;
 using Clean.Domain.OrderItems;
 using Clean.Domain.Orders.Enums;
-using Clean.Domain.Shared;
+using Clean.Shared;
 
 namespace Clean.Domain.Orders;
 
-public class Order : AggregateRoot<Order,Guid>
+public class Order : AggregateRoot<Order, Guid>
 {
     private List<OrderItem> _orderItems = new();
     public Guid CustomerId { get; private set; }
@@ -22,15 +22,16 @@ public class Order : AggregateRoot<Order,Guid>
 
     private Order() : base(Guid.Empty) { }
 
-    public TResult<OrderItem> AddOrderItem(Guid productId, int quantity)
+    public IResult<OrderItem> AddOrderItem(Guid productId, int quantity)
     {
-        if(quantity<=0)
+        if (quantity <= 0)
         {
-            return TResult<OrderItem>.Fail($"Quantity should be greater than 0!");
+            return Result<OrderItem>.Fail($"Quantity should be greater than 0!");
         }
-         var orderItem = new OrderItem(productId,this.Id, quantity);
+
+        OrderItem? orderItem = new OrderItem(productId, this.Id, quantity);
         _orderItems.Add(orderItem);
-        return TResult<OrderItem>.Ok(orderItem);
+        return Result<OrderItem>.Success(value: orderItem);
     }
 
     public void PaymentRecived()

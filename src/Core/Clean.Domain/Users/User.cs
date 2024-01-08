@@ -1,5 +1,5 @@
 ﻿using Clean.Domain.Contracts.Interfaces;
-using Clean.Domain.Shared;
+using Clean.Shared;
 
 namespace Clean.Domain.Users;
 
@@ -20,7 +20,7 @@ public class User : IDocument
     public string? RoleId { get; private set; }
     public bool IsDeleted { get; private set; }
 
-    public static TResult<User> CreateUser(string firstName, string lastName, string username, string email, string password)
+    public static IResult<User> CreateUser(string firstName, string lastName, string username, string email, string password)
     {
         var errors = new List<string>();
         if (string.IsNullOrEmpty(firstName)) errors.Add("First name cannot be empty!");
@@ -30,13 +30,13 @@ public class User : IDocument
         if (string.IsNullOrEmpty(password)) errors.Add("Password cannot be empty!");
 
         if (errors.Count > 0)
-            return TResult<User>.Fail(errors);
+            return Result<User>.Fail(errors:errors);
 
-        var user = new User(firstName, lastName, username, email, password);
-        return TResult<User>.Ok(user);
+        User? user = new User(firstName, lastName, username, email, password);
+        return Result<User>.Success(value: user);
     }
 
-    public static TResult<User> CreateUser(string firstName, string lastName, string username, string email, string password, string roleId)
+    public static IResult<User> CreateUser(string firstName, string lastName, string username, string email, string password, string roleId)
     {
         var errors = new List<string>();
         if (string.IsNullOrEmpty(firstName)) errors.Add("First name cannot be empty!");
@@ -47,10 +47,10 @@ public class User : IDocument
         if (string.IsNullOrEmpty(roleId)) errors.Add("RoleId cannot be empty!");
 
         if (errors.Count > 0)
-            return TResult<User>.Fail(errors);
+            return Result<User>.Fail(errors: errors);
 
-        var user = new User(firstName, lastName, username, email, password, roleId);
-        return TResult<User>.Ok(user);
+        User? user = new User(firstName, lastName, username, email, password, roleId);
+        return Result<User>.Success(value: user);
 
     }
 

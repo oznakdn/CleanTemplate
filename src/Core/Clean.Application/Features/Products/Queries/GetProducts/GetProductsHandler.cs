@@ -1,18 +1,18 @@
 ﻿using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Products;
-using Clean.Domain.Shared;
+using Clean.Shared;
 using Mapster;
 
 namespace Clean.Application.Features.Products.Queries.GetProducts;
 
 
-public record GetProductsRequest(int MaxPage, int PageSize, int PageNumber, string? query) : IRequest<TResult<GetProductsResponse>>;
+public record GetProductsRequest(int MaxPage, int PageSize, int PageNumber, string? query) : IRequest<IResult<GetProductsResponse>>;
 public record GetProductsResponse(string Id, string DisplayName, string Currency, decimal Price, string Category, List<ProductImage> Images);
 public record ProductImage(string ImageName, string ImageSize);
 
 
 
-public class GetProductsHandler : IRequestHandler<GetProductsRequest, TResult<GetProductsResponse>>
+public class GetProductsHandler : IRequestHandler<GetProductsRequest, IResult<GetProductsResponse>>
 {
 
     private readonly IQueryUnitOfWork _query;
@@ -22,7 +22,7 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, TResult<Ge
         _query = query;
     }
 
-    public async Task<TResult<GetProductsResponse>> Handle(GetProductsRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<GetProductsResponse>> Handle(GetProductsRequest request, CancellationToken cancellationToken)
     {
         IEnumerable<Product> products;
 
@@ -47,9 +47,9 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, TResult<Ge
 
         if (products is null)
         {
-            return TResult<GetProductsResponse>.Fail("Product not found!");
+            return Result<GetProductsResponse>.Fail("Product not found!");
         }
 
-        return TResult<GetProductsResponse>.Ok(result);
+        return Result<GetProductsResponse>.Success(values: result);
     }
 }

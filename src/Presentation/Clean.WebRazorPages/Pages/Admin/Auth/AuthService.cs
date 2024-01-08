@@ -1,4 +1,4 @@
-﻿using Clean.Domain.Shared;
+﻿using Clean.Shared;
 using Clean.WebRazorPages.Pages.Admin.Auth.Models;
 
 namespace Clean.WebRazorPages.Pages.Admin.Auth;
@@ -9,7 +9,7 @@ public class AuthService : ClientServiceBase
     {
     }
 
-    public async Task<TResult<LoginResponse>> Login(LoginRequest loginRequest)
+    public async Task<IResult<LoginResponse>> Login(LoginRequest loginRequest)
     {
         string? url = EndPoints.Auth[0].Login;
 
@@ -17,9 +17,9 @@ public class AuthService : ClientServiceBase
         if (responseMessage.IsSuccessStatusCode)
         {
             LoginResponse? response = await responseMessage.Content.ReadFromJsonAsync<LoginResponse>();
-            return TResult<LoginResponse>.Ok(response);
+            return Result<LoginResponse>.Success(value:response);
         }
 
-        return TResult<LoginResponse>.Fail();
+        return Result<LoginResponse>.Fail();
     }
 }

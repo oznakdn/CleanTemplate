@@ -17,7 +17,7 @@ public class IndexModel : PageModel
     public async Task<IActionResult> OnGet()
     {
         var response = await _productService.GetProductsAsync();
-        if(response.IsFailed)
+        if(!response.IsSuccess)
         {
             return RedirectToPage("/Admin/Auth/Login");
         }

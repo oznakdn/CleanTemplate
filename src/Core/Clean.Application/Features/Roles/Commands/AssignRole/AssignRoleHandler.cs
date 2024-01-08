@@ -1,16 +1,16 @@
 ﻿using Clean.Domain.Roles.Repositories;
-using Clean.Domain.Shared;
 using Clean.Domain.Users;
 using Clean.Domain.Users.Repositories;
+using Clean.Shared;
 using MongoDB.Driver;
 
 namespace Clean.Application.Features.Roles.Commands.AssignRole;
 
 
-public record AssignRoleRequest(string UserId, string RoleId) : IRequest<TResult<AssignRoleResponse>>;
+public record AssignRoleRequest(string UserId, string RoleId) : IRequest<IResult<AssignRoleResponse>>;
 public record AssignRoleResponse;
 
-public class AssignRoleHandler : IRequestHandler<AssignRoleRequest, TResult<AssignRoleResponse>>
+public class AssignRoleHandler : IRequestHandler<AssignRoleRequest, IResult<AssignRoleResponse>>
 {
     private readonly IRoleQuery _roleQuery;
     private readonly IUserQuery _userQuery;
@@ -23,24 +23,24 @@ public class AssignRoleHandler : IRequestHandler<AssignRoleRequest, TResult<Assi
         _userCommand = userCommand;
     }
 
-    public async Task<TResult<AssignRoleResponse>> Handle(AssignRoleRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<AssignRoleResponse>> Handle(AssignRoleRequest request, CancellationToken cancellationToken)
     {
         var role = await _roleQuery.ReadSingleOrDefaultAsync(x => x.Id == request.RoleId, cancellationToken);
         var user = await _userQuery.ReadSingleOrDefaultAsync(x => x.Id == request.UserId, cancellationToken);
 
         if (role is null)
         {
-            return TResult<AssignRoleResponse>.Fail("Role not found!");
+            return Result<AssignRoleResponse>.Fail("Role not found!");
         }
 
         if (user is null)
         {
-            return TResult<AssignRoleResponse>.Fail("User not found!");
+            return Result<AssignRoleResponse>.Fail("User not found!");
         }
 
         if (user.RoleId == role.Id)
         {
-            return TResult<AssignRoleResponse>.Fail("User has already this role");
+            return Result<AssignRoleResponse>.Fail("User has already this role");
         }
 
         user.AssignRole(role.Id);
@@ -48,6 +48,6 @@ public class AssignRoleHandler : IRequestHandler<AssignRoleRequest, TResult<Assi
 
         await _userCommand.EditAsync(filter, user, cancellationToken);
 
-        return TResult<AssignRoleResponse>.Ok("The role has been assigned to the user.");
+        return Result<AssignRoleResponse>.Success("The role has been assigned to the user.");
     }
 }

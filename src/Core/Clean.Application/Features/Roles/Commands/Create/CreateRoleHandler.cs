@@ -1,13 +1,13 @@
 ﻿using Clean.Domain.Roles;
 using Clean.Domain.Roles.Repositories;
-using Clean.Domain.Shared;
+using Clean.Shared;
 
 namespace Clean.Application.Features.Roles.Commands.Create;
 
-public record CreateRoleRequest(string RoleTitle, string Description) : IRequest<TResult<CreateRoleResponse>>;
+public record CreateRoleRequest(string RoleTitle, string Description) : IRequest<IResult<CreateRoleResponse>>;
 public record CreateRoleResponse;
 
-public class CreateRoleHandler : IRequestHandler<CreateRoleRequest, TResult<CreateRoleResponse>>
+public class CreateRoleHandler : IRequestHandler<CreateRoleRequest, IResult<CreateRoleResponse>>
 {
     private readonly IRoleCommand _command;
 
@@ -16,15 +16,15 @@ public class CreateRoleHandler : IRequestHandler<CreateRoleRequest, TResult<Crea
         _command = command;
     }
 
-    public async Task<TResult<CreateRoleResponse>> Handle(CreateRoleRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<CreateRoleResponse>> Handle(CreateRoleRequest request, CancellationToken cancellationToken)
     {
         var result = Role.CreateRole(request.RoleTitle,request.Description);
-        if(result.IsFailed)
+        if(!result.IsSuccess)
         {
-            return TResult<CreateRoleResponse>.Fail(result.Errors.ToList());
+            return Result<CreateRoleResponse>.Fail(errors: result.Errors);
         }
 
         await _command.InsertAsync(result.Value, cancellationToken);
-        return  TResult<CreateRoleResponse>.Ok("Role was created.");
+        return  Result<CreateRoleResponse>.Success("Role was created.");
     }
 }

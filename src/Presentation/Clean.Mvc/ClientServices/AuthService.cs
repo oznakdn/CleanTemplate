@@ -1,5 +1,5 @@
-﻿using Clean.Domain.Shared;
-using Clean.Mvc.Areas.Admin.Models.AuthViewModels;
+﻿using Clean.Mvc.Areas.Admin.Models.AuthViewModels;
+using Clean.Shared;
 
 namespace Clean.Mvc.ClientServices;
 
@@ -12,11 +12,11 @@ public class AuthService : ClientService
         _client = _httpClient.CreateClient("CleanClient");
     }
 
-    public async Task<TResult<LoginResponse>> LoginAsync(LoginRequest loginRequest)
+    public async Task<IResult<LoginResponse>> LoginAsync(LoginRequest loginRequest)
     {
         string url = "auth/login";
         var responseMessage = await _client.PutAsJsonAsync<LoginRequest>(url, loginRequest);
-        var response = await responseMessage.Content.ReadFromJsonAsync<LoginResponse>();
-        return  TResult<LoginResponse>.Ok(response!);
+        LoginResponse? response = await responseMessage.Content.ReadFromJsonAsync<LoginResponse>();
+        return  Result<LoginResponse>.Success(value:response!);
     }
 }

@@ -14,7 +14,7 @@ public class OrdersController : AbstractController
     public async Task<IActionResult> CreateOrder([FromQuery] string customerId)
     {
         var result = await _mediator.Send(new CreateOrderRequest(customerId));
-        if (result.IsSuccessed)
+        if (result.IsSuccess)
         {
             return Created("", result.Message);
         }

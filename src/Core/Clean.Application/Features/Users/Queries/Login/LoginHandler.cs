@@ -1,8 +1,8 @@
 ﻿using Clean.Domain.Roles.Repositories;
-using Clean.Domain.Shared;
 using Clean.Domain.Users;
 using Clean.Domain.Users.Repositories;
 using Clean.Identity.Helpers;
+using Clean.Shared;
 using Gleeman.JwtGenerator;
 using Gleeman.JwtGenerator.Generator;
 using MongoDB.Driver;
@@ -10,11 +10,11 @@ using MongoDB.Driver;
 namespace Clean.Application.Features.Users.Queries.Login;
 
 
-public record LoginRequest(string Email, string Password) : IRequest<TResult<LoginResponse>>;
+public record LoginRequest(string Email, string Password) : IRequest<IResult<LoginResponse>>;
 public record LoginResponse(string AccessToken, string AccessExpire, string RefreshToken, string RefreshExpire);
 
 
-public class LoginHandler : IRequestHandler<LoginRequest, TResult<LoginResponse>>
+public class LoginHandler : IRequestHandler<LoginRequest, IResult<LoginResponse>>
 {
     private readonly IUserCommand _userCommand;
     private readonly IUserQuery _userQuery;
@@ -30,7 +30,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, TResult<LoginResponse>
 
     }
 
-    public async Task<TResult<LoginResponse>> Handle(LoginRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<LoginResponse>> Handle(LoginRequest request, CancellationToken cancellationToken)
     {
         var validator = new LoginValidator();
         var validation = validator.Validate(request);
@@ -40,7 +40,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, TResult<LoginResponse>
         {
             validation.Errors.ForEach(error => errors.Add(error.ErrorMessage));
 
-            return TResult< LoginResponse >.Fail(errors);
+            return Result<LoginResponse>.Fail(errors: errors);
         }
 
         var user = await _userQuery.ReadSingleOrDefaultAsync(x => x.Email == request.Email, cancellationToken);
@@ -48,7 +48,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, TResult<LoginResponse>
 
         if (user == null)
         {
-            return TResult<LoginResponse>.Fail("User not found!");
+            return Result<LoginResponse>.Fail("User not found!");
 
         }
 
@@ -56,7 +56,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, TResult<LoginResponse>
 
         if (!passwordIsValid)
         {
-            return TResult<LoginResponse>.Fail("Password is wrong!");
+            return Result<LoginResponse>.Fail("Password is wrong!");
         }
 
         var userParameter = new UserParameter
@@ -94,7 +94,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, TResult<LoginResponse>
             refresh.Token,
             refresh.ExpireDate.ToString());
 
-        return TResult<LoginResponse>.Ok(response);
+        return Result<LoginResponse>.Success(value: response);
 
     }
 }

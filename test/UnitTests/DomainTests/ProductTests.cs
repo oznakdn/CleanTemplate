@@ -19,7 +19,7 @@ public class ProductTests
     {
         Product product = new("TestProduct");
         var result = product.AddMoney(Currency.TL,1000);
-        Assert.True(result.IsSuccessed);
+        Assert.True(result.IsSuccess);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class ProductTests
     {
         Product product = new("TestProduct");
         var result = product.AddMoney(Currency.TL,-1000);
-        Assert.True(result.IsFailed);
+        Assert.True(!result.IsSuccess);
         Assert.Equal<int>(result.Errors.Count(),1);
 
     }
@@ -37,7 +37,7 @@ public class ProductTests
     {
         Product product = new("TestProduct");
         var result = product.AddCategory("TestCategory");
-        Assert.True(result.IsSuccessed);
+        Assert.True(result.IsSuccess);
     }
 
 
@@ -46,7 +46,7 @@ public class ProductTests
     {
         Product product = new("TestProduct");
         var result = product.AddCategory("");
-        Assert.True(result.IsFailed);
+        Assert.True(!result.IsSuccess);
         Assert.Equal<string>(result.Message,"DisplayName can be between 3 and 20 characters!");
     }
 
@@ -55,7 +55,7 @@ public class ProductTests
     {
         Product product = new("TestProduct");
         var result = product.AddInventory(product.Id,1);
-        Assert.True(result.IsSuccessed);
+        Assert.True(result.IsSuccess);
     }
 
     [Fact]
@@ -63,7 +63,7 @@ public class ProductTests
     {
         Product product = new("TestProduct");
         var result = product.AddInventory(product.Id,-1);
-        Assert.True(result.IsFailed);
+        Assert.True(!result.IsSuccess);
     }
 
 

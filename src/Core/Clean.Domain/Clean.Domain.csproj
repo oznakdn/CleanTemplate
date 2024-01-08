@@ -15,5 +15,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Clean.Domain.Contracts\Clean.Domain.Contracts.csproj" />
+    <ProjectReference Include="..\Clean.Shared\Clean.Shared.csproj" />
   </ItemGroup>
 </Project>

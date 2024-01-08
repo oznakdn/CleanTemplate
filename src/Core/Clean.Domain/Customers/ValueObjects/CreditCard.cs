@@ -1,5 +1,5 @@
 ﻿using Clean.Domain.Contracts.Abstracts;
-using Clean.Domain.Shared;
+using Clean.Shared;
 
 namespace Clean.Domain.Customers.ValueObjects;
 
@@ -37,14 +37,14 @@ public class CreditCard : ValueObject
         yield return AvailableLimit;
     }
 
-    public Result CardSpend(decimal amount)
+    public IResult CardSpend(decimal amount)
     {
         SetAvailableLimit();
         if (AvailableLimit >= amount)
         {
             TotalDebt += amount;
             AvailableLimit = TotalLimit - TotalDebt;
-            return Result.Ok();
+            return Result.Success();
         }
         return Result.Fail("Card limit is not available!");
     }

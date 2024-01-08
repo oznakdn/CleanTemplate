@@ -1,5 +1,5 @@
 ﻿using Clean.Domain.Contracts.Interfaces;
-using Clean.Domain.Shared;
+using Clean.Shared;
 
 namespace Clean.Domain.Roles;
 
@@ -21,17 +21,17 @@ public class Role : IDocument
     }
     private Role() { }
 
-    public static TResult<Role> CreateRole(string roleTitle, string description)
+    public static IResult<Role> CreateRole(string roleTitle, string description)
     {
         var errors = new List<string>();
         if (string.IsNullOrEmpty(roleTitle)) errors.Add("Role title cannot be empty!");
         if (string.IsNullOrEmpty(description)) errors.Add("Description cannot be empty!");
 
         if (errors.Count > 0)
-            return TResult<Role>.Fail(errors);
+            return Result<Role>.Fail(errors:errors);
 
-        var role = new Role(roleTitle, description);
-        return TResult<Role>.Ok(role);
+        Role? role = new Role(roleTitle, description);
+        return Result<Role>.Success(value: role);
     }
 
     public bool Equals(IEntity<string>? other)

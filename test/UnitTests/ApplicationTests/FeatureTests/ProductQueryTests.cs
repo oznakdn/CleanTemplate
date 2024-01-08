@@ -2,7 +2,7 @@
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Products;
 using Clean.Domain.Products.Enums;
-using Clean.Domain.Shared;
+using Clean.Shared;
 using Moq;
 
 namespace ApplicationTests.FeatureTests;
@@ -34,13 +34,13 @@ public class ProductQueryTests
         //    p.Price.Currency.ToString(), 
         //    p.Price.Amount, 
         //    p.Category.DisplayName)).ToList();
-        
 
-         _moq.Setup(x => x.Product.GetAllProductsWithInventoryAsync(50,5,1,default).Result).Returns(products);
 
-        TResult<GetProductsResponse> actualResult = await _getProductsHandler.Handle(new GetProductsRequest(50,5,1,null), default);
+        _moq.Setup(x => x.Product.GetAllProductsWithInventoryAsync(50, 5, 1, default).Result).Returns(products);
 
-        Assert.True(actualResult.IsSuccessed);
+        IResult<GetProductsResponse> actualResult = await _getProductsHandler.Handle(new GetProductsRequest(50, 5, 1, null), default);
+
+        Assert.True(actualResult.IsSuccess);
         //Assert.Equal<GetProductsResponse>(expectedResult, actualResult.Values);
 
 

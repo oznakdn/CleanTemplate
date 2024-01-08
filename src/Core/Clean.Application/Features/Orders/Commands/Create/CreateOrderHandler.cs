@@ -4,15 +4,16 @@ using Clean.Domain.BasketItems.Events;
 using Clean.Domain.Customers.Events;
 using Clean.Domain.OrderItems.Events;
 using Clean.Domain.Orders;
-using Clean.Domain.Shared;
+using Clean.Shared;
+
 
 namespace Clean.Application.Features.Orders.Commands.Create;
 
 
-public record CreateOrderRequest(string customerId) : IRequest<TResult<CreateOrderResponse>>;
+public record CreateOrderRequest(string customerId) : IRequest<IResult<CreateOrderResponse>>;
 public record CreateOrderResponse();
 
-public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, TResult<CreateOrderResponse>>
+public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, IResult<CreateOrderResponse>>
 {
     private readonly IQueryUnitOfWork _query;
     private readonly ICommandUnitOfWork _command;
@@ -34,7 +35,7 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, TResult<Cr
         _createOrderItemEventHandler = createOrderItemEventHandler;
     }
 
-    public async Task<TResult<CreateOrderResponse>> Handle(CreateOrderRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<CreateOrderResponse>> Handle(CreateOrderRequest request, CancellationToken cancellationToken)
     {
 
         var basket = await _query.Basket.ReadSingleOrDefaultAsync(
@@ -46,10 +47,10 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, TResult<Cr
             filter: x => x.Id == Guid.Parse(request.customerId));
 
         if (basket is null)
-            return  TResult<CreateOrderResponse>.Fail("Basket not found!");
+            return  Result<CreateOrderResponse>.Fail("Basket not found!");
 
         if (customer is null)
-            return TResult<CreateOrderResponse>.Fail("Customer not found!");
+            return Result<CreateOrderResponse>.Fail("Customer not found!");
 
         if(customer.CreditCard is null)
         {
@@ -62,7 +63,7 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, TResult<Cr
             Order order = new(customer.Id);
             var result = customer.CreditCard.CardSpend(basket.TotalAmount);
             await _updateCustomerEventHandler.PublishAsync(new UpdateCustomerEvent(customer), cancellationToken);
-            if (result.IsFailed)
+            if (!result.IsSuccess)
             {
                 order.PaymentFailed();
             }
@@ -79,9 +80,9 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderRequest, TResult<Cr
             await _command.Order.InsertAsync(order, cancellationToken);
             await _command.Order.ExecuteAsync(cancellationToken);
 
-            return  TResult<CreateOrderResponse>.Ok("Order has been created.");
+            return  Result<CreateOrderResponse>.Success("Order has been created.");
         }
 
-        return  TResult<CreateOrderResponse>.Fail("Basket is empty!");
+        return  Result<CreateOrderResponse>.Fail("Basket is empty!");
     }
 }

@@ -1,17 +1,17 @@
 ﻿using Clean.Application.DataShaping;
 using Clean.Application.UnitOfWork.Queries;
 using Clean.Domain.Products;
-using Clean.Domain.Shared;
+using Clean.Shared;
 using Mapster;
 using System.Dynamic;
 
 namespace Clean.Application.Features.Products.Queries.GetProductsWithDataShaping;
 
-public record GetProductsDataShapingRequest(string fields) : IRequest<TResult<ExpandoObject>>;
+public record GetProductsDataShapingRequest(string fields) : IRequest<IResult<ExpandoObject>>;
 public record GetProductsDataShapingResponse(string Id, string DisplayName, string Currency, decimal Price, string Category);
 
 
-public class GetProductsWithDataShapingHandler : IRequestHandler<GetProductsDataShapingRequest, TResult<ExpandoObject>>
+public class GetProductsWithDataShapingHandler : IRequestHandler<GetProductsDataShapingRequest, IResult<ExpandoObject>>
 {
     private readonly IQueryUnitOfWork _query;
     private readonly IDataShaper<GetProductsDataShapingResponse> _shaper;
@@ -21,7 +21,7 @@ public class GetProductsWithDataShapingHandler : IRequestHandler<GetProductsData
         _shaper = shaper;
     }
 
-    public async Task<TResult<ExpandoObject>> Handle(GetProductsDataShapingRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<ExpandoObject>> Handle(GetProductsDataShapingRequest request, CancellationToken cancellationToken)
     {
         var products = await _query.Product.ReadAllAsync(noTracking:true,cancellationToken:default);
 
@@ -36,7 +36,7 @@ public class GetProductsWithDataShapingHandler : IRequestHandler<GetProductsData
 
         IEnumerable<ExpandoObject> shapedDatas = _shaper.ShapeDatas(result,request.fields);
 
-        return TResult<ExpandoObject>.Ok(shapedDatas);
+        return Result<ExpandoObject>.Success(values:shapedDatas);
 
     }
 }

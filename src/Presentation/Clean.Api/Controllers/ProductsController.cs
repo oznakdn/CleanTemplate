@@ -42,7 +42,7 @@ public class ProductsController : AbstractController
     public async Task<IActionResult> GetProductDetail(string productId)
     {
         var result = await _mediator.Send(new GetProductDetailRequest(productId));
-        if(result.IsFailed) return NotFound(result.Message);
+        if(!result.IsSuccess) return NotFound(result.Message);
         return Ok(result.Value);
     }
 
@@ -57,7 +57,7 @@ public class ProductsController : AbstractController
     public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest createProduct)
     {
         var result = await _mediator.Send(createProduct);
-        if (result.IsFailed && result.Errors.Count() > 0)
+        if (!result.IsSuccess && result.Errors.Count() > 0)
         {
             return BadRequest(result.Errors);
         }

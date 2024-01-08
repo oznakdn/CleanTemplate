@@ -1,9 +1,10 @@
 ﻿using Clean.Application.UnitOfWork.Queries;
-using Clean.Domain.Shared;
+using Clean.Shared;
+
 
 namespace Clean.Application.Features.Baskets.Queries.GetCustomerBasket;
 
-public record GetCustomerBasketRequest(string CustomerId) : IRequest<TResult<GetCustomerBasketResponse>>;
+public record GetCustomerBasketRequest(string CustomerId) : IRequest<IResult<GetCustomerBasketResponse>>;
 public record GetBasketItems(string Id, string ProductName, int Quantity);
 public class GetCustomerBasketResponse
 {
@@ -11,7 +12,7 @@ public class GetCustomerBasketResponse
     public decimal TotalAmount { get; set; }
     public List<GetBasketItems> BasketItems { get; set; }
 }
-public class GetCustomerBasketHandler : IRequestHandler<GetCustomerBasketRequest, TResult<GetCustomerBasketResponse>>
+public class GetCustomerBasketHandler : IRequestHandler<GetCustomerBasketRequest, IResult<GetCustomerBasketResponse>>
 {
     private readonly IQueryUnitOfWork _query;
 
@@ -20,7 +21,7 @@ public class GetCustomerBasketHandler : IRequestHandler<GetCustomerBasketRequest
         _query = query;
     }
 
-    public async Task<TResult<GetCustomerBasketResponse>> Handle(GetCustomerBasketRequest request, CancellationToken cancellationToken)
+    public async Task<IResult<GetCustomerBasketResponse>> Handle(GetCustomerBasketRequest request, CancellationToken cancellationToken)
     {
         GetCustomerBasketResponse response = new();
         var basket = await _query.Basket.ReadSingleOrDefaultAsync(true, x => x.CustomerId == Guid.Parse(request.CustomerId), cancellationToken);
@@ -28,7 +29,7 @@ public class GetCustomerBasketHandler : IRequestHandler<GetCustomerBasketRequest
             filter: x => x.BasketId == basket.Id, cancellationToken: cancellationToken);
 
         if (basket is null)
-            return TResult<GetCustomerBasketResponse>.Fail("Basket not found!");
+            return Result<GetCustomerBasketResponse>.Fail("Basket not found!");
 
 
         response.BasketId = basket.Id.ToString();
@@ -40,6 +41,6 @@ public class GetCustomerBasketHandler : IRequestHandler<GetCustomerBasketRequest
             x.ProductQuantity
             )).ToList();
 
-        return TResult<GetCustomerBasketResponse>.Ok(response);
+        return Result<GetCustomerBasketResponse>.Success(value:response);
     }
 }

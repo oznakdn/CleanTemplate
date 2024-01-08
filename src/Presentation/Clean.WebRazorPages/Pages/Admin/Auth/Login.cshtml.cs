@@ -22,7 +22,7 @@ public class LoginModel : PageModel
     public async Task<IActionResult> OnPostLogin()
     {
         var result = await _authService.Login(LoginRequest);
-        if (result.IsSuccessed)
+        if (result.IsSuccess)
         {
             HttpContext.Response.Cookies.Append("token", result.Value.AccessToken, new CookieOptions
             {
