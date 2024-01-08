@@ -14,20 +14,24 @@ public class LoginModel : PageModel
 
     [BindProperty]
     public LoginRequest LoginRequest { get; set; }
-    public void OnGet()
-    {
-
-    }
+    
 
     public async Task<IActionResult> OnPostLogin()
     {
         var result = await _authService.Login(LoginRequest);
         if (result.IsSuccess)
         {
-            HttpContext.Response.Cookies.Append("token", result.Value.AccessToken, new CookieOptions
+            if(LoginRequest.isRememberMe)
             {
-                Expires = Convert.ToDateTime(result.Value.AccessExpire)
-            });
+                HttpContext.Response.Cookies.Append("token", result.Value.AccessToken, new CookieOptions
+                {
+                    Expires = Convert.ToDateTime(result.Value.AccessExpire)
+                });
+            }
+            else
+            {
+                HttpContext.Response.Cookies.Append("token", result.Value.AccessToken);
+            }
             return RedirectToPage("/Admin/Dashboard/Index");
         }
 
