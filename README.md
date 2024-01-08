@@ -13,8 +13,9 @@
     ├── src
     |   ├── Core
     │   |    ├── Clean.Application
+    │   |    ├── Clean.Domain
     │   |    ├── Clean.Domain.Contracts
-    |   |    └── Clean.Domain
+    |   |    └── Clean.Domain.Shared
     │   ├── Infrastructure
     |   |    ├── Clean.Caching
     |   |    ├── Clean.Identity
