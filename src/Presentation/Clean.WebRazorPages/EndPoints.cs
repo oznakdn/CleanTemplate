@@ -39,6 +39,7 @@ public class Product
     public string GetProductDetail { get; set; }
     public string GetProductsWithDataShaping { get; set; }
     public string CreateProduct { get; set; }
+    public string UpdateProduct { get; set; }
 
 }
 

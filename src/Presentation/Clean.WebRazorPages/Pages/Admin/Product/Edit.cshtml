@@ -1,0 +1,38 @@
+﻿@page
+@model Clean.WebRazorPages.Pages.Admin.Product.EditModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="row mt-5">
+    <div class="display-6 text-center">Create a New Product</div>
+</div>
+
+<div class="row">
+    <div class="col-6 offset-3 my-4">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="UpdateProductRequest.Id"/>
+            <div class="form-group">
+                <label class="form-label">Product Name</label>
+                <input asp-for="UpdateProductRequest.DisplayName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="form-label">Category</label>
+                <input asp-for="UpdateProductRequest.CategoryName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="form-label">Amount</label>
+                <input asp-for="UpdateProductRequest.Amount" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="form-label">Currency</label>
+                <select class="form-select" asp-for="UpdateProductRequest.Currency" asp-items="Html.GetEnumSelectList<Clean.Domain.Products.Enums.Currency>()">
+                    <option value="">Select a currency type</option>
+                </select>
+            </div>
+            <div class="form-group my-3">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

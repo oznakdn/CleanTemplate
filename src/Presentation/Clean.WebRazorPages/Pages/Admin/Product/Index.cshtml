@@ -18,8 +18,6 @@
                     <th>
                         <a asp-page="/admin/product/insert" class="btn btn-outline-primary btn-lg"><i class="fa-solid fa-file-circle-plus"></i></a>
                     </th>
-
-
                 </tr>
             </thead>
             <tbody>
@@ -37,7 +35,7 @@
                             <div class="btn-group">
 
                                 <a class="btn btn-outline-info" asp-page="/admin/product/details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info"></i></a>
-                                <a class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="btn btn-outline-warning" asp-page="/admin/product/edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
 
                             </div>

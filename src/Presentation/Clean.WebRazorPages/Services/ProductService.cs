@@ -54,4 +54,19 @@ public class ProductService : ClientServiceBase
         return Result<string>.Fail();
     }
 
+    public async Task<IResult<string>>UpdateProductAsync(UpdateProductRequest updateProduct)
+    {
+        string url = EndPoints.Product.UpdateProduct;
+        bool isAdded = base.AddAuthenticationHeader();
+
+        if (isAdded)
+        {
+            HttpResponseMessage responseMessage = await HttpClient.PutAsJsonAsync<UpdateProductRequest>(url, updateProduct);
+            string response = await responseMessage.Content.ReadAsStringAsync();
+            return Result<string>.Success(value: response);
+        }
+
+        return Result<string>.Fail();
+    }
+
 }
