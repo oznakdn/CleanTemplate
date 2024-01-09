@@ -1,4 +1,5 @@
-using Clean.WebRazorPages.Pages.Admin.Auth.Models;
+using Clean.WebRazorPages.Models.AuthModels;
+using Clean.WebRazorPages.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

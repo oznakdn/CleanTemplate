@@ -1,7 +1,6 @@
 using Clean.WebRazorPages;
 using Clean.WebRazorPages.Filters;
-using Clean.WebRazorPages.Pages.Admin.Auth;
-using Clean.WebRazorPages.Pages.Product;
+using Clean.WebRazorPages.Services;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,7 +1,7 @@
 ﻿using Clean.Shared;
 using Clean.WebRazorPages.Pages.Product.Models;
 
-namespace Clean.WebRazorPages.Pages.Product;
+namespace Clean.WebRazorPages.Services;
 
 public class ProductService : ClientServiceBase
 {
@@ -11,7 +11,7 @@ public class ProductService : ClientServiceBase
 
     public async Task<IResult<ProductsResponse>> GetProductsAsync()
     {
-        string? url = base.EndPoints.Product[0].GetProducts;
+        string? url = EndPoints.Product.GetProducts;
         bool isAdded = base.AddAuthenticationHeader();
         if (isAdded)
         {

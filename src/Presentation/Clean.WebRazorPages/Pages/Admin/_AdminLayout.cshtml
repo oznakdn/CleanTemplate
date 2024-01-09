@@ -1,5 +1,5 @@
-﻿﻿
-<html lang="en">
+﻿<html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,22 +21,22 @@
             <main>
                 <div class="container-fluid px-4">
                     <div class="row">
-@RenderBody()
-</div>
-</div>
-</main>
-</div>
-</div>
-<!--Body Ends-->
-<!--Footer Starts-->
-<partial name="_FooterAdmin" />
-<!--Footer Ends-->
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/lib/font-awesome/js/fontawesome.min.js"></script>
-<script src="~/js/scripts.js" asp-append-version="true"></script>
+                        @RenderBody()
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!--Body Ends-->
+    <!--Footer Starts-->
+    <partial name="_FooterAdmin" />
+    <!--Footer Ends-->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/font-awesome/js/fontawesome.min.js"></script>
+    <script src="~/js/scripts.js" asp-append-version="true"></script>
 
-@await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>

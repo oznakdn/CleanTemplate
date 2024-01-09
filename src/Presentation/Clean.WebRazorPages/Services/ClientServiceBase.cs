@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using System.Net.Http.Headers;
 
-namespace Clean.WebRazorPages;
+namespace Clean.WebRazorPages.Services;
 
 public abstract class ClientServiceBase
 {

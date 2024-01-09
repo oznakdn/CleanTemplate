@@ -1,3 +1,3 @@
-﻿namespace Clean.WebRazorPages.Pages.Admin.Auth.Models;
+﻿namespace Clean.WebRazorPages.Models.AuthModels;
 
 public record LoginRequest(string email, string password, bool isRememberMe);
