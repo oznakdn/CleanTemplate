@@ -13,9 +13,9 @@ public class Category : ValueObject
 
     private Category() { }
 
-    public void Update(string newName)
+    public void Update(string? newName)
     {
-        DisplayName = newName;
+        DisplayName = newName ?? default!;
     }
 
     protected override IEnumerable<object> GetAtomicValues()

@@ -80,4 +80,24 @@ public class Product : AggregateRoot<Product, Guid>
         return Result.Success();
     }
 
+    public void UpdateProductName(string? displayName = null)
+    {
+        DisplayName = displayName ?? default!;
+    }
+
+    public void UpdateProductCategory(string? categoryName)
+    {
+        Category.Update(categoryName!);
+    }
+
+    public void UpdateProductMoneyCurrency(Currency? currency)
+    {
+        Price.UpdateMoneyType(currency);
+    }
+
+    public void UpdateProductAmount(decimal? amount)
+    {
+        Price.UpdateMoneyAmount(amount);
+    }
+
 }

@@ -1,9 +1,7 @@
 ﻿using Clean.Application.UnitOfWork.Commands;
 using Clean.Domain.Products;
 using Clean.Domain.Products.Enums;
-using Clean.Domain.Products.ValueObjects;
 using Clean.Shared;
-using static System.Net.Mime.MediaTypeNames;
 using Image = Clean.Domain.Products.ValueObjects.Image;
 
 

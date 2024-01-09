@@ -28,4 +28,14 @@ public class Inventory : Entity<Guid>
     {
         Quantity += quantity;
     }
+
+    public void UpdateInventory(int? quantity)
+    {
+        Quantity = quantity ?? Quantity;
+        if (quantity > 0)
+        {
+            HasStock = true;
+        }
+    }
+
 }

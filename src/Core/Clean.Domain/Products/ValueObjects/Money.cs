@@ -17,14 +17,14 @@ public class Money : ValueObject
     public decimal Amount { get; private set; }
 
 
-    public void UpdateMoneyType(Currency moneyType)
+    public void UpdateMoneyType(Currency? moneyType)
     {
-        Currency = moneyType;
+        Currency = moneyType ?? default;
     }
 
-    public void UpdateMoneyAmount(decimal amount)
+    public void UpdateMoneyAmount(decimal? amount)
     {
-        Amount = amount;
+        Amount = amount ?? default;
     }
 
     protected override IEnumerable<object> GetAtomicValues()
