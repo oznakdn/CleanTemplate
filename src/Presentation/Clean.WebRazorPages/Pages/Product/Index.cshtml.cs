@@ -1,4 +1,4 @@
-using Clean.WebRazorPages.Pages.Product.Models;
+using Clean.WebRazorPages.Models.ProductModels;
 using Clean.WebRazorPages.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

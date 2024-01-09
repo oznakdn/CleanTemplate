@@ -22,7 +22,6 @@ public class ProductsController : AbstractController
 
     [HttpGet]
     [EnableRateLimiting("Api")]
-    [Authorize]
     public async Task<IActionResult> GetProducts([FromQuery] int PageSize, [FromQuery] int PageNumber, [FromQuery] string? Query)
     {
         var result = await _mediator.Send(new GetProductsRequest(50,PageSize,PageNumber, Query));

@@ -1,0 +1,42 @@
+﻿@page
+@model Clean.WebRazorPages.Pages.Admin.Product.DetailsModel
+@{ 
+    Layout = "_AdminLayout";
+}
+
+<div class="row mb-5">
+    <div class="display-6 text-center">Product's Details</div>
+</div>
+
+<div class="row my-4">
+    <div class="col-8 offset-2">
+        <div class="card" style="width: 60rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center">Product</h5>
+                <p class="card-text"><span class="text-primary">Name: </span> @Model.ProductDetailResponse.DisplayName</p>
+                <p class="card-text"><span class="text-primary">Category: </span>@Model.ProductDetailResponse.Category.DisplayName</p>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<div class="row my-4">
+    <div class="col-6">
+        <div class="card" style="width: 50rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center">Inventory</h5>
+                <p class="card-text"><span class="text-primary">Quantity: </span>@Model.ProductDetailResponse.Inventory.Quantity</p>
+                <p class="card-text"><span class="text-primary">Stock: </span>@(Model.ProductDetailResponse.Inventory.HasStock == true ? "Yes" : "No")</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card" style="width: 50rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center">Currency</h5>
+                <p class="card-text"><span class="text-primary">Currency: </span>@Model.ProductDetailResponse.Money.Currency</p>
+                <p class="card-text"><span class="text-primary">Amount: </span>@Model.ProductDetailResponse.Money.Amount</p>
+            </div>
+        </div>
+    </div>
+</div>

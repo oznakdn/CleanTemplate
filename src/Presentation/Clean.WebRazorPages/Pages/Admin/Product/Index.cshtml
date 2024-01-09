@@ -1,4 +1,52 @@
 ﻿@page
 @model Clean.WebRazorPages.Pages.Admin.Product.IndexModel
 @{
+    Layout = "_AdminLayout";
 }
+
+<div class="row mb-5">
+    <div class="display-6 text-center text-dark">List of Products</div>
+    <div class="col-8 offset-2 my-4">
+        <table class="table table-bordered">
+            <thead>
+                <tr class="text-center">
+                    <th>Id</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>
+                        <a asp-page="/admin/product/insert" class="btn btn-outline-primary btn-lg"><i class="fa-solid fa-file-circle-plus"></i></a>
+                    </th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Products)
+                {
+                    <tr class="text-center">
+                        <td>@item.Id</td>
+                        <td>
+                            <img id="#showImage" src="/images/@item.Images[0].ImageName" class="img-fluid" width="50" />
+                        </td>
+                        <td>@item.DisplayName</td>
+                        <td>@item.Price</td>
+                        <td>@item.Category</td>
+                        <td>
+                            <div class="btn-group">
+
+                                <a class="btn btn-outline-info" asp-page="/admin/product/details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info"></i></a>
+                                <a class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
