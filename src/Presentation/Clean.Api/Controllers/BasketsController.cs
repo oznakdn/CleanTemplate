@@ -4,7 +4,7 @@ using Clean.Application.Features.Baskets.Commands.UpdateBasket;
 
 namespace Clean.Api.Controllers;
 
-
+[Route("api/baskets")]
 public class BasketsController : AbstractController
 {
     public BasketsController(IMediator mediator) : base(mediator)
@@ -12,7 +12,7 @@ public class BasketsController : AbstractController
 
     }
 
-    [HttpPost]
+    [HttpPost("add-basket-item")]
     public async Task<IActionResult> AddBasketItem([FromBody] AddBasketItemRequest addBasketItem)
     {
         var result = await _mediator.Send(addBasketItem);
@@ -21,7 +21,7 @@ public class BasketsController : AbstractController
         return NotFound(result.Message);
     }
 
-    [HttpPut]
+    [HttpPut("remove-basket-item")]
     public async Task<IActionResult> RemoveBasketItem([FromQuery] string BasketId, [FromQuery] string BasketItemId)
     {
         var result = await _mediator.Send(new DeleteBasketItemRequest(BasketId, BasketItemId));
@@ -29,7 +29,7 @@ public class BasketsController : AbstractController
         return NotFound(result.Message);
     }
 
-    [HttpPut("{quantity}")]
+    [HttpPut("update-basket-item/{quantity}")]
     public async Task<IActionResult> UpdateBasketItem([FromQuery] string BasketId, [FromQuery] string BasketItemId,int quantity)
     {
         var result = await _mediator.Send(new UpdateBasketRequest(BasketId, BasketItemId,quantity));

@@ -4,13 +4,12 @@ using Clean.Application.Features.Products.Queries.GetProductDetail;
 using Clean.Application.Features.Products.Queries.GetProducts;
 using Clean.Application.Features.Products.Queries.GetProductsWithDataShaping;
 using Clean.Persistence.Caching;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
 using MongoDB.Driver;
 
 namespace Clean.Api.Controllers;
 
-
+[Route("api/products")]
 public class ProductsController : AbstractController
 {
     private readonly IProductCacheService _productCache;
@@ -31,7 +30,7 @@ public class ProductsController : AbstractController
     }
 
 
-    [HttpGet]
+    [HttpGet("get-cache")]
     public IActionResult GetProductsCache()
     {
         var result = _productCache.GetProductFromCache();
@@ -39,7 +38,7 @@ public class ProductsController : AbstractController
     }
 
 
-    [HttpGet("{productId}")]
+    [HttpGet("product-detail/{productId}")]
     public async Task<IActionResult> GetProductDetail(string productId)
     {
         var result = await _mediator.Send(new GetProductDetailRequest(productId));
@@ -47,7 +46,7 @@ public class ProductsController : AbstractController
         return Ok(result.Value);
     }
 
-    [HttpGet]
+    [HttpGet("data-shaping")]
     public async Task<IActionResult> GetProductsWithDataShaping([FromQuery] string fields)
     {
         var result = await _mediator.Send(new GetProductsDataShapingRequest(fields));

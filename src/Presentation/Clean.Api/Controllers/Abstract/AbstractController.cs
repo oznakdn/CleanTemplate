@@ -1,6 +1,6 @@
 ﻿namespace Clean.Api.Controllers.Abstract;
 
-[Route("api/[controller]/[action]")]
+
 [ApiController]
 public abstract class AbstractController : ControllerBase
 {

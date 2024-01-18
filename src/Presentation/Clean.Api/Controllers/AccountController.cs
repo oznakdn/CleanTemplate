@@ -3,6 +3,8 @@ using Clean.Application.Features.Customers.Queries.LoginCustomer;
 
 namespace Clean.Api.Controllers;
 
+
+[Route("api/accounts")]
 public class AccountController : AbstractController
 {
     public AccountController(IMediator mediator) : base(mediator)
@@ -10,7 +12,7 @@ public class AccountController : AbstractController
     }
 
 
-    [HttpPut]
+    [HttpPut("login")]
     public async Task<IActionResult> Login([FromBody] LoginCustomerRequest login)
     {
         var result = await _mediator.Send(login);
@@ -21,7 +23,7 @@ public class AccountController : AbstractController
         return Ok(result.Value);
     }
 
-    [HttpPost]
+    [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] CreateCustomerRequest register)
     {
         var result = await _mediator.Send(register);

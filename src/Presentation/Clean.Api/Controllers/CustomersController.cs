@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Clean.Api.Controllers;
 
-
+[Route("api/customers")]
 public class CustomersController : AbstractController
 {
     public CustomersController(IMediator mediator) : base(mediator)
     {
     }
 
-    [HttpGet]
+    [HttpGet("customer")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetCustomer([FromQuery] string? CustomerId, [FromQuery] string? NameOrSurname)
     {
@@ -40,7 +40,7 @@ public class CustomersController : AbstractController
     }
 
    
-    [HttpGet("{CustomerId}")]
+    [HttpGet("get-customer-basket/{CustomerId}")]
     public async Task<IActionResult> GetCustomerBasket(string CustomerId)
     {
         var result = await _mediator.Send(new GetCustomerBasketRequest(CustomerId));

@@ -3,7 +3,7 @@ using Clean.Application.Features.Orders.Queries.GetCustomerOrders;
 
 namespace Clean.Api.Controllers;
 
-
+[Route("api/orders")]
 public class OrdersController : AbstractController
 {
     public OrdersController(IMediator mediator) : base(mediator)
