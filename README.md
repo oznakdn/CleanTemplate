@@ -67,10 +67,10 @@
 $ cd CleanTemplate/src/Infrastructure/Clean.Persistence
 ```
 ```csharp
-$ dotnet ef migrations add [MigrationName] --context [ContextName] --startup-project [ProjectDirectoryPath]
+$ dotnet ef migrations add [MigrationName] --context [ContextName] --startup-project [Clean.Api ProjectDirectoryPath]
 ```
 ```csharp
-$ dotnet ef database update --context [ContextName] --startup-project [ProjectDirectoryPath]
+$ dotnet ef database update --context [ContextName] --startup-project [Clean.Api ProjectDirectoryPath]
 ```
 
 
@@ -94,4 +94,6 @@ MongoDB.Driver
 Mapster
 MailKit
 ```
+## Api Endpoints
+![endpoints](https://github.com/oznakdn/CleanTemplate/assets/79724084/249dc317-c0a6-446a-a8a1-5a271e192a33)
 
