@@ -67,10 +67,10 @@
 $ cd CleanTemplate/src/Infrastructure/Clean.Persistence
 ```
 ```csharp
-$ dotnet ef migrations add [MigrationName] --context [ContextName] --startup-project [ProjectDirectoryPath]
+$ dotnet ef migrations add [MigrationName] --context [ContextName] --startup-project [Clean.Api ProjectDirectoryPath]
 ```
 ```csharp
-$ dotnet ef database update --context [ContextName] --startup-project [ProjectDirectoryPath]
+$ dotnet ef database update --context [ContextName] --startup-project [Clean.Api ProjectDirectoryPath]
 ```
 
 
